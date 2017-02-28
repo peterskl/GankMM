@@ -4,12 +4,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -21,20 +18,19 @@ import com.maning.gankmm.ui.iView.IImageView;
 import com.maning.gankmm.ui.presenter.impl.ImagePresenterImpl;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
-import com.maning.gankmm.utils.MyToast;
 import com.umeng.analytics.MobclickAgent;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.github.yavski.fabspeeddial.FabSpeedDial;
 import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
-import pub.devrel.easypermissions.EasyPermissions;
 
-public class ImagesActivity extends BaseActivity implements IImageView, EasyPermissions.PermissionCallbacks {
+public class ImagesActivity extends BaseActivity implements IImageView {
 
     private static final String TAG = ImagesActivity.class.getSimpleName();
     @Bind(R.id.viewPager)
@@ -53,8 +49,6 @@ public class ImagesActivity extends BaseActivity implements IImageView, EasyPerm
     private ImagesAdapter imageAdapter;
 
     private ImagePresenterImpl imagePresenter;
-
-    private static final int REQUECT_CODE_STORAGE = 2;  //保存图片申请权限Code
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,13 +78,18 @@ public class ImagesActivity extends BaseActivity implements IImageView, EasyPerm
             public boolean onMenuItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_save:
-                        if (EasyPermissions.hasPermissions(ImagesActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        // 先判断是否有权限。
+                        if(AndPermission.hasPermission(ImagesActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            // 有权限，直接do anything.
                             imagePresenter.saveImage();
                         } else {
-                            // Ask for one permission
-                            EasyPermissions.requestPermissions(this, "请求存储文件权限，用来保存图片到本地",
-                                    REQUECT_CODE_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                            // 申请权限。
+                            AndPermission.with(ImagesActivity.this)
+                                    .requestCode(100)
+                                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                    .send();
                         }
+
                         break;
                     case R.id.action_share:
                         int currentItem = viewPager.getCurrentItem();
@@ -208,22 +207,34 @@ public class ImagesActivity extends BaseActivity implements IImageView, EasyPerm
     }
 
     @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
-        Log.d(TAG, "onPermissionsGranted:" + requestCode + ":" + perms.size());
-        MySnackbar.makeSnackBarBlack(toolbar, "权限申请成功");
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // 只需要调用这一句，其它的交给AndPermission吧，最后一个参数是PermissionListener。
+        AndPermission.onRequestPermissionsResult(requestCode, permissions, grantResults, listener);
     }
 
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-        Log.d(TAG, "onPermissionsDenied:" + requestCode + ":" + perms.size());
-        //当用户点击拒绝权限，并且再也不提示的时候，再次请求
-        EasyPermissions.checkDeniedPermissionsNeverAskAgain(this, "请求存储文件权限，用来保存图片到本地", R.string.setting, R.string.cancel, perms);
-    }
+    private PermissionListener listener = new PermissionListener() {
+        @Override
+        public void onSucceed(int requestCode, List<String> grantedPermissions) {
+            // 权限申请成功回调。
+            if(requestCode == 100) {
+                MySnackbar.makeSnackBarBlack(toolbar, "权限申请成功");
+                imagePresenter.saveImage();
+            }
+        }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        // EasyPermissions handles the request result.
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
+        @Override
+        public void onFailed(int requestCode, List<String> deniedPermissions) {
+            // 权限申请失败回调。
+            // 用户否勾选了不再提示并且拒绝了权限，那么提示用户到设置中授权。
+            if (AndPermission.hasAlwaysDeniedPermission(ImagesActivity.this, deniedPermissions)) {
+                // 第二种：用自定义的提示语。
+                 AndPermission.defaultSettingDialog(ImagesActivity.this, 300)
+                 .setTitle("权限申请失败")
+                 .setMessage("我们需要的一些权限被您拒绝或者系统发生错误申请失败，请您到设置页面手动授权，否则功能无法正常使用！")
+                 .setPositiveButton("好，去设置")
+                 .show();
+            }
+        }
+    };
+
 }

@@ -125,7 +125,7 @@
 ######[LikeButton](https://github.com/jd-alexander/LikeButton)
 ######[jsoup](https://github.com/jhy/jsoup)
 ######[klog](https://github.com/ZhaoKaiQiang/KLog)
-######[easypermissions](https://github.com/googlesamples/easypermissions)
+######[AndPermission](https://github.com/yanzhenjie/AndPermission)
 ######[smarttablayout](https://github.com/ogaclejapan/SmartTabLayout)
 ######[SwitcherView](https://github.com/maning0303/SwitcherView)
 

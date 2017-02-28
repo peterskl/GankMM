@@ -110,7 +110,7 @@ dependencies {
     /*解析HTML页面*/
     compile 'org.jsoup:jsoup:1.9.2'
     /*权限库*/
-    compile 'pub.devrel:easypermissions:0.1.7'
+    compile 'com.yanzhenjie:permission:1.0.5'
     /*ViewPager指示器*/
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     /*翻滚广告条TextView*/
