@@ -227,7 +227,16 @@ public class MainActivity extends BaseActivity implements IMainView {
                     case R.id.nav_codes:
                         menuItem.setCheckable(false);
                         //泡在网上的日子
-                        startActivity(new Intent(MainActivity.this, CodesActivity.class));
+                        Intent intent01 = new Intent(MainActivity.this, CodesActivity.class);
+                        intent01.putExtra(CodesActivity.IntentType,CodesActivity.IntentTypeName_Jcode);
+                        startActivity(intent01);
+                        break;
+                    case R.id.nav_cocoa_china:
+                        menuItem.setCheckable(false);
+                        //CocoaChina
+                        Intent intent = new Intent(MainActivity.this, CodesActivity.class);
+                        intent.putExtra(CodesActivity.IntentType,CodesActivity.IntentTypeName_CocoaChina);
+                        startActivity(intent);
                         break;
                     case R.id.about:
                         menuItem.setChecked(false); // 改变item选中状态

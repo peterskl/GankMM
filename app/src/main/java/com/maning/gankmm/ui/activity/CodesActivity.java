@@ -61,8 +61,15 @@ public class CodesActivity extends BaseActivity implements OnRefreshListener, On
     @Bind(R.id.iv_top_quick)
     ImageView ivTopQuick;
 
-    private static final String baseUrl = "http://www.jcodecraeer.com";
-    private String url = baseUrl + "/plus/list.php?tid=31";
+    public static final String IntentType = "Type";
+    public static final String IntentTypeName_Jcode = "泡在网上的日志";
+    public static final String IntentTypeName_CocoaChina = "CocoaChina";
+    private String IntentTypeNameCurrent = "";
+
+    //当前页面的访问地址
+    private String url_Current = "";
+    private static final String baseUrl_Jcode = "http://www.jcodecraeer.com";
+    private static final String baseUrl_CocoaChina = "http://code.cocoachina.com";
 
     private ArrayList<CategoryTitleBean> titles = new ArrayList<>();
     private ArrayList<CategoryContentBean> codes = new ArrayList<>();
@@ -82,18 +89,27 @@ public class CodesActivity extends BaseActivity implements OnRefreshListener, On
         setContentView(R.layout.activity_codes);
         ButterKnife.bind(this);
 
+        //获取Intent数据
+        IntentTypeNameCurrent = getIntent().getStringExtra(IntentType);
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            initToolBar(toolbar, "泡在网上的日子", R.drawable.icon_arrow_back);
+            initToolBar(toolbar, IntentTypeNameCurrent, R.drawable.icon_arrow_back);
         } else {
-            initToolBar(toolbar, "泡在网上的日子", R.drawable.icon_arrow_back_night);
+            initToolBar(toolbar, IntentTypeNameCurrent, R.drawable.icon_arrow_back_night);
         }
 
         initViews();
 
         initAnimation();
 
-        codesPresenter = new CodesPresenterImpl(this, this);
+        codesPresenter = new CodesPresenterImpl(this, this, IntentTypeNameCurrent);
+
+        //判断是CocoaChina的诗句还是泡在网上的日志的数据
+        if (IntentTypeNameCurrent.equals(CodesActivity.IntentTypeName_Jcode)) {
+            url_Current =  baseUrl_Jcode + "/plus/list.php?tid=31";
+        }else if (IntentTypeNameCurrent.equals(CodesActivity.IntentTypeName_CocoaChina)){
+            url_Current =  baseUrl_CocoaChina;
+        }
 
         //加载数据
         swipeToLoadLayout.postDelayed(new Runnable() {
@@ -150,7 +166,7 @@ public class CodesActivity extends BaseActivity implements OnRefreshListener, On
                     drawerLayout.closeDrawers();
                     if (NetUtils.hasNetWorkConection(CodesActivity.this)) {
                         recycleTitleAdapter.setType(titles.get(position).getTitle());
-                        url = titles.get(position).getUrl();
+                        url_Current = titles.get(position).getUrl();
                         scrollToTop();
                         //加载数据
                         swipeToLoadLayout.setRefreshing(true);
@@ -296,7 +312,7 @@ public class CodesActivity extends BaseActivity implements OnRefreshListener, On
     public void onRefresh() {
         //获取数据
         if (NetUtils.hasNetWorkConection(CodesActivity.this)) {
-            codesPresenter.getNewDatas(url);
+            codesPresenter.getNewDatas(url_Current);
         } else {
             showToast(getString(R.string.gank_net_fail));
             overRefresh();
