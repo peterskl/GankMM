@@ -98,7 +98,7 @@ dependencies {
     /*日志*/
     compile 'com.github.zhaokaiqiang.klog:library:1.3.0'
     /*提示库*/
-    compile 'com.bigkoo:svprogresshud:1.0.6'
+    compile 'com.bigkoo:svprogresshud:1.0.4'
     /*注解*/
     compile 'com.jakewharton:butterknife:7.0.1'
     /*下拉刷新框架*/

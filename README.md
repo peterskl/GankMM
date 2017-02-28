@@ -130,7 +130,7 @@
 ######[glide](https://github.com/bumptech/glide)
 ######[SwipeToLoadLayout](https://github.com/Aspsine/SwipeToLoadLayout)
 ######[Android-SVProgressHUD](https://github.com/saiwu-bigkoo/Android-SVProgressHUD)
-######[MaterialDialog](https://github.com/drakeet/MaterialDialog)
+######[material-dialogs](https://github.com/afollestad/material-dialogs)
 ######[RecyclerView-FlexibleDivider](https://github.com/yqritc/RecyclerView-FlexibleDivider)
 ######[LikeButton](https://github.com/jd-alexander/LikeButton)
 ######[jsoup](https://github.com/jhy/jsoup)
