@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.AppUpdateInfo;
 import com.maning.gankmm.constant.Constants;
@@ -28,9 +27,6 @@ import com.socks.library.KLog;
 import com.umeng.analytics.MobclickAgent;
 
 import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,6 +44,8 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     @Bind(R.id.iv_night_mode)
     ImageView ivNightMode;
 
+    @Bind(R.id.item_gank_headline)
+    MySettingItemView itemGankHeadline;
     @Bind(R.id.item_clean_cache)
     MySettingItemView itemCleanCache;
     @Bind(R.id.item_feedback)
@@ -80,6 +78,8 @@ public class SettingActivity extends BaseActivity implements ISettingView {
         settingPresenter.initAppUpdateState();
 
         settingPresenter.initFeedBack();
+
+        settingPresenter.initHeadLine();
 
     }
 
@@ -141,6 +141,13 @@ public class SettingActivity extends BaseActivity implements ISettingView {
         });
 
     }
+
+    //配置头条
+    @OnClick(R.id.item_gank_headline)
+    void item_gank_headline() {
+        settingPresenter.configurationHeadLine();
+    }
+
 
     @OnClick(R.id.iv_push)
     void iv_push() {
@@ -235,7 +242,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
                 .cancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(final DialogInterface dialog) {
-                        if(dialogUpdate.isCancelled()){
+                        if (dialogUpdate.isCancelled()) {
                             return;
                         }
                         dialogCloseWarn = DialogUtils.showMyDialog(SettingActivity.this, "警告", "当前正在下载APK，是否关闭进度框？", "关闭", "取消", new DialogUtils.OnDialogClickListener() {
@@ -317,6 +324,11 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     @Override
     public void showToast(String msg) {
         MySnackbar.makeSnackBarBlack(toolbar, msg);
+    }
+
+    @Override
+    public void updateHeadLine(String type) {
+        itemGankHeadline.setRightText(type);
     }
 
     @Override

@@ -31,4 +31,10 @@ public interface ISettingPresenter {
     //初始化夜间模式状态
     void clickNightMode();
 
+    //配置头条
+    void configurationHeadLine();
+
+    //初始化头条
+    void initHeadLine();
+
 }

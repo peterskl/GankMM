@@ -145,9 +145,9 @@ public class GankApi {
     }
 
 
-    public static Call<RandomEntity> getRandomDatas(int count, final int what, final MyCallBack myCallBack) {
+    public static Call<RandomEntity> getRandomDatas(String type,int count, final int what, final MyCallBack myCallBack) {
 
-        Call<RandomEntity> randomDatasCall = BuildApi.getAPIService().getRandomDatas("Android", count);
+        Call<RandomEntity> randomDatasCall = BuildApi.getAPIService().getRandomDatas(type, count);
 
         randomDatasCall.enqueue(new Callback<RandomEntity>() {
             @Override

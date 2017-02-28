@@ -44,6 +44,7 @@ public class Constants {
     public static final String SPJpush = "jpush";
     public static final String SPAppUpdate = "update";
     public static final String SPCodesMenu = "codeMenu";
+    public static final String SPSwitcherDataType = "SPSwitcherDataType"; //保存首页头条
 
 
 }

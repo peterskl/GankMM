@@ -77,6 +77,8 @@
 
     </RelativeLayout>
 
+
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -92,6 +94,22 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1px"
+            android:background="?lineColor" />
+
+        <com.maning.gankmm.ui.view.MySettingItemView
+            android:id="@+id/item_gank_headline"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="?item_setting_bg"
+            app:setting_red_dot="false"
+            app:setting_right_text="Android"
+            app:setting_title="头条类型" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
             android:background="?lineColor" />
 
         <com.maning.gankmm.ui.view.MySettingItemView

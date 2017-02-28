@@ -10,6 +10,7 @@ import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.ui.iView.IWelFareView;
 import com.maning.gankmm.ui.presenter.IWelFarePresenter;
 import com.maning.gankmm.utils.IntentUtils;
+import com.maning.gankmm.utils.SharePreUtil;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class WelFarePresenterImpl extends BasePresenterImpl<IWelFareView> implem
                     }
                     mView.overRefresh();
                     break;
-                case 0x003: //头条，5条随机数
+                case 0x003: //头条，10条随机数
                     randomLists = results;
                     mView.setRandomList(randomLists);
                     break;
@@ -101,6 +102,7 @@ public class WelFarePresenterImpl extends BasePresenterImpl<IWelFareView> implem
     @Override
     public void getNewDatas() {
         GankApi.getCommonDataNew(Constants.FlagWelFare, pageSize, 1, 0x002, httpCallBack);
+        getRandomDatas();
     }
 
     @Override
@@ -110,7 +112,9 @@ public class WelFarePresenterImpl extends BasePresenterImpl<IWelFareView> implem
 
     @Override
     public void getRandomDatas() {
-        GankApi.getRandomDatas(10, 0x003, httpCallBack);
+        //查看配置的干活类型:默认Android
+        String headLineType = SharePreUtil.getStringData(context, Constants.SPSwitcherDataType, "Android");
+        GankApi.getRandomDatas(headLineType,10, 0x003, httpCallBack);
     }
 
     @Override

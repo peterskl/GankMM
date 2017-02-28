@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.view.View;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.alibaba.sdk.android.feedback.util.IWxCallback;
 import com.bumptech.glide.Glide;
@@ -20,6 +22,7 @@ import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.activity.SettingActivity;
 import com.maning.gankmm.ui.iView.ISettingView;
 import com.maning.gankmm.ui.presenter.ISettingPresenter;
+import com.maning.gankmm.utils.DialogUtils;
 import com.maning.gankmm.utils.FileUtils;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.SharePreUtil;
@@ -147,6 +150,28 @@ public class SettingPresenterImpl extends BasePresenterImpl<ISettingView> implem
             mView.closeNightMode();
         }
         mView.recreateActivity();
+    }
+
+    @Override
+    public void configurationHeadLine() {
+        if (mView == null) {
+            return;
+        }
+        DialogUtils.showMyListDialog(context, null, R.array.gankHeadLineTypes, new DialogUtils.OnDialogListCallback() {
+            @Override
+            public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                //保存选择的类型
+                SharePreUtil.saveStringData(context,Constants.SPSwitcherDataType,String.valueOf(text));
+                mView.updateHeadLine(String.valueOf(text));
+            }
+        });
+    }
+
+    @Override
+    public void initHeadLine() {
+        //选择的类型
+        String headlineType = SharePreUtil.getStringData(context, Constants.SPSwitcherDataType, "Android");
+        mView.updateHeadLine(headlineType);
     }
 
     @Override

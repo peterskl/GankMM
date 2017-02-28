@@ -29,4 +29,5 @@ public interface ISettingView extends IBaseView {
 
     void showToast(String msg);
 
+    void updateHeadLine(String type);
 }

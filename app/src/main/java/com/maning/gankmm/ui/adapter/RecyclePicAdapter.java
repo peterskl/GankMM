@@ -78,7 +78,7 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void updateHeadLines(List<GankEntity> headLines) {
         this.headLines = headLines;
         updateHeadLinesStrs();
-        notifyItemChanged(0);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -125,23 +125,21 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
             layoutParams.setFullSpan(true);
             if (headLines != null && headLines.size() > 0) {
-                if (viewHolder.tvLoadingHeadLine.getVisibility() == View.VISIBLE) {
-                    viewHolder.tvLoadingHeadLine.setVisibility(View.GONE);
-                    viewHolder.switcherView.setVisibility(View.VISIBLE);
-                    //设置数据源
-                    viewHolder.switcherView.setResource(headLinesStrs);
-                    //开始滚动
-                    viewHolder.switcherView.startRolling();
-
-                    viewHolder.switcherView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            int index = viewHolder.switcherView.getCurrentIndex();
-                            GankEntity randomGankEntity = headLines.get(index);
-                            IntentUtils.startToWebActivity(context,randomGankEntity.getType(),randomGankEntity.getDesc(),randomGankEntity.getUrl());
-                        }
-                    });
-                }
+                viewHolder.tvLoadingHeadLine.setVisibility(View.GONE);
+                viewHolder.switcherView.setVisibility(View.VISIBLE);
+                //设置数据源
+                viewHolder.switcherView.setResource(headLinesStrs);
+                //开始滚动
+                viewHolder.switcherView.startRolling();
+                //点击事件
+                viewHolder.switcherView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int index = viewHolder.switcherView.getCurrentIndex();
+                        GankEntity randomGankEntity = headLines.get(index);
+                        IntentUtils.startToWebActivity(context, randomGankEntity.getType(), randomGankEntity.getDesc(), randomGankEntity.getUrl());
+                    }
+                });
             } else {
                 viewHolder.tvLoadingHeadLine.setVisibility(View.VISIBLE);
                 viewHolder.switcherView.setVisibility(View.GONE);
