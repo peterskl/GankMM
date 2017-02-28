@@ -46,7 +46,7 @@ public class CodesPresenterImpl extends BasePresenterImpl<ICodesView> implements
 
                     if (titles.size() <= 0) {
                         //分类
-                        Elements categorys = doc.select("div.col-md-2").select("ul.slidebar-box").select("li.slidebar-category-one");
+                        Elements categorys = doc.select("li.slidebar-category-one");
                         CategoryTitleBean categoryTitleBean;
                         for (Element element : categorys) {
                             String url = element.select("li.slidebar-category-one").select("a[href]").attr("href");
@@ -84,16 +84,14 @@ public class CodesPresenterImpl extends BasePresenterImpl<ICodesView> implements
                         String imageUrl = element.select("div.codeli-photo").select("img[src]").attr("src");
                         String title = element.select("h2.codeli-name").select("a[href]").text();
                         String description = element.select("p.codeli-description").text();
-                        String type = element.select("div.otherinfo").select("a[href]").text();
                         String otherInfo = element.select("div.otherinfo").select("span").text();
 
                         if (!TextUtils.isEmpty(url)) {
                             categoryContentBean = new CategoryContentBean();
                             categoryContentBean.setUrl(baseUrl + url);
                             categoryContentBean.setTitle(title);
-                            categoryContentBean.setImageUrl(baseUrl + imageUrl);
+                            categoryContentBean.setImageUrl(imageUrl);
                             categoryContentBean.setDescription(description);
-                            categoryContentBean.setType(type);
                             categoryContentBean.setOtherInfo(otherInfo);
                             codes.add(categoryContentBean);
                             KLog.i("categoryContentBean----" + categoryContentBean.toString());

@@ -51,7 +51,6 @@ public class RecycleCodesContentAdapter extends RecyclerView.Adapter<RecycleCode
 
         holder.tvTitle.setText(categoryContentBean.getTitle());
         holder.tvDescription.setText(categoryContentBean.getDescription());
-        holder.tvType.setText(categoryContentBean.getType());
         holder.tvOtherInfo.setText(categoryContentBean.getOtherInfo());
 
         String imageUrl = categoryContentBean.getImageUrl();
@@ -81,7 +80,6 @@ public class RecycleCodesContentAdapter extends RecyclerView.Adapter<RecycleCode
 
         TextView tvTitle;
         TextView tvDescription;
-        TextView tvType;
         TextView tvOtherInfo;
         ImageView ivShow;
 
@@ -90,7 +88,6 @@ public class RecycleCodesContentAdapter extends RecyclerView.Adapter<RecycleCode
             ivShow = (ImageView) itemView.findViewById(R.id.iv_show);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
             tvOtherInfo = (TextView) itemView.findViewById(R.id.tv_other_info);
-            tvType = (TextView) itemView.findViewById(R.id.tv_type);
             tvDescription = (TextView) itemView.findViewById(R.id.tv_description);
         }
     }

@@ -9,7 +9,6 @@ public class CategoryContentBean {
     private String url;
     private String imageUrl;
     private String description;
-    private String type;
     private String otherInfo;
 
     public String getTitle() {
@@ -44,14 +43,6 @@ public class CategoryContentBean {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getOtherInfo() {
         return otherInfo;
     }
@@ -67,7 +58,6 @@ public class CategoryContentBean {
                 ", url='" + url + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", description='" + description + '\'' +
-                ", type='" + type + '\'' +
                 ", otherInfo='" + otherInfo + '\'' +
                 '}';
     }
