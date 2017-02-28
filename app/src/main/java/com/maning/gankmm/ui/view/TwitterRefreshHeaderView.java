@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.aspsine.swipetoloadlayout.SwipeRefreshHeaderLayout;
@@ -72,7 +73,7 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
     }
 
     @Override
-    public void onSwipe(int y, boolean isComplete) {
+    public void onMove(int y, boolean isComplete, boolean automatic) {
         if (!isComplete) {
             ivArrow.setVisibility(VISIBLE);
             progressBar.setVisibility(GONE);
@@ -102,7 +103,7 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
     }
 
     @Override
-    public void complete() {
+    public void onComplete() {
         rotated = false;
         ivSuccess.setVisibility(VISIBLE);
         ivArrow.clearAnimation();

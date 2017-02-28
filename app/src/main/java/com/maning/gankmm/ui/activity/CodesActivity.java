@@ -62,7 +62,7 @@ public class CodesActivity extends BaseActivity implements OnRefreshListener, On
     ImageView ivTopQuick;
 
     public static final String IntentType = "Type";
-    public static final String IntentTypeName_Jcode = "泡在网上的日志";
+    public static final String IntentTypeName_Jcode = "泡在网上的日子";
     public static final String IntentTypeName_CocoaChina = "CocoaChina";
     private String IntentTypeNameCurrent = "";
 

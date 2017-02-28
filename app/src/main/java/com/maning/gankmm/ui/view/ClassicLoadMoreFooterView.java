@@ -3,6 +3,7 @@ package com.maning.gankmm.ui.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.aspsine.swipetoloadlayout.SwipeLoadMoreFooterLayout;
@@ -45,7 +46,7 @@ public class ClassicLoadMoreFooterView extends SwipeLoadMoreFooterLayout {
     }
 
     @Override
-    public void onSwipe(int y, boolean isComplete) {
+    public void onMove(int y, boolean isComplete, boolean automatic) {
         if (!isComplete) {
             ivSuccess.setVisibility(GONE);
             progressBar.setVisibility(GONE);
@@ -69,7 +70,7 @@ public class ClassicLoadMoreFooterView extends SwipeLoadMoreFooterLayout {
     }
 
     @Override
-    public void complete() {
+    public void onComplete() {
         progressBar.setVisibility(GONE);
         ivSuccess.setVisibility(VISIBLE);
     }
