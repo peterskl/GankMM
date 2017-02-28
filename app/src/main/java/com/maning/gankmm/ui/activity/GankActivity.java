@@ -38,6 +38,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 每日显示Gank
+ */
 public class GankActivity extends BaseActivity implements IGankView {
 
 

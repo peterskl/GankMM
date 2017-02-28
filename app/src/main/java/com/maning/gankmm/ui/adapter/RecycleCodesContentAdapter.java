@@ -26,7 +26,7 @@ public class RecycleCodesContentAdapter extends RecyclerView.Adapter<RecycleCode
     private List<CategoryContentBean> mDatas;
     private LayoutInflater layoutInflater;
 
-    public RecycleCodesContentAdapter(Context context, List<CategoryContentBean> mDatas,RequestManager glide) {
+    public RecycleCodesContentAdapter(Context context, List<CategoryContentBean> mDatas, RequestManager glide) {
         this.context = context;
         this.glide = glide;
         this.mDatas = mDatas;
@@ -54,11 +54,16 @@ public class RecycleCodesContentAdapter extends RecyclerView.Adapter<RecycleCode
         holder.tvOtherInfo.setText(categoryContentBean.getOtherInfo());
 
         String imageUrl = categoryContentBean.getImageUrl();
-        glide
-                .load(imageUrl)
-                .asBitmap()
-                .centerCrop()
-                .into(holder.ivShow);
+        if (imageUrl.contains(".gif")) {
+            glide.load(imageUrl).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.ivShow);
+        } else {
+            glide
+                    .load(imageUrl)
+                    .asBitmap()
+                    .centerCrop()
+                    .into(holder.ivShow);
+        }
+
 
         //如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null) {
