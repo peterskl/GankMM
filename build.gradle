@@ -28,10 +28,10 @@ task clean(type: Delete) {
 }
 
 ext {
-    compileSdkVersion = 23
+    compileSdkVersion = 24
     buildToolsVersion = "23.0.2"
     minSdkVersion = 14
-    targetSdkVersion = 23
+    targetSdkVersion = 24
     versionCode = 12
     versionName = "1.4.2"
     storePassword = "123456"
