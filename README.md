@@ -29,20 +29,30 @@
 
 
 ##项目截图：
-![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_day_01.jpg)
-![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_night_01.jpg)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_day_01.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_night_01.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_day_02.jpg)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_night_02.jpg)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_day_03.jpg)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_night_03.jpg)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_001.jpg)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_002.jpg)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_003.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_004.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_005.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_006.png)
 
 ##下版本想法：
-##### 1.首页头条支持配置...
+##### 1.添加搜索功能...
 <br>
 
 ##更新日志：
+###V1.4.3:
+    1.Gank头条可以在设置界面配置
+    2.修复泡在网上的日子数据异常问题
+    3.添加CocoaChina代码展示
+    4.更新Gradle和support版本
+
 ###V1.4.2:
     1.修复历史浏览可能出现的一个崩溃问题
 
