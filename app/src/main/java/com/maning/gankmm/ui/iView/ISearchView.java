@@ -14,4 +14,6 @@ public interface ISearchView extends IBaseView {
 
     void showToast(String msg);
 
+    void overRefresh();
+
 }

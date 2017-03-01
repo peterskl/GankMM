@@ -47,8 +47,29 @@ public class RecycleSearchAdapter extends RecyclerView.Adapter<RecycleSearchAdap
     @Override
     public void onBindViewHolder(final RecycleSearchAdapter.MyViewHolder viewHolder, final int position) {
         SearchBean searchBean = mDatas.get(position);
+        viewHolder.tvDesc.setText(searchBean.getDesc());
+        viewHolder.tvType.setText(searchBean.getType());
+        viewHolder.tvTime.setText(searchBean.getPublishedAt().split("T")[0]);
 
-        viewHolder.tvTime.setText(searchBean.getDesc());
+        // Android | iOS | 休息视频 | 福利 | 拓展资源 | 前端 | 瞎推荐 | App
+        String type = searchBean.getType();
+        if("Android".equals(type)){
+            viewHolder.tvType.setBackgroundColor(context.getResources().getColor(R.color.type_01));
+        }else if("iOS".equals(type)){
+            viewHolder.tvType.setBackgroundColor(context.getResources().getColor(R.color.type_02));
+        }else if("休息视频".equals(type)){
+            viewHolder.tvType.setBackgroundColor(context.getResources().getColor(R.color.type_03));
+        }else if("福利".equals(type)){
+            viewHolder.tvType.setBackgroundColor(context.getResources().getColor(R.color.type_04));
+        }else if("拓展资源".equals(type)){
+            viewHolder.tvType.setBackgroundColor(context.getResources().getColor(R.color.type_05));
+        }else if("前端".equals(type)){
+            viewHolder.tvType.setBackgroundColor(context.getResources().getColor(R.color.type_06));
+        }else if("瞎推荐".equals(type)){
+            viewHolder.tvType.setBackgroundColor(context.getResources().getColor(R.color.type_07));
+        }else if("App".equals(type)){
+            viewHolder.tvType.setBackgroundColor(context.getResources().getColor(R.color.type_08));
+        }
 
         //如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null) {
@@ -75,6 +96,10 @@ public class RecycleSearchAdapter extends RecyclerView.Adapter<RecycleSearchAdap
 
         @Bind(R.id.tv_time)
         TextView tvTime;
+        @Bind(R.id.tv_desc)
+        TextView tvDesc;
+        @Bind(R.id.tv_type)
+        TextView tvType;
 
 
         public MyViewHolder(View itemView) {

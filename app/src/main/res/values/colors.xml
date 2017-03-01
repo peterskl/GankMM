@@ -21,6 +21,16 @@
     <color name="google_green">#34A853</color>
     <color name="google_yellow">#FBBC05</color>
 
+    <!--彩虹七色-->
+    <color name="type_01">#FF0000</color>
+    <color name="type_02">#FF7F00</color>
+    <color name="type_03">#FFFF00</color>
+    <color name="type_04">#00FF00</color>
+    <color name="type_05">#00FFFF</color>
+    <color name="type_06">#0000FF</color>
+    <color name="type_07">#8B00FF</color>
+    <color name="type_08">#494949</color>
+
     <!--华丽的分界线-->
     <color name="gank_text1_color">#FFFFFF</color><!--一级字体颜色-->
     <color name="gank_text1_color_night">#9AACEC</color><!--一级字体颜色夜间-->

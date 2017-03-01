@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?app_background"
+    android:background="@color/backgroundColor"
     android:orientation="vertical">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="?app_toolbar_bg">
+        android:background="@color/main_color">
 
         <Button
             android:id="@+id/btn_back"
@@ -56,13 +56,13 @@
 
 
             <com.maning.gankmm.ui.view.ProgressWheel
-                android:visibility="gone"
                 android:id="@+id/progressWheel"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
+                android:visibility="gone"
                 app:matProg_barColor="@color/colorPrimary"
                 app:matProg_barWidth="2dp"
                 app:matProg_progressIndeterminate="true" />
@@ -76,14 +76,14 @@
         android:id="@+id/swipeToLoadLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?refresh_bg"
+        android:background="@color/refresh_bg_color"
         app:swipe_style="classic">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/swipe_target"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?app_background"
+            android:background="@color/backgroundColor"
             android:clipToPadding="false"
             android:fadeScrollbars="true"
             android:scrollbars="vertical" />

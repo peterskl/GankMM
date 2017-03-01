@@ -18,6 +18,10 @@ import java.util.List;
 public class SearchPresenterImpl extends BasePresenterImpl<ISearchView> implements ISearchPresenter {
 
     private Context context;
+    private int pageSize = 20;
+    private int pageIndex = 1;
+    private String keyWord;
+    private List<SearchBean> gankSearchList;
 
     private MyCallBack httpCallBack = new MyCallBack() {
         @Override
@@ -27,10 +31,20 @@ public class SearchPresenterImpl extends BasePresenterImpl<ISearchView> implemen
             }
             if (what == 0x001) {
                 mView.hideBaseProgressDialog();
-                List<SearchBean> gankSearchList = results;
+                gankSearchList = results;
                 if (gankSearchList != null && gankSearchList.size() > 0) {
                     mView.setSearchList(gankSearchList);
                 }
+                pageIndex = 1;
+                pageIndex++;
+                mView.overRefresh();
+            } else if (what == 0x002) {
+                gankSearchList.addAll(results);
+                if (gankSearchList != null && gankSearchList.size() > 0) {
+                    mView.setSearchList(gankSearchList);
+                }
+                pageIndex++;
+                mView.overRefresh();
             }
         }
 
@@ -64,19 +78,19 @@ public class SearchPresenterImpl extends BasePresenterImpl<ISearchView> implemen
 
         //开始搜索
         if (TextUtils.isEmpty(keyWords)) {
-            mView.showToast("不能为空");
+            mView.showToast("关键字不能为空");
             return;
         }
-
+        keyWord = keyWords;
         //获取数据
         mView.showBaseProgressDialog("搜索中...");
-        GankApi.getSearchData(keyWords, "all", 20, 1, 0x001, httpCallBack);
+        GankApi.getSearchData(keyWord, "all", pageSize, pageIndex, 0x001, httpCallBack);
 
     }
 
     @Override
     public void loadMoreDatas() {
-
+        GankApi.getSearchData(keyWord, "all", pageSize, pageIndex, 0x002, httpCallBack);
     }
 
     @Override

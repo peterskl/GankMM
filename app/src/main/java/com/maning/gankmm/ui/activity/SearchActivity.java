@@ -11,16 +11,17 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.SearchBean;
-import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.adapter.RecycleSearchAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.ui.iView.ISearchView;
 import com.maning.gankmm.ui.presenter.impl.SearchPresenterImpl;
 import com.maning.gankmm.ui.view.MClearEditText;
 import com.maning.gankmm.ui.view.ProgressWheel;
+import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.KeyboardUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.umeng.analytics.MobclickAgent;
@@ -35,7 +36,7 @@ import butterknife.OnClick;
 /**
  * 搜索页面
  */
-public class SearchActivity extends BaseActivity implements ISearchView {
+public class SearchActivity extends BaseActivity implements ISearchView, OnLoadMoreListener {
 
 
     @Bind(R.id.btn_back)
@@ -48,8 +49,6 @@ public class SearchActivity extends BaseActivity implements ISearchView {
     SwipeToLoadLayout swipeToLoadLayout;
     @Bind(R.id.progressWheel)
     ProgressWheel progressWheel;
-
-    private int currentSkinType;
 
     private SearchPresenterImpl searchPresenter;
 
@@ -87,14 +86,10 @@ public class SearchActivity extends BaseActivity implements ISearchView {
 
 
         //添加分割线
-        currentSkinType = SkinManager.getCurrentSkinType(this);
-        if (currentSkinType == SkinManager.THEME_DAY) {
-            swipeTarget.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).color(Color.LTGRAY).build());
-        } else {
-            swipeTarget.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).color(getResources().getColor(R.color.lineColor_night)).build());
-        }
+        swipeTarget.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).color(Color.LTGRAY).build());
         swipeToLoadLayout.setRefreshEnabled(false);
-        swipeToLoadLayout.setLoadMoreEnabled(false);
+        swipeToLoadLayout.setLoadMoreEnabled(true);
+        swipeToLoadLayout.setOnLoadMoreListener(this);
 
         swipeTarget.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -134,8 +129,6 @@ public class SearchActivity extends BaseActivity implements ISearchView {
         searchPresenter.searchDatas(result);
         //关闭键盘
         KeyboardUtils.hideSoftInput(this, editTextSearch);
-        //失去焦点
-        editTextSearch.setFocusable(false);
     }
 
     private void initRecycleAdapter() {
@@ -147,7 +140,9 @@ public class SearchActivity extends BaseActivity implements ISearchView {
             recyclePicAdapter.setOnItemClickLitener(new RecycleSearchAdapter.OnItemClickLitener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    MySnackbar.makeSnackBarBlack(btnBack, "position:" + position);
+                    //跳转页面
+                    SearchBean searchBean = resultList.get(position);
+                    IntentUtils.startToWebActivity(SearchActivity.this, searchBean.getType(), searchBean.getDesc(), searchBean.getUrl());
                 }
             });
         } else {
@@ -159,6 +154,19 @@ public class SearchActivity extends BaseActivity implements ISearchView {
     @Override
     public void showToast(String msg) {
         MySnackbar.makeSnackBarBlack(btnBack, msg);
+    }
+
+    @Override
+    public void overRefresh() {
+        if (swipeToLoadLayout == null) {
+            return;
+        }
+        if (swipeToLoadLayout.isRefreshing()) {
+            swipeToLoadLayout.setRefreshing(false);
+        }
+        if (swipeToLoadLayout.isLoadingMore()) {
+            swipeToLoadLayout.setLoadingMore(false);
+        }
     }
 
     @Override
@@ -187,5 +195,10 @@ public class SearchActivity extends BaseActivity implements ISearchView {
     protected void onDestroy() {
         super.onDestroy();
         searchPresenter.detachView();
+    }
+
+    @Override
+    public void onLoadMore() {
+        searchPresenter.loadMoreDatas();
     }
 }
