@@ -105,6 +105,9 @@ public class WebActivity extends BaseActivity implements IWebView {
             case R.id.action_open:
                 webPresenter.openBrowser(url);
                 break;
+            case R.id.action_share:
+                IntentUtils.startAppShareText(WebActivity.this, "GankMM链接分享", "GankMM链接分享：" + url);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

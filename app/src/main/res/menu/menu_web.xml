@@ -12,4 +12,9 @@
         android:title="浏览器打开"
         android:orderInCategory="100"
         app:showAsAction="never"/>
+
+    <item android:id="@+id/action_share"
+        android:title="分享链接"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
 </menu>
