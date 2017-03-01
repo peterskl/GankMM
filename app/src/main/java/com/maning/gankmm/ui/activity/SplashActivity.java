@@ -11,6 +11,8 @@ import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.skin.SkinManager;
 import com.umeng.analytics.MobclickAgent;
 
+import net.youmi.android.AdManager;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.jpush.android.api.JPushInterface;
@@ -29,7 +31,7 @@ public class SplashActivity extends Activity {
         ButterKnife.bind(this);
 
         int currentSkinType = SkinManager.getCurrentSkinType(this);
-        if(currentSkinType == SkinManager.THEME_NIGHT){
+        if (currentSkinType == SkinManager.THEME_NIGHT) {
             shadeBg.setVisibility(View.VISIBLE);
         }
 
@@ -42,6 +44,9 @@ public class SplashActivity extends Activity {
         }, 2000);
 
         tv_app_version.setText(String.valueOf("V " + MyApplication.getVersionName()));
+
+        //有米SDK
+        AdManager.getInstance(this).init("f990efa85f85257b", "f990efa85f85257b", true, true);
 
     }
 
