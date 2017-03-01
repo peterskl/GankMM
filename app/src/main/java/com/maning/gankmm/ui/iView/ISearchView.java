@@ -16,4 +16,6 @@ public interface ISearchView extends IBaseView {
 
     void overRefresh();
 
+    void setLoadMoreEnabled(boolean flag);
+
 }

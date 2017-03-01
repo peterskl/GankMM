@@ -88,7 +88,7 @@ public class SearchActivity extends BaseActivity implements ISearchView, OnLoadM
         //添加分割线
         swipeTarget.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).color(Color.LTGRAY).build());
         swipeToLoadLayout.setRefreshEnabled(false);
-        swipeToLoadLayout.setLoadMoreEnabled(true);
+        swipeToLoadLayout.setLoadMoreEnabled(false);
         swipeToLoadLayout.setOnLoadMoreListener(this);
 
         swipeTarget.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -167,6 +167,11 @@ public class SearchActivity extends BaseActivity implements ISearchView, OnLoadM
         if (swipeToLoadLayout.isLoadingMore()) {
             swipeToLoadLayout.setLoadingMore(false);
         }
+    }
+
+    @Override
+    public void setLoadMoreEnabled(boolean flag) {
+        swipeToLoadLayout.setLoadMoreEnabled(flag);
     }
 
     @Override

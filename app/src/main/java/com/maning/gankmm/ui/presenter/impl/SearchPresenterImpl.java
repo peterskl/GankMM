@@ -35,6 +35,12 @@ public class SearchPresenterImpl extends BasePresenterImpl<ISearchView> implemen
                 if (gankSearchList != null && gankSearchList.size() > 0) {
                     mView.setSearchList(gankSearchList);
                 }
+                //判断是不是可以使用上啦加载更多功能
+                if (gankSearchList == null || gankSearchList.size() == 0 || gankSearchList.size() < pageIndex * pageSize) {
+                    mView.setLoadMoreEnabled(false);
+                } else {
+                    mView.setLoadMoreEnabled(true);
+                }
                 pageIndex = 1;
                 pageIndex++;
                 mView.overRefresh();
@@ -59,6 +65,7 @@ public class SearchPresenterImpl extends BasePresenterImpl<ISearchView> implemen
                 return;
             }
             mView.hideBaseProgressDialog();
+            mView.overRefresh();
             if (!TextUtils.isEmpty(result)) {
                 mView.showToast(result);
             }
