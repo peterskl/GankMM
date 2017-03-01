@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?app_background"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?app_toolbar_bg">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/icon_arrow_back" />
+
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/icon_search" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/btn_search"
+            android:layout_toRightOf="@id/btn_back"
+            android:background="@drawable/search_bg">
+
+            <com.maning.gankmm.ui.view.MClearEditText
+                android:id="@+id/editTextSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@null"
+                android:hint="输入想要搜索的关键字"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="13sp" />
+
+
+            <com.maning.gankmm.ui.view.ProgressWheel
+                android:visibility="gone"
+                android:id="@+id/progressWheel"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                app:matProg_barColor="@color/colorPrimary"
+                app:matProg_barWidth="2dp"
+                app:matProg_progressIndeterminate="true" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
+        android:id="@+id/swipeToLoadLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?refresh_bg"
+        app:swipe_style="classic">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/swipe_target"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?app_background"
+            android:clipToPadding="false"
+            android:fadeScrollbars="true"
+            android:scrollbars="vertical" />
+
+        <include
+            android:id="@id/swipe_load_more_footer"
+            layout="@layout/layout_refresh_footer" />
+
+    </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
+
+
+</LinearLayout>

@@ -77,6 +77,7 @@
         <item name="app_icon_menu">@drawable/icon_menu2</item>
         <item name="webview_progress_bg_color">@color/webview_progress_bg_color</item>
         <item name="webview_progress_color">@color/webview_progress_color</item>
+        <item name="app_icon_search">@drawable/icon_search</item>
     </style>
 
     <!--黑夜-->
@@ -121,6 +122,7 @@
         <item name="app_icon_menu">@drawable/icon_menu2_night</item>
         <item name="webview_progress_bg_color">@color/webview_progress_bg_color_night</item>
         <item name="webview_progress_color">@color/webview_progress_color_night</item>
+        <item name="app_icon_search">@drawable/icon_search_night</item>
     </style>
 
 

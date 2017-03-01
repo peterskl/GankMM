@@ -7,6 +7,7 @@ import com.maning.gankmm.bean.DayEntity;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.HttpResult;
 import com.maning.gankmm.bean.RandomEntity;
+import com.maning.gankmm.bean.SearchBean;
 import com.socks.library.KLog;
 
 import java.util.List;
@@ -89,7 +90,7 @@ public class GankApi {
 
             @Override
             public void onFailure(Call<HttpResult<List<String>>> call, Throwable t) {
-                KLog.i("getHistoryData-----success：" + t.toString());
+                KLog.i("getHistoryData-----onFailure：" + t.toString());
                 //数据错误
                 myCallBack.onFail(what, NET_FAIL);
             }
@@ -213,6 +214,55 @@ public class GankApi {
         });
 
         return theLastAppInfoCall;
+    }
+
+
+    /**
+     * 获取搜索结果
+     * @param keyWord   关键字
+     * @param type      类型  category 后面可接受参数 all | Android | iOS | 休息视频 | 福利 | 拓展资源 | 前端 | 瞎推荐 | App
+     * @param count     搜索长度
+     * @param indexPage 页码
+     * @param what
+     * @param myCallBack
+     * @return
+     */
+    public static Call<HttpResult<List<SearchBean>>> getSearchData(String keyWord,String type,int count,int indexPage,final int what, final MyCallBack myCallBack) {
+
+        Call<HttpResult<List<SearchBean>>> ganSearchData = BuildApi.getAPIService().getSearchData(keyWord,type,count,indexPage);
+
+        ganSearchData.enqueue(new Callback<HttpResult<List<SearchBean>>>() {
+            @Override
+            public void onResponse(Call<HttpResult<List<SearchBean>>> call, Response<HttpResult<List<SearchBean>>> response) {
+                if (response.isSuccessful()) {
+                    HttpResult<List<SearchBean>> httpResult = response.body();
+                    if (httpResult != null) {
+                        if (!httpResult.isError()) {
+                            List<SearchBean> gankEntityList = httpResult.getResults();
+                            KLog.i("getHistoryData---success：" + gankEntityList.toString());
+                            myCallBack.onSuccessList(what, gankEntityList);
+                        } else {
+                            myCallBack.onFail(what, GET_DATA_FAIL);
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HttpResult<List<SearchBean>>> call, Throwable t) {
+                KLog.i("getHistoryData-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+
+        return ganSearchData;
+
     }
 
 }

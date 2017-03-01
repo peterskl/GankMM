@@ -5,6 +5,7 @@ import com.maning.gankmm.bean.DayEntity;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.HttpResult;
 import com.maning.gankmm.bean.RandomEntity;
+import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.constant.Constants;
 
 import java.util.List;
@@ -52,5 +53,16 @@ public interface APIService {
     @Headers("Cache-Control: public, max-age=3600")
     @GET(Constants.URL_AppUpdateInfo)
     Call<AppUpdateInfo> getTheLastAppInfo();
+
+
+    //搜索
+    //http://gank.io/api/search/query/listview/category/Android/count/10/page/1
+    @Headers("Cache-Control: public, max-age=120")
+    @GET("search/query/{keyword}/category/{type}/count/{count}/page/{pageIndex}")
+    Call<HttpResult<List<SearchBean>>> getSearchData(@Path("keyword") String keyword,
+                                                     @Path("type") String type,
+                                                     @Path("count") int count,
+                                                     @Path("pageIndex") int pageIndex
+    );
 
 }

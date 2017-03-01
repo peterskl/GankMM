@@ -12,6 +12,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
@@ -127,11 +129,19 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     private void initMyToolBar() {
         int currentSkinType = SkinManager.getCurrentSkinType(this);
+        Button rightBtnSearch = (Button) toolbar.findViewById(R.id.right_btn);
+        rightBtnSearch.setVisibility(View.VISIBLE);
         if (SkinManager.THEME_DAY == currentSkinType) {
             initToolBar(toolbar, Constants.FlagWelFare, R.drawable.icon_menu2);
         } else {
             initToolBar(toolbar, Constants.FlagWelFare, R.drawable.icon_menu2_night);
         }
+        rightBtnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,SearchActivity.class));
+            }
+        });
     }
 
     private void initIntent() {
