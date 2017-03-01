@@ -137,7 +137,17 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
             @Override
             public void onConfirm() {
-                settingPresenter.cleanCache();
+                // 先判断是否有权限。
+                if(AndPermission.hasPermission(SettingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    // 有权限，直接do anything.
+                    settingPresenter.cleanCache();
+                } else {
+                    // 申请权限。
+                    AndPermission.with(SettingActivity.this)
+                            .requestCode(101)
+                            .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            .send();
+                }
             }
 
             @Override
@@ -378,11 +388,14 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     private PermissionListener listener = new PermissionListener() {
         @Override
         public void onSucceed(int requestCode, List<String> grantedPermissions) {
+            MySnackbar.makeSnackBarBlack(toolbar, "权限申请成功");
             // 权限申请成功回调。
             if(requestCode == 100) {
-                MySnackbar.makeSnackBarBlack(toolbar, "权限申请成功");
                 //更新版本
                 showDownloadDialog(appUpdateInfo);
+            }else if(requestCode == 101){
+                //清理缓存
+                settingPresenter.cleanCache();
             }
         }
 
