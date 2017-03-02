@@ -24,6 +24,7 @@ public class SplashActivity extends Activity {
     @Bind(R.id.shade_bg)
     TextView shadeBg;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,16 +39,21 @@ public class SplashActivity extends Activity {
         MyApplication.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, SplashAdActivity.class));
                 SplashActivity.this.finish();
             }
         }, 2000);
 
         tv_app_version.setText(String.valueOf("V " + MyApplication.getVersionName()));
 
-        //有米SDK
-        AdManager.getInstance(this).init("f990efa85f85257b", "f990efa85f85257b", true, true);
 
+        initYoumiSDK();
+
+    }
+
+    private void initYoumiSDK() {
+        //初始化
+        AdManager.getInstance(this).init("f990efa85f85257b", "7a55d045a3ab5fe6", true, true);
     }
 
     @Override

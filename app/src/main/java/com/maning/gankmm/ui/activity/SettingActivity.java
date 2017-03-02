@@ -138,7 +138,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
             @Override
             public void onConfirm() {
                 // 先判断是否有权限。
-                if(AndPermission.hasPermission(SettingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                if (AndPermission.hasPermission(SettingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     // 有权限，直接do anything.
                     settingPresenter.cleanCache();
                 } else {
@@ -173,6 +173,11 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     @OnClick(R.id.iv_night_mode)
     void iv_night_mode() {
         settingPresenter.clickNightMode();
+    }
+
+    @OnClick(R.id.item_app_ad)
+    void item_app_ad() {
+        IntentUtils.startAdActivity(this);
     }
 
     @Override
@@ -240,7 +245,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
                     @Override
                     public void onConfirm() {
                         // 先判断是否有权限。
-                        if(AndPermission.hasPermission(SettingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        if (AndPermission.hasPermission(SettingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                             // 有权限，直接do anything.
                             //更新版本
                             showDownloadDialog(SettingActivity.this.appUpdateInfo);
@@ -390,10 +395,10 @@ public class SettingActivity extends BaseActivity implements ISettingView {
         public void onSucceed(int requestCode, List<String> grantedPermissions) {
             MySnackbar.makeSnackBarBlack(toolbar, "权限申请成功");
             // 权限申请成功回调。
-            if(requestCode == 100) {
+            if (requestCode == 100) {
                 //更新版本
                 showDownloadDialog(appUpdateInfo);
-            }else if(requestCode == 101){
+            } else if (requestCode == 101) {
                 //清理缓存
                 settingPresenter.cleanCache();
             }

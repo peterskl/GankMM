@@ -40,6 +40,8 @@ import com.umeng.analytics.MobclickAgent;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
 
+import net.youmi.android.normal.spot.SpotManager;
+
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -110,7 +112,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     private void requestSomePermission() {
 
         // 先判断是否有权限。
-        if(!AndPermission.hasPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+        if (!AndPermission.hasPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             // 申请权限。
             AndPermission.with(MainActivity.this)
                     .requestCode(100)
@@ -139,7 +141,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         rightBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,SearchActivity.class));
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
             }
         });
     }
@@ -258,14 +260,14 @@ public class MainActivity extends BaseActivity implements IMainView {
                         menuItem.setCheckable(false);
                         //泡在网上的日子
                         Intent intent01 = new Intent(MainActivity.this, CodesActivity.class);
-                        intent01.putExtra(CodesActivity.IntentType,CodesActivity.IntentTypeName_Jcode);
+                        intent01.putExtra(CodesActivity.IntentType, CodesActivity.IntentTypeName_Jcode);
                         startActivity(intent01);
                         break;
                     case R.id.nav_cocoa_china:
                         menuItem.setCheckable(false);
                         //CocoaChina
                         Intent intent = new Intent(MainActivity.this, CodesActivity.class);
-                        intent.putExtra(CodesActivity.IntentType,CodesActivity.IntentTypeName_CocoaChina);
+                        intent.putExtra(CodesActivity.IntentType, CodesActivity.IntentTypeName_CocoaChina);
                         startActivity(intent);
                         break;
                     case R.id.about:
@@ -325,6 +327,8 @@ public class MainActivity extends BaseActivity implements IMainView {
             return;
         }
         finish();
+        //退出
+        SpotManager.getInstance(this).onAppExit();
     }
 
     @Override
@@ -407,7 +411,7 @@ public class MainActivity extends BaseActivity implements IMainView {
                 .cancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(final DialogInterface dialog) {
-                        if(dialogUpdate.isCancelled()){
+                        if (dialogUpdate.isCancelled()) {
                             return;
                         }
                         dialogCloseWarn = DialogUtils.showMyDialog(MainActivity.this, "警告", "当前正在下载APK，是否关闭进度框？", "关闭", "取消", new DialogUtils.OnDialogClickListener() {
@@ -425,11 +429,11 @@ public class MainActivity extends BaseActivity implements IMainView {
                 })
                 .show();
 
-        new InstallUtils(context, appUpdateInfo.getInstall_url(), Constants.UpdateAPKPath, "GankMM_"+appUpdateInfo.getVersionShort(), new InstallUtils.DownloadCallBack() {
+        new InstallUtils(context, appUpdateInfo.getInstall_url(), Constants.UpdateAPKPath, "GankMM_" + appUpdateInfo.getVersionShort(), new InstallUtils.DownloadCallBack() {
             @Override
             public void onStart() {
-                KLog.i( "onStart");
-                if(dialogUpdate.isCancelled()){
+                KLog.i("onStart");
+                if (dialogUpdate.isCancelled()) {
                     return;
                 }
                 dialogUpdate.setProgress(0);
@@ -437,12 +441,12 @@ public class MainActivity extends BaseActivity implements IMainView {
 
             @Override
             public void onComplete(String path) {
-                KLog.i(  "onComplete:" + path);
+                KLog.i("onComplete:" + path);
                 InstallUtils.installAPK(context, path);
                 if (dialogCloseWarn != null) {
                     dialogCloseWarn.dismiss();
                 }
-                if(dialogUpdate.isCancelled()){
+                if (dialogUpdate.isCancelled()) {
                     return;
                 }
                 dialogUpdate.dismiss();
@@ -450,8 +454,8 @@ public class MainActivity extends BaseActivity implements IMainView {
 
             @Override
             public void onLoading(long total, long current) {
-                KLog.i(  "onLoading:-----total:" + total + ",current:" + current);
-                if(dialogUpdate.isCancelled()){
+                KLog.i("onLoading:-----total:" + total + ",current:" + current);
+                if (dialogUpdate.isCancelled()) {
                     return;
                 }
                 dialogUpdate.setProgress((int) (current * 100 / total));
@@ -462,7 +466,7 @@ public class MainActivity extends BaseActivity implements IMainView {
                 if (dialogCloseWarn != null) {
                     dialogCloseWarn.dismiss();
                 }
-                if(dialogUpdate.isCancelled()){
+                if (dialogUpdate.isCancelled()) {
                     return;
                 }
                 dialogUpdate.dismiss();

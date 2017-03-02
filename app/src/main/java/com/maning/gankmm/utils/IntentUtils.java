@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.maning.gankmm.ui.activity.AboutActivity;
+import com.maning.gankmm.ui.activity.AdActivity;
 import com.maning.gankmm.ui.activity.GankActivity;
 import com.maning.gankmm.ui.activity.ImagesActivity;
 import com.maning.gankmm.ui.activity.SettingActivity;
@@ -48,6 +49,11 @@ public class IntentUtils {
 
     public static void startAboutActivity(Context context) {
         Intent intent = new Intent(context.getApplicationContext(), AboutActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startAdActivity(Context context) {
+        Intent intent = new Intent(context.getApplicationContext(), AdActivity.class);
         context.startActivity(intent);
     }
 
