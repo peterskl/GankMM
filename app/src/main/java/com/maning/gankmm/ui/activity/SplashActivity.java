@@ -53,7 +53,7 @@ public class SplashActivity extends Activity {
 
     private void initYoumiSDK() {
         //初始化
-        AdManager.getInstance(this).init("f990efa85f85257b", "7a55d045a3ab5fe6", true, true);
+        AdManager.getInstance(this).init("f990efa85f85257b", "7a55d045a3ab5fe6", false, false);
     }
 
     @Override
