@@ -41,6 +41,7 @@ import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
 
 import net.youmi.android.normal.spot.SpotManager;
+import net.youmi.android.normal.video.VideoAdManager;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -112,11 +113,11 @@ public class MainActivity extends BaseActivity implements IMainView {
     private void requestSomePermission() {
 
         // 先判断是否有权限。
-        if (!AndPermission.hasPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+        if (!AndPermission.hasPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) || !AndPermission.hasPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE)) {
             // 申请权限。
             AndPermission.with(MainActivity.this)
                     .requestCode(100)
-                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE)
                     .send();
         }
 
@@ -329,6 +330,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         finish();
         //退出
         SpotManager.getInstance(this).onAppExit();
+        VideoAdManager.getInstance(this).onAppExit();
     }
 
     @Override

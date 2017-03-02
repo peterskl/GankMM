@@ -72,4 +72,5 @@ public class SplashActivity extends Activity {
         MobclickAgent.onPause(this);
     }
 
+
 }

@@ -1,29 +1,36 @@
 package com.maning.gankmm.ui.activity;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.maning.gankmm.R;
+import com.maning.gankmm.ui.base.BaseActivity;
 import com.socks.library.KLog;
+import com.umeng.analytics.MobclickAgent;
 
 import net.youmi.android.normal.common.ErrorCode;
 import net.youmi.android.normal.spot.SplashViewSettings;
 import net.youmi.android.normal.spot.SpotListener;
 import net.youmi.android.normal.spot.SpotManager;
-import net.youmi.android.normal.video.VideoAdManager;
 
-public class SplashAdActivity extends AppCompatActivity {
+import cn.jpush.android.api.JPushInterface;
+
+public class SplashAdActivity extends BaseActivity {
 
     private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 设置全屏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // 移除标题栏
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_splash_ad);
 
         mContext = this;
@@ -115,5 +122,21 @@ public class SplashAdActivity extends AppCompatActivity {
         super.onDestroy();
         // 开屏展示界面的 onDestroy() 回调方法中调用
         SpotManager.getInstance(this).onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+        MobclickAgent.onPageStart("SplashAdActivity");
+        MobclickAgent.onResume(this);       //统计时长
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+        MobclickAgent.onPageStart("SplashAdActivity");
+        MobclickAgent.onPause(this);
     }
 }
