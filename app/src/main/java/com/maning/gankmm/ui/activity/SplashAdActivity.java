@@ -2,12 +2,15 @@ package com.maning.gankmm.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.maning.gankmm.R;
+import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.socks.library.KLog;
 import com.umeng.analytics.MobclickAgent;
@@ -17,10 +20,14 @@ import net.youmi.android.normal.spot.SplashViewSettings;
 import net.youmi.android.normal.spot.SpotListener;
 import net.youmi.android.normal.spot.SpotManager;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import cn.jpush.android.api.JPushInterface;
 
 public class SplashAdActivity extends BaseActivity {
 
+    @Bind(R.id.shade_bg)
+    TextView shadeBg;
     private Context mContext;
 
     @Override
@@ -32,8 +39,15 @@ public class SplashAdActivity extends BaseActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_splash_ad);
+        ButterKnife.bind(this);
 
         mContext = this;
+
+        //夜间模式
+        int currentSkinType = SkinManager.getCurrentSkinType(this);
+        if (currentSkinType == SkinManager.THEME_NIGHT) {
+            shadeBg.setVisibility(View.VISIBLE);
+        }
 
         //开屏广告
         setupSplashAd();
@@ -47,7 +61,7 @@ public class SplashAdActivity extends BaseActivity {
      */
     private void checkAdSettings() {
         boolean result = SpotManager.getInstance(this).checkSpotAdConfig();
-        KLog.e("youmi配置 :"+result);
+        KLog.e("youmi配置 :" + result);
     }
 
 
