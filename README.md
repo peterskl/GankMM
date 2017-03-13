@@ -132,7 +132,7 @@
 ######[所有的开源的人](https://github.com)
 
 ##依赖库：
-######[butterknife](https://github.com/JakeWharton/butterknife)
+###### 注解框架 [butterknife](https://github.com/JakeWharton/butterknife)
 ######[Gson](https://github.com/google/gson)
 ######[retrofit](https://github.com/square/retrofit)
 ######[okhttp](https://github.com/square/okhttp)
