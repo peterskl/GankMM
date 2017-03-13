@@ -47,6 +47,7 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private ArrayList<String> headLinesStrs;
     private LayoutInflater layoutInflater;
     private int screenWidth;
+    private MyViewHolderHeader myViewHolderHeader;
 
     public RecyclePicAdapter(Context context, List<GankEntity> commonDataResults) {
         this.context = context;
@@ -99,6 +100,9 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             commonDataResults.clear();
             commonDataResults = null;
         }
+        if(myViewHolderHeader != null){
+            myViewHolderHeader.destroyHeadLines();
+        }
     }
 
     public List<GankEntity> getAllDatas() {
@@ -110,7 +114,8 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         if (0 == viewType) {
             View inflate = layoutInflater.inflate(R.layout.item_welfare_header, parent, false);
-            return new MyViewHolderHeader(inflate);
+            myViewHolderHeader = new MyViewHolderHeader(inflate);
+            return myViewHolderHeader;
         } else {
             View inflate = layoutInflater.inflate(R.layout.item_welfare_staggered, parent, false);
             return new MyViewHolder(inflate);

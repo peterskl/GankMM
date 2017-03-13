@@ -44,8 +44,6 @@ public class WelFareFragment extends BaseFragment implements OnRefreshListener, 
 
     private WelFarePresenterImpl welFarePresenter;
 
-    private ArrayList<String> imagesList;
-
     public static WelFareFragment newInstance() {
         return new WelFareFragment();
     }
@@ -160,15 +158,10 @@ public class WelFareFragment extends BaseFragment implements OnRefreshListener, 
 
     @Override
     public void onDestroyView() {
-        welFarePresenter.detachView();
         if (recyclePicAdapter != null) {
-            RecyclerView.ViewHolder childViewHolder = swipeTarget.getChildViewHolder(swipeTarget.getChildAt(0));
-            if(childViewHolder instanceof RecyclePicAdapter.MyViewHolderHeader){
-                RecyclePicAdapter.MyViewHolderHeader viewHolder = (RecyclePicAdapter.MyViewHolderHeader) childViewHolder;
-                viewHolder.destroyHeadLines();
-            }
             recyclePicAdapter.destroyList();
         }
+        welFarePresenter.detachView();
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
