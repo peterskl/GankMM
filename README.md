@@ -15,11 +15,14 @@
     9.Android 6.0权限适配
     10.夜间模式的使用
 
+
 ##所有的数据来自：
 ####[干货集中营(http://gank.io/)](http://gank.io/)<br>
 
+
 ##注意：
 ####若是出现保存图片失败，或者更新应用失败请查看是不是存储权限关闭了。
+
 
 ##APK下载地址：
 ### 豌豆荚，应用宝 市场都已经通过审核，请到市场下载--->搜索：干货营 
@@ -27,8 +30,10 @@
 ####扫描下载:
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_ewm.png)
 
+
 ##GankMM夜间模式实现Demo（切换主题实现）：
 ####[AndroidChangeSkinDemo](https://github.com/maning0303/AndroidChangeSkinDemo)
+
 
 
 ##项目截图：
@@ -45,9 +50,7 @@
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_005.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_006.png)
 
-##下版本想法：
-##### 1.暂时还没有想法...
-<br>
+
 
 ##更新日志：
 ###V1.5.0:
@@ -117,10 +120,12 @@
     1.所有ListView替换为RecycleView
     2.修复Bug
     3.更换图标，APP名字
+
     
 ##关于
 #####亲，喜欢就start一下吧
 #####您可以在App意见反馈反馈您的意见和想法，也可以在这里提出您宝贵的[意见和想法](https://github.com/maning0303/GankMM/issues)
+
 
 ##感谢：
 ######[代码家-干货集中营](https://github.com/daimajia)
@@ -130,6 +135,7 @@
 ######[xiongwei-git](https://github.com/xiongwei-git/GankApp)
 ######[zzhoujay](https://github.com/zzhoujay/Gank4Android)
 ######[所有的开源的人](https://github.com)
+
 
 ##依赖库：
 ###### 注解框架 [butterknife](https://github.com/JakeWharton/butterknife)
