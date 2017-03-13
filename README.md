@@ -132,20 +132,18 @@
 ######[所有的开源的人](https://github.com)
 
 ##依赖库：
-
-###### [butterknife](https://github.com/JakeWharton/butterknife)    注解框架
-###### [Gson](https://github.com/google/gson)                       Json解析
-###### [retrofit](https://github.com/square/retrofit)               网络框架
-###### [okhttp](https://github.com/square/okhttp)                   网络框架
-###### [klog](https://github.com/ZhaoKaiQiang/KLog)                 打印日志框架
-###### [glide](https://github.com/bumptech/glide)                   图片加载
-###### [SwipeToLoadLayout](https://github.com/Aspsine/SwipeToLoadLayout)    刷新框架
-###### [Android-SVProgressHUD](https://github.com/saiwu-bigkoo/Android-SVProgressHUD)  载状态提示库
-###### 提示框          [material-dialogs](https://github.com/afollestad/material-dialogs)
-###### RecycleView分割线 [RecyclerView-FlexibleDivider](https://github.com/yqritc/RecyclerView-FlexibleDivider)
+###### 注解框架 [butterknife](https://github.com/JakeWharton/butterknife)
+###### Json解析 [Gson](https://github.com/google/gson)
+###### 网络框架 [retrofit](https://github.com/square/retrofit)  [okhttp](https://github.com/square/okhttp)
+###### 打印日志框架 [klog](https://github.com/ZhaoKaiQiang/KLog)
+###### 图片加载 [glide](https://github.com/bumptech/glide)
+###### 刷新框架 [SwipeToLoadLayout](https://github.com/Aspsine/SwipeToLoadLayout)
 ###### 解析Html [jsoup](https://github.com/jhy/jsoup)
 ###### 权限管理库 [AndPermission](https://github.com/yanzhenjie/AndPermission)
+###### 提示框  [material-dialogs](https://github.com/afollestad/material-dialogs)  [Android-SVProgressHUD](https://github.com/saiwu-bigkoo/Android-SVProgressHUD)
+###### RecycleView分割线 [RecyclerView-FlexibleDivider](https://github.com/yqritc/RecyclerView-FlexibleDivider)
 ###### ViewPager的标题控件 [smarttablayout](https://github.com/ogaclejapan/SmartTabLayout)
 ###### 广告轮播控件 [SwitcherView](https://github.com/maning0303/SwitcherView)
 ###### 收藏按钮 [LikeButton](https://github.com/jd-alexander/LikeButton)
+
 
