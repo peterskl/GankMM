@@ -118,7 +118,7 @@ public class MainActivity extends BaseActivity implements IMainView {
             // 申请权限。
             AndPermission.with(MainActivity.this)
                     .requestCode(100)
-                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_PHONE_STATE)
+                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
                     .send();
         }
 
@@ -328,10 +328,13 @@ public class MainActivity extends BaseActivity implements IMainView {
             exitTime = currtTime;
             return;
         }
+
+        // 不退出程序，进入后台
+        moveTaskToBack(true);
         //使 App 进入后台而不是关闭
-        Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
-        launcherIntent.addCategory(Intent.CATEGORY_HOME);
-        startActivity(launcherIntent);
+//        Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
+//        launcherIntent.addCategory(Intent.CATEGORY_HOME);
+//        startActivity(launcherIntent);
 
     }
 
@@ -347,6 +350,12 @@ public class MainActivity extends BaseActivity implements IMainView {
         super.onPause();
         MobclickAgent.onPause(this);
         KLog.i("onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        KLog.i("onStop");
     }
 
     @Override
