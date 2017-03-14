@@ -86,6 +86,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        KLog.i("onCreate");
 
         context = this;
 
@@ -327,26 +328,34 @@ public class MainActivity extends BaseActivity implements IMainView {
             exitTime = currtTime;
             return;
         }
-        finish();
-        //退出
-        SpotManager.getInstance(this).onAppExit();
-        VideoAdManager.getInstance(this).onAppExit();
+        //使 App 进入后台而不是关闭
+        Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
+        launcherIntent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(launcherIntent);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);       //统计时长
+        KLog.i("onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+        KLog.i("onPause");
     }
 
     @Override
     protected void onDestroy() {
+        KLog.i("onDestroy");
+        //退出
+        SpotManager.getInstance(this).onAppExit();
+        VideoAdManager.getInstance(this).onAppExit();
+
         mainPresenter.detachView();
         SkinManager.unregisterSkinReceiver(this, skinBroadcastReceiver);
         skinBroadcastReceiver = null;

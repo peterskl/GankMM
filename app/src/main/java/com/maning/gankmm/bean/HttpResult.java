@@ -1,6 +1,8 @@
 package com.maning.gankmm.bean;
 
 
+import com.google.gson.Gson;
+
 import java.io.Serializable;
 
 /**
@@ -37,4 +39,5 @@ public class HttpResult<T> implements Serializable{
                 ", results=" + results.toString() +
                 '}';
     }
+
 }

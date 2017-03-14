@@ -1,9 +1,12 @@
 package com.maning.gankmm.app;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.util.Log;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
@@ -15,6 +18,7 @@ import com.socks.library.KLog;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import cn.jpush.android.api.JPushInterface;
@@ -27,7 +31,6 @@ import okhttp3.Response;
 
 /**
  * Created by maning on 16/3/2.
- *
  */
 public class MyApplication extends Application {
 
@@ -36,6 +39,9 @@ public class MyApplication extends Application {
     private static MyApplication application;
     private static Handler mHandler;
     private static ACache aCache;
+
+    //Activity实例
+    public static ArrayList<Activity> sLeakyActivities = new ArrayList<Activity>();
 
     @Override
     public void onCreate() {
@@ -50,13 +56,19 @@ public class MyApplication extends Application {
         initCrash();
 
         //初始化Log
-        KLog.init(BuildConfig.LOG_DEBUG);
+        KLog.init(BuildConfig.LOG_DEBUG,"GankMM");
 
         //初始化ACache类
         aCache = ACache.get(this);
 
         //初始化意见反馈
         initAliFeedBack();
+
+        //开启违例检测:StrictMode
+        if (BuildConfig.LOG_DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
+        }
 
     }
 
