@@ -31,6 +31,9 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
 
+        //初始化有米
+        initYoumiSDK();
+
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (currentSkinType == SkinManager.THEME_NIGHT) {
             shadeBg.setVisibility(View.VISIBLE);
@@ -46,8 +49,6 @@ public class SplashActivity extends Activity {
 
         tv_app_version.setText(String.valueOf("V " + MyApplication.getVersionName()));
 
-
-        initYoumiSDK();
 
     }
 

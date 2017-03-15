@@ -35,8 +35,6 @@ public class SplashAdActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // 设置全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        // 移除标题栏
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_splash_ad);
         ButterKnife.bind(this);

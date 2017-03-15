@@ -12,11 +12,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.maning.gankmm.R;
+import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.utils.MyToast;
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 import com.socks.library.KLog;
 import com.umeng.analytics.MobclickAgent;
 import com.yanzhenjie.permission.AndPermission;
@@ -32,6 +37,7 @@ import net.youmi.android.normal.video.VideoAdManager;
 import net.youmi.android.normal.video.VideoAdSettings;
 
 import java.util.List;
+import java.util.logging.Handler;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,8 +59,10 @@ public class AdActivity extends BaseActivity {
     @Bind(R.id.btn_ad_03)
     Button btnAd03;
     @Bind(R.id.ll_main_banner)
-    LinearLayout llMainBanner;
+    RelativeLayout llMainBanner;
     private Context mContext;
+
+    private BannerView bv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,12 +85,18 @@ public class AdActivity extends BaseActivity {
         // 设置插屏广告
         setupSpotAd();
 
+        //腾讯广告
+        initBanner();
+
     }
 
     @OnClick(R.id.btn_ad_01)
     void btn_ad_01() {
         // 设置插屏广告
         setupSpotAd();
+
+        /* 发起广告请求，收到广告数据后会展示数据   */
+        bv.loadAD();
     }
 
     @OnClick(R.id.btn_ad_02)
@@ -478,5 +492,28 @@ public class AdActivity extends BaseActivity {
             }
         }
     };
+
+
+    private void initBanner() {
+        this.bv = new BannerView(this, ADSize.BANNER, Constants.AD_APPID, Constants.AD_BannerPosID);
+        // 注意：如果开发者的banner不是始终展示在屏幕中的话，请关闭自动刷新，否则将导致曝光率过低。
+        // 并且应该自行处理：当banner广告区域出现在屏幕后，再手动loadAD。
+        bv.setRefresh(30);
+        bv.setADListener(new AbstractBannerADListener() {
+            @Override
+            public void onNoAD(int arg0) {
+                KLog.i("BannerNoAD，eCode=" + arg0);
+            }
+
+            @Override
+            public void onADReceiv() {
+                KLog.i("ONBannerReceive");
+            }
+        });
+        llMainBanner.addView(bv);
+
+        /* 发起广告请求，收到广告数据后会展示数据   */
+        bv.loadAD();
+    }
 
 }

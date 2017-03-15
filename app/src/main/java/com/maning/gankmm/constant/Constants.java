@@ -47,4 +47,9 @@ public class Constants {
     public static final String SPSwitcherDataType = "SPSwitcherDataType"; //保存首页头条
 
 
+    //广告
+    public static final String AD_APPID = "1105681438";
+    public static final String AD_BannerPosID = "7000624101084236";
+
+
 }

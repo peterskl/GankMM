@@ -33,10 +33,10 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 如果使用积分墙广告,还需要配置下面权限 -->
-<!--    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission
-        android:name="android.permission.PACKAGE_USAGE_STATS"
-        tools:ignore="ProtectedPermissions" />-->
+    <!--    <uses-permission android:name="android.permission.GET_TASKS" />
+        <uses-permission
+            android:name="android.permission.PACKAGE_USAGE_STATS"
+            tools:ignore="ProtectedPermissions" />-->
 
     <application
         android:name=".app.MyApplication"
@@ -233,8 +233,7 @@
             android:resizeableActivity="false"
             android:screenOrientation="landscape"
             android:taskAffinity=""
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity >
+            android:theme="@android:style/Theme.NoTitleBar" />
 
         <activity
             android:name=".ui.activity.SplashAdActivity"
@@ -242,6 +241,15 @@
         <activity
             android:name=".ui.activity.AdActivity"
             android:screenOrientation="portrait" />
+
+        <!--腾讯广告联盟-->
+        <service
+            android:name="com.qq.e.comm.DownloadService"
+            android:exported="false" />
+        <activity
+            android:name="com.qq.e.ads.ADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
     </application>
 
 </manifest>
