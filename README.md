@@ -37,7 +37,7 @@
 
 
 
-##项目截图：
+##  项目截图：
 
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_day_01.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_night_01.png)
