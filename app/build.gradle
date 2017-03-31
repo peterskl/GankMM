@@ -128,4 +128,5 @@ dependencies {
     compile 'io.github.yavski:fab-speed-dial:1.0.4'
     compile files('libs/YoumiSdk_v7.0.1_2017-01-06.jar')
     compile files('libs/GDTUnionSDK.4.9.543.min.jar')
+    compile files('libs/AMap_Location_V3.3.0_20170118.jar')
 }
