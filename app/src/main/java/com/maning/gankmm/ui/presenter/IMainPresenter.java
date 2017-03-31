@@ -9,4 +9,10 @@ public interface IMainPresenter {
 
     void initAppUpdate();
 
+    void getLocationInfo();
+
+    void getCitys();
+
+    void destroyLocation();
+
 }

@@ -24,6 +24,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.AppUpdateInfo;
 import com.maning.gankmm.constant.Constants;
+import com.maning.gankmm.http.GankApi;
 import com.maning.gankmm.skin.SkinBroadcastReceiver;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.base.BaseActivity;
@@ -57,7 +58,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements IMainView, AMapLocationListener {
+public class MainActivity extends BaseActivity implements IMainView {
 
     @Bind(R.id.navigationView)
     NavigationView navigationView;
@@ -86,11 +87,6 @@ public class MainActivity extends BaseActivity implements IMainView, AMapLocatio
     private MaterialDialog dialogUpdate;
     private MaterialDialog dialogCloseWarn;
 
-    //定位
-    public AMapLocationClientOption mLocationOption = null;
-    private AMapLocationClient mlocationClient;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +102,9 @@ public class MainActivity extends BaseActivity implements IMainView, AMapLocatio
 
         mainPresenter = new MainPresenterImpl(this, this);
         mainPresenter.initAppUpdate();
+        mainPresenter.initFeedBack();
+        mainPresenter.getLocationInfo();
+        mainPresenter.getCitys();
 
         initIntent();
 
@@ -118,9 +117,6 @@ public class MainActivity extends BaseActivity implements IMainView, AMapLocatio
 
         //申请权限
         requestSomePermission();
-
-        //定位
-        requestLocationInfo();
 
     }
 
@@ -381,15 +377,10 @@ public class MainActivity extends BaseActivity implements IMainView, AMapLocatio
         //退出
         SpotManager.getInstance(this).onAppExit();
         VideoAdManager.getInstance(this).onAppExit();
-
+        mainPresenter.destroyLocation();
         mainPresenter.detachView();
         SkinManager.unregisterSkinReceiver(this, skinBroadcastReceiver);
         skinBroadcastReceiver = null;
-
-        //销毁定位客户端，同时销毁本地定位服务。
-        if (mlocationClient != null) {
-            mlocationClient.onDestroy();
-        }
 
         super.onDestroy();
     }
@@ -545,76 +536,5 @@ public class MainActivity extends BaseActivity implements IMainView, AMapLocatio
         }
     };
 
-    private void requestLocationInfo() {
-        mlocationClient = new AMapLocationClient(this);
-        //初始化定位参数
-        mLocationOption = new AMapLocationClientOption();
-        //设置定位监听
-        mlocationClient.setLocationListener(this);
-        //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        //设置定位间隔,单位毫秒,默认为2000ms
-        mLocationOption.setInterval(2000);
-        //单位是毫秒，默认30000毫秒，建议超时时间不要低于8000毫秒。
-        mLocationOption.setHttpTimeOut(20000);
-        //设置是否返回地址信息（默认返回地址信息）
-        mLocationOption.setNeedAddress(true);
-        //获取一次定位结果：
-        //该方法默认为false。
-        mLocationOption.setOnceLocation(true);
-        //获取最近3s内精度最高的一次定位结果：
-        //设置setOnceLocationLatest(boolean b)接口为true，启动定位时SDK会返回最近3s内精度最高的一次定位结果。如果设置其为true，setOnceLocation(boolean b)接口也会被设置为true，反之不会，默认为false。
-        mLocationOption.setOnceLocationLatest(true);
-        //设置定位参数
-        mlocationClient.setLocationOption(mLocationOption);
-        // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-        // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
-        // 在定位结束后，在合适的生命周期调用onDestroy()方法
-        // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
-        //启动定位
-        mlocationClient.startLocation();
-    }
 
-    @Override
-    public void onLocationChanged(AMapLocation amapLocation) {
-        if (amapLocation != null) {
-            if (amapLocation.getErrorCode() == 0) {
-                //停止定位后，本地定位服务并不会被销毁
-                if (mlocationClient != null) {
-                    mlocationClient.stopLocation();
-                }
-
-                //定位成功回调信息，设置相关消息
-                amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                amapLocation.getLatitude();//获取纬度
-                amapLocation.getLongitude();//获取经度
-                amapLocation.getAccuracy();//获取精度信息
-                amapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
-                amapLocation.getCountry();//国家信息
-                amapLocation.getProvince();//省信息
-                amapLocation.getCity();//城市信息
-                amapLocation.getDistrict();//城区信息
-                amapLocation.getStreet();//街道信息
-                amapLocation.getStreetNum();//街道门牌号信息
-                amapLocation.getCityCode();//城市编码
-                amapLocation.getAdCode();//地区编码
-                amapLocation.getAoiName();//获取当前定位点的AOI信息
-                amapLocation.getBuildingId();//获取当前室内定位的建筑物Id
-                amapLocation.getFloor();//获取当前室内定位的楼层
-                //获取定位时间
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date date = new Date(amapLocation.getTime());
-                df.format(date);
-
-                KLog.i("定位成功:" + amapLocation.toString());
-
-
-            } else {
-                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-                KLog.e("AmapError", "location Error, ErrCode:"
-                        + amapLocation.getErrorCode() + ", errInfo:"
-                        + amapLocation.getErrorInfo());
-            }
-        }
-    }
 }

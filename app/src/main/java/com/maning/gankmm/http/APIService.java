@@ -1,6 +1,7 @@
 package com.maning.gankmm.http;
 
 import com.maning.gankmm.bean.AppUpdateInfo;
+import com.maning.gankmm.bean.CitysEntity;
 import com.maning.gankmm.bean.DayEntity;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.HttpResult;
@@ -14,6 +15,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 /**
@@ -64,5 +66,21 @@ public interface APIService {
                                                      @Path("count") int count,
                                                      @Path("pageIndex") int pageIndex
     );
+
+    //获取天气信息
+    @Headers("Cache-Control: public, max-age=300")
+    @GET(Constants.URL_Mob + "weather/query")
+    Call<CitysEntity> getCityWeather(@Query("key") String appkey,
+                                     @Query("city") String city,
+                                     @Query("province") String province
+    );
+
+    //城市列表查询接口
+    //http://apicloud.mob.com/v1/weather/citys?key=appkey
+    @Headers("Cache-Control: public, max-age=300")
+    @GET(Constants.URL_Mob + "weather/citys")
+    Call<CitysEntity> getCitys(@Query("key") String appkey
+    );
+
 
 }

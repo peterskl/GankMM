@@ -3,11 +3,13 @@ package com.maning.gankmm.http;
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.AppUpdateInfo;
+import com.maning.gankmm.bean.CitysEntity;
 import com.maning.gankmm.bean.DayEntity;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.HttpResult;
 import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
+import com.maning.gankmm.constant.Constants;
 import com.socks.library.KLog;
 
 import java.util.List;
@@ -264,6 +266,48 @@ public class GankApi {
 
         return ganSearchData;
 
+    }
+
+    /***
+     * 获取城市列表
+     *
+     * @param what
+     * @param myCallBack
+     * @return
+     */
+    public static Call<CitysEntity> getCitys(final int what, final MyCallBack myCallBack) {
+
+        Call<CitysEntity> entityCall = BuildApi.getAPIService().getCitys(Constants.URL_APP_Key);
+
+        entityCall.enqueue(new Callback<CitysEntity>() {
+            @Override
+            public void onResponse(Call<CitysEntity> call, Response<CitysEntity> response) {
+                if (response.isSuccessful()) {
+                    CitysEntity citysEntity = response.body();
+                    if (citysEntity != null) {
+                        if (citysEntity.getMsg().equals("success")) {
+                            KLog.i("getCitys---success：" + citysEntity.toString());
+                            myCallBack.onSuccessList(what, citysEntity.getResult());
+                        } else {
+                            myCallBack.onFail(what, GET_DATA_FAIL);
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CitysEntity> call, Throwable t) {
+                KLog.e("getCitys-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return entityCall;
     }
 
 }
