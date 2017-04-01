@@ -79,7 +79,7 @@ public class RecycleCitysAdapter extends RecyclerView.Adapter<RecycleCitysAdapte
             if (currentPosition == position) {
                 viewHolder.tvTime.setTextColor(context.getResources().getColor(R.color.gank_text1_color_night));
             } else {
-                viewHolder.tvTime.setTextColor(context.getResources().getColor(R.color.gank_text2_color_night));
+                viewHolder.tvTime.setTextColor(context.getResources().getColor(R.color.gank_text3_color_night));
             }
         }
 
