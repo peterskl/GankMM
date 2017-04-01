@@ -181,8 +181,6 @@ public class InstallUtils {
         intent.setDataAndType(Uri.parse("file://" + filePath), "application/vnd.android.package-archive");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
-        //关闭旧版本的应用程序的进程
-        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
 }
