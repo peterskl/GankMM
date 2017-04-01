@@ -501,7 +501,6 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             @Override
             public void onComplete(String path) {
                 KLog.i("onComplete:" + path);
-                InstallUtils.installAPK(context, path);
                 if (dialogCloseWarn != null) {
                     dialogCloseWarn.dismiss();
                 }
@@ -509,6 +508,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                     return;
                 }
                 dialogUpdate.dismiss();
+                //安装APK
+                InstallUtils.installAPK(context, path);
             }
 
             @Override
