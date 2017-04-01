@@ -95,6 +95,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     private SkinBroadcastReceiver skinBroadcastReceiver;
     private MaterialDialog dialogUpdate;
     private MaterialDialog dialogCloseWarn;
+    private static final int citysChooseRequestCode = 10001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -411,6 +412,11 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     }
 
     @Override
+    public void showToast(String msg) {
+        MySnackbar.makeSnackBarBlack(navigationView, msg);
+    }
+
+    @Override
     public void showFeedBackDialog() {
         runOnUiThread(new Runnable() {
             @Override
@@ -571,13 +577,14 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         switch (view.getId()) {
             case R.id.header_ll_choose_city:
                 //切换城市
-                MySnackbar.makeSnackBarBlack(header_iv_weather, "切换城市");
+                Intent intent = new Intent(MainActivity.this, CitysActivity.class);
+                startActivityForResult(intent, citysChooseRequestCode);
                 break;
         }
     }
 
     @Override
-    public void initWeatherInfo(WeatherEntity.ResultBean weatherEntity, String cityName) {
+    public void initWeatherInfo(WeatherEntity.ResultBean weatherEntity) {
         //初始化天气信息
         //当前温度
         String temperature = weatherEntity.getTemperature();
@@ -585,10 +592,24 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         String airCondition = weatherEntity.getAirCondition();
         //天气
         String weather = weatherEntity.getWeather();
+        //城市
+        String cityName = weatherEntity.getCity();
         //赋值
         header_tv_temperature.setText(temperature);
         header_tv_other.setText(weather + "  空气" + airCondition);
         header_iv_weather.setImageDrawable(getResources().getDrawable(SharePreUtil.getIntData(context, weather, R.drawable.icon_weather_none)));
         header_tv_city_name.setText(cityName);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == citysChooseRequestCode) {
+            if (data != null) {
+                String provinceName = data.getStringExtra("provinceName");
+                String cityName = data.getStringExtra("cityName");
+                mainPresenter.getCityWeather(provinceName, cityName);
+            }
+        }
     }
 }

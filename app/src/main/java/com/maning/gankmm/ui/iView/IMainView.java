@@ -8,10 +8,12 @@ import com.maning.gankmm.bean.WeatherEntity;
  */
 public interface IMainView {
 
+    void showToast(String msg);
+
     void showFeedBackDialog();
 
     void showAppUpdateDialog(AppUpdateInfo appUpdateInfo);
 
-    void initWeatherInfo(WeatherEntity.ResultBean weatherEntity,String cityName);
+    void initWeatherInfo(WeatherEntity.ResultBean weatherEntity);
 
 }

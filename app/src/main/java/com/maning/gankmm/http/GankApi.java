@@ -11,6 +11,7 @@ import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.bean.WeatherEntity;
 import com.maning.gankmm.constant.Constants;
+import com.maning.gankmm.utils.UserUtils;
 import com.socks.library.KLog;
 
 import java.util.List;
@@ -286,6 +287,8 @@ public class GankApi {
                 if (response.isSuccessful()) {
                     CitysEntity citysEntity = response.body();
                     if (citysEntity != null) {
+                        //保存
+                        UserUtils.saveCitysCache(citysEntity);
                         if (citysEntity.getMsg().equals("success")) {
                             KLog.i("getCitys---success：" + citysEntity.toString());
                             myCallBack.onSuccessList(what, citysEntity.getResult());
@@ -314,6 +317,7 @@ public class GankApi {
 
     /***
      * 获取城市天气信息
+     *
      * @param city
      * @param province
      * @param what

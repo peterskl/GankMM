@@ -19,6 +19,7 @@ import com.maning.gankmm.http.GankApi;
 import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.ui.iView.IMainView;
 import com.maning.gankmm.ui.presenter.IMainPresenter;
+import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.SharePreUtil;
 import com.socks.library.KLog;
@@ -49,19 +50,12 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
                 return;
             }
             switch (what) {
-                case 0x002:
-                    List<CitysEntity.ResultBean> citys = results;
-                    for (int i = 0; i < citys.size(); i++) {
-
-                    }
-
-                    break;
                 case 0x003:
                     List<WeatherEntity.ResultBean> weathers = results;
                     if (weathers.size() > 0) {
                         WeatherEntity.ResultBean resultBean = weathers.get(0);
                         if (resultBean != null) {
-                            mView.initWeatherInfo(resultBean, cityName);
+                            mView.initWeatherInfo(resultBean);
                         }
                     }
                     break;
@@ -102,6 +96,9 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
 
         @Override
         public void onFail(int what, String result) {
+            if (!TextUtils.isEmpty(result)) {
+                mView.showToast(result);
+            }
         }
     };
     private String provinceName;
@@ -259,7 +256,7 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
                 if (provinceName.endsWith("省") || provinceName.endsWith("市")) {
                     provinceName = provinceName.substring(0, provinceName.length() - 1);
                 }
-                getCityWeather();
+                getCityWeather(cityName, provinceName);
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 KLog.e("AmapError", "location Error, ErrCode:"
@@ -269,7 +266,8 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
         }
     }
 
-    private void getCityWeather() {
+    @Override
+    public void getCityWeather(String provinceName, String cityName) {
         GankApi.getCityWeather(cityName, provinceName, 0x003, httpCallBack);
     }
 
