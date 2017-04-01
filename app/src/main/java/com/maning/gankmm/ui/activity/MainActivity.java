@@ -14,6 +14,9 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
@@ -23,6 +26,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.AppUpdateInfo;
+import com.maning.gankmm.bean.WeatherEntity;
 import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.http.GankApi;
 import com.maning.gankmm.skin.SkinBroadcastReceiver;
@@ -58,7 +62,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements IMainView {
+public class MainActivity extends BaseActivity implements IMainView, View.OnClickListener {
 
     @Bind(R.id.navigationView)
     NavigationView navigationView;
@@ -66,7 +70,12 @@ public class MainActivity extends BaseActivity implements IMainView {
     DrawerLayout drawerLayout;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-
+    //头部布局
+    private ImageView header_iv_weather;
+    private TextView header_tv_temperature;
+    private TextView header_tv_other;
+    private TextView header_tv_city_name;
+    private LinearLayout header_ll_choose_city;
 
     private Context context;
     private WelFareFragment welFareFragment;
@@ -100,13 +109,14 @@ public class MainActivity extends BaseActivity implements IMainView {
 
         initNavigationView();
 
+        initIntent();
+
         mainPresenter = new MainPresenterImpl(this, this);
+        mainPresenter.initDatas();
         mainPresenter.initAppUpdate();
         mainPresenter.initFeedBack();
         mainPresenter.getLocationInfo();
         mainPresenter.getCitys();
-
-        initIntent();
 
         initOtherDatas(savedInstanceState);
 
@@ -128,6 +138,13 @@ public class MainActivity extends BaseActivity implements IMainView {
             AndPermission.with(MainActivity.this)
                     .requestCode(100)
                     .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
+                    .send();
+        }
+        if (!AndPermission.hasPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            // 申请权限。
+            AndPermission.with(MainActivity.this)
+                    .requestCode(101)
+                    .permission(Manifest.permission.ACCESS_FINE_LOCATION)
                     .send();
         }
 
@@ -300,6 +317,14 @@ public class MainActivity extends BaseActivity implements IMainView {
                 return true;
             }
         });
+
+        View headerLayout = navigationView.inflateHeaderView(R.layout.drawer_header);
+        header_iv_weather = (ImageView) headerLayout.findViewById(R.id.header_iv_weather);
+        header_tv_temperature = (TextView) headerLayout.findViewById(R.id.header_tv_temperature);
+        header_tv_other = (TextView) headerLayout.findViewById(R.id.header_tv_other);
+        header_tv_city_name = (TextView) headerLayout.findViewById(R.id.header_tv_city_name);
+        header_ll_choose_city = (LinearLayout) headerLayout.findViewById(R.id.header_ll_choose_city);
+        header_ll_choose_city.setOnClickListener(this);
     }
 
     private void registerSkinReceiver() {
@@ -519,6 +544,10 @@ public class MainActivity extends BaseActivity implements IMainView {
         @Override
         public void onSucceed(int requestCode, List<String> grantedPermissions) {
             MySnackbar.makeSnackBarBlack(toolbar, "权限申请成功");
+            if (requestCode == 101) {
+                KLog.i("定位权限申请成功");
+                mainPresenter.getLocationInfo();
+            }
         }
 
         @Override
@@ -537,4 +566,29 @@ public class MainActivity extends BaseActivity implements IMainView {
     };
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.header_ll_choose_city:
+                //切换城市
+                MySnackbar.makeSnackBarBlack(header_iv_weather, "切换城市");
+                break;
+        }
+    }
+
+    @Override
+    public void initWeatherInfo(WeatherEntity.ResultBean weatherEntity, String cityName) {
+        //初始化天气信息
+        //当前温度
+        String temperature = weatherEntity.getTemperature();
+        //空气
+        String airCondition = weatherEntity.getAirCondition();
+        //天气
+        String weather = weatherEntity.getWeather();
+        //赋值
+        header_tv_temperature.setText(temperature);
+        header_tv_other.setText(weather + "  空气" + airCondition);
+        header_iv_weather.setImageDrawable(getResources().getDrawable(SharePreUtil.getIntData(context, weather, R.drawable.icon_weather_none)));
+        header_tv_city_name.setText(cityName);
+    }
 }

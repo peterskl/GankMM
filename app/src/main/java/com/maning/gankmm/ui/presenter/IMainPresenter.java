@@ -15,4 +15,6 @@ public interface IMainPresenter {
 
     void destroyLocation();
 
+    void initDatas();
+
 }

@@ -7,6 +7,7 @@ import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.HttpResult;
 import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
+import com.maning.gankmm.bean.WeatherEntity;
 import com.maning.gankmm.constant.Constants;
 
 import java.util.List;
@@ -70,9 +71,9 @@ public interface APIService {
     //获取天气信息
     @Headers("Cache-Control: public, max-age=300")
     @GET(Constants.URL_Mob + "weather/query")
-    Call<CitysEntity> getCityWeather(@Query("key") String appkey,
-                                     @Query("city") String city,
-                                     @Query("province") String province
+    Call<WeatherEntity> getCityWeather(@Query("key") String appkey,
+                                       @Query("city") String city,
+                                       @Query("province") String province
     );
 
     //城市列表查询接口

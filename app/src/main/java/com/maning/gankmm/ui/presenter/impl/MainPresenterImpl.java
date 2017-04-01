@@ -1,6 +1,7 @@
 package com.maning.gankmm.ui.presenter.impl;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.alibaba.sdk.android.feedback.util.IWxCallback;
@@ -8,8 +9,11 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.AppUpdateInfo;
+import com.maning.gankmm.bean.CitysEntity;
+import com.maning.gankmm.bean.WeatherEntity;
 import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.http.GankApi;
 import com.maning.gankmm.http.MyCallBack;
@@ -33,6 +37,7 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
     //定位
     public AMapLocationClientOption mLocationOption = null;
     private AMapLocationClient mlocationClient;
+    private String cityName;
 
     private MyCallBack httpCallBack = new MyCallBack() {
         @Override
@@ -40,12 +45,25 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
             if (mView == null) {
                 return;
             }
+            if (results == null) {
+                return;
+            }
             switch (what) {
                 case 0x002:
-                    if (results == null) {
-                        return;
+                    List<CitysEntity.ResultBean> citys = results;
+                    for (int i = 0; i < citys.size(); i++) {
+
                     }
 
+                    break;
+                case 0x003:
+                    List<WeatherEntity.ResultBean> weathers = results;
+                    if (weathers.size() > 0) {
+                        WeatherEntity.ResultBean resultBean = weathers.get(0);
+                        if (resultBean != null) {
+                            mView.initWeatherInfo(resultBean, cityName);
+                        }
+                    }
                     break;
             }
         }
@@ -86,6 +104,7 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
         public void onFail(int what, String result) {
         }
     };
+    private String provinceName;
 
 
     public MainPresenterImpl(Context context, IMainView iMainView) {
@@ -138,7 +157,7 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
 
     @Override
     public void getCitys() {
-        GankApi.getCitys(0x002,httpCallBack);
+        GankApi.getCitys(0x002, httpCallBack);
     }
 
     @Override
@@ -147,6 +166,24 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
         if (mlocationClient != null) {
             mlocationClient.onDestroy();
         }
+    }
+
+    @Override
+    public void initDatas() {
+        SharePreUtil.saveIntData(context, "未知", R.drawable.icon_weather_none);
+        SharePreUtil.saveIntData(context, "晴", R.drawable.icon_weather_sunny);
+        SharePreUtil.saveIntData(context, "阴", R.drawable.icon_weather_cloudy);
+        SharePreUtil.saveIntData(context, "多云", R.drawable.icon_weather_cloudy);
+        SharePreUtil.saveIntData(context, "少云", R.drawable.icon_weather_cloudy);
+        SharePreUtil.saveIntData(context, "晴间多云", R.drawable.icon_weather_cloudytosunny);
+        SharePreUtil.saveIntData(context, "小雨", R.drawable.icon_weather_cloudytosunny);
+        SharePreUtil.saveIntData(context, "中雨", R.drawable.icon_weather_rain);
+        SharePreUtil.saveIntData(context, "大雨", R.drawable.icon_weather_rain);
+        SharePreUtil.saveIntData(context, "阵雨", R.drawable.icon_weather_rain);
+        SharePreUtil.saveIntData(context, "雷阵雨", R.drawable.icon_weather_thunderstorm);
+        SharePreUtil.saveIntData(context, "霾", R.drawable.icon_weather_haze);
+        SharePreUtil.saveIntData(context, "雾", R.drawable.icon_weather_fog);
+        SharePreUtil.saveIntData(context, "雨夹雪", R.drawable.icon_weather_snowrain);
     }
 
 
@@ -213,7 +250,16 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
 
                 KLog.i("定位成功:" + amapLocation.toString());
 
-
+                //获取城市
+                cityName = amapLocation.getCity();
+                if (cityName.endsWith("市")) {
+                    cityName = cityName.substring(0, cityName.length() - 1);
+                }
+                provinceName = amapLocation.getProvince();
+                if (provinceName.endsWith("省") || provinceName.endsWith("市")) {
+                    provinceName = provinceName.substring(0, provinceName.length() - 1);
+                }
+                getCityWeather();
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 KLog.e("AmapError", "location Error, ErrCode:"
@@ -223,6 +269,8 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
         }
     }
 
-
+    private void getCityWeather() {
+        GankApi.getCityWeather(cityName, provinceName, 0x003, httpCallBack);
+    }
 
 }

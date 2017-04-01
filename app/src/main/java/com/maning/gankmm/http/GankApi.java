@@ -9,6 +9,7 @@ import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.HttpResult;
 import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
+import com.maning.gankmm.bean.WeatherEntity;
 import com.maning.gankmm.constant.Constants;
 import com.socks.library.KLog;
 
@@ -308,6 +309,50 @@ public class GankApi {
         });
 
         return entityCall;
+    }
+
+
+    /***
+     * 获取城市天气信息
+     * @param city
+     * @param province
+     * @param what
+     * @param myCallBack
+     * @return
+     */
+    public static Call<WeatherEntity> getCityWeather(String city, String province, final int what, final MyCallBack myCallBack) {
+
+        Call<WeatherEntity> weatherEntityCall = BuildApi.getAPIService().getCityWeather(Constants.URL_APP_Key, city, province);
+
+        weatherEntityCall.enqueue(new Callback<WeatherEntity>() {
+            @Override
+            public void onResponse(Call<WeatherEntity> call, Response<WeatherEntity> response) {
+                if (response.isSuccessful()) {
+                    WeatherEntity weatherEntity = response.body();
+                    if (weatherEntity != null) {
+                        if (weatherEntity.getMsg().equals("success")) {
+                            KLog.i("getCityWeather---success：" + weatherEntity.toString());
+                            myCallBack.onSuccessList(what, weatherEntity.getResult());
+                        } else {
+                            myCallBack.onFail(what, GET_DATA_FAIL);
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherEntity> call, Throwable t) {
+                KLog.e("getCityWeather-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return weatherEntityCall;
     }
 
 }
