@@ -1,8 +1,9 @@
 # GankMM -- 干货营
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/icon.png)<br>
 
-##### 干货营 是干货集中营（Gank.io）的三方客户端，每天一张美女图片，一个视频短片，若干程序干货，周一到周五每天更新。<br>
-#####（Material Design & MVP & Retrofit + OKHttp & RecyclerView ...）<br>
+##### 干货营 是干货集中营（Gank.io）的三方客户端，每天一张美女图片，一个视频短片，若干程序干货，周一到周五每天更新。
+#####（Material Design & MVP & Retrofit + OKHttp & RecyclerView ...)
+
 
 # 知识点：
     1.Retrofit和OKHttp的使用，实现网络自动缓存；
@@ -55,6 +56,10 @@
 
 
 ## 更新日志：
+### V1.5.01:
+    1.修复小Bug,优化体验
+    2.添加意见反馈回复提示框(之前忘记调用方法了)
+    3.增加城市天气信息展示
 
 ### V1.5.0:
     1.首页添加干货搜索功能
