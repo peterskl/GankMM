@@ -112,6 +112,11 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
         initIntent();
 
+        //申请权限
+        requestSomePermission();
+        //注册夜间模式广播监听
+        registerSkinReceiver();
+
         mainPresenter = new MainPresenterImpl(this, this);
         mainPresenter.initDatas();
         mainPresenter.initAppUpdate();
@@ -123,32 +128,21 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
         setDefaultFragment();
 
-        //注册夜间模式广播监听
-        registerSkinReceiver();
-
-        //申请权限
-        requestSomePermission();
-
     }
 
     private void requestSomePermission() {
 
         // 先判断是否有权限。
-        if (!AndPermission.hasPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) || !AndPermission.hasPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE)) {
+        if (!AndPermission.hasPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
+                !AndPermission.hasPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) ||
+                !AndPermission.hasPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                ) {
             // 申请权限。
             AndPermission.with(MainActivity.this)
                     .requestCode(100)
-                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
+                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION)
                     .send();
         }
-        if (!AndPermission.hasPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // 申请权限。
-            AndPermission.with(MainActivity.this)
-                    .requestCode(101)
-                    .permission(Manifest.permission.ACCESS_FINE_LOCATION)
-                    .send();
-        }
-
     }
 
     private void initOtherDatas(Bundle savedInstanceState) {
@@ -549,8 +543,9 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     private PermissionListener listener = new PermissionListener() {
         @Override
         public void onSucceed(int requestCode, List<String> grantedPermissions) {
+            KLog.i("权限onSucceed:" + grantedPermissions.toString());
             MySnackbar.makeSnackBarBlack(toolbar, "权限申请成功");
-            if (requestCode == 101) {
+            if (grantedPermissions.contains("android.permission.ACCESS_FINE_LOCATION")) {
                 KLog.i("定位权限申请成功");
                 mainPresenter.getLocationInfo();
             }
@@ -558,6 +553,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
         @Override
         public void onFailed(int requestCode, List<String> deniedPermissions) {
+            KLog.i("权限onFailed:" + deniedPermissions.toString());
             // 权限申请失败回调。
             // 用户否勾选了不再提示并且拒绝了权限，那么提示用户到设置中授权。
             if (AndPermission.hasAlwaysDeniedPermission(MainActivity.this, deniedPermissions)) {
