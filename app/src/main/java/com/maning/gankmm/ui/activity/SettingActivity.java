@@ -63,7 +63,6 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     private SettingPresenterImpl settingPresenter;
     private MaterialDialog dialogUpdate;
-    private MaterialDialog dialogCloseWarn;
 
     private AppUpdateInfo appUpdateInfo;
     private NotifyUtil notifyUtils;
@@ -299,9 +298,6 @@ public class SettingActivity extends BaseActivity implements ISettingView {
             public void onComplete(String path) {
                 KLog.i("installAPK----onComplete:" + path);
                 InstallUtils.installAPK(context, path);
-                if (dialogCloseWarn != null && dialogCloseWarn.isShowing()) {
-                    dialogCloseWarn.dismiss();
-                }
                 if (dialogUpdate != null && dialogUpdate.isShowing()) {
                     dialogUpdate.dismiss();
                 }
@@ -325,9 +321,6 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
             @Override
             public void onFail(Exception e) {
-                if (dialogCloseWarn != null && dialogCloseWarn.isShowing()) {
-                    dialogCloseWarn.dismiss();
-                }
                 if (dialogUpdate != null && dialogUpdate.isShowing()) {
                     dialogUpdate.dismiss();
                 }

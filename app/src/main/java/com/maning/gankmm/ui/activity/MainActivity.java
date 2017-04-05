@@ -3,7 +3,6 @@ package com.maning.gankmm.ui.activity;
 import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,16 +21,10 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.AppUpdateInfo;
 import com.maning.gankmm.bean.WeatherEntity;
 import com.maning.gankmm.constant.Constants;
-import com.maning.gankmm.http.GankApi;
 import com.maning.gankmm.skin.SkinBroadcastReceiver;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.base.BaseActivity;
@@ -57,11 +50,7 @@ import net.youmi.android.normal.spot.SpotManager;
 import net.youmi.android.normal.video.VideoAdManager;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -98,7 +87,6 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     //夜间模式的广播
     private SkinBroadcastReceiver skinBroadcastReceiver;
     private MaterialDialog dialogUpdate;
-    private MaterialDialog dialogCloseWarn;
     private static final int citysChooseRequestCode = 10001;
 
     private NotifyUtil notifyUtils;
@@ -497,9 +485,6 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             public void onComplete(String path) {
                 KLog.i("installAPK----onComplete:" + path);
                 InstallUtils.installAPK(context, path);
-                if (dialogCloseWarn != null && dialogCloseWarn.isShowing()) {
-                    dialogCloseWarn.dismiss();
-                }
                 if (dialogUpdate != null && dialogUpdate.isShowing()) {
                     dialogUpdate.dismiss();
                 }
@@ -523,9 +508,6 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
             @Override
             public void onFail(Exception e) {
-                if (dialogCloseWarn != null && dialogCloseWarn.isShowing()) {
-                    dialogCloseWarn.dismiss();
-                }
                 if (dialogUpdate != null && dialogUpdate.isShowing()) {
                     dialogUpdate.dismiss();
                 }
