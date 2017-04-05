@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
+import android.widget.Toast;
+
+import com.socks.library.KLog;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,7 +40,9 @@ public class InstallUtils {
     private String savePath;
     private String saveName;
     private DownloadCallBack downloadCallBack;
-    private File saveFile;
+    private static File saveFile;
+
+    private boolean isComplete = false;
 
 
     public interface DownloadCallBack {
@@ -108,12 +113,14 @@ public class InstallUtils {
                             fileCurrentLength = current;
                         }
                     }
+                    isComplete = true;
                     //下载完成
                     ((Activity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             if (downloadCallBack != null) {
                                 downloadCallBack.onComplete(saveFile.getPath());
+                                downloadCallBack = null;
                             }
                         }
                     });
@@ -124,6 +131,7 @@ public class InstallUtils {
                         public void run() {
                             if (downloadCallBack != null) {
                                 downloadCallBack.onFail(e);
+                                downloadCallBack = null;
                             }
                         }
                     });
@@ -154,7 +162,9 @@ public class InstallUtils {
                     @Override
                     public void run() {
                         if (downloadCallBack != null) {
-                            downloadCallBack.onLoading(fileLength, fileCurrentLength);
+                            if (!isComplete) {
+                                downloadCallBack.onLoading(fileLength, fileCurrentLength);
+                            }
                         }
                     }
                 });
@@ -172,25 +182,25 @@ public class InstallUtils {
             mTask = null;
             mTimer = null;
         }
-        if (downloadCallBack != null) {
-            downloadCallBack = null;
-        }
     }
 
     public static void installAPK(Context context, String filePath) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        File apkFile = new File(filePath);
-        intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            Uri contentUri = FileProvider.getUriForFile(context, "com.maning.gankmm.fileProvider", apkFile);
-//            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
-//        } else {
-//            intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
-//        }
-        context.startActivity(intent);
+        try {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            File apkFile = new File(filePath);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                Uri contentUri = FileProvider.getUriForFile(context, "com.maning.gankmm.fileProvider", apkFile);
+                intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+            } else {
+                intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+            }
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, "安装APK失败:" + e.toString(), Toast.LENGTH_SHORT).show();
+            KLog.e("安装APK失败:" + e.toString());
+        }
     }
-
 }

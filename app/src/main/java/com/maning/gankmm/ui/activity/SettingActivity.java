@@ -270,14 +270,14 @@ public class SettingActivity extends BaseActivity implements ISettingView {
                 .title("正在下载最新版本")
                 .content("请稍等")
                 .canceledOnTouchOutside(false)
-                .cancelable(false)
+                .cancelable(true)
                 .progress(false, 100, false)
                 .show();
 
         new InstallUtils(context, appUpdateInfo.getInstall_url(), Constants.UpdateAPKPath, "GankMM_" + appUpdateInfo.getVersionShort(), new InstallUtils.DownloadCallBack() {
             @Override
             public void onStart() {
-                KLog.i("onStart");
+                KLog.i("installAPK-----onStart");
                 if (dialogUpdate != null) {
                     dialogUpdate.setProgress(0);
                 }
@@ -285,7 +285,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
             @Override
             public void onComplete(String path) {
-                KLog.i("onComplete:" + path);
+                KLog.i("installAPK----onComplete:" + path);
                 InstallUtils.installAPK(context, path);
                 if (dialogCloseWarn != null && dialogCloseWarn.isShowing()) {
                     dialogCloseWarn.dismiss();
@@ -297,7 +297,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
             @Override
             public void onLoading(long total, long current) {
-                KLog.i("onLoading:-----total:" + total + ",current:" + current);
+                KLog.i("installAPK-----onLoading:-----total:" + total + ",current:" + current);
                 if (dialogUpdate != null) {
                     dialogUpdate.setProgress((int) (current * 100 / total));
                 }
