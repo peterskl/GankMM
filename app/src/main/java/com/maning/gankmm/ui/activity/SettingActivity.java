@@ -1,14 +1,17 @@
 package com.maning.gankmm.ui.activity;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.AppUpdateInfo;
@@ -23,6 +26,7 @@ import com.maning.gankmm.utils.InstallUtils;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.NetUtils;
+import com.maning.gankmm.utils.NotifyUtil;
 import com.maning.gankmm.utils.SharePreUtil;
 import com.socks.library.KLog;
 import com.umeng.analytics.MobclickAgent;
@@ -62,6 +66,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     private MaterialDialog dialogCloseWarn;
 
     private AppUpdateInfo appUpdateInfo;
+    private NotifyUtil notifyUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -270,8 +275,15 @@ public class SettingActivity extends BaseActivity implements ISettingView {
                 .title("正在下载最新版本")
                 .content("请稍等")
                 .canceledOnTouchOutside(false)
-                .cancelable(true)
+                .cancelable(false)
                 .progress(false, 100, false)
+                .negativeText("后台下载")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        startNotifyProgress();
+                    }
+                })
                 .show();
 
         new InstallUtils(context, appUpdateInfo.getInstall_url(), Constants.UpdateAPKPath, "GankMM_" + appUpdateInfo.getVersionShort(), new InstallUtils.DownloadCallBack() {
@@ -293,13 +305,21 @@ public class SettingActivity extends BaseActivity implements ISettingView {
                 if (dialogUpdate != null && dialogUpdate.isShowing()) {
                     dialogUpdate.dismiss();
                 }
+                if (notifyUtils != null) {
+                    notifyUtils.setNotifyProgressComplete();
+                    notifyUtils.clear();
+                }
             }
 
             @Override
             public void onLoading(long total, long current) {
                 KLog.i("installAPK-----onLoading:-----total:" + total + ",current:" + current);
+                int currentProgress = (int) (current * 100 / total);
                 if (dialogUpdate != null) {
-                    dialogUpdate.setProgress((int) (current * 100 / total));
+                    dialogUpdate.setProgress(currentProgress);
+                }
+                if (notifyUtils != null) {
+                    notifyUtils.setNotifyProgress(100, currentProgress, false);
                 }
             }
 
@@ -311,8 +331,28 @@ public class SettingActivity extends BaseActivity implements ISettingView {
                 if (dialogUpdate != null && dialogUpdate.isShowing()) {
                     dialogUpdate.dismiss();
                 }
+                if (notifyUtils != null) {
+                    notifyUtils.clear();
+                }
             }
         }).downloadAPK();
+    }
+
+
+    /**
+     * 开启通知栏
+     */
+    private void startNotifyProgress() {
+        //设置想要展示的数据内容
+        Intent intent = new Intent(this, SettingActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent rightPendIntent = PendingIntent.getActivity(this,
+                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        int smallIcon = R.mipmap.ic_launcher;
+        String ticker = "正在下载干货营更新包...";
+        //实例化工具类，并且调用接口
+        notifyUtils = new NotifyUtil(this, 0);
+        notifyUtils.notify_progress(rightPendIntent, smallIcon, ticker, "干货营 下载", "正在下载中...", false, false, false);
     }
 
     @Override

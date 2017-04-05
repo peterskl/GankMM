@@ -1,10 +1,12 @@
 package com.maning.gankmm.ui.activity;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.amap.api.location.AMapLocation;
@@ -43,6 +46,7 @@ import com.maning.gankmm.utils.InstallUtils;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.NetUtils;
+import com.maning.gankmm.utils.NotifyUtil;
 import com.maning.gankmm.utils.SharePreUtil;
 import com.socks.library.KLog;
 import com.umeng.analytics.MobclickAgent;
@@ -96,6 +100,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     private MaterialDialog dialogUpdate;
     private MaterialDialog dialogCloseWarn;
     private static final int citysChooseRequestCode = 10001;
+
+    private NotifyUtil notifyUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -461,6 +467,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 });
     }
 
+
     private void showDownloadDialog(AppUpdateInfo appUpdateInfo) {
         dialogUpdate = new MaterialDialog.Builder(MainActivity.this)
                 .title("正在下载最新版本")
@@ -468,12 +475,19 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 .canceledOnTouchOutside(false)
                 .cancelable(false)
                 .progress(false, 100, false)
+                .negativeText("后台下载")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        startNotifyProgress();
+                    }
+                })
                 .show();
 
         new InstallUtils(context, appUpdateInfo.getInstall_url(), Constants.UpdateAPKPath, "GankMM_" + appUpdateInfo.getVersionShort(), new InstallUtils.DownloadCallBack() {
             @Override
             public void onStart() {
-                KLog.i("onStart");
+                KLog.i("installAPK-----onStart");
                 if (dialogUpdate != null) {
                     dialogUpdate.setProgress(0);
                 }
@@ -481,7 +495,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
             @Override
             public void onComplete(String path) {
-                KLog.i("onComplete:" + path);
+                KLog.i("installAPK----onComplete:" + path);
                 InstallUtils.installAPK(context, path);
                 if (dialogCloseWarn != null && dialogCloseWarn.isShowing()) {
                     dialogCloseWarn.dismiss();
@@ -489,13 +503,21 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 if (dialogUpdate != null && dialogUpdate.isShowing()) {
                     dialogUpdate.dismiss();
                 }
+                if (notifyUtils != null) {
+                    notifyUtils.setNotifyProgressComplete();
+                    notifyUtils.clear();
+                }
             }
 
             @Override
             public void onLoading(long total, long current) {
-                KLog.i("onLoading:-----total:" + total + ",current:" + current);
+                KLog.i("installAPK-----onLoading:-----total:" + total + ",current:" + current);
+                int currentProgress = (int) (current * 100 / total);
                 if (dialogUpdate != null) {
-                    dialogUpdate.setProgress((int) (current * 100 / total));
+                    dialogUpdate.setProgress(currentProgress);
+                }
+                if (notifyUtils != null) {
+                    notifyUtils.setNotifyProgress(100, currentProgress, false);
                 }
             }
 
@@ -507,8 +529,28 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 if (dialogUpdate != null && dialogUpdate.isShowing()) {
                     dialogUpdate.dismiss();
                 }
+                if (notifyUtils != null) {
+                    notifyUtils.clear();
+                }
             }
         }).downloadAPK();
+    }
+
+
+    /**
+     * 开启通知栏
+     */
+    private void startNotifyProgress() {
+        //设置想要展示的数据内容
+        Intent intent = new Intent(this, SettingActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent rightPendIntent = PendingIntent.getActivity(this,
+                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        int smallIcon = R.mipmap.ic_launcher;
+        String ticker = "正在下载干货营更新包...";
+        //实例化工具类，并且调用接口
+        notifyUtils = new NotifyUtil(this, 0);
+        notifyUtils.notify_progress(rightPendIntent, smallIcon, ticker, "干货营 下载", "正在下载中...", false, false, false);
     }
 
     @Override
