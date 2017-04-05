@@ -261,7 +261,7 @@
 
         <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name=".ui.activity.CitysActivity"></activity>
+        <activity android:name=".ui.activity.CitysActivity"/>
     </application>
 
 </manifest>

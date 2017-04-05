@@ -6,4 +6,9 @@
     <external-path
         name="apk2"
         path="." />
+
+    <external-path
+        name="GankMM"
+        path="" />
+
 </paths>

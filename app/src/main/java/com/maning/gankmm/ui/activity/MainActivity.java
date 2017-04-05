@@ -466,72 +466,48 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 .title("正在下载最新版本")
                 .content("请稍等")
                 .canceledOnTouchOutside(false)
+                .cancelable(false)
                 .progress(false, 100, false)
-                .cancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(final DialogInterface dialog) {
-                        if (dialogUpdate.isCancelled()) {
-                            return;
-                        }
-                        dialogCloseWarn = DialogUtils.showMyDialog(MainActivity.this, "警告", "当前正在下载APK，是否关闭进度框？", "关闭", "取消", new DialogUtils.OnDialogClickListener() {
-                            @Override
-                            public void onConfirm() {
-                                dialog.dismiss();
-                            }
-
-                            @Override
-                            public void onCancel() {
-
-                            }
-                        });
-                    }
-                })
                 .show();
 
         new InstallUtils(context, appUpdateInfo.getInstall_url(), Constants.UpdateAPKPath, "GankMM_" + appUpdateInfo.getVersionShort(), new InstallUtils.DownloadCallBack() {
             @Override
             public void onStart() {
                 KLog.i("onStart");
-                if (dialogUpdate.isCancelled()) {
-                    return;
+                if (dialogUpdate != null) {
+                    dialogUpdate.setProgress(0);
                 }
-                dialogUpdate.setProgress(0);
             }
 
             @Override
             public void onComplete(String path) {
                 KLog.i("onComplete:" + path);
-                if (dialogCloseWarn != null) {
+                InstallUtils.installAPK(context, path);
+                if (dialogCloseWarn != null && dialogCloseWarn.isShowing()) {
                     dialogCloseWarn.dismiss();
                 }
-                if (dialogUpdate.isCancelled()) {
-                    return;
+                if (dialogUpdate != null && dialogUpdate.isShowing()) {
+                    dialogUpdate.dismiss();
                 }
-                dialogUpdate.dismiss();
-                //安装APK
-                InstallUtils.installAPK(context, path);
             }
 
             @Override
             public void onLoading(long total, long current) {
                 KLog.i("onLoading:-----total:" + total + ",current:" + current);
-                if (dialogUpdate.isCancelled()) {
-                    return;
+                if (dialogUpdate != null) {
+                    dialogUpdate.setProgress((int) (current * 100 / total));
                 }
-                dialogUpdate.setProgress((int) (current * 100 / total));
             }
 
             @Override
             public void onFail(Exception e) {
-                if (dialogCloseWarn != null) {
+                if (dialogCloseWarn != null && dialogCloseWarn.isShowing()) {
                     dialogCloseWarn.dismiss();
                 }
-                if (dialogUpdate.isCancelled()) {
-                    return;
+                if (dialogUpdate != null && dialogUpdate.isShowing()) {
+                    dialogUpdate.dismiss();
                 }
-                dialogUpdate.dismiss();
             }
-
         }).downloadAPK();
     }
 
