@@ -9,7 +9,7 @@ import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.HttpResult;
 import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
-import com.maning.gankmm.bean.WeatherEntity;
+import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.utils.UserUtils;
 import com.socks.library.KLog;
@@ -324,19 +324,19 @@ public class GankApi {
      * @param myCallBack
      * @return
      */
-    public static Call<WeatherEntity> getCityWeather(String city, String province, final int what, final MyCallBack myCallBack) {
+    public static Call<WeatherBeseEntity> getCityWeather(String city, String province, final int what, final MyCallBack myCallBack) {
 
-        Call<WeatherEntity> weatherEntityCall = BuildApi.getAPIService().getCityWeather(Constants.URL_APP_Key, city, province);
+        Call<WeatherBeseEntity> weatherEntityCall = BuildApi.getAPIService().getCityWeather(Constants.URL_APP_Key, city, province);
 
-        weatherEntityCall.enqueue(new Callback<WeatherEntity>() {
+        weatherEntityCall.enqueue(new Callback<WeatherBeseEntity>() {
             @Override
-            public void onResponse(Call<WeatherEntity> call, Response<WeatherEntity> response) {
+            public void onResponse(Call<WeatherBeseEntity> call, Response<WeatherBeseEntity> response) {
                 if (response.isSuccessful()) {
-                    WeatherEntity weatherEntity = response.body();
-                    if (weatherEntity != null) {
-                        if (weatherEntity.getMsg().equals("success")) {
-                            KLog.i("getCityWeather---success：" + weatherEntity.toString());
-                            myCallBack.onSuccessList(what, weatherEntity.getResult());
+                    WeatherBeseEntity weatherBeseEntity = response.body();
+                    if (weatherBeseEntity != null) {
+                        if (weatherBeseEntity.getMsg().equals("success")) {
+                            KLog.i("getCityWeather---success：" + weatherBeseEntity.toString());
+                            myCallBack.onSuccessList(what, weatherBeseEntity.getResult());
                         } else {
                             myCallBack.onFail(what, GET_DATA_FAIL);
                         }
@@ -349,7 +349,7 @@ public class GankApi {
             }
 
             @Override
-            public void onFailure(Call<WeatherEntity> call, Throwable t) {
+            public void onFailure(Call<WeatherBeseEntity> call, Throwable t) {
                 KLog.e("getCityWeather-----onFailure：" + t.toString());
                 //数据错误
                 myCallBack.onFail(what, NET_FAIL);

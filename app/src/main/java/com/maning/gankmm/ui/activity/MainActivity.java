@@ -17,13 +17,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.AppUpdateInfo;
-import com.maning.gankmm.bean.WeatherEntity;
+import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.skin.SkinBroadcastReceiver;
 import com.maning.gankmm.skin.SkinManager;
@@ -65,6 +66,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     Toolbar toolbar;
     //头部布局
     private ImageView header_iv_weather;
+    private RelativeLayout rl_weather;
     private TextView header_tv_temperature;
     private TextView header_tv_other;
     private TextView header_tv_city_name;
@@ -90,6 +92,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     private static final int citysChooseRequestCode = 10001;
 
     private NotifyUtil notifyUtils;
+
+    private WeatherBeseEntity.WeatherBean weatherEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -309,11 +313,13 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
         View headerLayout = navigationView.inflateHeaderView(R.layout.drawer_header);
         header_iv_weather = (ImageView) headerLayout.findViewById(R.id.header_iv_weather);
+        rl_weather = (RelativeLayout) headerLayout.findViewById(R.id.rl_weather);
         header_tv_temperature = (TextView) headerLayout.findViewById(R.id.header_tv_temperature);
         header_tv_other = (TextView) headerLayout.findViewById(R.id.header_tv_other);
         header_tv_city_name = (TextView) headerLayout.findViewById(R.id.header_tv_city_name);
         header_ll_choose_city = (LinearLayout) headerLayout.findViewById(R.id.header_ll_choose_city);
         header_ll_choose_city.setOnClickListener(this);
+        rl_weather.setOnClickListener(this);
     }
 
     private void registerSkinReceiver() {
@@ -577,12 +583,21 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 Intent intent = new Intent(MainActivity.this, CitysActivity.class);
                 startActivityForResult(intent, citysChooseRequestCode);
                 break;
+            case R.id.rl_weather:
+                //切换城市
+                if (weatherEntity != null) {
+                    Intent intent_weather = new Intent(MainActivity.this, WeatherActivity.class);
+                    intent_weather.putExtra(WeatherActivity.intentKey_weatherBean, weatherEntity);
+                    startActivity(intent_weather);
+                }
+                break;
         }
     }
 
     @Override
-    public void initWeatherInfo(WeatherEntity.ResultBean weatherEntity) {
+    public void initWeatherInfo(WeatherBeseEntity.WeatherBean weatherEntity) {
         //初始化天气信息
+        this.weatherEntity = weatherEntity;
         //当前温度
         String temperature = weatherEntity.getTemperature();
         //空气

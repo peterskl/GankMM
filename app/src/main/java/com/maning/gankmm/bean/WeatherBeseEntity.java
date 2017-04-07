@@ -1,14 +1,16 @@
 package com.maning.gankmm.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by maning on 2017/4/1.
  */
 
-public class WeatherEntity {
+public class WeatherBeseEntity implements Serializable{
 
 
+    private static final long serialVersionUID = 872231399457580359L;
     /**
      * msg : success
      * result : [{"airCondition":"良","city":"北京","coldIndex":"低发期","updateTime":"20150908153820","date":"2015-09-08","distrct":"门头沟","dressingIndex":"短袖类","exerciseIndex":"适宜","future":[{"date":"2015-09-09","dayTime":"阵雨","night":"阴","temperature":"24°C/18°C","week":"星期三","wind":"无持续风向小于3级"},{"date":"2015-09-10","dayTime":"阵雨","night":"阵雨","temperature":"22°C/15°C","week":"星期四","wind":"无持续风向小于3级"},{"date":"2015-09-11","dayTime":"阴","night":"晴","temperature":"23°C/15°C","week":"星期五","wind":"北风3～4级无持续风向小于3级"},{"date":"2015-09-12","dayTime":"晴","night":"晴","temperature":"26°C/13°C","week":"星期六","wind":"北风3～4级无持续风向小于3级"},{"date":"2015-09-13","dayTime":"晴","night":"晴","temperature":"27°C/16°C","week":"星期日","wind":"无持续风向小于3级"},{"date":"2015-09-14","dayTime":"晴","night":"多云","temperature":"27°C/16°C","week":"星期一","wind":"无持续风向小于3级"},{"date":"2015-09-15","dayTime":"少云","night":"晴","temperature":"26°C/14°C","week":"星期二","wind":"南风3级南风2级"},{"date":"2015-09-16","dayTime":"局部多云","night":"少云","temperature":"26°C/15°C","week":"星期三","wind":"南风3级南风2级"},{"date":"2015-09-17","dayTime":"阴天","night":"局部多云","temperature":"26°C/15°C","week":"星期四","wind":"东南风2级"}],"humidity":"湿度：46%","province":"北京","sunset":"18:37","sunrise":"05:49","temperature":"25℃","time":"14:35","washIndex":"不适宜","weather":"多云","week":"周二","wind":"南风2级"}]
@@ -17,7 +19,7 @@ public class WeatherEntity {
 
     private String msg;
     private String retCode;
-    private List<ResultBean> result;
+    private List<WeatherBean> result;
 
     public String getMsg() {
         return msg;
@@ -35,15 +37,16 @@ public class WeatherEntity {
         this.retCode = retCode;
     }
 
-    public List<ResultBean> getResult() {
+    public List<WeatherBean> getResult() {
         return result;
     }
 
-    public void setResult(List<ResultBean> result) {
+    public void setResult(List<WeatherBean> result) {
         this.result = result;
     }
 
-    public static class ResultBean {
+    public static class WeatherBean implements Serializable{
+        private static final long serialVersionUID = -3104835373443095573L;
         /**
          * airCondition : 良
          * city : 北京
@@ -238,7 +241,8 @@ public class WeatherEntity {
             this.future = future;
         }
 
-        public static class FutureBean {
+        public static class FutureBean implements Serializable{
+            private static final long serialVersionUID = -6624919653439551917L;
             /**
              * date : 2015-09-09
              * dayTime : 阵雨
@@ -316,6 +320,8 @@ public class WeatherEntity {
             }
         }
 
+
+
         @Override
         public String toString() {
             return "ResultBean{" +
@@ -340,5 +346,14 @@ public class WeatherEntity {
                     ", future=" + future +
                     '}';
         }
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherBeseEntity{" +
+                "msg='" + msg + '\'' +
+                ", retCode='" + retCode + '\'' +
+                ", result=" + result.toString() +
+                '}';
     }
 }

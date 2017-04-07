@@ -12,14 +12,12 @@ import com.amap.api.location.AMapLocationListener;
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.AppUpdateInfo;
-import com.maning.gankmm.bean.CitysEntity;
-import com.maning.gankmm.bean.WeatherEntity;
+import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.http.GankApi;
 import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.ui.iView.IMainView;
 import com.maning.gankmm.ui.presenter.IMainPresenter;
-import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.SharePreUtil;
 import com.socks.library.KLog;
@@ -51,9 +49,9 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
             }
             switch (what) {
                 case 0x003:
-                    List<WeatherEntity.ResultBean> weathers = results;
+                    List<WeatherBeseEntity.WeatherBean> weathers = results;
                     if (weathers.size() > 0) {
-                        WeatherEntity.ResultBean resultBean = weathers.get(0);
+                        WeatherBeseEntity.WeatherBean resultBean = weathers.get(0);
                         if (resultBean != null) {
                             mView.initWeatherInfo(resultBean);
                         }
@@ -173,6 +171,7 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
         SharePreUtil.saveIntData(context, "多云", R.drawable.icon_weather_cloudy);
         SharePreUtil.saveIntData(context, "少云", R.drawable.icon_weather_cloudy);
         SharePreUtil.saveIntData(context, "晴间多云", R.drawable.icon_weather_cloudytosunny);
+        SharePreUtil.saveIntData(context, "局部多云", R.drawable.icon_weather_cloudy);
         SharePreUtil.saveIntData(context, "小雨", R.drawable.icon_weather_cloudytosunny);
         SharePreUtil.saveIntData(context, "中雨", R.drawable.icon_weather_rain);
         SharePreUtil.saveIntData(context, "大雨", R.drawable.icon_weather_rain);
