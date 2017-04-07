@@ -24,6 +24,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.AppUpdateInfo;
+import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.skin.SkinBroadcastReceiver;
@@ -94,6 +95,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     private NotifyUtil notifyUtils;
 
     private WeatherBeseEntity.WeatherBean weatherEntity;
+
+    private List<GankEntity> welFareList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -588,6 +591,9 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 if (weatherEntity != null) {
                     Intent intent_weather = new Intent(MainActivity.this, WeatherActivity.class);
                     intent_weather.putExtra(WeatherActivity.intentKey_weatherBean, weatherEntity);
+                    if (welFareList != null && welFareList.size() > 0) {
+                        intent_weather.putExtra(WeatherActivity.intentKey_bg_url, welFareList.get(0).getUrl());
+                    }
                     startActivity(intent_weather);
                 }
                 break;
@@ -624,4 +630,9 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             }
         }
     }
+
+    public void setPicList(List<GankEntity> welFareList) {
+        this.welFareList = welFareList;
+    }
+
 }

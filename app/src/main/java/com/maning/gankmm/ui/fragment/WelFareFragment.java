@@ -15,6 +15,7 @@ import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.GankEntity;
+import com.maning.gankmm.ui.activity.MainActivity;
 import com.maning.gankmm.ui.adapter.RecyclePicAdapter;
 import com.maning.gankmm.ui.base.BaseFragment;
 import com.maning.gankmm.ui.iView.IWelFareView;
@@ -80,6 +81,9 @@ public class WelFareFragment extends BaseFragment implements OnRefreshListener, 
     }
 
     private void initRecycleView(List<GankEntity> welFareList) {
+        
+        ((MainActivity) getActivity()).setPicList(welFareList);
+
         if (recyclePicAdapter == null) {
             recyclePicAdapter = new RecyclePicAdapter(context, welFareList);
             swipeTarget.setAdapter(recyclePicAdapter);
