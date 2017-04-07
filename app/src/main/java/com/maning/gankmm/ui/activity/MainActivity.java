@@ -53,6 +53,7 @@ import net.youmi.android.normal.video.VideoAdManager;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -592,7 +593,9 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                     Intent intent_weather = new Intent(MainActivity.this, WeatherActivity.class);
                     intent_weather.putExtra(WeatherActivity.intentKey_weatherBean, weatherEntity);
                     if (welFareList != null && welFareList.size() > 0) {
-                        intent_weather.putExtra(WeatherActivity.intentKey_bg_url, welFareList.get(0).getUrl());
+                        Random random = new Random();
+                        int randomIndex = random.nextInt(welFareList.size() - 1);
+                        intent_weather.putExtra(WeatherActivity.intentKey_bg_url, welFareList.get(randomIndex).getUrl());
                     }
                     startActivity(intent_weather);
                 }

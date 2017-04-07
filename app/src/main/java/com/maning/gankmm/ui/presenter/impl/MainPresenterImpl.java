@@ -172,7 +172,8 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
         SharePreUtil.saveIntData(context, "少云", R.drawable.icon_weather_cloudy);
         SharePreUtil.saveIntData(context, "晴间多云", R.drawable.icon_weather_cloudytosunny);
         SharePreUtil.saveIntData(context, "局部多云", R.drawable.icon_weather_cloudy);
-        SharePreUtil.saveIntData(context, "小雨", R.drawable.icon_weather_cloudytosunny);
+        SharePreUtil.saveIntData(context, "雨", R.drawable.icon_weather_rain);
+        SharePreUtil.saveIntData(context, "小雨", R.drawable.icon_weather_rain);
         SharePreUtil.saveIntData(context, "中雨", R.drawable.icon_weather_rain);
         SharePreUtil.saveIntData(context, "大雨", R.drawable.icon_weather_rain);
         SharePreUtil.saveIntData(context, "阵雨", R.drawable.icon_weather_rain);
