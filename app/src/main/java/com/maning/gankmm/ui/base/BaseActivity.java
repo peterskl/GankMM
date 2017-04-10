@@ -37,9 +37,9 @@ public class BaseActivity extends AppCompatActivity {
         //设置状态栏的颜色
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            StatusBarUtil.setColor(this, getResources().getColor(R.color.main_color), 0);
+            StatusBarUtil.setColor(this, getResources().getColor(R.color.main_color), 60);
         } else {
-            StatusBarUtil.setColor(this, getResources().getColor(R.color.main_color_night), 0);
+            StatusBarUtil.setColor(this, getResources().getColor(R.color.main_color_night), 60);
         }
     }
 

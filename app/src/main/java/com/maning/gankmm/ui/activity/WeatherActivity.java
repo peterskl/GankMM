@@ -1,6 +1,7 @@
 package com.maning.gankmm.ui.activity;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,10 +11,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.maning.gankmm.R;
+import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.ui.adapter.WeatherAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
@@ -28,7 +32,7 @@ import jp.wasabeef.blurry.Blurry;
 /**
  * 天气界面
  */
-public class WeatherActivity extends BaseActivity {
+public class WeatherActivity extends BaseActivity implements OnRefreshListener {
 
     public static final String intentKey_weatherBean = "intentKey_weatherBean";
     public static final String intentKey_bg_url = "intentKey_bg_url";
@@ -48,6 +52,8 @@ public class WeatherActivity extends BaseActivity {
     LinearLayout llContent;
     @Bind(R.id.ll_bg_blur)
     LinearLayout llBgBlur;
+    @Bind(R.id.swipeToLoadLayout)
+    SwipeToLoadLayout swipeToLoadLayout;
 
     private WeatherBeseEntity.WeatherBean weatherEntity;
     private WeatherAdapter weatherAdapter;
@@ -60,7 +66,7 @@ public class WeatherActivity extends BaseActivity {
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
 
-        StatusBarUtil.setTranslucentForImageView(this, llContent);
+        StatusBarUtil.setTranslucentForImageView(this, 80, llContent);
 
         initIntent();
 
@@ -105,7 +111,7 @@ public class WeatherActivity extends BaseActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         swipeTarget.setLayoutManager(linearLayoutManager);
         swipeTarget.setItemAnimator(new DefaultItemAnimator());
-
+        swipeToLoadLayout.setOnRefreshListener(this);
         swipeTarget.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int totalDy = 0;
 
@@ -156,4 +162,13 @@ public class WeatherActivity extends BaseActivity {
         swipeTarget.setAdapter(weatherAdapter);
     }
 
+    @Override
+    public void onRefresh() {
+        MyApplication.getHandler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeToLoadLayout.setRefreshing(false);
+            }
+        }, 3000);
+    }
 }
