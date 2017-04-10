@@ -1,7 +1,6 @@
 package com.maning.gankmm.ui.activity;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,11 +17,18 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
+import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.ui.adapter.WeatherAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
+import com.maning.gankmm.ui.iView.IWeatherView;
+import com.maning.gankmm.ui.presenter.impl.WeatherPresenterImpl;
+import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.StatusBarUtil;
 import com.socks.library.KLog;
+
+import java.util.List;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,9 +38,11 @@ import jp.wasabeef.blurry.Blurry;
 /**
  * 天气界面
  */
-public class WeatherActivity extends BaseActivity implements OnRefreshListener {
+public class WeatherActivity extends BaseActivity implements OnRefreshListener, IWeatherView {
 
     public static final String intentKey_weatherBean = "intentKey_weatherBean";
+    public static final String intentKey_weatherProvinceName = "intentKey_weatherProvinceName";
+    public static final String intentKey_weatherCityName = "intentKey_weatherCityName";
     public static final String intentKey_bg_url = "intentKey_bg_url";
     private static final String TAG = "WeatherActivity";
     private static final float defaultAlpha = 0.0f;
@@ -59,6 +67,12 @@ public class WeatherActivity extends BaseActivity implements OnRefreshListener {
     private WeatherAdapter weatherAdapter;
 
     private String bgPicUrl;
+    private String provinceName;
+    private String cityName;
+    private List<GankEntity> welFareList;
+
+    private WeatherPresenterImpl weatherPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,28 +90,36 @@ public class WeatherActivity extends BaseActivity implements OnRefreshListener {
 
         initBackgroundPic();
 
+        initPresenter();
+
+    }
+
+    public void initPresenter() {
+        weatherPresenter = new WeatherPresenterImpl(this, this);
     }
 
     private void initBackgroundPic() {
 
-        if (!TextUtils.isEmpty(bgPicUrl)) {
-
-            Glide.with(this).load(bgPicUrl).asBitmap().centerCrop().into(new SimpleTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                    ivBg.setImageBitmap(resource);
-                    ivBg2.setImageBitmap(resource);
-                    Blurry.with(WeatherActivity.this)
-                            .radius(25)
-                            .sampling(3)
-                            .async()
-                            .capture(ivBg2)
-                            .into(ivBg2);
-                    llBgBlur.setAlpha(defaultAlpha);
-                }
-            });
-
-
+        if (welFareList != null && welFareList.size() > 0) {
+            Random random = new Random();
+            int randomIndex = random.nextInt(welFareList.size() - 1);
+            bgPicUrl = welFareList.get(randomIndex).getUrl();
+            if (!TextUtils.isEmpty(bgPicUrl)) {
+                Glide.with(this).load(bgPicUrl).asBitmap().centerCrop().into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        ivBg.setImageBitmap(resource);
+                        ivBg2.setImageBitmap(resource);
+                        Blurry.with(WeatherActivity.this)
+                                .radius(25)
+                                .sampling(3)
+                                .async()
+                                .capture(ivBg2)
+                                .into(ivBg2);
+                        llBgBlur.setAlpha(defaultAlpha);
+                    }
+                });
+            }
         }
 
     }
@@ -149,7 +171,9 @@ public class WeatherActivity extends BaseActivity implements OnRefreshListener {
 
     private void initIntent() {
         weatherEntity = (WeatherBeseEntity.WeatherBean) getIntent().getSerializableExtra(intentKey_weatherBean);
-        bgPicUrl = getIntent().getStringExtra(intentKey_bg_url);
+        welFareList = (List<GankEntity>) getIntent().getSerializableExtra(intentKey_bg_url);
+        provinceName = getIntent().getStringExtra(intentKey_weatherProvinceName);
+        cityName = getIntent().getStringExtra(intentKey_weatherCityName);
     }
 
     @OnClick(R.id.rl_back)
@@ -158,17 +182,45 @@ public class WeatherActivity extends BaseActivity implements OnRefreshListener {
     }
 
     private void initAdapter() {
-        weatherAdapter = new WeatherAdapter(this, weatherEntity);
-        swipeTarget.setAdapter(weatherAdapter);
+        if (weatherAdapter == null) {
+            weatherAdapter = new WeatherAdapter(this, weatherEntity);
+            swipeTarget.setAdapter(weatherAdapter);
+        } else {
+            weatherAdapter.updateDatas(weatherEntity);
+        }
+
     }
 
     @Override
     public void onRefresh() {
-        MyApplication.getHandler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeToLoadLayout.setRefreshing(false);
-            }
-        }, 3000);
+        if (weatherPresenter != null) {
+            weatherPresenter.getCityWeather(provinceName, cityName);
+        }
+    }
+
+    @Override
+    public void showToast(String msg) {
+        MySnackbar.makeSnackBarBlack(ivBg, msg);
+    }
+
+    @Override
+    public void initWeatherInfo(WeatherBeseEntity.WeatherBean weatherEntity) {
+        this.weatherEntity = weatherEntity;
+        initAdapter();
+        initBackgroundPic();
+    }
+
+    @Override
+    public void overRefresh() {
+        swipeToLoadLayout.setRefreshing(false);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (weatherPresenter != null) {
+            weatherPresenter.detachView();
+            weatherPresenter = null;
+        }
     }
 }

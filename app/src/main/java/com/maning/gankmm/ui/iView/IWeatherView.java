@@ -6,16 +6,12 @@ import com.maning.gankmm.bean.WeatherBeseEntity;
 /**
  * Created by maning on 16/6/21.
  */
-public interface IMainView {
+public interface IWeatherView {
 
     void showToast(String msg);
 
-    void showFeedBackDialog();
-
-    void showAppUpdateDialog(AppUpdateInfo appUpdateInfo);
-
     void initWeatherInfo(WeatherBeseEntity.WeatherBean weatherEntity);
 
-    void updateLocationInfo(String provinceName, String cityName);
+    void overRefresh();
 
 }

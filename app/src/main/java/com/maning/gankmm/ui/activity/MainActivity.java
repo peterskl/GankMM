@@ -52,6 +52,7 @@ import net.youmi.android.normal.spot.SpotManager;
 import net.youmi.android.normal.video.VideoAdManager;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -98,6 +99,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     private WeatherBeseEntity.WeatherBean weatherEntity;
 
     private List<GankEntity> welFareList;
+    private String provinceName;
+    private String cityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -592,10 +595,10 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 if (weatherEntity != null) {
                     Intent intent_weather = new Intent(MainActivity.this, WeatherActivity.class);
                     intent_weather.putExtra(WeatherActivity.intentKey_weatherBean, weatherEntity);
+                    intent_weather.putExtra(WeatherActivity.intentKey_weatherProvinceName, provinceName);
+                    intent_weather.putExtra(WeatherActivity.intentKey_weatherCityName, cityName);
                     if (welFareList != null && welFareList.size() > 0) {
-                        Random random = new Random();
-                        int randomIndex = random.nextInt(welFareList.size() - 1);
-                        intent_weather.putExtra(WeatherActivity.intentKey_bg_url, welFareList.get(randomIndex).getUrl());
+                        intent_weather.putStringArrayListExtra(WeatherActivity.intentKey_bg_url, (ArrayList) welFareList);
                     }
                     startActivity(intent_weather);
                 }
@@ -623,12 +626,18 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     }
 
     @Override
+    public void updateLocationInfo(String provinceName, String cityName) {
+        this.provinceName = provinceName;
+        this.cityName = cityName;
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == citysChooseRequestCode) {
             if (data != null) {
-                String provinceName = data.getStringExtra("provinceName");
-                String cityName = data.getStringExtra("cityName");
+                provinceName = data.getStringExtra("provinceName");
+                cityName = data.getStringExtra("cityName");
                 mainPresenter.getCityWeather(provinceName, cityName);
             }
         }

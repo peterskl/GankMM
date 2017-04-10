@@ -268,6 +268,7 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
 
     @Override
     public void getCityWeather(String provinceName, String cityName) {
+        mView.updateLocationInfo(provinceName, cityName);
         GankApi.getCityWeather(cityName, provinceName, 0x003, httpCallBack);
     }
 

@@ -33,6 +33,11 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         layoutInflater = LayoutInflater.from(this.mContext);
     }
 
+    public void updateDatas(WeatherBeseEntity.WeatherBean weatherEntity){
+        this.weatherEntity = weatherEntity;
+        notifyDataSetChanged();
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
