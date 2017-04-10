@@ -87,7 +87,16 @@ public class WeatherBeseEntity implements Serializable{
         private String weather;
         private String week;
         private String wind;
+        private String pollutionIndex;
         private List<FutureBean> future;
+
+        public String getPollutionIndex() {
+            return pollutionIndex;
+        }
+
+        public void setPollutionIndex(String pollutionIndex) {
+            this.pollutionIndex = pollutionIndex;
+        }
 
         public String getAirCondition() {
             return airCondition;

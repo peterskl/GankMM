@@ -52,8 +52,8 @@ public class Weather2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             myViewHolder01.tv_04.setText(futureBean.getTemperature().split("/")[0].replace(" ", ""));
             myViewHolder01.tv_05.setText(futureBean.getTemperature().split("/")[1].replace(" ", ""));
             myViewHolder01.tv_06.setText(futureBean.getNight());
-            myViewHolder01.tv_07.setText(futureBean.getWind().split(" ")[0]);
-            myViewHolder01.tv_08.setText(futureBean.getWind().split(" ")[1]);
+            myViewHolder01.tv_07.setText(futureBean.getWind().split(" ")[0].replace(" ", ""));
+            myViewHolder01.tv_08.setText(futureBean.getWind().split(" ")[1].replace(" ", ""));
 
             myViewHolder01.iv_01.setImageDrawable(mContext.getResources().getDrawable(SharePreUtil.getIntData(mContext, futureBean.getDayTime(), R.drawable.icon_weather_none)));
             myViewHolder01.iv_02.setImageDrawable(mContext.getResources().getDrawable(SharePreUtil.getIntData(mContext, futureBean.getNight(), R.drawable.icon_weather_none)));

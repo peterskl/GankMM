@@ -12,6 +12,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="gray">#494949</color>
+    <color name="gray_trance">#c2b3b3b3</color>
     <color name="red">#ff0000</color>
 
     <color name="itemGrayBg">#eaeaea</color>
@@ -22,7 +23,7 @@
     <color name="google_yellow">#FBBC05</color>
 
     <!--彩虹七色-->
-    <color name="type_01">#FF0000</color>
+    <color name="type_01">#FF0000</color>red
     <color name="type_02">#FF7F00</color>
     <color name="type_03">#FFFF00</color>
     <color name="type_04">#00FF00</color>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.WeatherBeseEntity;
+import com.maning.gankmm.ui.view.ArcProgressView;
 import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration;
 
 import butterknife.Bind;
@@ -33,7 +34,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         layoutInflater = LayoutInflater.from(this.mContext);
     }
 
-    public void updateDatas(WeatherBeseEntity.WeatherBean weatherEntity){
+    public void updateDatas(WeatherBeseEntity.WeatherBean weatherEntity) {
         this.weatherEntity = weatherEntity;
         notifyDataSetChanged();
     }
@@ -43,9 +44,14 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (viewType == 0) {
             View inflate = layoutInflater.inflate(R.layout.item_weather_header, parent, false);
             return new WeatherAdapter.MyViewHolder01(inflate);
-        } else {
+        } else if (viewType == 1) {
             View inflate = layoutInflater.inflate(R.layout.item_weather_later, parent, false);
             return new WeatherAdapter.MyViewHolder02(inflate);
+        } else if (viewType == 2) {
+            View inflate = layoutInflater.inflate(R.layout.item_weather_air, parent, false);
+            return new WeatherAdapter.MyViewHolder03(inflate);
+        } else {
+            return null;
         }
     }
 
@@ -71,6 +77,10 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             Weather2Adapter weather2Adapter = new Weather2Adapter(mContext, weatherEntity);
             myViewHolder02.recycle_later.setAdapter(weather2Adapter);
 
+        } else if (holder instanceof MyViewHolder03) {
+            final MyViewHolder03 myViewHolder02 = (MyViewHolder03) holder;
+            String pollutionIndex = weatherEntity.getPollutionIndex();
+            myViewHolder02.arc_progress.setCurrentCount(500, Integer.parseInt(pollutionIndex));
         }
 
 
@@ -78,16 +88,12 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
-            return 0;
-        } else {
-            return 1;
-        }
+        return position;
     }
 
     public static class MyViewHolder01 extends RecyclerView.ViewHolder {
@@ -115,6 +121,17 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         RecyclerView recycle_later;
 
         public MyViewHolder02(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
+    public static class MyViewHolder03 extends RecyclerView.ViewHolder {
+
+        @Bind(R.id.arc_progress)
+        ArcProgressView arc_progress;
+
+        public MyViewHolder03(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
