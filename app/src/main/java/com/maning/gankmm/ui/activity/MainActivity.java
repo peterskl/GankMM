@@ -379,16 +379,6 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     }
 
     @Override
-    protected void onResume() {
-        MobclickAgent.onResume(this);       //统计时长
-    }
-
-    @Override
-    protected void onPause() {
-        MobclickAgent.onPause(this);
-    }
-
-    @Override
     protected void onDestroy() {
         //退出
         SpotManager.getInstance(this).onAppExit();

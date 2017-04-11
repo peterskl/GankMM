@@ -36,7 +36,6 @@ public class CollectDao {
         values.put(GankMMHelper.GankID, gankResult.get_id());
         values.put(GankMMHelper.createdAt, gankResult.getCreatedAt());
         values.put(GankMMHelper.desc, gankResult.getDesc());
-        values.put(GankMMHelper.NS, gankResult.get_ns());
         values.put(GankMMHelper.publishedAt, gankResult.getPublishedAt());
         values.put(GankMMHelper.source, gankResult.getSource());
         values.put(GankMMHelper.type, gankResult.getType());
@@ -100,7 +99,6 @@ public class CollectDao {
             String createdAt = cursor.getString(cursor.getColumnIndex(GankMMHelper.createdAt));
             String desc = cursor.getString(cursor.getColumnIndex(GankMMHelper.desc));
             String GankID = cursor.getString(cursor.getColumnIndex(GankMMHelper.GankID));
-            String NS = cursor.getString(cursor.getColumnIndex(GankMMHelper.NS));
             String publishedAt = cursor.getString(cursor.getColumnIndex(GankMMHelper.publishedAt));
             String source = cursor.getString(cursor.getColumnIndex(GankMMHelper.source));
             String url = cursor.getString(cursor.getColumnIndex(GankMMHelper.url));
@@ -108,7 +106,6 @@ public class CollectDao {
 
             collect = new GankEntity();
             collect.set_id(GankID);
-            collect.set_ns(NS);
             collect.setCreatedAt(createdAt);
             collect.setDesc(desc);
             collect.setPublishedAt(publishedAt);

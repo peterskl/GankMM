@@ -1,78 +1,93 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="120dp"
     android:background="?item_bg"
-    android:orientation="vertical"
-    android:paddingTop="12dp">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvShowTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/iv_show"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:ellipsize="end"
-        android:text="一种新的 Header View + RecyclerView 实现方式asdasdasdasdasdasdasdasdasdasdasda"
-        android:textColor="?main_text_color"
-        android:textSize="16sp" />
+        android:background="#eaeaea" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="12dp">
+        android:layout_toRightOf="@id/iv_show">
 
         <TextView
-            android:id="@+id/tvShowWho"
+            android:id="@+id/tvShowTitle"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:text="daimajia"
-            android:textColor="?black_text3_color"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="一种新的 Header View + RecyclerView 实现方式asdasdasdasdasdasdasdasdasdasdasda"
+            android:textColor="?main_text_color"
+            android:textSize="16sp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <com.like.LikeButton
-                android:id="@+id/btn_collect"
-                android:layout_width="36dp"
-                android:layout_height="match_parent"
-                app:anim_scale_factor="1"
-                app:circle_end_color="?icon_like_color"
-                app:circle_start_color="?icon_like_color"
-                app:dots_primary_color="?icon_like_color"
-                app:dots_secondary_color="?icon_like_color"
-                app:icon_size="28dp"
-                app:like_drawable="?icon_like_yes"
-                app:unlike_drawable="?icon_like_no" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp">
 
             <TextView
-                android:id="@+id/tvShowTime"
+                android:id="@+id/tvShowWho"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
                 android:gravity="center"
-                android:text="2016-3-4"
+                android:text="daimajia"
                 android:textColor="?black_text3_color"
                 android:textSize="14sp" />
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
+                <com.like.LikeButton
+                    android:id="@+id/btn_collect"
+                    android:layout_width="36dp"
+                    android:layout_height="match_parent"
+                    app:anim_scale_factor="1"
+                    app:circle_end_color="?icon_like_color"
+                    app:circle_start_color="?icon_like_color"
+                    app:dots_primary_color="?icon_like_color"
+                    app:dots_secondary_color="?icon_like_color"
+                    app:icon_size="28dp"
+                    app:like_drawable="?icon_like_yes"
+                    app:unlike_drawable="?icon_like_no" />
+
+                <TextView
+                    android:id="@+id/tvShowTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:gravity="center"
+                    android:text="2016-3-4"
+                    android:textColor="?black_text3_color"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1.5px"
-        android:layout_marginTop="6dp"
+        android:layout_alignParentBottom="true"
         android:background="?lineColor" />
 
-</LinearLayout>
+</RelativeLayout>

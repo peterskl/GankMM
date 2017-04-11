@@ -1,13 +1,19 @@
 package com.maning.gankmm.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.maning.gankmm.R;
@@ -63,6 +69,19 @@ public class RecyclePublicAdapter extends RecyclerView.Adapter<RecyclePublicAdap
         viewHolder.tvShowTitle.setText(resultsEntity.getDesc());
         viewHolder.tvShowTime.setText(resultsEntity.getPublishedAt().split("T")[0]);
 
+        //图片展示
+        String imageUrl = "";
+        List<String> images = resultsEntity.getImages();
+        if (images != null && images.size() > 0) {
+            imageUrl = images.get(0);
+        }
+        Glide.with(context)
+                .load(imageUrl)
+                .asBitmap()
+                .placeholder(R.drawable.pic_gray_bg)
+                .centerCrop()
+                .into(viewHolder.ivShow);
+
         //查询是否存在收藏
         boolean isCollect = new CollectDao().queryOneCollectByID(resultsEntity.get_id());
         if (isCollect) {
@@ -81,6 +100,7 @@ public class RecyclePublicAdapter extends RecyclerView.Adapter<RecyclePublicAdap
                     likeButton.setLiked(false);
                 }
             }
+
             @Override
             public void unLiked(LikeButton likeButton) {
                 boolean deleteResult = new CollectDao().deleteOneCollect(resultsEntity.get_id());
@@ -120,6 +140,8 @@ public class RecyclePublicAdapter extends RecyclerView.Adapter<RecyclePublicAdap
         TextView tvShowTime;
         @Bind(R.id.btn_collect)
         LikeButton btnCollect;
+        @Bind(R.id.iv_show)
+        ImageView ivShow;
 
         public MyViewHolder(View itemView) {
             super(itemView);
