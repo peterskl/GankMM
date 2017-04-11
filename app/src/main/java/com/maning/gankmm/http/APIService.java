@@ -1,10 +1,12 @@
 package com.maning.gankmm.http;
 
 import com.maning.gankmm.bean.AppUpdateInfo;
+import com.maning.gankmm.bean.CalendarInfoEntity;
 import com.maning.gankmm.bean.CitysEntity;
 import com.maning.gankmm.bean.DayEntity;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.HttpResult;
+import com.maning.gankmm.bean.MobBaseEntity;
 import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.bean.WeatherBeseEntity;
@@ -70,7 +72,7 @@ public interface APIService {
 
     //获取天气信息
     @Headers("Cache-Control: public, max-age=300")
-    @GET(Constants.URL_Mob + "weather/query")
+    @GET(Constants.URL_Mob + "v1/weather/query")
     Call<WeatherBeseEntity> getCityWeather(@Query("key") String appkey,
                                            @Query("city") String city,
                                            @Query("province") String province
@@ -79,8 +81,16 @@ public interface APIService {
     //城市列表查询接口
     //http://apicloud.mob.com/v1/weather/citys?key=appkey
     @Headers("Cache-Control: public, max-age=300")
-    @GET(Constants.URL_Mob + "weather/citys")
+    @GET(Constants.URL_Mob + "v1/weather/citys")
     Call<CitysEntity> getCitys(@Query("key") String appkey
+    );
+
+    //万年历查询
+    //http://apicloud.mob.com/appstore/calendar/day?key=appkey&date=2015-05-01
+    @Headers("Cache-Control: public, max-age=300")
+    @GET(Constants.URL_Mob + "appstore/calendar/day")
+    Call<MobBaseEntity<CalendarInfoEntity>> getCalendarInfo(@Query("key") String appkey,
+                                                            @Query("date") String date
     );
 
 

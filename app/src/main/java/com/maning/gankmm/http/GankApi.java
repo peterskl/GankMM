@@ -3,10 +3,12 @@ package com.maning.gankmm.http;
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.AppUpdateInfo;
+import com.maning.gankmm.bean.CalendarInfoEntity;
 import com.maning.gankmm.bean.CitysEntity;
 import com.maning.gankmm.bean.DayEntity;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.HttpResult;
+import com.maning.gankmm.bean.MobBaseEntity;
 import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.bean.WeatherBeseEntity;
@@ -357,6 +359,47 @@ public class GankApi {
         });
 
         return weatherEntityCall;
+    }
+
+    /***
+     * 获取万年历信息
+     *
+     * @param date
+     * @param what
+     * @param myCallBack
+     * @return
+     */
+    public static Call<MobBaseEntity<CalendarInfoEntity>> getCalendarInfo(String date, final int what, final MyCallBack myCallBack) {
+        Call<MobBaseEntity<CalendarInfoEntity>> calendarInfoCall = BuildApi.getAPIService().getCalendarInfo(Constants.URL_APP_Key, date);
+        calendarInfoCall.enqueue(new Callback<MobBaseEntity<CalendarInfoEntity>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<CalendarInfoEntity>> call, Response<MobBaseEntity<CalendarInfoEntity>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<CalendarInfoEntity> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("getCalendarInfo---success：" + body.toString());
+                            myCallBack.onSuccess(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, GET_DATA_FAIL);
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<CalendarInfoEntity>> call, Throwable t) {
+                KLog.e("getCalendarInfo-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return calendarInfoCall;
     }
 
 }

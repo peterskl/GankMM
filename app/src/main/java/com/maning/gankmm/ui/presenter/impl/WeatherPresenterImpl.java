@@ -3,12 +3,14 @@ package com.maning.gankmm.ui.presenter.impl;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.maning.gankmm.bean.CalendarInfoEntity;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.http.GankApi;
 import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.ui.iView.IWeatherView;
 import com.maning.gankmm.ui.presenter.IWeatherPresenter;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -44,6 +46,19 @@ public class WeatherPresenterImpl extends BasePresenterImpl<IWeatherView> implem
 
         @Override
         public void onSuccess(int what, Object result) {
+            if (mView == null) {
+                return;
+            }
+            if (result == null) {
+                return;
+            }
+            switch (what) {
+                case 0x001:
+                    CalendarInfoEntity calendarInfoEntity = (CalendarInfoEntity) result;
+                    //刷新界面
+                    mView.updateCalendarInfo(calendarInfoEntity);
+                    break;
+            }
         }
 
         @Override
@@ -63,5 +78,13 @@ public class WeatherPresenterImpl extends BasePresenterImpl<IWeatherView> implem
     @Override
     public void getCityWeather(String provinceName, String cityName) {
         GankApi.getCityWeather(cityName, provinceName, 0x003, httpCallBack);
+    }
+
+    @Override
+    public void getCalendarInfo() {
+        //获取当天日期
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new java.util.Date());
+        GankApi.getCalendarInfo(date, 0x001, httpCallBack);
     }
 }

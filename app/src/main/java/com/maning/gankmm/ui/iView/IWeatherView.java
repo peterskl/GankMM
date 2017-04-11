@@ -1,6 +1,7 @@
 package com.maning.gankmm.ui.iView;
 
 import com.maning.gankmm.bean.AppUpdateInfo;
+import com.maning.gankmm.bean.CalendarInfoEntity;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 
 /**
@@ -13,5 +14,7 @@ public interface IWeatherView {
     void initWeatherInfo(WeatherBeseEntity.WeatherBean weatherEntity);
 
     void overRefresh();
+
+    void updateCalendarInfo(CalendarInfoEntity calendarInfoEntity);
 
 }

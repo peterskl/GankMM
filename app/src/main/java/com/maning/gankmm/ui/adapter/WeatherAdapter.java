@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.maning.gankmm.R;
+import com.maning.gankmm.bean.CalendarInfoEntity;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.ui.view.ArcProgressView;
 import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration;
@@ -25,17 +26,20 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private Context mContext;
     private WeatherBeseEntity.WeatherBean weatherEntity;
+    private CalendarInfoEntity calendarInfoEntity;
     private LayoutInflater layoutInflater;
 
 
-    public WeatherAdapter(Context context, WeatherBeseEntity.WeatherBean weatherEntity) {
+    public WeatherAdapter(Context context, WeatherBeseEntity.WeatherBean weatherEntity, CalendarInfoEntity calendarInfoEntity) {
         this.mContext = context;
         this.weatherEntity = weatherEntity;
+        this.calendarInfoEntity = calendarInfoEntity;
         layoutInflater = LayoutInflater.from(this.mContext);
     }
 
-    public void updateDatas(WeatherBeseEntity.WeatherBean weatherEntity) {
+    public void updateDatas(WeatherBeseEntity.WeatherBean weatherEntity, CalendarInfoEntity calendarInfoEntity) {
         this.weatherEntity = weatherEntity;
+        this.calendarInfoEntity = calendarInfoEntity;
         notifyDataSetChanged();
     }
 
@@ -50,6 +54,9 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else if (viewType == 2) {
             View inflate = layoutInflater.inflate(R.layout.item_weather_air, parent, false);
             return new WeatherAdapter.MyViewHolder03(inflate);
+        } else if (viewType == 3) {
+            View inflate = layoutInflater.inflate(R.layout.item_weather_calendar, parent, false);
+            return new WeatherAdapter.MyViewHolder04(inflate);
         } else {
             return null;
         }
@@ -78,9 +85,18 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             myViewHolder02.recycle_later.setAdapter(weather2Adapter);
 
         } else if (holder instanceof MyViewHolder03) {
-            final MyViewHolder03 myViewHolder02 = (MyViewHolder03) holder;
+            final MyViewHolder03 myViewHolder03 = (MyViewHolder03) holder;
             String pollutionIndex = weatherEntity.getPollutionIndex();
-            myViewHolder02.arc_progress.setCurrentCount(500, Integer.parseInt(pollutionIndex));
+            myViewHolder03.arc_progress.setCurrentCount(500, Integer.parseInt(pollutionIndex));
+        } else if (holder instanceof MyViewHolder04) {
+            final MyViewHolder04 myViewHolder04 = (MyViewHolder04) holder;
+
+            myViewHolder04.tv_01.setText(calendarInfoEntity.getDate());
+            myViewHolder04.tv_02.setText(calendarInfoEntity.getLunar());
+            myViewHolder04.tv_03.setText(calendarInfoEntity.getLunarYear() + " (" + calendarInfoEntity.getZodiac() + ") " + calendarInfoEntity.getWeekday());
+            myViewHolder04.tv_04.setText(calendarInfoEntity.getSuit());
+            myViewHolder04.tv_05.setText(calendarInfoEntity.getAvoid());
+
         }
 
 
@@ -88,7 +104,10 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 3;
+        if (calendarInfoEntity == null) {
+            return 3;
+        }
+        return 4;
     }
 
     @Override
@@ -132,6 +151,26 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ArcProgressView arc_progress;
 
         public MyViewHolder03(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
+
+    public static class MyViewHolder04 extends RecyclerView.ViewHolder {
+
+        @Bind(R.id.tv_01)
+        TextView tv_01;
+        @Bind(R.id.tv_02)
+        TextView tv_02;
+        @Bind(R.id.tv_03)
+        TextView tv_03;
+        @Bind(R.id.tv_04)
+        TextView tv_04;
+        @Bind(R.id.tv_05)
+        TextView tv_05;
+
+        public MyViewHolder04(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

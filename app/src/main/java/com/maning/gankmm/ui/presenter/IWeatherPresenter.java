@@ -7,4 +7,6 @@ public interface IWeatherPresenter {
 
     void getCityWeather(String provinceName, String cityName);
 
+    //万年历查询
+    void getCalendarInfo();
 }

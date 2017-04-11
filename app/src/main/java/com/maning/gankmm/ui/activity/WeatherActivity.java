@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.maning.gankmm.R;
-import com.maning.gankmm.app.MyApplication;
+import com.maning.gankmm.bean.CalendarInfoEntity;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.ui.adapter.WeatherAdapter;
@@ -63,6 +63,7 @@ public class WeatherActivity extends BaseActivity implements OnRefreshListener, 
     @Bind(R.id.swipeToLoadLayout)
     SwipeToLoadLayout swipeToLoadLayout;
 
+    private CalendarInfoEntity calendarInfoEntity;
     private WeatherBeseEntity.WeatherBean weatherEntity;
     private WeatherAdapter weatherAdapter;
 
@@ -96,6 +97,7 @@ public class WeatherActivity extends BaseActivity implements OnRefreshListener, 
 
     public void initPresenter() {
         weatherPresenter = new WeatherPresenterImpl(this, this);
+        weatherPresenter.getCalendarInfo();
     }
 
     private void initBackgroundPic() {
@@ -183,10 +185,10 @@ public class WeatherActivity extends BaseActivity implements OnRefreshListener, 
 
     private void initAdapter() {
         if (weatherAdapter == null) {
-            weatherAdapter = new WeatherAdapter(this, weatherEntity);
+            weatherAdapter = new WeatherAdapter(this, weatherEntity, calendarInfoEntity);
             swipeTarget.setAdapter(weatherAdapter);
         } else {
-            weatherAdapter.updateDatas(weatherEntity);
+            weatherAdapter.updateDatas(weatherEntity, calendarInfoEntity);
         }
 
     }
@@ -213,6 +215,12 @@ public class WeatherActivity extends BaseActivity implements OnRefreshListener, 
     @Override
     public void overRefresh() {
         swipeToLoadLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void updateCalendarInfo(CalendarInfoEntity calendarInfoEntity) {
+        this.calendarInfoEntity = calendarInfoEntity;
+        initAdapter();
     }
 
     @Override
