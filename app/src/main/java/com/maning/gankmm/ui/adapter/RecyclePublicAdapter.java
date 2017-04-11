@@ -77,7 +77,6 @@ public class RecyclePublicAdapter extends RecyclerView.Adapter<RecyclePublicAdap
         }
         Glide.with(context)
                 .load(imageUrl)
-                .asBitmap()
                 .placeholder(R.drawable.pic_gray_bg)
                 .centerCrop()
                 .into(viewHolder.ivShow);

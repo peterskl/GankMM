@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.socks.library.KLog;
+
 /**
  * Created by maning on 16/3/5.
  */
@@ -12,7 +14,10 @@ public class GankMMHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "GankMM";
     public static final String TABLE_NAME_COLLECT = "collect";
     public static final String TABLE_NAME_PUBLIC = "public";
-    private static final int version = 1;
+    private static final int version = 2;
+    //升级添加字段
+    private static final String INSERT_URL_COLLECT = "ALTER TABLE collect ADD imageUrl TEXT default ''";
+    private static final String INSERT_URL_PUBLIC = "ALTER TABLE public ADD imageUrl TEXT default ''";
 
     /**
      * _id : 56d6481e6776592a03e624a4
@@ -37,6 +42,8 @@ public class GankMMHelper extends SQLiteOpenHelper {
     public static final String url = "url";
     public static final String used = "used";
     public static final String who = "who";
+    //版本2添加的新字段
+    public static final String imageUrl = "imageUrl";
 
 
     //收藏表
@@ -81,6 +88,18 @@ public class GankMMHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        for (int i = oldVersion; i <= newVersion; i++) {
+            updateTableToVersion(db, i);
+        }
+    }
 
+    private void updateTableToVersion(SQLiteDatabase db, int version) {
+        switch (version) {
+            case 2:
+                KLog.i("数据库升级了");
+                db.execSQL(INSERT_URL_COLLECT);
+                db.execSQL(INSERT_URL_PUBLIC);
+                break;
+        }
     }
 }

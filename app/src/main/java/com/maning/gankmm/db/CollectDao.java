@@ -8,6 +8,7 @@ import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.GankEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by maning on 16/3/5.
@@ -46,6 +47,12 @@ public class CollectDao {
         } else {
             values.put(GankMMHelper.used, "false");
         }
+        String imageUrl = "";
+        if (gankResult.getImages() != null && gankResult.getImages().size() > 0) {
+            imageUrl = gankResult.getImages().get(0);
+        }
+        values.put(GankMMHelper.imageUrl, imageUrl);
+
         long insert = db.insert(GankMMHelper.TABLE_NAME_COLLECT, null, values);
         db.close();
         return insert != (-1);
@@ -103,6 +110,7 @@ public class CollectDao {
             String source = cursor.getString(cursor.getColumnIndex(GankMMHelper.source));
             String url = cursor.getString(cursor.getColumnIndex(GankMMHelper.url));
             String who = cursor.getString(cursor.getColumnIndex(GankMMHelper.who));
+            String imageUrl = cursor.getString(cursor.getColumnIndex(GankMMHelper.imageUrl));
 
             collect = new GankEntity();
             collect.set_id(GankID);
@@ -113,6 +121,11 @@ public class CollectDao {
             collect.setType(type);
             collect.setUrl(url);
             collect.setWho(who);
+
+            List<String> images = new ArrayList<>();
+            images.add(imageUrl);
+            collect.setImages(images);
+
             collectList.add(collect);
         }
         //关闭游标

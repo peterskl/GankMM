@@ -55,6 +55,13 @@ public class PublicDao {
                 } else {
                     values.put(GankMMHelper.used, "false");
                 }
+
+                String imageUrl = "";
+                if (gankResult.getImages() != null && gankResult.getImages().size() > 0) {
+                    imageUrl = gankResult.getImages().get(0);
+                }
+                values.put(GankMMHelper.imageUrl, imageUrl);
+
                 db.insert(GankMMHelper.TABLE_NAME_PUBLIC, null, values);
             }
         }
@@ -108,6 +115,7 @@ public class PublicDao {
             String source = cursor.getString(cursor.getColumnIndex(GankMMHelper.source));
             String url = cursor.getString(cursor.getColumnIndex(GankMMHelper.url));
             String who = cursor.getString(cursor.getColumnIndex(GankMMHelper.who));
+            String imageUrl = cursor.getString(cursor.getColumnIndex(GankMMHelper.imageUrl));
 
             collect = new GankEntity();
             collect.set_id(GankID);
@@ -118,6 +126,11 @@ public class PublicDao {
             collect.setType(type);
             collect.setUrl(url);
             collect.setWho(who);
+
+            List<String> images = new ArrayList<>();
+            images.add(imageUrl);
+            collect.setImages(images);
+
             collectList.add(collect);
         }
         //关闭游标

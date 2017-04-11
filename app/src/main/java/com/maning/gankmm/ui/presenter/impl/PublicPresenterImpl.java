@@ -2,7 +2,6 @@ package com.maning.gankmm.ui.presenter.impl;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.GankEntity;
@@ -10,7 +9,6 @@ import com.maning.gankmm.db.PublicDao;
 import com.maning.gankmm.http.GankApi;
 import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.ui.iView.IPublicView;
-import com.maning.gankmm.ui.iView.IWelFareView;
 import com.maning.gankmm.ui.presenter.IPublicPresenter;
 import com.maning.gankmm.utils.IntentUtils;
 
