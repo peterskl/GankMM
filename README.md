@@ -52,10 +52,17 @@
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_004.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_005.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_006.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_007.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_008.png)
 
 
 
 ## 更新日志：
+### V1.6.0:
+    1.天气页面信息展示完善
+    2.优化部分界面显示
+    3.修复Bug
+
 ### V1.5.1:
     1.修复小Bug,优化体验
     2.添加意见反馈回复提示框(之前忘记调用方法了)
@@ -159,5 +166,6 @@
 ###### ViewPager的标题控件 [smarttablayout](https://github.com/ogaclejapan/SmartTabLayout)
 ###### 广告轮播控件 [SwitcherView](https://github.com/maning0303/SwitcherView)
 ###### 收藏按钮 [LikeButton](https://github.com/jd-alexander/LikeButton)
+###### 模糊控件 [LikeButton](https://github.com/wasabeef/Blurry)
 
 
