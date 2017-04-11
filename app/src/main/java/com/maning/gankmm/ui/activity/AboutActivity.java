@@ -162,19 +162,10 @@ public class AboutActivity extends BaseActivity {
     void tv_github16() {
         IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_16));
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MobclickAgent.onPageStart(TAG);
-        MobclickAgent.onResume(this);       //统计时长
+    @OnClick(R.id.tv_github17)
+    void tv_github17() {
+        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_16));
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MobclickAgent.onPageStart(TAG);
-        MobclickAgent.onPause(this);
-    }
 
 }

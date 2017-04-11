@@ -65,16 +65,4 @@ public class CollectFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onPageStart("CollectFragment");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPageEnd("CollectFragment");
-    }
-
 }

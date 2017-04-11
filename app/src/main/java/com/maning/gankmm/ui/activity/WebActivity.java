@@ -225,18 +225,15 @@ public class WebActivity extends BaseActivity implements IWebView {
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart(TAG);
-        MobclickAgent.onResume(this);       //统计时长
+        webView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        webView.onPause();
         //保证了webView退出后不再有声音
         webView.reload();
-        //
-        MobclickAgent.onPageEnd(TAG);
-        MobclickAgent.onPause(this);
     }
 
 

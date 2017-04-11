@@ -166,6 +166,6 @@
 ###### ViewPager的标题控件 [smarttablayout](https://github.com/ogaclejapan/SmartTabLayout)
 ###### 广告轮播控件 [SwitcherView](https://github.com/maning0303/SwitcherView)
 ###### 收藏按钮 [LikeButton](https://github.com/jd-alexander/LikeButton)
-###### 模糊控件 [LikeButton](https://github.com/wasabeef/Blurry)
+###### 模糊控件 [Blurry](https://github.com/wasabeef/Blurry)
 
 

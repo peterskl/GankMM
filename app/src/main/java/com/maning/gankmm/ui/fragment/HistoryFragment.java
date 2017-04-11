@@ -136,17 +136,6 @@ public class HistoryFragment extends BaseFragment implements OnRefreshListener, 
         dissmissProgressDialog();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onPageStart("HistoryFragment");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPageEnd("HistoryFragment");
-    }
 
     @Override
     public void onDestroyView() {

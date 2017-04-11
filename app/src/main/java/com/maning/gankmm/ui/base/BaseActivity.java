@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.maning.gankmm.R;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.utils.StatusBarUtil;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by maning on 16/3/2.
@@ -108,6 +109,20 @@ public class BaseActivity extends AppCompatActivity {
         dissmissProgressDialog();
         Glide.with(this.getApplicationContext()).pauseRequests();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+        MobclickAgent.onResume(this);       //统计时长
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+        MobclickAgent.onPause(this);
     }
 
 

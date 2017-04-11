@@ -138,15 +138,11 @@ public class SplashAdActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         JPushInterface.onResume(this);
-        MobclickAgent.onPageStart("SplashAdActivity");
-        MobclickAgent.onResume(this);       //统计时长
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         JPushInterface.onPause(this);
-        MobclickAgent.onPageStart("SplashAdActivity");
-        MobclickAgent.onPause(this);
     }
 }

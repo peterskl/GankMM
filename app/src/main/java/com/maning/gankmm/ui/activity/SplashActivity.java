@@ -57,21 +57,5 @@ public class SplashActivity extends Activity {
         AdManager.getInstance(this).init("f990efa85f85257b", "7a55d045a3ab5fe6", false, false);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        JPushInterface.onResume(this);
-        MobclickAgent.onPageStart("CodesActivity");
-        MobclickAgent.onResume(this);       //统计时长
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        JPushInterface.onPause(this);
-        MobclickAgent.onPageStart("CodesActivity");
-        MobclickAgent.onPause(this);
-    }
-
 
 }

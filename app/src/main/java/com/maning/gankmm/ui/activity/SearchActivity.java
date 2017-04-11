@@ -185,18 +185,6 @@ public class SearchActivity extends BaseActivity implements ISearchView, OnLoadM
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onPageStart("SearchActivity");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPageEnd("SearchActivity");
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         searchPresenter.detachView();

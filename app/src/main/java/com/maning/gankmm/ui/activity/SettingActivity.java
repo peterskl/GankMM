@@ -373,20 +373,6 @@ public class SettingActivity extends BaseActivity implements ISettingView {
         itemGankHeadline.setRightText(type);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MobclickAgent.onPageStart(TAG);
-        MobclickAgent.onResume(this);       //统计时长
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MobclickAgent.onPageStart(TAG);
-        MobclickAgent.onPause(this);
-    }
-
 
     @Override
     protected void onDestroy() {

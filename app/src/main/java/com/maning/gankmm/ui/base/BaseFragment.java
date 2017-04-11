@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.bigkoo.svprogresshud.SVProgressHUD;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseFragment extends Fragment {
 
@@ -37,6 +38,18 @@ public class BaseFragment extends Fragment {
         if (mSVProgressHUD.isShowing()) {
             mSVProgressHUD.dismiss();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 
 }
