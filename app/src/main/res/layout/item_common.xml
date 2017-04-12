@@ -11,13 +11,15 @@
         android:layout_height="80dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="#eaeaea" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/pic_gray_bg"
+        android:visibility="visible" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_toRightOf="@id/iv_show">
 
@@ -36,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:id="@+id/tvShowWho"

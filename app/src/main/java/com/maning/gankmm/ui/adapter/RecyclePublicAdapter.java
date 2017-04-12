@@ -3,6 +3,7 @@ package com.maning.gankmm.ui.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,11 +76,16 @@ public class RecyclePublicAdapter extends RecyclerView.Adapter<RecyclePublicAdap
         if (images != null && images.size() > 0) {
             imageUrl = images.get(0);
         }
-        Glide.with(context)
-                .load(imageUrl)
-                .placeholder(R.drawable.pic_gray_bg)
-                .centerCrop()
-                .into(viewHolder.ivShow);
+        if (TextUtils.isEmpty(imageUrl)) {
+            viewHolder.ivShow.setVisibility(View.GONE);
+        } else {
+            viewHolder.ivShow.setVisibility(View.VISIBLE);
+            Glide.with(context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.pic_gray_bg)
+                    .centerCrop()
+                    .into(viewHolder.ivShow);
+        }
 
         //查询是否存在收藏
         boolean isCollect = new CollectDao().queryOneCollectByID(resultsEntity.get_id());
