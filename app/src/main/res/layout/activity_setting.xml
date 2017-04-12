@@ -157,6 +157,34 @@
             android:layout_height="1px"
             android:background="?lineColor" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="?item_bg"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="?lineColor" />
+
+        <com.maning.gankmm.ui.view.MySettingItemView
+            android:id="@+id/item_app_market"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="?item_setting_bg"
+            app:setting_red_dot="false"
+            app:setting_title="给干货营评分" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="?lineColor" />
+
         <com.maning.gankmm.ui.view.MySettingItemView
             android:id="@+id/item_app_ad"
             android:layout_width="match_parent"
@@ -171,5 +199,6 @@
             android:background="?lineColor" />
 
     </LinearLayout>
+
 
 </LinearLayout>

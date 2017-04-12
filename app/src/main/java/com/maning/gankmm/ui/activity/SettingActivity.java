@@ -29,6 +29,7 @@ import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.NotifyUtil;
 import com.maning.gankmm.utils.SharePreUtil;
 import com.socks.library.KLog;
+import com.ta.utdid2.android.utils.SystemUtils;
 import com.umeng.analytics.MobclickAgent;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
@@ -182,6 +183,11 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     @OnClick(R.id.item_app_ad)
     void item_app_ad() {
         IntentUtils.startAdActivity(this);
+    }
+
+    @OnClick(R.id.item_app_market)
+    void item_app_market() {
+        IntentUtils.goToMarket(this, "com.maning.gankmm");
     }
 
     @Override

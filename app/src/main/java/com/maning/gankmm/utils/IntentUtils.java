@@ -1,7 +1,10 @@
 package com.maning.gankmm.utils;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
@@ -15,6 +18,7 @@ import com.maning.gankmm.ui.activity.WebActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -126,6 +130,22 @@ public class IntentUtils {
     public static void startQRCodeActivity(Context context) {
         Intent intent = new Intent(context.getApplicationContext(), QRCodeActivity.class);
         context.startActivity(intent);
+    }
+
+    public static void goToMarket(Context context, String packageName) {
+        //判断是否安装应用宝
+        if (!GankUtils.isAppInstalled(context, "com.tencent.android.qqdownloader")) {
+            MyToast.showShortToast("请先安装应用宝市场");
+            return;
+        }
+        Uri uri = Uri.parse("market://details?id=" + packageName);
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            goToMarket.setClassName("com.tencent.android.qqdownloader", "com.tencent.pangu.link.LinkProxyActivity");
+            context.startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }
