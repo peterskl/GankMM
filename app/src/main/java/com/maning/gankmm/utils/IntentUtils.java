@@ -9,6 +9,7 @@ import com.maning.gankmm.ui.activity.AboutActivity;
 import com.maning.gankmm.ui.activity.AdActivity;
 import com.maning.gankmm.ui.activity.GankActivity;
 import com.maning.gankmm.ui.activity.ImagesActivity;
+import com.maning.gankmm.ui.activity.QRCodeActivity;
 import com.maning.gankmm.ui.activity.SettingActivity;
 import com.maning.gankmm.ui.activity.WebActivity;
 
@@ -120,6 +121,11 @@ public class IntentUtils {
         customInfoMap.put("hideLoginSuccess", "true");
         FeedbackAPI.setUICustomInfo(customInfoMap);
         FeedbackAPI.openFeedbackActivity(context);
+    }
+
+    public static void startQRCodeActivity(Context context) {
+        Intent intent = new Intent(context.getApplicationContext(), QRCodeActivity.class);
+        context.startActivity(intent);
     }
 
 }

@@ -313,6 +313,11 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                         //分享
                         IntentUtils.startAppShareText(context, "干货营", "干货营Android客户端：" + getString(R.string.download_url));
                         break;
+                    case R.id.my_qr_code:
+                        menuItem.setChecked(false); // 改变item选中状态
+                        //我的二维码
+                        IntentUtils.startQRCodeActivity(context);
+                        break;
                 }
                 return true;
             }
