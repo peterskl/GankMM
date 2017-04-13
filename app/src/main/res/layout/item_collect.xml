@@ -56,24 +56,22 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <com.like.LikeButton
+                <com.ldoublem.thumbUplib.ThumbUpView
                     android:id="@+id/btn_collect"
-                    android:layout_width="36dp"
-                    android:layout_height="match_parent"
-                    app:anim_scale_factor="1"
-                    app:circle_end_color="?icon_like_color"
-                    app:circle_start_color="?icon_like_color"
-                    app:dots_primary_color="?icon_like_color"
-                    app:dots_secondary_color="?icon_like_color"
-                    app:icon_size="28dp"
-                    app:like_drawable="?icon_like_yes"
-                    app:unlike_drawable="?icon_like_no" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    app:bgColor="@color/translate"
+                    app:cracksColor="@color/translate"
+                    app:edgeColor="?collect_btn_border"
+                    app:fillColor="?icon_like_color"
+                    app:unlikeType="0" />
 
                 <TextView
                     android:id="@+id/tvShowTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="2016-3-4"
                     android:textColor="?black_text3_color"

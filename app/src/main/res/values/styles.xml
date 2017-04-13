@@ -57,8 +57,6 @@
         <item name="head_lines_text2_color">@color/head_lines_text2_color</item>
         <item name="girl_pic_trans_item">@color/girl_pic_trans_item</item>
         <item name="girl_pic_trans_item_text_color">@color/girl_pic_trans_item_text_color</item>
-        <item name="icon_like_yes">@drawable/icon_collect_yes</item>
-        <item name="icon_like_no">@drawable/icon_collect_no</item>
         <item name="icon_like_color">@color/icon_like_color</item>
         <item name="girl_pic_trans_shade">@color/girl_pic_trans_shade</item>
         <item name="refresh_bg">@color/refresh_bg_color</item>
@@ -79,6 +77,7 @@
         <item name="webview_progress_color">@color/webview_progress_color</item>
         <item name="app_icon_search">@drawable/icon_search</item>
         <item name="arrow_down_white">@drawable/icon_arrow_down_white</item>
+        <item name="collect_btn_border">@color/btn_collect_border_color</item>
     </style>
 
     <!--黑夜-->
@@ -103,8 +102,6 @@
         <item name="girl_pic_trans_item">@color/girl_pic_trans_item_night</item>
         <item name="girl_pic_trans_item_text_color">@color/girl_pic_trans_item_text_color_night
         </item>
-        <item name="icon_like_yes">@drawable/icon_collect_yes_night</item>
-        <item name="icon_like_no">@drawable/icon_collect_no_night</item>
         <item name="icon_like_color">@color/icon_like_color_night</item>
         <item name="girl_pic_trans_shade">@color/girl_pic_trans_shade_night</item>
         <item name="refresh_bg">@color/refresh_bg_color_night</item>
@@ -125,6 +122,7 @@
         <item name="webview_progress_color">@color/webview_progress_color_night</item>
         <item name="app_icon_search">@drawable/icon_search_night</item>
         <item name="arrow_down_white">@drawable/icon_arrow_down_white_night</item>
+        <item name="collect_btn_border">@color/btn_collect_border_color_night</item>
     </style>
 
 

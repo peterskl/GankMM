@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.like.LikeButton;
-import com.like.OnLikeListener;
+import com.ldoublem.thumbUplib.ThumbUpView;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.constant.Constants;
@@ -95,33 +93,29 @@ public class RecycleCollectAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             //查询是否存在收藏
             boolean isCollect = new CollectDao().queryOneCollectByID(resultsEntity.get_id());
             if (isCollect) {
-                myViewHolder1.btnCollect.setLiked(true);
+                myViewHolder1.btnCollect.setLike();
             } else {
-                myViewHolder1.btnCollect.setLiked(false);
+                myViewHolder1.btnCollect.setUnlike();
             }
 
-            myViewHolder1.btnCollect.setOnLikeListener(new OnLikeListener() {
+            myViewHolder1.btnCollect.setOnThumbUp(new ThumbUpView.OnThumbUp() {
                 @Override
-                public void liked(LikeButton likeButton) {
-                    boolean insertResult = new CollectDao().insertOneCollect(resultsEntity);
-                    if (insertResult) {
-                        MySnackbar.makeSnackBarBlack(myViewHolder1.tvShowTime, "收藏成功");
+                public void like(boolean like) {
+                    if (like) {
+                        boolean insertResult = new CollectDao().insertOneCollect(resultsEntity);
+                        if (insertResult) {
+                            MySnackbar.makeSnackBarBlack(myViewHolder1.tvShowTime, "收藏成功");
+                        } else {
+                            MySnackbar.makeSnackBarRed(myViewHolder1.tvShowTime, "收藏失败");
+                        }
                     } else {
-                        MySnackbar.makeSnackBarRed(myViewHolder1.tvShowTime, "收藏失败");
-                        likeButton.setLiked(false);
+                        boolean deleteResult = new CollectDao().deleteOneCollect(resultsEntity.get_id());
+                        if (deleteResult) {
+                            MySnackbar.makeSnackBarBlack(myViewHolder1.tvShowTime, "取消收藏成功");
+                        } else {
+                            MySnackbar.makeSnackBarRed(myViewHolder1.tvShowTime, "取消收藏失败");
+                        }
                     }
-                }
-
-                @Override
-                public void unLiked(LikeButton likeButton) {
-                    boolean deleteResult = new CollectDao().deleteOneCollect(resultsEntity.get_id());
-                    if (deleteResult) {
-                        MySnackbar.makeSnackBarBlack(myViewHolder1.tvShowTime, "取消收藏成功");
-                    } else {
-                        MySnackbar.makeSnackBarRed(myViewHolder1.tvShowTime, "取消收藏失败");
-                        likeButton.setLiked(true);
-                    }
-
                 }
             });
 
@@ -145,33 +139,29 @@ public class RecycleCollectAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             //查询是否存在收藏
             boolean isCollect = new CollectDao().queryOneCollectByID(resultsEntity.get_id());
             if (isCollect) {
-                myViewHolder.btnCollect.setLiked(true);
+                myViewHolder.btnCollect.setLike();
             } else {
-                myViewHolder.btnCollect.setLiked(false);
+                myViewHolder.btnCollect.setUnlike();
             }
 
-            myViewHolder.btnCollect.setOnLikeListener(new OnLikeListener() {
+            myViewHolder.btnCollect.setOnThumbUp(new ThumbUpView.OnThumbUp() {
                 @Override
-                public void liked(LikeButton likeButton) {
-                    boolean insertResult = new CollectDao().insertOneCollect(resultsEntity);
-                    if (insertResult) {
-                        MySnackbar.makeSnackBarBlack(myViewHolder.tvShowTime, "收藏成功");
+                public void like(boolean like) {
+                    if (like) {
+                        boolean insertResult = new CollectDao().insertOneCollect(resultsEntity);
+                        if (insertResult) {
+                            MySnackbar.makeSnackBarBlack(myViewHolder.tvShowTime, "收藏成功");
+                        } else {
+                            MySnackbar.makeSnackBarRed(myViewHolder.tvShowTime, "收藏失败");
+                        }
                     } else {
-                        MySnackbar.makeSnackBarRed(myViewHolder.tvShowTime, "收藏失败");
-                        likeButton.setLiked(false);
+                        boolean deleteResult = new CollectDao().deleteOneCollect(resultsEntity.get_id());
+                        if (deleteResult) {
+                            MySnackbar.makeSnackBarBlack(myViewHolder.tvShowTime, "取消收藏成功");
+                        } else {
+                            MySnackbar.makeSnackBarRed(myViewHolder.tvShowTime, "取消收藏失败");
+                        }
                     }
-                }
-
-                @Override
-                public void unLiked(LikeButton likeButton) {
-                    boolean deleteResult = new CollectDao().deleteOneCollect(resultsEntity.get_id());
-                    if (deleteResult) {
-                        MySnackbar.makeSnackBarBlack(myViewHolder.tvShowTime, "取消收藏成功");
-                    } else {
-                        MySnackbar.makeSnackBarRed(myViewHolder.tvShowTime, "取消收藏失败");
-                        likeButton.setLiked(true);
-                    }
-
                 }
             });
 
@@ -210,7 +200,7 @@ public class RecycleCollectAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @Bind(R.id.tvShowTime)
         TextView tvShowTime;
         @Bind(R.id.btn_collect)
-        LikeButton btnCollect;
+        ThumbUpView btnCollect;
         @Bind(R.id.image)
         ImageView image;
 
@@ -230,7 +220,7 @@ public class RecycleCollectAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @Bind(R.id.tvShowTime)
         TextView tvShowTime;
         @Bind(R.id.btn_collect)
-        LikeButton btnCollect;
+        ThumbUpView btnCollect;
         @Bind(R.id.iv_show)
         ImageView ivShow;
 

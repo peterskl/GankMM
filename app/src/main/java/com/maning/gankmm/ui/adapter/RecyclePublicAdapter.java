@@ -1,7 +1,6 @@
 package com.maning.gankmm.ui.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,14 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.like.LikeButton;
-import com.like.OnLikeListener;
+import com.ldoublem.thumbUplib.ThumbUpView;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.db.CollectDao;
@@ -90,30 +84,28 @@ public class RecyclePublicAdapter extends RecyclerView.Adapter<RecyclePublicAdap
         //查询是否存在收藏
         boolean isCollect = new CollectDao().queryOneCollectByID(resultsEntity.get_id());
         if (isCollect) {
-            viewHolder.btnCollect.setLiked(true);
+            viewHolder.btnCollect.setLike();
         } else {
-            viewHolder.btnCollect.setLiked(false);
+            viewHolder.btnCollect.setUnlike();
         }
-        viewHolder.btnCollect.setOnLikeListener(new OnLikeListener() {
-            @Override
-            public void liked(LikeButton likeButton) {
-                boolean insertResult = new CollectDao().insertOneCollect(resultsEntity);
-                if (insertResult) {
-                    MySnackbar.makeSnackBarBlack(viewHolder.tvShowTime, "收藏成功");
-                } else {
-                    MySnackbar.makeSnackBarRed(viewHolder.tvShowTime, "收藏失败");
-                    likeButton.setLiked(false);
-                }
-            }
 
+        viewHolder.btnCollect.setOnThumbUp(new ThumbUpView.OnThumbUp() {
             @Override
-            public void unLiked(LikeButton likeButton) {
-                boolean deleteResult = new CollectDao().deleteOneCollect(resultsEntity.get_id());
-                if (deleteResult) {
-                    MySnackbar.makeSnackBarBlack(viewHolder.tvShowTime, "取消收藏成功");
+            public void like(boolean like) {
+                if (like) {
+                    boolean insertResult = new CollectDao().insertOneCollect(resultsEntity);
+                    if (insertResult) {
+                        MySnackbar.makeSnackBarBlack(viewHolder.tvShowTime, "收藏成功");
+                    } else {
+                        MySnackbar.makeSnackBarRed(viewHolder.tvShowTime, "收藏失败");
+                    }
                 } else {
-                    MySnackbar.makeSnackBarRed(viewHolder.tvShowTime, "取消收藏失败");
-                    likeButton.setLiked(true);
+                    boolean deleteResult = new CollectDao().deleteOneCollect(resultsEntity.get_id());
+                    if (deleteResult) {
+                        MySnackbar.makeSnackBarBlack(viewHolder.tvShowTime, "取消收藏成功");
+                    } else {
+                        MySnackbar.makeSnackBarRed(viewHolder.tvShowTime, "取消收藏失败");
+                    }
                 }
             }
         });
@@ -144,7 +136,7 @@ public class RecyclePublicAdapter extends RecyclerView.Adapter<RecyclePublicAdap
         @Bind(R.id.tvShowTime)
         TextView tvShowTime;
         @Bind(R.id.btn_collect)
-        LikeButton btnCollect;
+        ThumbUpView btnCollect;
         @Bind(R.id.iv_show)
         ImageView ivShow;
 

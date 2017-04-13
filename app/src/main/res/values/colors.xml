@@ -73,6 +73,7 @@
     <color name="black_text3_color">#7c7c7c</color>
     <color name="webview_progress_bg_color">#FFFFFF</color>
     <color name="webview_progress_color">#FF8080</color>
+    <color name="btn_collect_border_color">#c6c6c6</color>
     <!--夜间-->
     <color name="backgroundColor_night">#232736</color>
     <color name="textColor_night">#626f9b</color>
@@ -105,5 +106,6 @@
     <color name="black_text3_color_night">#464c61</color>
     <color name="webview_progress_bg_color_night">#3d445e</color>
     <color name="webview_progress_color_night">#aec0ff</color>
+    <color name="btn_collect_border_color_night">#9AACEC</color>
 
 </resources>

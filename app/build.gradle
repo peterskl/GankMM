@@ -108,7 +108,7 @@ dependencies {
     /*下拉刷新框架*/
     compile 'com.github.Aspsine:SwipeToLoadLayout:v1.0.4'
     /*点赞收藏按钮*/
-    compile 'com.github.jd-alexander:LikeButton:0.1.8'
+    compile 'com.ldoublem.thumbUplib:ThumbUplib:0.5'
     /*material风格的dialogs*/
     compile 'com.afollestad.material-dialogs:core:0.9.3.0'
     /*解析HTML页面*/
