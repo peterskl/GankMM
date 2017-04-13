@@ -57,7 +57,7 @@ public class DayEntity implements Serializable {
          * who : 有时放纵
          */
 
-        private List<AndroidEntity> Android;
+        private List<GankEntity> Android;
         /**
          * _id : 56cc6d1d421aa95caa70777e
          * createdAt : 2015-08-06T01:55:36.30Z
@@ -69,7 +69,7 @@ public class DayEntity implements Serializable {
          * who : Andrew Liu
          */
 
-        private List<IOSEntity> iOS;
+        private List<GankEntity> iOS;
         /**
          * _id : 56cc6d23421aa95caa707c2b
          * createdAt : 2015-08-06T03:55:07.175Z
@@ -81,7 +81,7 @@ public class DayEntity implements Serializable {
          * who : 代码家
          */
 
-        private List<休息视频Entity> 休息视频;
+        private List<GankEntity> 休息视频;
         /**
          * _id : 56cc6d1d421aa95caa707781
          * createdAt : 2015-08-06T00:53:43.851Z
@@ -93,7 +93,7 @@ public class DayEntity implements Serializable {
          * who : YJX
          */
 
-        private List<拓展资源Entity> 拓展资源;
+        private List<GankEntity> 拓展资源;
         /**
          * _id : 56cc6d23421aa95caa707c6f
          * createdAt : 2015-08-06T01:33:55.463Z
@@ -105,421 +105,47 @@ public class DayEntity implements Serializable {
          * who : 张涵宇
          */
 
-        private List<福利Entity> 福利;
+        private List<GankEntity> 福利;
 
-        public List<AndroidEntity> getAndroid() {
+        public List<GankEntity> getAndroid() {
             return Android;
         }
 
-        public void setAndroid(List<AndroidEntity> Android) {
+        public void setAndroid(List<GankEntity> Android) {
             this.Android = Android;
         }
 
-        public List<IOSEntity> getIOS() {
+        public List<GankEntity> getIOS() {
             return iOS;
         }
 
-        public void setIOS(List<IOSEntity> iOS) {
+        public void setIOS(List<GankEntity> iOS) {
             this.iOS = iOS;
         }
 
-        public List<休息视频Entity> get休息视频() {
+        public List<GankEntity> get休息视频() {
             return 休息视频;
         }
 
-        public void set休息视频(List<休息视频Entity> 休息视频) {
+        public void set休息视频(List<GankEntity> 休息视频) {
             this.休息视频 = 休息视频;
         }
 
-        public List<拓展资源Entity> get拓展资源() {
+        public List<GankEntity> get拓展资源() {
             return 拓展资源;
         }
 
-        public void set拓展资源(List<拓展资源Entity> 拓展资源) {
+        public void set拓展资源(List<GankEntity> 拓展资源) {
             this.拓展资源 = 拓展资源;
         }
 
-        public List<福利Entity> get福利() {
+        public List<GankEntity> get福利() {
             return 福利;
         }
 
-        public void set福利(List<福利Entity> 福利) {
+        public void set福利(List<GankEntity> 福利) {
             this.福利 = 福利;
         }
 
-        public static class AndroidEntity {
-            private String _id;
-            private String createdAt;
-            private String desc;
-            private String publishedAt;
-            private String type;
-            private String url;
-            private boolean used;
-            private String who;
-
-            public String get_id() {
-                return _id;
-            }
-
-            public void set_id(String _id) {
-                this._id = _id;
-            }
-
-            public String getCreatedAt() {
-                return createdAt;
-            }
-
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-
-            public String getDesc() {
-                return desc;
-            }
-
-            public void setDesc(String desc) {
-                this.desc = desc;
-            }
-
-            public String getPublishedAt() {
-                return publishedAt;
-            }
-
-            public void setPublishedAt(String publishedAt) {
-                this.publishedAt = publishedAt;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public boolean isUsed() {
-                return used;
-            }
-
-            public void setUsed(boolean used) {
-                this.used = used;
-            }
-
-            public String getWho() {
-                return who;
-            }
-
-            public void setWho(String who) {
-                this.who = who;
-            }
-        }
-
-        public static class IOSEntity {
-            private String _id;
-            private String createdAt;
-            private String desc;
-            private String publishedAt;
-            private String type;
-            private String url;
-            private boolean used;
-            private String who;
-
-            public String get_id() {
-                return _id;
-            }
-
-            public void set_id(String _id) {
-                this._id = _id;
-            }
-
-            public String getCreatedAt() {
-                return createdAt;
-            }
-
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-
-            public String getDesc() {
-                return desc;
-            }
-
-            public void setDesc(String desc) {
-                this.desc = desc;
-            }
-
-            public String getPublishedAt() {
-                return publishedAt;
-            }
-
-            public void setPublishedAt(String publishedAt) {
-                this.publishedAt = publishedAt;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public boolean isUsed() {
-                return used;
-            }
-
-            public void setUsed(boolean used) {
-                this.used = used;
-            }
-
-            public String getWho() {
-                return who;
-            }
-
-            public void setWho(String who) {
-                this.who = who;
-            }
-        }
-
-        public static class 休息视频Entity {
-            private String _id;
-            private String createdAt;
-            private String desc;
-            private String publishedAt;
-            private String type;
-            private String url;
-            private boolean used;
-            private String who;
-
-            public String get_id() {
-                return _id;
-            }
-
-            public void set_id(String _id) {
-                this._id = _id;
-            }
-
-            public String getCreatedAt() {
-                return createdAt;
-            }
-
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-
-            public String getDesc() {
-                return desc;
-            }
-
-            public void setDesc(String desc) {
-                this.desc = desc;
-            }
-
-            public String getPublishedAt() {
-                return publishedAt;
-            }
-
-            public void setPublishedAt(String publishedAt) {
-                this.publishedAt = publishedAt;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public boolean isUsed() {
-                return used;
-            }
-
-            public void setUsed(boolean used) {
-                this.used = used;
-            }
-
-            public String getWho() {
-                return who;
-            }
-
-            public void setWho(String who) {
-                this.who = who;
-            }
-        }
-
-        public static class 拓展资源Entity {
-            private String _id;
-            private String createdAt;
-            private String desc;
-            private String publishedAt;
-            private String type;
-            private String url;
-            private boolean used;
-            private String who;
-
-            public String get_id() {
-                return _id;
-            }
-
-            public void set_id(String _id) {
-                this._id = _id;
-            }
-
-            public String getCreatedAt() {
-                return createdAt;
-            }
-
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-
-            public String getDesc() {
-                return desc;
-            }
-
-            public void setDesc(String desc) {
-                this.desc = desc;
-            }
-
-            public String getPublishedAt() {
-                return publishedAt;
-            }
-
-            public void setPublishedAt(String publishedAt) {
-                this.publishedAt = publishedAt;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public boolean isUsed() {
-                return used;
-            }
-
-            public void setUsed(boolean used) {
-                this.used = used;
-            }
-
-            public String getWho() {
-                return who;
-            }
-
-            public void setWho(String who) {
-                this.who = who;
-            }
-        }
-
-        public static class 福利Entity {
-            private String _id;
-            private String createdAt;
-            private String desc;
-            private String publishedAt;
-            private String type;
-            private String url;
-            private boolean used;
-            private String who;
-
-            public String get_id() {
-                return _id;
-            }
-
-            public void set_id(String _id) {
-                this._id = _id;
-            }
-
-            public String getCreatedAt() {
-                return createdAt;
-            }
-
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-
-            public String getDesc() {
-                return desc;
-            }
-
-            public void setDesc(String desc) {
-                this.desc = desc;
-            }
-
-            public String getPublishedAt() {
-                return publishedAt;
-            }
-
-            public void setPublishedAt(String publishedAt) {
-                this.publishedAt = publishedAt;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
-
-            public boolean isUsed() {
-                return used;
-            }
-
-            public void setUsed(boolean used) {
-                this.used = used;
-            }
-
-            public String getWho() {
-                return who;
-            }
-
-            public void setWho(String who) {
-                this.who = who;
-            }
-        }
     }
 }

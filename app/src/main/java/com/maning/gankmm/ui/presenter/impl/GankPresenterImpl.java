@@ -37,7 +37,7 @@ public class GankPresenterImpl extends BasePresenterImpl<IGankView> implements I
                 DayEntity.ResultsEntity results = dayEntity.getResults();
                 if (results != null) {
 
-                    List<DayEntity.ResultsEntity.福利Entity> 福利 = dayEntity.getResults().get福利();
+                    List<GankEntity> 福利 = dayEntity.getResults().get福利();
                     if (福利 != null && 福利.size() > 0) {
                         String url = dayEntity.getResults().get福利().get(0).getUrl();
                         mView.setProgressBarVisility(View.GONE);
@@ -102,85 +102,43 @@ public class GankPresenterImpl extends BasePresenterImpl<IGankView> implements I
     private void initDatas(DayEntity dayEntity) {
         dayEntityArrayList.clear();
 
-        GankEntity gankEntity_other;
-        List<DayEntity.ResultsEntity.AndroidEntity> androidEntityList = dayEntity.getResults().getAndroid();
+        List<GankEntity> androidEntityList = dayEntity.getResults().getAndroid();
         if (androidEntityList != null && androidEntityList.size() > 0) {
             GankEntity gankEntity_title = new GankEntity();
             gankEntity_title.setType("title");
             gankEntity_title.setDesc("Android");
             dayEntityArrayList.add(gankEntity_title);
-            for (int i = 0; i < androidEntityList.size(); i++) {
-                DayEntity.ResultsEntity.AndroidEntity androidEntity = androidEntityList.get(i);
-                gankEntity_other = new GankEntity();
-                gankEntity_other.set_id(androidEntity.get_id());
-                gankEntity_other.setDesc(androidEntity.getDesc());
-                gankEntity_other.setType(androidEntity.getType());
-                gankEntity_other.setCreatedAt(androidEntity.getCreatedAt());
-                gankEntity_other.setPublishedAt(androidEntity.getPublishedAt());
-                gankEntity_other.setUrl(androidEntity.getUrl());
-                dayEntityArrayList.add(gankEntity_other);
-            }
+            dayEntityArrayList.addAll(androidEntityList);
         }
 
-        List<DayEntity.ResultsEntity.IOSEntity> iosEntityList = dayEntity.getResults().getIOS();
+
+        List<GankEntity> iosEntityList = dayEntity.getResults().getIOS();
         if (iosEntityList != null && iosEntityList.size() > 0) {
-            GankEntity gankEntity_title02 = new GankEntity();
-            gankEntity_title02.setType("title");
-            gankEntity_title02.setDesc("iOS");
-            dayEntityArrayList.add(gankEntity_title02);
-
-            for (int i = 0; i < iosEntityList.size(); i++) {
-                DayEntity.ResultsEntity.IOSEntity entity = iosEntityList.get(i);
-                gankEntity_other = new GankEntity();
-                gankEntity_other.set_id(entity.get_id());
-                gankEntity_other.setDesc(entity.getDesc());
-                gankEntity_other.setType(entity.getType());
-                gankEntity_other.setCreatedAt(entity.getCreatedAt());
-                gankEntity_other.setPublishedAt(entity.getPublishedAt());
-                gankEntity_other.setUrl(entity.getUrl());
-                dayEntityArrayList.add(gankEntity_other);
-            }
+            GankEntity gankEntity_title = new GankEntity();
+            gankEntity_title.setType("title");
+            gankEntity_title.setDesc("iOS");
+            dayEntityArrayList.add(gankEntity_title);
+            dayEntityArrayList.addAll(iosEntityList);
         }
 
-        List<DayEntity.ResultsEntity.休息视频Entity> 休息视频EntityList = dayEntity.getResults().get休息视频();
+
+        List<GankEntity> 休息视频EntityList = dayEntity.getResults().get休息视频();
         if (休息视频EntityList != null && 休息视频EntityList.size() > 0) {
-            GankEntity gankEntity_title03 = new GankEntity();
-            gankEntity_title03.setType("title");
-            gankEntity_title03.setDesc("休息视频");
-            dayEntityArrayList.add(gankEntity_title03);
-
-            for (int i = 0; i < 休息视频EntityList.size(); i++) {
-                DayEntity.ResultsEntity.休息视频Entity entity = 休息视频EntityList.get(i);
-                gankEntity_other = new GankEntity();
-                gankEntity_other.set_id(entity.get_id());
-                gankEntity_other.setDesc(entity.getDesc());
-                gankEntity_other.setType(entity.getType());
-                gankEntity_other.setCreatedAt(entity.getCreatedAt());
-                gankEntity_other.setPublishedAt(entity.getPublishedAt());
-                gankEntity_other.setUrl(entity.getUrl());
-                dayEntityArrayList.add(gankEntity_other);
-            }
+            GankEntity gankEntity_title = new GankEntity();
+            gankEntity_title.setType("title");
+            gankEntity_title.setDesc("休息视频");
+            dayEntityArrayList.add(gankEntity_title);
+            dayEntityArrayList.addAll(休息视频EntityList);
         }
 
 
-        List<DayEntity.ResultsEntity.拓展资源Entity> 拓展资源EntityList = dayEntity.getResults().get拓展资源();
+        List<GankEntity> 拓展资源EntityList = dayEntity.getResults().get拓展资源();
         if (拓展资源EntityList != null && 拓展资源EntityList.size() > 0) {
-            GankEntity gankEntity_title04 = new GankEntity();
-            gankEntity_title04.setType("title");
-            gankEntity_title04.setDesc("拓展资源");
-            dayEntityArrayList.add(gankEntity_title04);
-
-            for (int i = 0; i < 拓展资源EntityList.size(); i++) {
-                DayEntity.ResultsEntity.拓展资源Entity entity = 拓展资源EntityList.get(i);
-                gankEntity_other = new GankEntity();
-                gankEntity_other.set_id(entity.get_id());
-                gankEntity_other.setDesc(entity.getDesc());
-                gankEntity_other.setType(entity.getType());
-                gankEntity_other.setCreatedAt(entity.getCreatedAt());
-                gankEntity_other.setPublishedAt(entity.getPublishedAt());
-                gankEntity_other.setUrl(entity.getUrl());
-                dayEntityArrayList.add(gankEntity_other);
-            }
+            GankEntity gankEntity_title = new GankEntity();
+            gankEntity_title.setType("title");
+            gankEntity_title.setDesc("拓展资源");
+            dayEntityArrayList.add(gankEntity_title);
+            dayEntityArrayList.addAll(拓展资源EntityList);
         }
 
         KLog.i("dayEntityArrayList---" + dayEntityArrayList.size());
