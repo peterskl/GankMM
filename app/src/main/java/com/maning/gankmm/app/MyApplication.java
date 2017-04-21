@@ -1,24 +1,22 @@
 package com.maning.gankmm.app;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.util.Log;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.maning.gankmm.BuildConfig;
 import com.maning.gankmm.crash.CrashHandler;
 import com.maning.gankmm.utils.ACache;
 import com.maning.gankmm.utils.NetUtils;
+import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.socks.library.KLog;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import cn.jpush.android.api.JPushInterface;
@@ -40,9 +38,6 @@ public class MyApplication extends Application {
     private static Handler mHandler;
     private static ACache aCache;
 
-    //Activity实例
-    public static ArrayList<Activity> sLeakyActivities = new ArrayList<Activity>();
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -56,7 +51,7 @@ public class MyApplication extends Application {
         initCrash();
 
         //初始化Log
-        KLog.init(BuildConfig.LOG_DEBUG,"GankMM");
+        KLog.init(BuildConfig.LOG_DEBUG, "GankMM");
 
         //初始化ACache类
         aCache = ACache.get(this);
@@ -122,6 +117,7 @@ public class MyApplication extends Application {
         client.cache(cache);
         //设置拦截器
         client.addInterceptor(LoggingInterceptor);
+        client.addInterceptor(new ChuckInterceptor(application));
         client.addNetworkInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR);
         client.addInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR);
         return client.build();
@@ -159,7 +155,6 @@ public class MyApplication extends Application {
             if (netWorkConection) {
                 //有网的时候读接口上的@Headers里的配置，你可以在这里进行统一的设置
                 String cacheControl = request.cacheControl().toString();
-                Log.i(TAG, "cacheControl:" + cacheControl);
                 response.newBuilder()
                         .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
                         .header("Cache-Control", cacheControl)
@@ -180,11 +175,14 @@ public class MyApplication extends Application {
         public Response intercept(Interceptor.Chain chain) throws IOException {
             Request request = chain.request();
             long t1 = System.nanoTime();
-            Log.i(TAG, String.format("Sending request %s on %s%n%s", request.url(), chain.connection(), request.headers()));
-            Response response = chain.proceed(request);
+            okhttp3.Response response = chain.proceed(chain.request());
             long t2 = System.nanoTime();
-            Log.i(TAG, String.format("Received response for %s in %.1fms%n%s", response.request().url(), (t2 - t1) / 1e6d, response.headers()));
-            return response;
+            okhttp3.MediaType mediaType = response.body().contentType();
+            String content = response.body().string();
+            KLog.i(TAG, "-----LoggingInterceptor----- :\nrequest url:" + request.url() + "\ntime:" + (t2 - t1) / 1e6d + "\nbody:" + content + "\n");
+            return response.newBuilder()
+                    .body(okhttp3.ResponseBody.create(mediaType, content))
+                    .build();
         }
     };
 

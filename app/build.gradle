@@ -135,4 +135,6 @@ dependencies {
     compile files('libs/AMap_Location_V3.3.0_20170118.jar')
     /* 模糊 */
     compile 'jp.wasabeef:blurry:2.1.1'
+    debugCompile 'com.readystatesoftware.chuck:library:1.0.4'
+    releaseCompile 'com.readystatesoftware.chuck:library-no-op:1.0.4'
 }
