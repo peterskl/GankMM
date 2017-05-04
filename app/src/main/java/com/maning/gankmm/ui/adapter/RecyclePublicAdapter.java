@@ -97,6 +97,7 @@ public class RecyclePublicAdapter extends RecyclerView.Adapter<RecyclePublicAdap
                     if (insertResult) {
                         MySnackbar.makeSnackBarBlack(viewHolder.tvShowTime, "收藏成功");
                     } else {
+                        viewHolder.btnCollect.setUnlike();
                         MySnackbar.makeSnackBarRed(viewHolder.tvShowTime, "收藏失败");
                     }
                 } else {
@@ -104,6 +105,7 @@ public class RecyclePublicAdapter extends RecyclerView.Adapter<RecyclePublicAdap
                     if (deleteResult) {
                         MySnackbar.makeSnackBarBlack(viewHolder.tvShowTime, "取消收藏成功");
                     } else {
+                        viewHolder.btnCollect.setLike();
                         MySnackbar.makeSnackBarRed(viewHolder.tvShowTime, "取消收藏失败");
                     }
                 }

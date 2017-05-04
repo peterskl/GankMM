@@ -59,7 +59,6 @@ public class GankMMHelper extends SQLiteOpenHelper {
             + type + " TEXT, "
             + url + " TEXT, "
             + used + " TEXT, "
-            + imageUrl + " TEXT, "
             + who + " TEXT)";
 
     //公共阅读表
@@ -75,7 +74,6 @@ public class GankMMHelper extends SQLiteOpenHelper {
             + type + " TEXT, "
             + url + " TEXT, "
             + used + " TEXT, "
-            + imageUrl + " TEXT, "
             + who + " TEXT)";
 
     public GankMMHelper(Context context) {
@@ -87,6 +85,8 @@ public class GankMMHelper extends SQLiteOpenHelper {
         KLog.i("数据库创建了");
         db.execSQL(sql_collect);
         db.execSQL(sql_public);
+        //升级2
+        updateTableToVersion(db, 2);
     }
 
     @Override
