@@ -169,7 +169,7 @@
 ###### 模糊控件 [Blurry](https://github.com/wasabeef/Blurry)
 
 
-## 请我喝杯咖啡 (￣▽￣)~*  谢谢:
+## 请作者喝杯咖啡 (￣▽￣)~* 哈哈:
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/icon_support_wx.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/icon_support_zfb.png)
 
