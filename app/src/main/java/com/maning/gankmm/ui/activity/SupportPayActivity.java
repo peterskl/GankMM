@@ -1,5 +1,6 @@
 package com.maning.gankmm.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -15,10 +16,12 @@ import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.utils.BitmapUtils;
-import com.maning.gankmm.utils.DialogUtils;
 import com.maning.gankmm.utils.MySnackbar;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
 
 import java.io.File;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -86,6 +89,22 @@ public class SupportPayActivity extends BaseActivity {
 
     @OnClick(R.id.btn_save)
     public void btn_save() {
+
+        // 先判断是否有权限。
+        if (AndPermission.hasPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            // 有权限，直接do anything.
+            savePayImage();
+        } else {
+            // 申请权限。
+            AndPermission.with(this)
+                    .requestCode(101)
+                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .send();
+        }
+
+    }
+
+    private void savePayImage() {
         //保存图片
         final Bitmap bitmapPay = getBitmapFromImageView(ivPayEwm);
         if (bitmapPay == null) {
@@ -123,7 +142,6 @@ public class SupportPayActivity extends BaseActivity {
                 });
             }
         }).start();
-
     }
 
     private Bitmap getBitmapFromImageView(ImageView imageView) {
@@ -132,5 +150,34 @@ public class SupportPayActivity extends BaseActivity {
         imageView.setDrawingCacheEnabled(false);
         return bitmap;
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // 只需要调用这一句，其它的交给AndPermission吧，最后一个参数是PermissionListener。
+        AndPermission.onRequestPermissionsResult(requestCode, permissions, grantResults, listener);
+    }
+
+    private PermissionListener listener = new PermissionListener() {
+        @Override
+        public void onSucceed(int requestCode, List<String> grantedPermissions) {
+            MySnackbar.makeSnackBarBlack(toolbar, "权限申请成功");
+            // 权限申请成功回调。
+            savePayImage();
+        }
+
+        @Override
+        public void onFailed(int requestCode, List<String> deniedPermissions) {
+            // 权限申请失败回调。
+            // 用户否勾选了不再提示并且拒绝了权限，那么提示用户到设置中授权。
+            if (AndPermission.hasAlwaysDeniedPermission(SupportPayActivity.this, deniedPermissions)) {
+                // 第二种：用自定义的提示语。
+                AndPermission.defaultSettingDialog(SupportPayActivity.this, 300)
+                        .setTitle("权限申请失败")
+                        .setMessage("我们需要的一些权限被您拒绝或者系统发生错误申请失败，请您到设置页面手动授权，否则功能无法正常使用！")
+                        .setPositiveButton("好，去设置")
+                        .show();
+            }
+        }
+    };
 
 }

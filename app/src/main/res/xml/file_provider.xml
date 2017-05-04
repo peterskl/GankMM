@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
 
-    <!--广告APK安装需要填写的-->
-    <cache-path
-        name="apk_AD_Cache"
-        path="." />
-    <external-path
-        name="apk_AD_External"
-        path="." />
-
     <!--GankMM升级-->
     <external-path
         name="apk_Update"

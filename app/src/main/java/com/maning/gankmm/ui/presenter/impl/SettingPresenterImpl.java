@@ -26,6 +26,7 @@ import com.maning.gankmm.utils.DialogUtils;
 import com.maning.gankmm.utils.FileUtils;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.SharePreUtil;
+import com.socks.library.KLog;
 
 import java.io.File;
 import java.util.Arrays;
@@ -85,7 +86,7 @@ public class SettingPresenterImpl extends BasePresenterImpl<ISettingView> implem
 
         @Override
         public void onFail(int what, String result) {
-            if(!TextUtils.isEmpty(result)){
+            if (!TextUtils.isEmpty(result)) {
                 if (mView != null) {
                     mView.showToast("检测新版本发生错误");
                 }
@@ -161,7 +162,7 @@ public class SettingPresenterImpl extends BasePresenterImpl<ISettingView> implem
             @Override
             public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                 //保存选择的类型
-                SharePreUtil.saveStringData(context,Constants.SPSwitcherDataType,String.valueOf(text));
+                SharePreUtil.saveStringData(context, Constants.SPSwitcherDataType, String.valueOf(text));
                 mView.updateHeadLine(String.valueOf(text));
             }
         });
@@ -179,16 +180,21 @@ public class SettingPresenterImpl extends BasePresenterImpl<ISettingView> implem
         if (mView == null) {
             return;
         }
-        boolean jpush = SharePreUtil.getBooleanData(context, Constants.SPJpush, true);
-        if (!jpush) {
-            SharePreUtil.saveBooleanData(context, Constants.SPJpush, true);
-            JPushInterface.resumePush(context.getApplicationContext());
-            mView.openPush();
-        } else {
-            SharePreUtil.saveBooleanData(context, Constants.SPJpush, false);
-            mView.closePush();
-            JPushInterface.stopPush(context.getApplicationContext());
+        try {
+            boolean jpush = SharePreUtil.getBooleanData(context, Constants.SPJpush, true);
+            if (!jpush) {
+                SharePreUtil.saveBooleanData(context, Constants.SPJpush, true);
+                JPushInterface.resumePush(context.getApplicationContext());
+                mView.openPush();
+            } else {
+                SharePreUtil.saveBooleanData(context, Constants.SPJpush, false);
+                mView.closePush();
+                JPushInterface.stopPush(context.getApplicationContext());
+            }
+        } catch (Exception e) {
+            KLog.e("changePushState Exception:" + e.toString());
         }
+
     }
 
     @Override

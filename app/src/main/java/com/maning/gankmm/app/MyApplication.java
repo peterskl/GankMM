@@ -44,17 +44,14 @@ public class MyApplication extends Application {
 
         initBase();
 
+        //初始化Log
+        initLog();
+
         //Jpush
         initJpush();
 
         //初始化异常捕获
         initCrash();
-
-        //初始化Log
-        KLog.init(BuildConfig.LOG_DEBUG, "GankMM");
-
-        //初始化ACache类
-        aCache = ACache.get(this);
 
         //初始化意见反馈
         initAliFeedBack();
@@ -67,19 +64,30 @@ public class MyApplication extends Application {
 
     }
 
+    private void initLog() {
+        KLog.init(BuildConfig.LOG_DEBUG, "GankMM");
+    }
+
     private void initAliFeedBack() {
         //第二个参数是appkey，就是百川应用创建时候的appkey
         FeedbackAPI.initAnnoy(this, "23444312");
     }
 
     private void initJpush() {
-        JPushInterface.setDebugMode(true);
-        JPushInterface.init(this);
+        try {
+            JPushInterface.setDebugMode(BuildConfig.LOG_DEBUG);
+            JPushInterface.init(this);
+        } catch (Exception e) {
+            KLog.e();
+        }
+
     }
 
     private void initBase() {
         application = this;
         mHandler = new Handler();
+        //初始化ACache类
+        aCache = ACache.get(this);
     }
 
     public static ACache getACache() {
