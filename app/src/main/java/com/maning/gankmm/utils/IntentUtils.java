@@ -3,13 +3,10 @@ package com.maning.gankmm.utils;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.maning.gankmm.ui.activity.AboutActivity;
-import com.maning.gankmm.ui.activity.AdActivity;
 import com.maning.gankmm.ui.activity.GankActivity;
 import com.maning.gankmm.ui.activity.ImagesActivity;
 import com.maning.gankmm.ui.activity.QRCodeActivity;
@@ -18,7 +15,6 @@ import com.maning.gankmm.ui.activity.WebActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,11 +50,6 @@ public class IntentUtils {
 
     public static void startAboutActivity(Context context) {
         Intent intent = new Intent(context.getApplicationContext(), AboutActivity.class);
-        context.startActivity(intent);
-    }
-
-    public static void startAdActivity(Context context) {
-        Intent intent = new Intent(context.getApplicationContext(), AdActivity.class);
         context.startActivity(intent);
     }
 

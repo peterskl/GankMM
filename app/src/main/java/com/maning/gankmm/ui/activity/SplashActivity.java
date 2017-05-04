@@ -9,13 +9,9 @@ import android.widget.TextView;
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.skin.SkinManager;
-import com.umeng.analytics.MobclickAgent;
-
-import net.youmi.android.AdManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.jpush.android.api.JPushInterface;
 
 public class SplashActivity extends Activity {
 
@@ -31,9 +27,6 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
 
-        //初始化有米
-        initYoumiSDK();
-
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (currentSkinType == SkinManager.THEME_NIGHT) {
             shadeBg.setVisibility(View.VISIBLE);
@@ -42,7 +35,7 @@ public class SplashActivity extends Activity {
         MyApplication.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, SplashAdActivity.class));
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 SplashActivity.this.finish();
             }
         }, 2000);
@@ -51,11 +44,5 @@ public class SplashActivity extends Activity {
 
 
     }
-
-    private void initYoumiSDK() {
-        //初始化
-        AdManager.getInstance(this).init("f990efa85f85257b", "7a55d045a3ab5fe6", false);
-    }
-
 
 }

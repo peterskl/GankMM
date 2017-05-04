@@ -44,17 +44,12 @@ import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.NotifyUtil;
 import com.maning.gankmm.utils.SharePreUtil;
 import com.socks.library.KLog;
-import com.umeng.analytics.MobclickAgent;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
-
-import net.youmi.android.normal.spot.SpotManager;
-import net.youmi.android.normal.video.VideoAdManager;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -385,9 +380,6 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
     @Override
     protected void onDestroy() {
-        //退出
-        SpotManager.getInstance(this).onAppExit();
-        VideoAdManager.getInstance(this).onAppExit();
         mainPresenter.destroyLocation();
         mainPresenter.detachView();
         SkinManager.unregisterSkinReceiver(this, skinBroadcastReceiver);

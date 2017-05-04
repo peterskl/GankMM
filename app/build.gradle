@@ -130,14 +130,10 @@ dependencies {
     compile files('libs/alisdk-ut-5.jar')
     /*菜单*/
     compile 'io.github.yavski:fab-speed-dial:1.0.4'
-    /*腾讯广告联盟*/
-    compile files('libs/GDTUnionSDK.4.9.543.min.jar')
     /*高德地图*/
     compile files('libs/AMap_Location_V3.3.0_20170118.jar')
     /* 模糊 */
     compile 'jp.wasabeef:blurry:2.1.1'
     debugCompile 'com.readystatesoftware.chuck:library:1.0.4'
     releaseCompile 'com.readystatesoftware.chuck:library-no-op:1.0.4'
-    /* Youmi广告 */
-    compile files('libs/YoumiSdk_v7.2.1_2017-04-11.jar')
 }

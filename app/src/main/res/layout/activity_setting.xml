@@ -186,12 +186,12 @@
             android:background="?lineColor" />
 
         <com.maning.gankmm.ui.view.MySettingItemView
-            android:id="@+id/item_app_ad"
+            android:id="@+id/item_app_support"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:background="?item_setting_bg"
             app:setting_red_dot="false"
-            app:setting_title="广告支持" />
+            app:setting_title="请喝一杯咖啡" />
 
         <ImageView
             android:layout_width="match_parent"

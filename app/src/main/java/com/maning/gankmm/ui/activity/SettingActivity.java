@@ -180,9 +180,9 @@ public class SettingActivity extends BaseActivity implements ISettingView {
         settingPresenter.clickNightMode();
     }
 
-    @OnClick(R.id.item_app_ad)
-    void item_app_ad() {
-        IntentUtils.startAdActivity(this);
+    @OnClick(R.id.item_app_support)
+    void item_app_support() {
+
     }
 
     @OnClick(R.id.item_app_market)
