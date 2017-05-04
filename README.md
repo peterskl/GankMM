@@ -170,8 +170,8 @@
 
 
 ## 请作者喝杯咖啡 (￣▽￣)~* 哈哈:
-![](https://github.com/maning0303/GankMM/raw/master/screenshots/icon_support_wx.png)
-![](https://github.com/maning0303/GankMM/raw/master/screenshots/icon_support_zfb.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/pay_support_wx.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/pay_support_zfb.png)
 
 
 
