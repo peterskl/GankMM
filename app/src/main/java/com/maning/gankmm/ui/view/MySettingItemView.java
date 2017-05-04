@@ -101,4 +101,9 @@ public class MySettingItemView extends FrameLayout {
         return tv_right.getText().toString();
     }
 
+
+    public void setTitleColor(int resId){
+        tv_title.setTextColor(resId);
+    }
+
 }

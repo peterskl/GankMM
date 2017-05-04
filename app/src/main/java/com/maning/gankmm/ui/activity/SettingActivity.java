@@ -61,6 +61,8 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     MySettingItemView itemFeedback;
     @Bind(R.id.item_app_update)
     MySettingItemView itemAppUpdate;
+    @Bind(R.id.item_app_support)
+    MySettingItemView itemAppSupport;
 
     private SettingPresenterImpl settingPresenter;
     private MaterialDialog dialogUpdate;
@@ -78,6 +80,8 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
         initMyToolBar();
 
+        initOtherViews();
+
         initPresenter();
 
         settingPresenter.initPushState();
@@ -92,6 +96,10 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
         settingPresenter.initHeadLine();
 
+    }
+
+    private void initOtherViews() {
+        itemAppSupport.setTitleColor(getResources().getColor(R.color.red));
     }
 
     private void initMyToolBar() {

@@ -9,9 +9,9 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
-        android:text="图片缓存"
+        android:text="----"
         android:textColor="?setting_text_color"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/setting_right_arrows"
@@ -31,7 +31,7 @@
         android:layout_toLeftOf="@id/setting_right_arrows"
         android:text="文本"
         android:textColor="?setting_small_text_color"
-        android:textSize="12sp" />
+        android:textSize="10sp" />
 
     <ImageView
         android:id="@+id/setting_iv_red"
