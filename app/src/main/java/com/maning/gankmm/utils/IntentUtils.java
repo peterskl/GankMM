@@ -11,6 +11,7 @@ import com.maning.gankmm.ui.activity.GankActivity;
 import com.maning.gankmm.ui.activity.ImagesActivity;
 import com.maning.gankmm.ui.activity.QRCodeActivity;
 import com.maning.gankmm.ui.activity.SettingActivity;
+import com.maning.gankmm.ui.activity.SupportPayActivity;
 import com.maning.gankmm.ui.activity.WebActivity;
 
 import java.util.ArrayList;
@@ -120,6 +121,11 @@ public class IntentUtils {
 
     public static void startQRCodeActivity(Context context) {
         Intent intent = new Intent(context.getApplicationContext(), QRCodeActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startSupportPayActivity(Context context) {
+        Intent intent = new Intent(context.getApplicationContext(), SupportPayActivity.class);
         context.startActivity(intent);
     }
 

@@ -313,6 +313,11 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                         //我的二维码
                         IntentUtils.startQRCodeActivity(context);
                         break;
+                    case R.id.my_support_pay:
+                        menuItem.setChecked(false); // 改变item选中状态
+                        //打赏作者
+                        IntentUtils.startSupportPayActivity(context);
+                        break;
                 }
                 return true;
             }

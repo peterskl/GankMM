@@ -1,5 +1,6 @@
 package com.maning.gankmm.ui.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,12 +22,15 @@ import com.umeng.analytics.MobclickAgent;
 public class BaseActivity extends AppCompatActivity {
 
     private SVProgressHUD mSVProgressHUD;
+    public Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //设置主题
         SkinManager.onActivityCreateSetSkin(this);
         super.onCreate(savedInstanceState);
+
+        mContext = this;
 
         initStatus();
 

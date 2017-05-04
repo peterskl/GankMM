@@ -190,7 +190,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     @OnClick(R.id.item_app_support)
     void item_app_support() {
-
+        IntentUtils.startSupportPayActivity(this);
     }
 
     @OnClick(R.id.item_app_market)

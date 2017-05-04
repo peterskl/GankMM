@@ -50,6 +50,10 @@
             android:icon="@drawable/icon_qr_code"
             android:title="二维码" />
         <item
+            android:id="@+id/my_support_pay"
+            android:icon="@drawable/icon_pay"
+            android:title="打赏作者 (￣▽￣)~*" />
+        <item
             android:id="@+id/about"
             android:icon="@drawable/icon_about"
             android:title="关于" />
