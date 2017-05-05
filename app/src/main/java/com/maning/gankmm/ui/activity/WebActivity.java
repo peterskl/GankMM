@@ -81,9 +81,9 @@ public class WebActivity extends BaseActivity implements IWebView {
         }
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            initToolBar(toolbar, title, R.drawable.icon_arrow_back);
+            initToolBar(toolbar, title, R.drawable.gank_ic_back_white);
         } else {
-            initToolBar(toolbar, title, R.drawable.icon_arrow_back_night);
+            initToolBar(toolbar, title, R.drawable.gank_ic_back_night);
         }
     }
 

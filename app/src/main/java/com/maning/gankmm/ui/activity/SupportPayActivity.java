@@ -57,9 +57,9 @@ public class SupportPayActivity extends BaseActivity {
     private void initMyToolBar() {
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            initToolBar(toolbar, "请作者喝一杯咖啡", R.drawable.icon_arrow_back);
+            initToolBar(toolbar, "请作者喝一杯咖啡", R.drawable.gank_ic_back_white);
         } else {
-            initToolBar(toolbar, "请作者喝一杯咖啡", R.drawable.icon_arrow_back_night);
+            initToolBar(toolbar, "请作者喝一杯咖啡", R.drawable.gank_ic_back_night);
         }
     }
 

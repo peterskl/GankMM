@@ -108,9 +108,9 @@ public class ImagesActivity extends BaseActivity implements IImageView {
     private void initMyToolBar() {
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            initToolBar(toolbar, getString(R.string.gank_page_title_girls), R.drawable.icon_arrow_back);
+            initToolBar(toolbar, getString(R.string.gank_page_title_girls), R.drawable.gank_ic_back_white);
         } else {
-            initToolBar(toolbar, getString(R.string.gank_page_title_girls), R.drawable.icon_arrow_back_night);
+            initToolBar(toolbar, getString(R.string.gank_page_title_girls), R.drawable.gank_ic_back_night);
         }
     }
 

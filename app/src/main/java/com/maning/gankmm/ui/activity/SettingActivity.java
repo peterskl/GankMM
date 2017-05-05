@@ -105,9 +105,9 @@ public class SettingActivity extends BaseActivity implements ISettingView {
     private void initMyToolBar() {
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            initToolBar(toolbar, "设置", R.drawable.icon_arrow_back);
+            initToolBar(toolbar, "设置", R.drawable.gank_ic_back_white);
         } else {
-            initToolBar(toolbar, "设置", R.drawable.icon_arrow_back_night);
+            initToolBar(toolbar, "设置", R.drawable.gank_ic_back_night);
         }
     }
 

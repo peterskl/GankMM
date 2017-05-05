@@ -93,9 +93,9 @@ public class CodesActivity extends BaseActivity implements OnRefreshListener, On
         IntentTypeNameCurrent = getIntent().getStringExtra(IntentType);
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            initToolBar(toolbar, IntentTypeNameCurrent, R.drawable.icon_arrow_back);
+            initToolBar(toolbar, IntentTypeNameCurrent, R.drawable.gank_ic_back_white);
         } else {
-            initToolBar(toolbar, IntentTypeNameCurrent, R.drawable.icon_arrow_back_night);
+            initToolBar(toolbar, IntentTypeNameCurrent, R.drawable.gank_ic_back_night);
         }
 
         initViews();

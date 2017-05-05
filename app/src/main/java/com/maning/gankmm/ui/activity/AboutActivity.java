@@ -14,16 +14,13 @@ import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.utils.IntentUtils;
-import com.umeng.analytics.MobclickAgent;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.jpush.android.api.JPushInterface;
 
 public class AboutActivity extends BaseActivity {
 
-    private static final String TAG = AboutActivity.class.getSimpleName();
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.collapsingToolbar)
@@ -52,13 +49,13 @@ public class AboutActivity extends BaseActivity {
     private void initBar() {
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            initToolBar(toolbar, getString(R.string.about), R.drawable.icon_arrow_back);
+            initToolBar(toolbar, getString(R.string.about), R.drawable.gank_ic_back_white);
             //设置CollapsingToolbarLayout扩张时的标题颜色
             collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.translate));
             //设置CollapsingToolbarLayout收缩时的标题颜色
             collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);
         } else {
-            initToolBar(toolbar, getString(R.string.about), R.drawable.icon_arrow_back_night);
+            initToolBar(toolbar, getString(R.string.about), R.drawable.gank_ic_back_night);
             //设置CollapsingToolbarLayout扩张时的标题颜色
             collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.translate));
             //设置CollapsingToolbarLayout收缩时的标题颜色

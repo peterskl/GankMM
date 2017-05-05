@@ -157,9 +157,9 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         Button rightBtnSearch = (Button) toolbar.findViewById(R.id.right_btn);
         rightBtnSearch.setVisibility(View.VISIBLE);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            initToolBar(toolbar, Constants.FlagWelFare, R.drawable.icon_menu2);
+            initToolBar(toolbar, Constants.FlagWelFare, R.drawable.gank_icon_menu_white);
         } else {
-            initToolBar(toolbar, Constants.FlagWelFare, R.drawable.icon_menu2_night);
+            initToolBar(toolbar, Constants.FlagWelFare, R.drawable.gank_icon_menu_night);
         }
         rightBtnSearch.setOnClickListener(new View.OnClickListener() {
             @Override

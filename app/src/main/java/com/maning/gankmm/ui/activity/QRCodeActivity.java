@@ -29,9 +29,9 @@ public class QRCodeActivity extends BaseActivity {
     private void initMyToolBar() {
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            initToolBar(toolbar, "我的二维码", R.drawable.icon_arrow_back);
+            initToolBar(toolbar, "我的二维码", R.drawable.gank_ic_back_white);
         } else {
-            initToolBar(toolbar, "我的二维码", R.drawable.icon_arrow_back_night);
+            initToolBar(toolbar, "我的二维码", R.drawable.gank_ic_back_night);
         }
     }
 
