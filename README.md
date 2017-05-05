@@ -58,6 +58,12 @@
 
 
 ## 更新日志：
+### V1.6.1:
+    1.升级推送SDK
+    2.分类浏览添加图片展示
+    3.升级数据库添加图片字段
+    3.去掉广告SDK
+
 ### V1.6.0:
     1.天气页面信息展示完善
     2.优化部分界面显示
@@ -167,6 +173,7 @@
 ###### 广告轮播控件 [SwitcherView](https://github.com/maning0303/SwitcherView)
 ###### 收藏按钮 [ThumbUp](https://github.com/ldoublem/ThumbUp)
 ###### 模糊控件 [Blurry](https://github.com/wasabeef/Blurry)
+###### 网络请求监控 [chuck](https://github.com/jgilfelt/chuck)
 
 
 ## 请作者喝杯咖啡 (￣▽￣)~* 哈哈:

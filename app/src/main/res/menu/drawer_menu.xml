@@ -48,7 +48,7 @@
         <item
             android:id="@+id/my_qr_code"
             android:icon="@drawable/icon_qr_code"
-            android:title="二维码" />
+            android:title="二维码分享应用" />
         <item
             android:id="@+id/my_support_pay"
             android:icon="@drawable/icon_pay"
