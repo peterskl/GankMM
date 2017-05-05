@@ -61,13 +61,13 @@ public class RecycleGankAdapter extends RecyclerView.Adapter<RecycleGankAdapter.
             viewHolder.tvTitle.setText(mDatas.get(position).getDesc());
         } else {
             if (mDatas.get(position).getType().equals("Android")) {
-                viewHolder.ivTitle.setImageResource(R.drawable.icon_android);
+                viewHolder.ivTitle.setImageResource(R.drawable.gank_icon_android);
             } else if (mDatas.get(position).getType().equals("iOS")) {
-                viewHolder.ivTitle.setImageResource(R.drawable.icon_apple);
+                viewHolder.ivTitle.setImageResource(R.drawable.gank_icon_ios);
             } else if (mDatas.get(position).getType().equals("休息视频")) {
-                viewHolder.ivTitle.setImageResource(R.drawable.icon_video);
+                viewHolder.ivTitle.setImageResource(R.drawable.gank_icon_video);
             } else if (mDatas.get(position).getType().equals("拓展资源")) {
-                viewHolder.ivTitle.setImageResource(R.drawable.icon_expand);
+                viewHolder.ivTitle.setImageResource(R.drawable.gank_icon_extend_resource);
             }
             viewHolder.tvTitle.setText(mDatas.get(position).getDesc());
         }

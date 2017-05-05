@@ -36,12 +36,12 @@
 
         <ImageView
             android:id="@+id/iv_push"
-            android:layout_width="44dp"
-            android:layout_height="match_parent"
+            android:layout_width="50dp"
+            android:layout_height="36dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="12dp"
-            android:src="@drawable/icon_setting_on" />
+            app:srcCompat="@drawable/gank_icon_switcher_on" />
 
     </RelativeLayout>
 
@@ -68,12 +68,12 @@
 
         <ImageView
             android:id="@+id/iv_night_mode"
-            android:layout_width="44dp"
-            android:layout_height="match_parent"
+            android:layout_width="50dp"
+            android:layout_height="36dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="12dp"
-            android:src="@drawable/icon_setting_off" />
+            app:srcCompat="@drawable/gank_icon_switcher_off" />
 
     </RelativeLayout>
 

@@ -97,13 +97,13 @@ public class MClearEditText extends EditText implements View.OnFocusChangeListen
         mClearDrawable = getCompoundDrawables()[DRAWABLE_RIGHT];
         if (mClearDrawable == null) {
             //获取默认图标
-            mClearDrawable = getResources().getDrawable(R.drawable.icon_clear_edit);
+            mClearDrawable = getResources().getDrawable(R.drawable.gank_icon_clean_edit);
         }
-        mClearDrawable.setBounds(0, 0, dip2px(context, 25), dip2px(context, 25));
+        mClearDrawable.setBounds(0, 0, dip2px(context, 22), dip2px(context, 22));
         //左边图标
         mLeftDrawable = getCompoundDrawables()[DRAWABLE_LEFT];
         if (mLeftDrawable != null) {
-            mLeftDrawable.setBounds(0, 0, dip2px(context, 28), dip2px(context, 28));
+            mLeftDrawable.setBounds(0, 0, dip2px(context, 25), dip2px(context, 25));
         }
     }
 

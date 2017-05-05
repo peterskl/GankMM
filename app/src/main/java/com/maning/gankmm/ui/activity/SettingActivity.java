@@ -200,22 +200,22 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     @Override
     public void openPush() {
-        ivPush.setImageResource(R.drawable.icon_setting_on);
+        ivPush.setImageResource(R.drawable.gank_icon_switcher_on);
     }
 
     @Override
     public void closePush() {
-        ivPush.setImageResource(R.drawable.icon_setting_off);
+        ivPush.setImageResource(R.drawable.gank_icon_switcher_off);
     }
 
     @Override
     public void openNightMode() {
-        ivNightMode.setImageResource(R.drawable.icon_setting_on);
+        ivNightMode.setImageResource(R.drawable.gank_icon_switcher_on);
     }
 
     @Override
     public void closeNightMode() {
-        ivNightMode.setImageResource(R.drawable.icon_setting_off);
+        ivNightMode.setImageResource(R.drawable.gank_icon_switcher_off);
     }
 
     @Override
