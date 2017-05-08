@@ -17,6 +17,7 @@ import com.maning.gankmm.R;
 import com.maning.gankmm.listeners.OnItemClickListener;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.activity.mob.PhoneAddressActivity;
+import com.maning.gankmm.ui.activity.mob.PostCodeActivity;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.MyToast;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -106,6 +107,7 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     if (title.equals("手机号码归属地")) {
                         context.startActivity(new Intent(context, PhoneAddressActivity.class));
                     } else if (title.equals("邮编查询")) {
+                        context.startActivity(new Intent(context, PostCodeActivity.class));
                     } else if (title.equals("菜谱查询")) {
                     } else if (title.equals("身份证查询")) {
                     } else if (title.equals("IP地址")) {
