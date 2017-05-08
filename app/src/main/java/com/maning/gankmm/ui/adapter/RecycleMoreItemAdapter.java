@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maning.gankmm.R;
+import com.maning.gankmm.listeners.OnItemClickListener;
 
 import java.util.List;
 
@@ -43,72 +44,81 @@ public class RecycleMoreItemAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (viewHolder instanceof MyViewHolder) {
             MyViewHolder myViewHolder = (MyViewHolder) viewHolder;
 
+            if (mOnItemClickLitener != null) {
+                myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mOnItemClickLitener.onItemClick(view, position);
+                    }
+                });
+            }
+
             String title = mDatas.get(position);
             myViewHolder.tv_title_more_item.setText(title);
 
-            if(title.equals("手机号码归属地")){
+            if (title.equals("手机号码归属地")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_phone_address);
-            }else if(title.equals("邮编查询")){
+            } else if (title.equals("邮编查询")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_postcode);
-            }else if(title.equals("菜谱查询")){
+            } else if (title.equals("菜谱查询")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_cookbook);
-            }else if(title.equals("身份证查询")){
+            } else if (title.equals("身份证查询")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_idcard_query);
-            }else if(title.equals("IP地址")){
+            } else if (title.equals("IP地址")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_ip);
-            }else if(title.equals("中国彩票开奖结果")){
+            } else if (title.equals("中国彩票开奖结果")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_lottery);
-            }else if(title.equals("微信精选")){
+            } else if (title.equals("微信精选")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_weixin);
             }
 
-            if(title.equals("银行卡信息")){
+            if (title.equals("银行卡信息")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_bank);
-            }else if(title.equals("黄金数据")){
+            } else if (title.equals("黄金数据")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_gold);
-            }else if(title.equals("货币汇率")){
+            } else if (title.equals("货币汇率")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_money);
-            }else if(title.equals("白银数据")){
+            } else if (title.equals("白银数据")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_baiyin);
-            }else if(title.equals("国内现货交易所贵金属")){
+            } else if (title.equals("国内现货交易所贵金属")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_guijinshu);
-            }else if(title.equals("全球股指查询")){
+            } else if (title.equals("全球股指查询")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_guzhi);
             }
 
-            if(title.equals("周公解梦")){
+            if (title.equals("周公解梦")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_zhougong);
-            }else if(title.equals("婚姻匹配")){
+            } else if (title.equals("婚姻匹配")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_hunyin);
-            }else if(title.equals("手机号码查吉凶")){
+            } else if (title.equals("手机号码查吉凶")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_jixiong);
-            }else if(title.equals("八字算命")){
+            } else if (title.equals("八字算命")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_suanming);
-            }else if(title.equals("老黄历")){
+            } else if (title.equals("老黄历")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_huangli);
-            }else if(title.equals("电影票房")){
+            } else if (title.equals("电影票房")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_movie);
-            }else if(title.equals("火车票查询")){
+            } else if (title.equals("火车票查询")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_train);
-            }else if(title.equals("航班信息查询")){
+            } else if (title.equals("航班信息查询")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_plane);
-            }else if(title.equals("足球五大联赛")){
+            } else if (title.equals("足球五大联赛")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_football);
             }
 
-            if(title.equals("健康知识")){
+            if (title.equals("健康知识")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_jiankang);
-            }else if(title.equals("历史上的今天")){
+            } else if (title.equals("历史上的今天")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_history);
-            }else if(title.equals("成语大全")){
+            } else if (title.equals("成语大全")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_chengyu);
-            }else if(title.equals("新华字典")){
+            } else if (title.equals("新华字典")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_zidian);
-            }else if(title.equals("全国省市今日油价")){
+            } else if (title.equals("全国省市今日油价")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_youjia);
-            }else if(title.equals("汽车信息查询")){
+            } else if (title.equals("汽车信息查询")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_car);
-            }else if(title.equals("驾考题库")){
+            } else if (title.equals("驾考题库")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_tiku_car);
             }
 
@@ -132,4 +142,12 @@ public class RecycleMoreItemAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             ButterKnife.bind(this, itemView);
         }
     }
+
+
+    private OnItemClickListener mOnItemClickLitener;
+
+    public void setOnItemClickLitener(OnItemClickListener mOnItemClickLitener) {
+        this.mOnItemClickLitener = mOnItemClickLitener;
+    }
+
 }

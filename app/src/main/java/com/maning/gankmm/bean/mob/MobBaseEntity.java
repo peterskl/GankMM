@@ -1,19 +1,23 @@
-package com.maning.gankmm.bean;
+package com.maning.gankmm.bean.mob;
 
 import java.io.Serializable;
 
 /**
- * Created by maning on 2017/4/11.
+ * Created by maning on 2017/5/8.
  */
 
 public class MobBaseEntity<T> implements Serializable {
-    private static final long serialVersionUID = -4553802208756427393L;
 
+    private static final long serialVersionUID = 7703166202155685415L;
+
+    /**
+     * msg : success
+     * retCode : 200
+     */
+
+    private T results;
     private String msg;
-
     private String retCode;
-
-    private T result;
 
     public String getMsg() {
         return msg;
@@ -31,20 +35,20 @@ public class MobBaseEntity<T> implements Serializable {
         this.retCode = retCode;
     }
 
-    public T getResult() {
-        return result;
+    public T getResults() {
+        return results;
     }
 
-    public void setResult(T result) {
-        this.result = result;
+    public void setResults(T results) {
+        this.results = results;
     }
 
     @Override
     public String toString() {
         return "MobBaseEntity{" +
-                "msg='" + msg + '\'' +
+                "results=" + results +
+                ", msg='" + msg + '\'' +
                 ", retCode='" + retCode + '\'' +
-                ", result=" + result.toString() +
                 '}';
     }
 }

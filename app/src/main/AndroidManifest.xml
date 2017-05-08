@@ -233,7 +233,9 @@
         <activity
             android:name=".ui.activity.SupportPayActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.MoreActivity"></activity>
+        <activity android:name=".ui.activity.MoreActivity" />
+        <activity android:name=".ui.activity.mob.PhoneAddressActivity"/>
+
     </application>
 
 </manifest>
