@@ -35,6 +35,11 @@
             android:icon="@drawable/gank_icon_ios"
             android:title="CocoaChina" />
 
+        <item
+            android:id="@+id/nav_more"
+            android:icon="@drawable/gank_icon_more_tools"
+            android:title="工具集合" />
+
     </group>
     <group android:id="@+id/second_group">
         <item

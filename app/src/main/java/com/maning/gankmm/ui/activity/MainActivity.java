@@ -318,6 +318,11 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                         //打赏作者
                         IntentUtils.startSupportPayActivity(context);
                         break;
+                    case R.id.nav_more:
+                        menuItem.setChecked(false); // 改变item选中状态
+                        //更多功能
+                        IntentUtils.startMoreActivity(context);
+                        break;
                 }
                 return true;
             }

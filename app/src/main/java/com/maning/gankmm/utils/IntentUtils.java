@@ -9,6 +9,7 @@ import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.maning.gankmm.ui.activity.AboutActivity;
 import com.maning.gankmm.ui.activity.GankActivity;
 import com.maning.gankmm.ui.activity.ImagesActivity;
+import com.maning.gankmm.ui.activity.MoreActivity;
 import com.maning.gankmm.ui.activity.QRCodeActivity;
 import com.maning.gankmm.ui.activity.SettingActivity;
 import com.maning.gankmm.ui.activity.SupportPayActivity;
@@ -126,6 +127,11 @@ public class IntentUtils {
 
     public static void startSupportPayActivity(Context context) {
         Intent intent = new Intent(context.getApplicationContext(), SupportPayActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startMoreActivity(Context context) {
+        Intent intent = new Intent(context.getApplicationContext(), MoreActivity.class);
         context.startActivity(intent);
     }
 
