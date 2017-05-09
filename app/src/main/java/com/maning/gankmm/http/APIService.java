@@ -10,8 +10,15 @@ import com.maning.gankmm.bean.MobBaseEntity;
 import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.bean.WeatherBeseEntity;
+import com.maning.gankmm.bean.mob.MobIdCardEntity;
+import com.maning.gankmm.bean.mob.MobIpEntity;
+import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
+import com.maning.gankmm.bean.mob.MobPostCodeEntity;
+import com.maning.gankmm.bean.mob.MobWxArticleListEntity;
+import com.maning.gankmm.bean.mob.MobWxCategoryEntity;
 import com.maning.gankmm.constant.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -91,6 +98,49 @@ public interface APIService {
     @GET(Constants.URL_Mob + "appstore/calendar/day")
     Call<MobBaseEntity<CalendarInfoEntity>> getCalendarInfo(@Query("key") String appkey,
                                                             @Query("date") String date
+    );
+
+    //手机号码归属地查询
+    //http://apicloud.mob.com/v1/mobile/address/query?phone=xxxx&key=1c9dccb9a2434
+    @GET(Constants.URL_Mob + "v1/mobile/address/query")
+    Call<MobBaseEntity<MobPhoneAddressEntity>> queryMobileAddress(@Query("key") String appkey,
+                                                                  @Query("phone") String phone
+    );
+
+    //邮编查询
+    //http://apicloud.mob.com/v1/postcode/query?code=102629&key=1c9dccb9a2434
+    @GET(Constants.URL_Mob + "v1/postcode/query")
+    Call<MobBaseEntity<MobPostCodeEntity>> queryPostCode(@Query("key") String appkey,
+                                                         @Query("code") String code
+    );
+
+    //身份证查询
+    //http://apicloud.mob.com/idcard/query?cardno=xxx&key=1c9dccb9a2434
+    @GET(Constants.URL_Mob + "idcard/query")
+    Call<MobBaseEntity<MobIdCardEntity>> queryIdcard(@Query("key") String appkey,
+                                                     @Query("cardno") String cardno
+    );
+
+    //IP查询
+    //http://apicloud.mob.com/ip/query?key=1c9dccb9a2434&ip=123.123.123.123
+    @GET(Constants.URL_Mob + "ip/query")
+    Call<MobBaseEntity<MobIpEntity>> queryIp(@Query("key") String appkey,
+                                             @Query("ip") String ip
+    );
+
+    //微信精选分类查询
+    //http://apicloud.mob.com/wx/article/category/query?key=123456
+    @GET(Constants.URL_Mob + "wx/article/category/query")
+    Call<MobBaseEntity<ArrayList<MobWxCategoryEntity>>> queryWxArticleCategory(@Query("key") String appkey
+    );
+
+    //微信精选列表查询
+    //http://apicloud.mob.com/wx/article/search?key=123456&cid=1
+    @GET(Constants.URL_Mob + "wx/article/search")
+    Call<MobBaseEntity<MobWxArticleListEntity>> queryWxArticleList(@Query("key") String appkey,
+                                                                   @Query("cid") String cid,
+                                                                   @Query("page") int page,
+                                                                   @Query("size") int size
     );
 
 

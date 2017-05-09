@@ -235,7 +235,10 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.MoreActivity" />
         <activity android:name=".ui.activity.mob.PhoneAddressActivity" />
-        <activity android:name=".ui.activity.mob.PostCodeActivity"></activity>
+        <activity android:name=".ui.activity.mob.PostCodeActivity" />
+        <activity android:name=".ui.activity.mob.IDCardQueryActivity" />
+        <activity android:name=".ui.activity.mob.IPQueryActivity" />
+        <activity android:name=".ui.activity.mob.WXArticleActivity"></activity>
     </application>
 
 </manifest>

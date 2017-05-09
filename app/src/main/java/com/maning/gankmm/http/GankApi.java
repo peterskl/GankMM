@@ -1,7 +1,5 @@
 package com.maning.gankmm.http;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.AppUpdateInfo;
@@ -14,20 +12,11 @@ import com.maning.gankmm.bean.MobBaseEntity;
 import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.bean.WeatherBeseEntity;
-import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
-import com.maning.gankmm.bean.mob.MobPostCodeEntity;
 import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.utils.UserUtils;
-import com.mob.mobapi.API;
-import com.mob.mobapi.APICallback;
-import com.mob.mobapi.MobAPI;
-import com.mob.mobapi.apis.Mobile;
-import com.mob.mobapi.apis.Postcode;
 import com.socks.library.KLog;
 
-import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -410,67 +399,6 @@ public class GankApi {
         });
 
         return calendarInfoCall;
-    }
-
-
-    public static void queryPhoneAddress(String phoneNumber, final int what, final MyCallBack myCallBack) {
-        Mobile api = (Mobile) MobAPI.getAPI(Mobile.NAME);
-        api.phoneNumberToAddress(phoneNumber, new APICallback() {
-            @Override
-            public void onSuccess(API api, int i, Map<String, Object> result) {
-                String resultString = result.toString();
-                KLog.i("queryPhoneAddress-success:" + resultString);
-                Type type = new TypeToken<MobBaseEntity<MobPhoneAddressEntity>>() {
-                }.getType();
-                MobBaseEntity<MobPhoneAddressEntity> mobPhone = new Gson().fromJson(resultString, type);
-                if (mobPhone != null) {
-                    if ("success".equals(mobPhone.getMsg())) {
-                        myCallBack.onSuccess(what, mobPhone.getResult());
-                    } else {
-                        myCallBack.onFail(what, GET_DATA_FAIL);
-                    }
-                } else {
-                    myCallBack.onFail(what, GET_DATA_FAIL);
-                }
-            }
-
-            @Override
-            public void onError(API api, int i, Throwable throwable) {
-                KLog.e("queryPhoneAddress-onError:" + throwable.toString());
-                //数据错误
-                myCallBack.onFail(what, NET_FAIL);
-            }
-        });
-    }
-
-    public static void queryPostCode(String postCode,final int what, final MyCallBack myCallBack) {
-        Postcode api = (Postcode) MobAPI.getAPI(Postcode.NAME);
-        api.postcodeToAddress(postCode, new APICallback() {
-            @Override
-            public void onSuccess(API api, int i, Map<String, Object> result) {
-                String resultString = result.toString();
-                KLog.i("queryPostCode-success:" + resultString);
-                Type type = new TypeToken<MobBaseEntity<MobPostCodeEntity>>() {
-                }.getType();
-                MobBaseEntity<MobPostCodeEntity> resultEntity = new Gson().fromJson(resultString, type);
-                if (resultEntity != null) {
-                    if ("success".equals(resultEntity.getMsg())) {
-                        myCallBack.onSuccess(what, resultEntity.getResult());
-                    } else {
-                        myCallBack.onFail(what, GET_DATA_FAIL);
-                    }
-                } else {
-                    myCallBack.onFail(what, GET_DATA_FAIL);
-                }
-            }
-
-            @Override
-            public void onError(API api, int i, Throwable throwable) {
-                KLog.e("queryPostCode-onError:" + throwable.toString());
-                //数据错误
-                myCallBack.onFail(what, NET_FAIL);
-            }
-        });
     }
 
 }

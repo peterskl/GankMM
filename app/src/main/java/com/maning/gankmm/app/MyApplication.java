@@ -9,11 +9,9 @@ import android.os.StrictMode;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.maning.gankmm.BuildConfig;
-import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.crash.CrashHandler;
 import com.maning.gankmm.utils.ACache;
 import com.maning.gankmm.utils.NetUtils;
-import com.mob.mobapi.MobAPI;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.socks.library.KLog;
 
@@ -58,18 +56,12 @@ public class MyApplication extends Application {
         //初始化意见反馈
         initAliFeedBack();
 
-        initMobSDK();
-
         //开启违例检测:StrictMode
         if (BuildConfig.LOG_DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
         }
 
-    }
-
-    private void initMobSDK() {
-        MobAPI.initSDK(this, Constants.URL_APP_Key);
     }
 
     private void initLog() {

@@ -10,15 +10,13 @@ import android.view.MenuItem;
 
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.mob.MobItemEntity;
-import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
 import com.maning.gankmm.bean.mob.MobPostCodeEntity;
-import com.maning.gankmm.http.GankApi;
+import com.maning.gankmm.http.MobApi;
 import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.adapter.RecycleMobQueryAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.ui.view.MClearEditText;
-import com.maning.gankmm.utils.GankUtils;
 import com.maning.gankmm.utils.KeyboardUtils;
 import com.maning.gankmm.utils.MySnackbar;
 
@@ -95,7 +93,7 @@ public class PostCodeActivity extends BaseActivity {
 
 
         showProgressDialog("正在查询...");
-        GankApi.queryPostCode(number, 0x001, new MyCallBack() {
+        MobApi.queryPostCode(number, 0x001, new MyCallBack() {
             @Override
             public void onSuccess(int what, Object object) {
                 dissmissProgressDialog();
@@ -113,6 +111,7 @@ public class PostCodeActivity extends BaseActivity {
             @Override
             public void onFail(int what, String result) {
                 dissmissProgressDialog();
+                MySnackbar.makeSnackBarRed(toolbar,result);
             }
         });
 

@@ -9,15 +9,14 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.maning.gankmm.R;
+import com.maning.gankmm.bean.mob.MobIpEntity;
 import com.maning.gankmm.bean.mob.MobItemEntity;
-import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
 import com.maning.gankmm.http.MobApi;
 import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.adapter.RecycleMobQueryAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.ui.view.MClearEditText;
-import com.maning.gankmm.utils.GankUtils;
 import com.maning.gankmm.utils.KeyboardUtils;
 import com.maning.gankmm.utils.MySnackbar;
 
@@ -29,9 +28,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 手机号码归属地查询
+ * IP查询
  */
-public class PhoneAddressActivity extends BaseActivity {
+public class IPQueryActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -44,7 +43,7 @@ public class PhoneAddressActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phone_address);
+        setContentView(R.layout.activity_ip_query);
         ButterKnife.bind(this);
 
         initMyToolBar();
@@ -62,9 +61,9 @@ public class PhoneAddressActivity extends BaseActivity {
     private void initMyToolBar() {
         int currentSkinType = SkinManager.getCurrentSkinType(this);
         if (SkinManager.THEME_DAY == currentSkinType) {
-            initToolBar(toolbar, "手机号码归属地查询", R.drawable.gank_ic_back_white);
+            initToolBar(toolbar, "IP查询", R.drawable.gank_ic_back_white);
         } else {
-            initToolBar(toolbar, "手机号码归属地查询", R.drawable.gank_ic_back_night);
+            initToolBar(toolbar, "IP查询", R.drawable.gank_ic_back_night);
         }
     }
 
@@ -84,27 +83,22 @@ public class PhoneAddressActivity extends BaseActivity {
 
         KeyboardUtils.hideSoftInput(this);
 
-        //获取手机号码
-        String phoneNumber = editTextPhone.getText().toString();
+        //获取输入
+        String number = editTextPhone.getText().toString();
 
-        if (TextUtils.isEmpty(phoneNumber)) {
-            MySnackbar.makeSnackBarRed(toolbar, "手机号码不能为空");
-            return;
-        }
-
-        if (!GankUtils.isMobile(phoneNumber)) {
-            MySnackbar.makeSnackBarRed(toolbar, "手机号码格式不正确");
+        if (TextUtils.isEmpty(number)) {
+            MySnackbar.makeSnackBarRed(toolbar, "IP号码不能为空");
             return;
         }
 
         showProgressDialog("正在查询...");
-        MobApi.queryPhoneAddress(phoneNumber, 0x001, new MyCallBack() {
+        MobApi.queryIp(number, 0x001, new MyCallBack() {
             @Override
-            public void onSuccess(int what, Object result) {
+            public void onSuccess(int what, Object object) {
                 dissmissProgressDialog();
-                if (result != null) {
-                    MobPhoneAddressEntity mobPhone = (MobPhoneAddressEntity) result;
-                    initAdapter(mobPhone);
+                if (object != null) {
+                    MobIpEntity result = (MobIpEntity) object;
+                    initAdapter(result);
                 }
             }
 
@@ -122,13 +116,12 @@ public class PhoneAddressActivity extends BaseActivity {
 
     }
 
-    private void initAdapter(MobPhoneAddressEntity mobPhone) {
+    private void initAdapter(MobIpEntity result) {
 
         HashMap<String, Object> mDatas = new HashMap<>();
-        mDatas.put("0", new MobItemEntity("营运商:", mobPhone.getOperator()));
-        mDatas.put("1", new MobItemEntity("城市:", mobPhone.getProvince() + " " + mobPhone.getCity()));
-        mDatas.put("2", new MobItemEntity("城市区号:", mobPhone.getCityCode()));
-        mDatas.put("3", new MobItemEntity("邮政编码:", mobPhone.getZipCode()));
+        mDatas.put("0", new MobItemEntity("IP:", result.getIp()));
+        mDatas.put("1", new MobItemEntity("国家:", result.getCountry()));
+        mDatas.put("2", new MobItemEntity("城市:", result.getProvince() + " " + result.getCity()));
 
         if (recycleMobQueryAdapter == null) {
             recycleMobQueryAdapter = new RecycleMobQueryAdapter(this, mDatas);

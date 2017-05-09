@@ -16,8 +16,11 @@ import android.widget.Toast;
 import com.maning.gankmm.R;
 import com.maning.gankmm.listeners.OnItemClickListener;
 import com.maning.gankmm.skin.SkinManager;
+import com.maning.gankmm.ui.activity.mob.IDCardQueryActivity;
+import com.maning.gankmm.ui.activity.mob.IPQueryActivity;
 import com.maning.gankmm.ui.activity.mob.PhoneAddressActivity;
 import com.maning.gankmm.ui.activity.mob.PostCodeActivity;
+import com.maning.gankmm.ui.activity.mob.WXArticleActivity;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.MyToast;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -103,16 +106,19 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 @Override
                 public void onItemClick(View view, int position) {
                     String title = mDatasTitle.get(position);
-                    MyToast.showShortToast(title);
                     if (title.equals("手机号码归属地")) {
                         context.startActivity(new Intent(context, PhoneAddressActivity.class));
                     } else if (title.equals("邮编查询")) {
                         context.startActivity(new Intent(context, PostCodeActivity.class));
                     } else if (title.equals("菜谱查询")) {
+                        MyToast.showShortToast("功能暂未开通,敬请期待");
                     } else if (title.equals("身份证查询")) {
+                        context.startActivity(new Intent(context, IDCardQueryActivity.class));
                     } else if (title.equals("IP地址")) {
+                        context.startActivity(new Intent(context, IPQueryActivity.class));
                     } else if (title.equals("中国彩票开奖结果")) {
                     } else if (title.equals("微信精选")) {
+                        context.startActivity(new Intent(context, WXArticleActivity.class));
                     }
 
                     if (title.equals("银行卡信息")) {
