@@ -117,6 +117,7 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     } else if (title.equals("IP地址")) {
                         context.startActivity(new Intent(context, IPQueryActivity.class));
                     } else if (title.equals("中国彩票开奖结果")) {
+                        MyToast.showShortToast("功能暂未开通,敬请期待");
                     } else if (title.equals("微信精选")) {
                         context.startActivity(new Intent(context, WXArticleActivity.class));
                     }
