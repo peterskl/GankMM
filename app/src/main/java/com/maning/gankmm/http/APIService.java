@@ -13,6 +13,7 @@ import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.bean.mob.MobBankCard;
 import com.maning.gankmm.bean.mob.MobIdCardEntity;
 import com.maning.gankmm.bean.mob.MobIpEntity;
+import com.maning.gankmm.bean.mob.MobOilPriceEntity;
 import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
 import com.maning.gankmm.bean.mob.MobPostCodeEntity;
 import com.maning.gankmm.bean.mob.MobWxArticleListEntity;
@@ -153,16 +154,11 @@ public interface APIService {
                                                        @Query("card") String card
     );
 
-    //上海黄金交易所行情
-    //http://apicloud.mob.com/gold/spot/query?key=appkey
-    @GET(Constants.URL_Mob + "gold/spot/query")
-    Call<MobBaseEntity<MobBankCard>> querySpotGold(@Query("key") String appkey
-    );
 
-    //上海期货交易所行情
-    //http://apicloud.mob.com/gold/future/query?key=appkey
-    @GET(Constants.URL_Mob + "gold/future/query")
-    Call<MobBaseEntity<MobBankCard>> queryFutureGold(@Query("key") String appkey
+    //全国今日油价查询
+    //http://apicloud.mob.com/oil/price/province/query?key=appkey
+    @GET(Constants.URL_Mob + "oil/price/province/query")
+    Call<MobBaseEntity<MobOilPriceEntity>> queryOilPrice(@Query("key") String appkey
     );
 
 

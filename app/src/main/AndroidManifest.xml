@@ -241,6 +241,7 @@
         <activity android:name=".ui.activity.mob.WXArticleActivity"/>
         <activity android:name=".ui.activity.mob.BankCardActivity"/>
         <activity android:name=".ui.activity.mob.ChineseCalendarActivity"/>
+        <activity android:name=".ui.activity.mob.OilPriceActivity"/>
     </application>
 
 </manifest>

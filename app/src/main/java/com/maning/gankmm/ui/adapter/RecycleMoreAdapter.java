@@ -20,6 +20,7 @@ import com.maning.gankmm.ui.activity.mob.BankCardActivity;
 import com.maning.gankmm.ui.activity.mob.ChineseCalendarActivity;
 import com.maning.gankmm.ui.activity.mob.IDCardQueryActivity;
 import com.maning.gankmm.ui.activity.mob.IPQueryActivity;
+import com.maning.gankmm.ui.activity.mob.OilPriceActivity;
 import com.maning.gankmm.ui.activity.mob.PhoneAddressActivity;
 import com.maning.gankmm.ui.activity.mob.PostCodeActivity;
 import com.maning.gankmm.ui.activity.mob.WXArticleActivity;
@@ -159,6 +160,7 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     } else if (title.equals("成语大全")) {
                     } else if (title.equals("新华字典")) {
                     } else if (title.equals("全国省市今日油价")) {
+                        context.startActivity(new Intent(context, OilPriceActivity.class));
                     } else if (title.equals("汽车信息查询")) {
                         MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     } else if (title.equals("驾考题库")) {

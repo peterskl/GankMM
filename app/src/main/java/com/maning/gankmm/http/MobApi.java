@@ -6,6 +6,7 @@ import com.maning.gankmm.bean.MobBaseEntity;
 import com.maning.gankmm.bean.mob.MobBankCard;
 import com.maning.gankmm.bean.mob.MobIdCardEntity;
 import com.maning.gankmm.bean.mob.MobIpEntity;
+import com.maning.gankmm.bean.mob.MobOilPriceEntity;
 import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
 import com.maning.gankmm.bean.mob.MobPostCodeEntity;
 import com.maning.gankmm.bean.mob.MobWxArticleListEntity;
@@ -268,6 +269,42 @@ public class MobApi {
 
             @Override
             public void onFailure(Call<MobBaseEntity<MobBankCard>> call, Throwable t) {
+                KLog.e("queryBankCard-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+
+    public static Call<MobBaseEntity<MobOilPriceEntity>> queryOilPrice(final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity<MobOilPriceEntity>> call = BuildApi.getAPIService().queryOilPrice(Constants.URL_APP_Key);
+        call.enqueue(new Callback<MobBaseEntity<MobOilPriceEntity>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<MobOilPriceEntity>> call, Response<MobBaseEntity<MobOilPriceEntity>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<MobOilPriceEntity> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("queryBankCard---success：" + body.toString());
+                            myCallBack.onSuccess(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<MobOilPriceEntity>> call, Throwable t) {
                 KLog.e("queryBankCard-----onFailure：" + t.toString());
                 //数据错误
                 myCallBack.onFail(what, NET_FAIL);
