@@ -16,11 +16,14 @@ import android.widget.Toast;
 import com.maning.gankmm.R;
 import com.maning.gankmm.listeners.OnItemClickListener;
 import com.maning.gankmm.skin.SkinManager;
+import com.maning.gankmm.ui.activity.mob.BankCardActivity;
+import com.maning.gankmm.ui.activity.mob.ChineseCalendarActivity;
 import com.maning.gankmm.ui.activity.mob.IDCardQueryActivity;
 import com.maning.gankmm.ui.activity.mob.IPQueryActivity;
 import com.maning.gankmm.ui.activity.mob.PhoneAddressActivity;
 import com.maning.gankmm.ui.activity.mob.PostCodeActivity;
 import com.maning.gankmm.ui.activity.mob.WXArticleActivity;
+import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.MyToast;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -82,13 +85,12 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             } else if (position == 2) {
                 mDatasItem.add("周公解梦");
                 mDatasItem.add("婚姻匹配");
-                mDatasItem.add("手机号码查吉凶");
                 mDatasItem.add("八字算命");
                 mDatasItem.add("老黄历");
                 mDatasItem.add("电影票房");
+                mDatasItem.add("足球五大联赛");
                 mDatasItem.add("火车票查询");
                 mDatasItem.add("航班信息查询");
-                mDatasItem.add("足球五大联赛");
             } else if (position == 3) {
                 mDatasItem.add("健康知识");
                 mDatasItem.add("历史上的今天");
@@ -123,22 +125,33 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
 
                     if (title.equals("银行卡信息")) {
+                        context.startActivity(new Intent(context, BankCardActivity.class));
                     } else if (title.equals("黄金数据")) {
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     } else if (title.equals("货币汇率")) {
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     } else if (title.equals("白银数据")) {
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     } else if (title.equals("国内现货交易所贵金属")) {
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     } else if (title.equals("全球股指查询")) {
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     }
 
                     if (title.equals("周公解梦")) {
+                        IntentUtils.startToWebActivity(context, "工具", "周公解梦", "http://tools.2345.com/zhgjm.htm");
                     } else if (title.equals("婚姻匹配")) {
-                    } else if (title.equals("手机号码查吉凶")) {
+                        IntentUtils.startToWebActivity(context, "工具", "婚姻匹配", "http://www.jjdzc.com/peidui/hehun.html");
                     } else if (title.equals("八字算命")) {
+                        IntentUtils.startToWebActivity(context, "工具", "八字算命", "http://www.jjdzc.com/sm/bz.html");
                     } else if (title.equals("老黄历")) {
+                        context.startActivity(new Intent(context, ChineseCalendarActivity.class));
                     } else if (title.equals("电影票房")) {
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     } else if (title.equals("火车票查询")) {
                     } else if (title.equals("航班信息查询")) {
                     } else if (title.equals("足球五大联赛")) {
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     }
 
                     if (title.equals("健康知识")) {
@@ -147,7 +160,9 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     } else if (title.equals("新华字典")) {
                     } else if (title.equals("全国省市今日油价")) {
                     } else if (title.equals("汽车信息查询")) {
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     } else if (title.equals("驾考题库")) {
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     }
                 }
             });

@@ -293,6 +293,11 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                         intent.putExtra(CodesActivity.IntentType, CodesActivity.IntentTypeName_CocoaChina);
                         startActivity(intent);
                         break;
+                    case R.id.nav_more:
+                        menuItem.setCheckable(false);
+                        //更多功能
+                        IntentUtils.startMoreActivity(context);
+                        break;
                     case R.id.about:
                         menuItem.setChecked(false); // 改变item选中状态
                         //跳转
@@ -317,11 +322,6 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                         menuItem.setChecked(false); // 改变item选中状态
                         //打赏作者
                         IntentUtils.startSupportPayActivity(context);
-                        break;
-                    case R.id.nav_more:
-                        menuItem.setChecked(false); // 改变item选中状态
-                        //更多功能
-                        IntentUtils.startMoreActivity(context);
                         break;
                 }
                 return true;

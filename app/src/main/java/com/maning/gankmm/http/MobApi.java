@@ -3,6 +3,7 @@ package com.maning.gankmm.http;
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.MobBaseEntity;
+import com.maning.gankmm.bean.mob.MobBankCard;
 import com.maning.gankmm.bean.mob.MobIdCardEntity;
 import com.maning.gankmm.bean.mob.MobIpEntity;
 import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
@@ -20,7 +21,7 @@ import retrofit2.Response;
 
 /**
  * Created by maning on 2017/5/9.
- *  Mob SDK 相关的API
+ * Mob SDK 相关的API
  */
 
 public class MobApi {
@@ -206,7 +207,6 @@ public class MobApi {
     }
 
 
-
     public static Call<MobBaseEntity<MobPhoneAddressEntity>> queryPhoneAddress(String phoneNum, final int what, final MyCallBack myCallBack) {
 
         Call<MobBaseEntity<MobPhoneAddressEntity>> call = BuildApi.getAPIService().queryMobileAddress(Constants.URL_APP_Key, phoneNum);
@@ -233,6 +233,42 @@ public class MobApi {
             @Override
             public void onFailure(Call<MobBaseEntity<MobPhoneAddressEntity>> call, Throwable t) {
                 KLog.e("queryPhoneAddress-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+
+    public static Call<MobBaseEntity<MobBankCard>> queryBankCard(String content, final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity<MobBankCard>> call = BuildApi.getAPIService().queryBankCradInfo(Constants.URL_APP_Key, content);
+        call.enqueue(new Callback<MobBaseEntity<MobBankCard>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<MobBankCard>> call, Response<MobBaseEntity<MobBankCard>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<MobBankCard> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("queryBankCard---success：" + body.toString());
+                            myCallBack.onSuccess(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<MobBankCard>> call, Throwable t) {
+                KLog.e("queryBankCard-----onFailure：" + t.toString());
                 //数据错误
                 myCallBack.onFail(what, NET_FAIL);
             }

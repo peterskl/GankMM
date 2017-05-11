@@ -10,6 +10,7 @@ import com.maning.gankmm.bean.MobBaseEntity;
 import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.bean.WeatherBeseEntity;
+import com.maning.gankmm.bean.mob.MobBankCard;
 import com.maning.gankmm.bean.mob.MobIdCardEntity;
 import com.maning.gankmm.bean.mob.MobIpEntity;
 import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
@@ -142,6 +143,28 @@ public interface APIService {
                                                                    @Query("page") int page,
                                                                    @Query("size") int size
     );
+
+    /*金融基金*/
+
+    //银行卡信息查询
+    //http://apicloud.mob.com/appstore/bank/card/query?card=6228482898203884775&key=1c9dccb9a2434
+    @GET(Constants.URL_Mob + "appstore/bank/card/query")
+    Call<MobBaseEntity<MobBankCard>> queryBankCradInfo(@Query("key") String appkey,
+                                                       @Query("card") String card
+    );
+
+    //上海黄金交易所行情
+    //http://apicloud.mob.com/gold/spot/query?key=appkey
+    @GET(Constants.URL_Mob + "gold/spot/query")
+    Call<MobBaseEntity<MobBankCard>> querySpotGold(@Query("key") String appkey
+    );
+
+    //上海期货交易所行情
+    //http://apicloud.mob.com/gold/future/query?key=appkey
+    @GET(Constants.URL_Mob + "gold/future/query")
+    Call<MobBaseEntity<MobBankCard>> queryFutureGold(@Query("key") String appkey
+    );
+
 
 
 }
