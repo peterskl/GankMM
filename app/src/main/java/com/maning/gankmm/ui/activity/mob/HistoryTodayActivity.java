@@ -6,28 +6,27 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.maning.calendarlibrary.MNCalendar;
+import com.maning.calendarlibrary.listeners.OnCalendarItemClickListener;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.mob.MobHistoryTodayEntity;
-import com.maning.gankmm.bean.mob.MobIdiomEntity;
-import com.maning.gankmm.bean.mob.MobItemEntity;
 import com.maning.gankmm.http.MobApi;
 import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.adapter.RecycleHistoryTodayAdapter;
-import com.maning.gankmm.ui.adapter.RecycleMobQueryAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
-import com.maning.gankmm.ui.view.MClearEditText;
-import com.maning.gankmm.utils.KeyboardUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -43,8 +42,19 @@ public class HistoryTodayActivity extends BaseActivity {
     Toolbar toolbar;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
+    @Bind(R.id.tv_time)
+    TextView tvTime;
+    @Bind(R.id.mnCalendar)
+    MNCalendar mnCalendar;
+    @Bind(R.id.calendar_bg)
+    RelativeLayout CalendarBg;
 
     private ArrayList<MobHistoryTodayEntity> mDatas;
+
+    private Date currentDate = new Date();
+    private SimpleDateFormat sdf = new SimpleDateFormat("MMdd");
+    private SimpleDateFormat sdf2 = new SimpleDateFormat("MM月dd日");
+    private RecycleHistoryTodayAdapter recycleHistoryTodayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +66,34 @@ public class HistoryTodayActivity extends BaseActivity {
 
         initRecyclerView();
 
+        initCalendar();
+
         queryData();
 
     }
 
-    private void queryData() {
+    private void initCalendar() {
+        mnCalendar.setOnCalendarItemClickListener(new OnCalendarItemClickListener() {
+            @Override
+            public void onClick(Date date) {
+                currentDate = date;
+                CalendarBg.setVisibility(View.GONE);
+                queryData();
+            }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MMdd");
-        Date date = new Date();
-        String timeString = sdf.format(date);
+            @Override
+            public void onLongClick(Date date) {
+
+            }
+        });
+    }
+
+    private void queryData() {
+        showProgressDialog("查询中...");
+
+        String timeString = sdf.format(currentDate);
+        String timeString2 = sdf2.format(currentDate);
+        tvTime.setText(timeString2);
 
         MobApi.queryHistory(timeString, 0x001, new MyCallBack() {
             @Override
@@ -74,21 +103,28 @@ public class HistoryTodayActivity extends BaseActivity {
 
             @Override
             public void onSuccessList(int what, List results) {
+                dissmissProgressDialog();
                 mDatas = (ArrayList<MobHistoryTodayEntity>) results;
                 initAdapter();
             }
 
             @Override
             public void onFail(int what, String result) {
-
+                MySnackbar.makeSnackBarRed(toolbar, result);
+                dissmissProgressDialog();
             }
         });
 
     }
 
     private void initAdapter() {
-        RecycleHistoryTodayAdapter recycleHistoryTodayAdapter = new RecycleHistoryTodayAdapter(this, mDatas);
-        recyclerView.setAdapter(recycleHistoryTodayAdapter);
+        if (recycleHistoryTodayAdapter == null) {
+            recycleHistoryTodayAdapter = new RecycleHistoryTodayAdapter(this, mDatas);
+            recyclerView.setAdapter(recycleHistoryTodayAdapter);
+        } else {
+            recycleHistoryTodayAdapter.upddateDatas(mDatas);
+        }
+
     }
 
     private void initRecyclerView() {
@@ -117,5 +153,14 @@ public class HistoryTodayActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @OnClick(R.id.tv_time)
+    public void tv_time() {
+        CalendarBg.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.calendar_bg)
+    public void calendar_bg() {
+        CalendarBg.setVisibility(View.GONE);
+    }
 
 }

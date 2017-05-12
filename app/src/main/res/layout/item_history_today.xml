@@ -42,4 +42,16 @@
 
     </com.ms.square.android.expandabletextview.ExpandableTextView>
 
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="1"
+        android:text="----"
+        android:textColor="@color/black_text2_color"
+        android:textSize="12sp" />
+
+
 </LinearLayout>

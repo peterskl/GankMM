@@ -12,7 +12,10 @@ import com.maning.gankmm.R;
 import com.maning.gankmm.bean.mob.MobHistoryTodayEntity;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,10 +29,18 @@ public class RecycleHistoryTodayAdapter extends RecyclerView.Adapter<RecyclerVie
     private ArrayList<MobHistoryTodayEntity> mDatas;
     private LayoutInflater layoutInflater;
 
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy年MM月dd日");
+
     public RecycleHistoryTodayAdapter(Context context, ArrayList<MobHistoryTodayEntity> mDatas) {
         this.context = context;
         this.mDatas = mDatas;
         layoutInflater = LayoutInflater.from(this.context);
+    }
+
+    public void upddateDatas(ArrayList<MobHistoryTodayEntity> mDatas){
+        this.mDatas = mDatas;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -46,6 +57,16 @@ public class RecycleHistoryTodayAdapter extends RecyclerView.Adapter<RecyclerVie
             MobHistoryTodayEntity mobHistoryTodayEntity = mDatas.get(position);
 
             myViewHolder.tv_title.setText(mobHistoryTodayEntity.getTitle());
+
+            String date = mobHistoryTodayEntity.getDate();
+            try {
+                Date parse = sdf.parse(date);
+                date = sdf2.format(parse);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            myViewHolder.tv_time.setText(date);
+
             SparseBooleanArray mTogglePositions = new SparseBooleanArray();
             myViewHolder.expand_text_view.setText(mobHistoryTodayEntity.getEvent(), mTogglePositions, position);
         }
@@ -60,6 +81,8 @@ public class RecycleHistoryTodayAdapter extends RecyclerView.Adapter<RecyclerVie
 
         @Bind(R.id.tv_title)
         TextView tv_title;
+        @Bind(R.id.tv_time)
+        TextView tv_time;
         @Bind(R.id.expand_text_view)
         ExpandableTextView expand_text_view;
 
