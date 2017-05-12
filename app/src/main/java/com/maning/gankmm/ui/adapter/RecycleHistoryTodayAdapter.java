@@ -2,6 +2,7 @@ package com.maning.gankmm.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,8 +46,8 @@ public class RecycleHistoryTodayAdapter extends RecyclerView.Adapter<RecyclerVie
             MobHistoryTodayEntity mobHistoryTodayEntity = mDatas.get(position);
 
             myViewHolder.tv_title.setText(mobHistoryTodayEntity.getTitle());
-            myViewHolder.expand_text_view.setText(mobHistoryTodayEntity.getEvent());
-
+            SparseBooleanArray mTogglePositions = new SparseBooleanArray();
+            myViewHolder.expand_text_view.setText(mobHistoryTodayEntity.getEvent(), mTogglePositions, position);
         }
     }
 
