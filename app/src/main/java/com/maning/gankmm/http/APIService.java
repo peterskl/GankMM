@@ -11,7 +11,10 @@ import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.bean.mob.MobBankCard;
+import com.maning.gankmm.bean.mob.MobDictEntity;
+import com.maning.gankmm.bean.mob.MobHistoryTodayEntity;
 import com.maning.gankmm.bean.mob.MobIdCardEntity;
+import com.maning.gankmm.bean.mob.MobIdiomEntity;
 import com.maning.gankmm.bean.mob.MobIpEntity;
 import com.maning.gankmm.bean.mob.MobOilPriceEntity;
 import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
@@ -155,12 +158,34 @@ public interface APIService {
     );
 
 
+    /*便民服务*/
+
+    //历史上今天
+    //http://apicloud.mob.com/appstore/history/query?day=0401&key=1c9dccb9a2434
+    @GET(Constants.URL_Mob + "appstore/history/query")
+    Call<MobBaseEntity<ArrayList<MobHistoryTodayEntity>>> queryHistory(@Query("key") String appkey,
+                                                            @Query("day") String day
+    );
+
+    //成语大全
+    //http://apicloud.mob.com/appstore/idiom/query?name=%E4%B8%A2%E4%B8%89%E8%90%BD%E5%9B%9B&key=1c9dccb9a2434
+    @GET(Constants.URL_Mob + "appstore/idiom/query")
+    Call<MobBaseEntity<MobIdiomEntity>> queryIdiom(@Query("key") String appkey,
+                                                   @Query("name") String name
+    );
+
+    //新华字典查询
+    //http://apicloud.mob.com/appstore/dictionary/query?key=123456&name=赵
+    @GET(Constants.URL_Mob + "appstore/dictionary/query")
+    Call<MobBaseEntity<MobDictEntity>> queryDict(@Query("key") String appkey,
+                                                 @Query("name") String name
+    );
+
     //全国今日油价查询
     //http://apicloud.mob.com/oil/price/province/query?key=appkey
     @GET(Constants.URL_Mob + "oil/price/province/query")
     Call<MobBaseEntity<MobOilPriceEntity>> queryOilPrice(@Query("key") String appkey
     );
-
 
 
 }

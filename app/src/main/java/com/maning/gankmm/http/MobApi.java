@@ -4,7 +4,10 @@ import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.MobBaseEntity;
 import com.maning.gankmm.bean.mob.MobBankCard;
+import com.maning.gankmm.bean.mob.MobDictEntity;
+import com.maning.gankmm.bean.mob.MobHistoryTodayEntity;
 import com.maning.gankmm.bean.mob.MobIdCardEntity;
+import com.maning.gankmm.bean.mob.MobIdiomEntity;
 import com.maning.gankmm.bean.mob.MobIpEntity;
 import com.maning.gankmm.bean.mob.MobOilPriceEntity;
 import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
@@ -315,5 +318,110 @@ public class MobApi {
 
     }
 
+    public static Call<MobBaseEntity<MobDictEntity>> queryDict(String content, final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity<MobDictEntity>> call = BuildApi.getAPIService().queryDict(Constants.URL_APP_Key, content);
+        call.enqueue(new Callback<MobBaseEntity<MobDictEntity>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<MobDictEntity>> call, Response<MobBaseEntity<MobDictEntity>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<MobDictEntity> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("queryBankCard---success：" + body.toString());
+                            myCallBack.onSuccess(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<MobDictEntity>> call, Throwable t) {
+                KLog.e("queryBankCard-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+    public static Call<MobBaseEntity<MobIdiomEntity>> queryIdiom(String content, final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity<MobIdiomEntity>> call = BuildApi.getAPIService().queryIdiom(Constants.URL_APP_Key, content);
+        call.enqueue(new Callback<MobBaseEntity<MobIdiomEntity>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<MobIdiomEntity>> call, Response<MobBaseEntity<MobIdiomEntity>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<MobIdiomEntity> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("queryBankCard---success：" + body.toString());
+                            myCallBack.onSuccess(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<MobIdiomEntity>> call, Throwable t) {
+                KLog.e("queryBankCard-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+
+    public static Call<MobBaseEntity<ArrayList<MobHistoryTodayEntity>>> queryHistory(String content, final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity<ArrayList<MobHistoryTodayEntity>>> call = BuildApi.getAPIService().queryHistory(Constants.URL_APP_Key, content);
+        call.enqueue(new Callback<MobBaseEntity<ArrayList<MobHistoryTodayEntity>>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<ArrayList<MobHistoryTodayEntity>>> call, Response<MobBaseEntity<ArrayList<MobHistoryTodayEntity>>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<ArrayList<MobHistoryTodayEntity>> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("queryBankCard---success：" + body.toString());
+                            myCallBack.onSuccessList(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<ArrayList<MobHistoryTodayEntity>>> call, Throwable t) {
+                KLog.e("queryBankCard-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
 
 }

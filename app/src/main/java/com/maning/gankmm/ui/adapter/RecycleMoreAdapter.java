@@ -18,8 +18,11 @@ import com.maning.gankmm.listeners.OnItemClickListener;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.activity.mob.BankCardActivity;
 import com.maning.gankmm.ui.activity.mob.ChineseCalendarActivity;
+import com.maning.gankmm.ui.activity.mob.DictionaryActivity;
+import com.maning.gankmm.ui.activity.mob.HistoryTodayActivity;
 import com.maning.gankmm.ui.activity.mob.IDCardQueryActivity;
 import com.maning.gankmm.ui.activity.mob.IPQueryActivity;
+import com.maning.gankmm.ui.activity.mob.IdiomActivity;
 import com.maning.gankmm.ui.activity.mob.OilPriceActivity;
 import com.maning.gankmm.ui.activity.mob.PhoneAddressActivity;
 import com.maning.gankmm.ui.activity.mob.PostCodeActivity;
@@ -156,9 +159,13 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
 
                     if (title.equals("健康知识")) {
+                        context.startActivity(new Intent(context, IdiomActivity.class));
                     } else if (title.equals("历史上的今天")) {
+                        context.startActivity(new Intent(context, HistoryTodayActivity.class));
                     } else if (title.equals("成语大全")) {
+                        context.startActivity(new Intent(context, IdiomActivity.class));
                     } else if (title.equals("新华字典")) {
+                        context.startActivity(new Intent(context, DictionaryActivity.class));
                     } else if (title.equals("全国省市今日油价")) {
                         context.startActivity(new Intent(context, OilPriceActivity.class));
                     } else if (title.equals("汽车信息查询")) {

@@ -141,4 +141,6 @@ dependencies {
     releaseCompile 'com.readystatesoftware.chuck:library-no-op:1.0.4'
     /* 表格 */
     compile 'com.kelin.scrollablepanel:library:1.2.0'
+    /*显示更多文字*/
+    compile 'com.ms-square:expandableTextView:0.1.4'
 }

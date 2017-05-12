@@ -242,6 +242,9 @@
         <activity android:name=".ui.activity.mob.BankCardActivity"/>
         <activity android:name=".ui.activity.mob.ChineseCalendarActivity"/>
         <activity android:name=".ui.activity.mob.OilPriceActivity"/>
+        <activity android:name=".ui.activity.mob.DictionaryActivity"/>
+        <activity android:name=".ui.activity.mob.IdiomActivity"/>
+        <activity android:name=".ui.activity.mob.HistoryTodayActivity"/>
     </application>
 
 </manifest>
