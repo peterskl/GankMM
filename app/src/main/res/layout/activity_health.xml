@@ -38,19 +38,36 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@null"
-                android:hint="输入要查询的字"
+                android:hint="输入关键字(如:香蕉,水)"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:maxLines="1"
                 android:textSize="13sp" />
+
         </RelativeLayout>
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <com.aspsine.swipetoloadlayout.SwipeToLoadLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipeToLoadLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+        android:layout_height="match_parent"
+        android:background="?refresh_bg"
+        app:swipe_style="classic">
+
+        <include
+            android:id="@id/swipe_refresh_header"
+            layout="@layout/layout_refresh_header" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/swipe_target"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@id/swipe_load_more_footer"
+            layout="@layout/layout_refresh_footer" />
+    </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
 
 </LinearLayout>

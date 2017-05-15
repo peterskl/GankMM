@@ -238,13 +238,14 @@
         <activity android:name=".ui.activity.mob.PostCodeActivity" />
         <activity android:name=".ui.activity.mob.IDCardQueryActivity" />
         <activity android:name=".ui.activity.mob.IPQueryActivity" />
-        <activity android:name=".ui.activity.mob.WXArticleActivity"/>
-        <activity android:name=".ui.activity.mob.BankCardActivity"/>
-        <activity android:name=".ui.activity.mob.ChineseCalendarActivity"/>
-        <activity android:name=".ui.activity.mob.OilPriceActivity"/>
-        <activity android:name=".ui.activity.mob.DictionaryActivity"/>
-        <activity android:name=".ui.activity.mob.IdiomActivity"/>
-        <activity android:name=".ui.activity.mob.HistoryTodayActivity"/>
+        <activity android:name=".ui.activity.mob.WXArticleActivity" />
+        <activity android:name=".ui.activity.mob.BankCardActivity" />
+        <activity android:name=".ui.activity.mob.ChineseCalendarActivity" />
+        <activity android:name=".ui.activity.mob.OilPriceActivity" />
+        <activity android:name=".ui.activity.mob.DictionaryActivity" />
+        <activity android:name=".ui.activity.mob.IdiomActivity" />
+        <activity android:name=".ui.activity.mob.HistoryTodayActivity" />
+        <activity android:name=".ui.activity.mob.HealthActivity" />
     </application>
 
 </manifest>

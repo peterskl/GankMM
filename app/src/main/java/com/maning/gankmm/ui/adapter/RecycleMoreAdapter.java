@@ -19,6 +19,7 @@ import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.activity.mob.BankCardActivity;
 import com.maning.gankmm.ui.activity.mob.ChineseCalendarActivity;
 import com.maning.gankmm.ui.activity.mob.DictionaryActivity;
+import com.maning.gankmm.ui.activity.mob.HealthActivity;
 import com.maning.gankmm.ui.activity.mob.HistoryTodayActivity;
 import com.maning.gankmm.ui.activity.mob.IDCardQueryActivity;
 import com.maning.gankmm.ui.activity.mob.IPQueryActivity;
@@ -159,7 +160,7 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
 
                     if (title.equals("健康知识")) {
-                        context.startActivity(new Intent(context, IdiomActivity.class));
+                        context.startActivity(new Intent(context, HealthActivity.class));
                     } else if (title.equals("历史上的今天")) {
                         context.startActivity(new Intent(context, HistoryTodayActivity.class));
                     } else if (title.equals("成语大全")) {

@@ -12,6 +12,7 @@ import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.bean.mob.MobBankCard;
 import com.maning.gankmm.bean.mob.MobDictEntity;
+import com.maning.gankmm.bean.mob.MobHealthEntity;
 import com.maning.gankmm.bean.mob.MobHistoryTodayEntity;
 import com.maning.gankmm.bean.mob.MobIdCardEntity;
 import com.maning.gankmm.bean.mob.MobIdiomEntity;
@@ -160,11 +161,20 @@ public interface APIService {
 
     /*便民服务*/
 
+    //健康知识
+    //http://apicloud.mob.com/appstore/health/search?key=123456&name=巴豆
+    @GET(Constants.URL_Mob + "appstore/health/search")
+    Call<MobBaseEntity<MobHealthEntity>> queryHealth(@Query("key") String appkey,
+                                                                @Query("name") String name,
+                                                                @Query("page") int page,
+                                                                @Query("size") int size
+    );
+
     //历史上今天
     //http://apicloud.mob.com/appstore/history/query?day=0401&key=1c9dccb9a2434
     @GET(Constants.URL_Mob + "appstore/history/query")
     Call<MobBaseEntity<ArrayList<MobHistoryTodayEntity>>> queryHistory(@Query("key") String appkey,
-                                                            @Query("day") String day
+                                                                       @Query("day") String day
     );
 
     //成语大全
