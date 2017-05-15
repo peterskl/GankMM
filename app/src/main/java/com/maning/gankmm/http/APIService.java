@@ -20,6 +20,8 @@ import com.maning.gankmm.bean.mob.MobIpEntity;
 import com.maning.gankmm.bean.mob.MobOilPriceEntity;
 import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
 import com.maning.gankmm.bean.mob.MobPostCodeEntity;
+import com.maning.gankmm.bean.mob.MobTrainEntity;
+import com.maning.gankmm.bean.mob.MobTrainNoEntity;
 import com.maning.gankmm.bean.mob.MobWxArticleListEntity;
 import com.maning.gankmm.bean.mob.MobWxCategoryEntity;
 import com.maning.gankmm.constant.Constants;
@@ -165,9 +167,9 @@ public interface APIService {
     //http://apicloud.mob.com/appstore/health/search?key=123456&name=巴豆
     @GET(Constants.URL_Mob + "appstore/health/search")
     Call<MobBaseEntity<MobHealthEntity>> queryHealth(@Query("key") String appkey,
-                                                                @Query("name") String name,
-                                                                @Query("page") int page,
-                                                                @Query("size") int size
+                                                     @Query("name") String name,
+                                                     @Query("page") int page,
+                                                     @Query("size") int size
     );
 
     //历史上今天
@@ -197,5 +199,19 @@ public interface APIService {
     Call<MobBaseEntity<MobOilPriceEntity>> queryOilPrice(@Query("key") String appkey
     );
 
+    //火车车次查询
+    //http://apicloud.mob.com/train/tickets/queryByTrainNo?key=123456&trainno=G2
+    @GET(Constants.URL_Mob + "train/tickets/queryByTrainNo")
+    Call<MobBaseEntity<ArrayList<MobTrainNoEntity>>> queryByTrainNo(@Query("key") String appkey,
+                                                                    @Query("trainno") String trainno
+    );
+
+    //火车站站查询
+    //http://apicloud.mob.com/train/tickets/queryByStationToStation?key=123456&start=北京&end=上海
+    @GET(Constants.URL_Mob + "train/tickets/queryByStationToStation")
+    Call<MobBaseEntity<ArrayList<MobTrainEntity>>> queryByStationToStation(@Query("key") String appkey,
+                                                                           @Query("start") String start,
+                                                                           @Query("end") String end
+    );
 
 }

@@ -27,6 +27,7 @@ import com.maning.gankmm.ui.activity.mob.IdiomActivity;
 import com.maning.gankmm.ui.activity.mob.OilPriceActivity;
 import com.maning.gankmm.ui.activity.mob.PhoneAddressActivity;
 import com.maning.gankmm.ui.activity.mob.PostCodeActivity;
+import com.maning.gankmm.ui.activity.mob.TrainActivity;
 import com.maning.gankmm.ui.activity.mob.WXArticleActivity;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
@@ -154,7 +155,9 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     } else if (title.equals("电影票房")) {
                         MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     } else if (title.equals("火车票查询")) {
+                        context.startActivity(new Intent(context, TrainActivity.class));
                     } else if (title.equals("航班信息查询")) {
+                        context.startActivity(new Intent(context, TrainActivity.class));
                     } else if (title.equals("足球五大联赛")) {
                         MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     }

@@ -37,6 +37,7 @@ public class RecycleWxArticleAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public void updateDatas(ArrayList<MobWxArticleListEntity.ListBean> mDatas) {
         this.mDatas = mDatas;
+        notifyDataSetChanged();
     }
 
     @Override

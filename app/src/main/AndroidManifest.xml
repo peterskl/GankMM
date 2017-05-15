@@ -246,6 +246,8 @@
         <activity android:name=".ui.activity.mob.IdiomActivity" />
         <activity android:name=".ui.activity.mob.HistoryTodayActivity" />
         <activity android:name=".ui.activity.mob.HealthActivity" />
+        <activity android:name=".ui.activity.mob.TrainActivity"/>
+        <activity android:name=".ui.activity.mob.TrainListActivity"/>
     </application>
 
 </manifest>
