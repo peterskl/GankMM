@@ -19,6 +19,7 @@ import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.activity.mob.BankCardActivity;
 import com.maning.gankmm.ui.activity.mob.ChineseCalendarActivity;
 import com.maning.gankmm.ui.activity.mob.DictionaryActivity;
+import com.maning.gankmm.ui.activity.mob.FlightActivity;
 import com.maning.gankmm.ui.activity.mob.HealthActivity;
 import com.maning.gankmm.ui.activity.mob.HistoryTodayActivity;
 import com.maning.gankmm.ui.activity.mob.IDCardQueryActivity;
@@ -157,7 +158,7 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     } else if (title.equals("火车票查询")) {
                         context.startActivity(new Intent(context, TrainActivity.class));
                     } else if (title.equals("航班信息查询")) {
-                        context.startActivity(new Intent(context, TrainActivity.class));
+                        context.startActivity(new Intent(context, FlightActivity.class));
                     } else if (title.equals("足球五大联赛")) {
                         MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     }

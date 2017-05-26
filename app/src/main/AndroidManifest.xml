@@ -248,6 +248,8 @@
         <activity android:name=".ui.activity.mob.HealthActivity" />
         <activity android:name=".ui.activity.mob.TrainActivity"/>
         <activity android:name=".ui.activity.mob.TrainListActivity"/>
+        <activity android:name=".ui.activity.mob.FlightActivity"/>
+        <activity android:name=".ui.activity.mob.FlightListActivity"/>
     </application>
 
 </manifest>

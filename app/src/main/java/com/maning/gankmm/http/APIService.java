@@ -12,6 +12,7 @@ import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.bean.mob.MobBankCard;
 import com.maning.gankmm.bean.mob.MobDictEntity;
+import com.maning.gankmm.bean.mob.MobFlightEntity;
 import com.maning.gankmm.bean.mob.MobHealthEntity;
 import com.maning.gankmm.bean.mob.MobHistoryTodayEntity;
 import com.maning.gankmm.bean.mob.MobIdCardEntity;
@@ -212,6 +213,14 @@ public interface APIService {
     Call<MobBaseEntity<ArrayList<MobTrainEntity>>> queryByStationToStation(@Query("key") String appkey,
                                                                            @Query("start") String start,
                                                                            @Query("end") String end
+    );
+
+    //航线查询航班信息
+    //http://apicloud.mob.com/flight/line/query?key=appkey&start=上海&end=海口
+    @GET(Constants.URL_Mob + "flight/line/query")
+    Call<MobBaseEntity<ArrayList<MobFlightEntity>>> queryFlightLineList(@Query("key") String appkey,
+                                                                        @Query("start") String start,
+                                                                        @Query("end") String end
     );
 
 }
