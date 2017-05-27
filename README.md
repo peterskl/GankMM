@@ -55,7 +55,7 @@
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_006.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_007.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_008.png)
-![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_009.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_009.jpg)
 
 
 
