@@ -144,5 +144,5 @@ dependencies {
     /*显示更多文字*/
     compile 'com.ms-square:expandableTextView:0.1.4'
     /* 日历 */
-    compile 'com.github.maning0303:MNCalendar:V1.0.0'
+    compile 'com.github.maning0303:MNCalendar:V1.0.1'
 }
