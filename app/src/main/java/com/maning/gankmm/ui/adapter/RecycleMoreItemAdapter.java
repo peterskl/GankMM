@@ -74,12 +74,12 @@ public class RecycleMoreItemAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             if (title.equals("银行卡信息")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_bank);
+            } else if (title.equals("白银数据")) {
+                myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_baiyin);
             } else if (title.equals("黄金数据")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_gold);
             } else if (title.equals("货币汇率")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_money);
-            } else if (title.equals("白银数据")) {
-                myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_baiyin);
             } else if (title.equals("国内现货交易所贵金属")) {
                 myViewHolder.iv_more_item.setImageResource(R.drawable.gank_icon_tools_guijinshu);
             } else if (title.equals("全球股指查询")) {

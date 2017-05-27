@@ -84,11 +84,11 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 mDatasItem.add("微信精选");
             } else if (position == 1) {
                 mDatasItem.add("银行卡信息");
-                mDatasItem.add("黄金数据");
                 mDatasItem.add("货币汇率");
-                mDatasItem.add("白银数据");
-                mDatasItem.add("国内现货交易所贵金属");
-                mDatasItem.add("全球股指查询");
+//                mDatasItem.add("黄金数据");
+//                mDatasItem.add("白银数据");
+//                mDatasItem.add("国内现货交易所贵金属");
+//                mDatasItem.add("全球股指查询");
             } else if (position == 2) {
                 mDatasItem.add("周公解梦");
                 mDatasItem.add("婚姻匹配");
@@ -133,7 +133,7 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                     if (title.equals("银行卡信息")) {
                         context.startActivity(new Intent(context, BankCardActivity.class));
-                    } else if (title.equals("黄金数据")) {
+                    } else if (title.equals("货币汇率")) {
                         MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
                     } else if (title.equals("货币汇率")) {
                         MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");

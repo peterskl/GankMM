@@ -55,10 +55,16 @@
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_006.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_007.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_008.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_009.png)
 
 
 
 ## 更新日志：
+### V1.6.2(还没有发布):
+    1.使用vector替换图片,APK更小
+    2.首页添加工具合集
+    3.修复部分Bug
+
 ### V1.6.1:
     1.分类浏览添加图片展示
     2.升级数据库添加图片字段
@@ -176,6 +182,9 @@
 ###### 收藏按钮 [ThumbUp](https://github.com/ldoublem/ThumbUp)
 ###### 模糊控件 [Blurry](https://github.com/wasabeef/Blurry)
 ###### 网络请求监控 [chuck](https://github.com/jgilfelt/chuck)
+###### 表格控件 [scrollablepanel](https://github.com/Kelin-Hong/ScrollablePanel)
+###### 可以展开的文字 [expandableTextView](https://github.com/Manabu-GT/ExpandableTextView)
+###### 自定义日历控件 [MNCalendar](https://github.com/maning0303/MNCalendar)
 
 
 
