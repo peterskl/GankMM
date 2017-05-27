@@ -161,7 +161,23 @@ public class AboutActivity extends BaseActivity {
     }
     @OnClick(R.id.tv_github17)
     void tv_github17() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_16));
+        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_17));
+    }
+    @OnClick(R.id.tv_github18)
+    void tv_github18() {
+        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_18));
+    }
+    @OnClick(R.id.tv_github19)
+    void tv_github19() {
+        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_19));
+    }
+    @OnClick(R.id.tv_github20)
+    void tv_github20() {
+        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_20));
+    }
+    @OnClick(R.id.tv_github21)
+    void tv_github21() {
+        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_21));
     }
 
 
