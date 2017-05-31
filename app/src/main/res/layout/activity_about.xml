@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="20dp"
-                android:text="项目Github地址："
+                android:text="作者Github地址："
                 android:textColor="?black_text1_color"
                 android:textSize="14sp" />
 
@@ -377,6 +377,17 @@
                 android:background="?item_setting_bg"
                 android:gravity="center"
                 android:text="MNCalendar"
+                android:textColor="?main_text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_github22"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="10dp"
+                android:background="?item_setting_bg"
+                android:gravity="center"
+                android:text="CrashMonitor"
                 android:textColor="?main_text_color"
                 android:textSize="14sp" />
 

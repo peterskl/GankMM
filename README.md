@@ -185,6 +185,7 @@
 ###### 表格控件 [scrollablepanel](https://github.com/Kelin-Hong/ScrollablePanel)
 ###### 可以展开的文字 [expandableTextView](https://github.com/Manabu-GT/ExpandableTextView)
 ###### 自定义日历控件 [MNCalendar](https://github.com/maning0303/MNCalendar)
+###### 日志监听 [CrashMonitor](https://github.com/maning0303/CrashMonitor)
 
 
 

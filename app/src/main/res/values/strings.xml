@@ -4,7 +4,7 @@
     <string name="mm_no_net">请检查网络设置</string>
 
     <string name="download_url">http://fir.im/gankmm</string>
-    <string name="github_my">http://www.github.com/maning0303</string>
+    <string name="github_my">https://github.com/maning0303</string>
     <string name="gankio">http://www.gank.io</string>
     <string name="github">github</string>
     <string name="github_01">https://github.com/yqritc/RecyclerView-FlexibleDivider</string>
@@ -28,6 +28,7 @@
     <string name="github_19">https://github.com/Kelin-Hong/ScrollablePanel</string>
     <string name="github_20">https://github.com/Manabu-GT/ExpandableTextView</string>
     <string name="github_21">https://github.com/maning0303/MNCalendar</string>
+    <string name="github_22">https://github.com/maning0303/CrashMonitor</string>
 
 
     <string name="gank_update_apk">当前版本是最新版</string>
