@@ -9,9 +9,9 @@ import android.os.StrictMode;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.maning.gankmm.BuildConfig;
-import com.maning.gankmm.crash.CrashHandler;
 import com.maning.gankmm.utils.ACache;
 import com.maning.gankmm.utils.NetUtils;
+import com.maning.librarycrashmonitor.main.MCrashMonitor;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.socks.library.KLog;
 
@@ -96,9 +96,12 @@ public class MyApplication extends Application {
 
 
     private void initCrash() {
-        //在这里为应用设置异常处理程序，然后我们的程序才能捕获未处理的异常
-        CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(this);
+        /**
+         * 初始化日志系统
+         * context :    上下文
+         * isDebug :    是不是Debug模式,true:崩溃后显示自定义崩溃页面 ;false:关闭应用,不跳转奔溃页面(默认)
+         */
+        MCrashMonitor.init(this, BuildConfig.LOG_DEBUG);
     }
 
     public static MyApplication getIntstance() {
