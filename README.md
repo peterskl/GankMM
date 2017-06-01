@@ -34,8 +34,23 @@
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_ewm.png)
 
 
-## GankMM夜间模式实现Demo（切换主题实现）：
+### GankMM夜间模式实现：
 #### [AndroidChangeSkinDemo](https://github.com/maning0303/AndroidChangeSkinDemo)
+
+### GankMM图片浏览器库：
+#### [MNImageBrowser](https://github.com/maning0303/MNImageBrowser)
+
+### GankMM日期选择库：
+#### [MNCalendar](https://github.com/maning0303/MNCalendar)
+
+### GankMM崩溃日志监听库：
+#### [CrashMonitor](https://github.com/maning0303/CrashMonitor)
+
+### GankMM版本更新库：
+#### [MNUpdateAPK](https://github.com/maning0303/MNUpdateAPK)
+
+### GankMM首页滚动条库：
+#### [SwitcherView](https://github.com/maning0303/SwitcherView)
 
 
 
@@ -63,6 +78,7 @@
 ### V1.6.2(还没有发布):
     1.使用Vector替换图片
     2.首页添加工具合集
+    3.图片浏览器更换新的UI界面
 
 ### V1.6.1:
     1.分类浏览添加图片展示
@@ -185,6 +201,7 @@
 ###### 可以展开的文字 [expandableTextView](https://github.com/Manabu-GT/ExpandableTextView)
 ###### 自定义日历控件 [MNCalendar](https://github.com/maning0303/MNCalendar)
 ###### 日志监听 [CrashMonitor](https://github.com/maning0303/CrashMonitor)
+###### 图片缩放 [PhotoView](https://github.com/chrisbanes/PhotoView)
 
 
 
