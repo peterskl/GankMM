@@ -63,6 +63,9 @@ public class WeatherPresenterImpl extends BasePresenterImpl<IWeatherView> implem
 
         @Override
         public void onFail(int what, String result) {
+            if(mView == null){
+                return;
+            }
             mView.overRefresh();
             if (!TextUtils.isEmpty(result)) {
                 mView.showToast(result);
