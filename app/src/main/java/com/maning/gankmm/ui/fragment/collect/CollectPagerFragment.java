@@ -17,7 +17,6 @@ import com.maning.gankmm.ui.adapter.RecycleCollectAdapter;
 import com.maning.gankmm.ui.base.BaseFragment;
 import com.maning.gankmm.ui.iView.ICollectPagerView;
 import com.maning.gankmm.ui.presenter.impl.CollectPagerPresenterImpl;
-import com.maning.gankmm.utils.IntentUtils;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -84,7 +83,7 @@ public class CollectPagerFragment extends BaseFragment implements OnRefreshListe
         recycleCollectAdapter.setOnItemClickLitener(new RecycleCollectAdapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-                collectPagerPresenter.itemClick(position);
+                collectPagerPresenter.itemClick(view,position);
             }
         });
 

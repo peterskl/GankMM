@@ -2,6 +2,7 @@ package com.maning.gankmm.ui.presenter.impl;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.constant.Constants;
@@ -11,7 +12,6 @@ import com.maning.gankmm.ui.iView.IWelFareView;
 import com.maning.gankmm.ui.presenter.IWelFarePresenter;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.SharePreUtil;
-import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,12 +118,12 @@ public class WelFarePresenterImpl extends BasePresenterImpl<IWelFareView> implem
     }
 
     @Override
-    public void itemClick(int position) {
+    public void itemClick(View view, int position) {
         imagesList.clear();
         for (int i = 0; i < welFareLists.size(); i++) {
             imagesList.add(welFareLists.get(i).getUrl());
         }
-        IntentUtils.startToImageShow(context, imagesList, position);
+        IntentUtils.startToImageShow(context, imagesList, position,view);
     }
 
 }

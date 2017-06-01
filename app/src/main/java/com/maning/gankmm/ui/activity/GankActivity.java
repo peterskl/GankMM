@@ -28,8 +28,6 @@ import com.maning.gankmm.ui.view.ProgressWheel;
 import com.maning.gankmm.utils.DensityUtil;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
-import com.maning.gankmm.utils.StatusBarUtil;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +81,7 @@ public class GankActivity extends BaseActivity implements IGankView {
     @OnClick(R.id.iv_top)
     void iv_top() {
         if (images != null && images.size() > 0) {
-            IntentUtils.startToImageShow(this, images, 0);
+            IntentUtils.startToImageShow(this, images, 0, ivTop);
         }
     }
 

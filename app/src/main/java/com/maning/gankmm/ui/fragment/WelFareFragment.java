@@ -2,7 +2,6 @@ package com.maning.gankmm.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -13,18 +12,14 @@ import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.maning.gankmm.R;
-import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.ui.activity.MainActivity;
 import com.maning.gankmm.ui.adapter.RecyclePicAdapter;
 import com.maning.gankmm.ui.base.BaseFragment;
 import com.maning.gankmm.ui.iView.IWelFareView;
 import com.maning.gankmm.ui.presenter.impl.WelFarePresenterImpl;
-import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
-import com.umeng.analytics.MobclickAgent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -91,7 +86,7 @@ public class WelFareFragment extends BaseFragment implements OnRefreshListener, 
             recyclePicAdapter.setOnItemClickLitener(new RecyclePicAdapter.OnItemClickLitener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    welFarePresenter.itemClick(position);
+                    welFarePresenter.itemClick(view,position);
                 }
             });
             //获取头条随机

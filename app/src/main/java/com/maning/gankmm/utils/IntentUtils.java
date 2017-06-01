@@ -4,16 +4,18 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.View;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.maning.gankmm.ui.activity.AboutActivity;
 import com.maning.gankmm.ui.activity.GankActivity;
-import com.maning.gankmm.ui.activity.ImagesActivity;
 import com.maning.gankmm.ui.activity.MoreActivity;
 import com.maning.gankmm.ui.activity.QRCodeActivity;
 import com.maning.gankmm.ui.activity.SettingActivity;
 import com.maning.gankmm.ui.activity.SupportPayActivity;
 import com.maning.gankmm.ui.activity.WebActivity;
+import com.maning.imagebrowserlibrary.MNImageBrowser;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,11 +37,13 @@ public class IntentUtils {
 
     public static final String PushMessage = "PushMessage";
 
-    public static void startToImageShow(Context context, ArrayList<String> mDatas, int position) {
-        Intent intent = new Intent(context.getApplicationContext(), ImagesActivity.class);
-        intent.putStringArrayListExtra(ImageArrayList, mDatas);
-        intent.putExtra(ImagePositionForImageShow, position);
-        context.startActivity(intent);
+    public static void startToImageShow(Context context, ArrayList<String> mDatas, int position, View view) {
+//        Intent intent = new Intent(context.getApplicationContext(), ImagesActivity.class);
+//        intent.putStringArrayListExtra(ImageArrayList, mDatas);
+//        intent.putExtra(ImagePositionForImageShow, position);
+//        context.startActivity(intent);
+        KLog.i("startToImageShow:" + view.getWidth() / 2 + "," + view.getHeight());
+        MNImageBrowser.showImageBrowser(context, view, position, mDatas);
     }
 
     public static void startToWebActivity(Context context, String titleFlag, String title, String url) {

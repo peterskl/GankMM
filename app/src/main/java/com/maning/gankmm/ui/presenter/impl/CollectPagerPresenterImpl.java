@@ -1,6 +1,7 @@
 package com.maning.gankmm.ui.presenter.impl;
 
 import android.content.Context;
+import android.view.View;
 
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.constant.Constants;
@@ -65,14 +66,14 @@ public class CollectPagerPresenterImpl extends BasePresenterImpl<ICollectPagerVi
     }
 
     @Override
-    public void itemClick(int position) {
+    public void itemClick(View view, int position) {
         GankEntity resultsEntity = collects.get(position);
         if (Constants.FlagWelFare.equals(resultsEntity.getType())) {
             ArrayList<String> imageList = new ArrayList<>();
             for (int i = 0; i < collects.size(); i++) {
                 imageList.add(collects.get(i).getUrl());
             }
-            IntentUtils.startToImageShow(context, imageList, position);
+            IntentUtils.startToImageShow(context, imageList, position,view);
 
         } else {
             IntentUtils.startToWebActivity(context, flag, resultsEntity.getDesc(), resultsEntity.getUrl());
