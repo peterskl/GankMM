@@ -14,7 +14,7 @@ import com.maning.gankmm.ui.activity.QRCodeActivity;
 import com.maning.gankmm.ui.activity.SettingActivity;
 import com.maning.gankmm.ui.activity.SupportPayActivity;
 import com.maning.gankmm.ui.activity.WebActivity;
-import com.maning.imagebrowserlibrary.MNImageBrowser;
+import com.maning.gankmm.ui.imagebrowser.MNImageBrowser;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;

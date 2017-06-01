@@ -246,10 +246,16 @@
         <activity android:name=".ui.activity.mob.IdiomActivity" />
         <activity android:name=".ui.activity.mob.HistoryTodayActivity" />
         <activity android:name=".ui.activity.mob.HealthActivity" />
-        <activity android:name=".ui.activity.mob.TrainActivity"/>
-        <activity android:name=".ui.activity.mob.TrainListActivity"/>
-        <activity android:name=".ui.activity.mob.FlightActivity"/>
-        <activity android:name=".ui.activity.mob.FlightListActivity"/>
+        <activity android:name=".ui.activity.mob.TrainActivity" />
+        <activity android:name=".ui.activity.mob.TrainListActivity" />
+        <activity android:name=".ui.activity.mob.FlightActivity" />
+        <activity android:name=".ui.activity.mob.FlightListActivity" />
+
+        <activity
+            android:name=".ui.imagebrowser.MNImageBrowserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImageBrowserTheme" />
+
     </application>
 
 </manifest>

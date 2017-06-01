@@ -1,4 +1,4 @@
-package com.maning.imagebrowserlibrary;
+package com.maning.gankmm.ui.imagebrowser;
 
 import android.annotation.SuppressLint;
 import android.support.v4.view.ViewPager;

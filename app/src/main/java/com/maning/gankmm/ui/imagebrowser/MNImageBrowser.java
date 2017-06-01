@@ -1,4 +1,4 @@
-package com.maning.imagebrowserlibrary;
+package com.maning.gankmm.ui.imagebrowser;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
+
+import com.maning.gankmm.R;
 
 import java.util.ArrayList;
 

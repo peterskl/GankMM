@@ -18,7 +18,6 @@ import com.maning.gankmm.ui.iView.IImageView;
 import com.maning.gankmm.ui.presenter.impl.ImagePresenterImpl;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
-import com.umeng.analytics.MobclickAgent;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
 
@@ -89,7 +88,6 @@ public class ImagesActivity extends BaseActivity implements IImageView {
                                     .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                                     .send();
                         }
-
                         break;
                     case R.id.action_share:
                         int currentItem = viewPager.getCurrentItem();
