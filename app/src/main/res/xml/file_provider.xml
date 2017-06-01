@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-
-    <!--GankMM升级-->
-    <external-path
-        name="apk_Update"
-        path="GankMM/update" />
-
-</paths>

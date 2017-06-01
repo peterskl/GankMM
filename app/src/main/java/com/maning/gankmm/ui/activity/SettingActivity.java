@@ -3,13 +3,13 @@ package com.maning.gankmm.ui.activity;
 import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -22,15 +22,13 @@ import com.maning.gankmm.ui.iView.ISettingView;
 import com.maning.gankmm.ui.presenter.impl.SettingPresenterImpl;
 import com.maning.gankmm.ui.view.MySettingItemView;
 import com.maning.gankmm.utils.DialogUtils;
-import com.maning.gankmm.utils.InstallUtils;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.NotifyUtil;
 import com.maning.gankmm.utils.SharePreUtil;
+import com.maning.updatelibrary.InstallUtils;
 import com.socks.library.KLog;
-import com.ta.utdid2.android.utils.SystemUtils;
-import com.umeng.analytics.MobclickAgent;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
 
@@ -299,7 +297,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
                 })
                 .show();
 
-        new InstallUtils(context, appUpdateInfo.getInstall_url(), Constants.UpdateAPKPath, "GankMM_" + appUpdateInfo.getVersionShort(), new InstallUtils.DownloadCallBack() {
+        new InstallUtils(context, appUpdateInfo.getInstall_url(), "GankMM_" + appUpdateInfo.getVersionShort(), new InstallUtils.DownloadCallBack() {
             @Override
             public void onStart() {
                 KLog.i("installAPK-----onStart");
@@ -311,7 +309,17 @@ public class SettingActivity extends BaseActivity implements ISettingView {
             @Override
             public void onComplete(String path) {
                 KLog.i("installAPK----onComplete:" + path);
-                InstallUtils.installAPK(context, path);
+                InstallUtils.installAPK(context, path, new InstallUtils.InstallCallBack() {
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        Toast.makeText(context, "安装失败:" + e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
                 if (dialogUpdate != null && dialogUpdate.isShowing()) {
                     dialogUpdate.dismiss();
                 }
@@ -343,6 +351,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
                 }
             }
         }).downloadAPK();
+
     }
 
 
