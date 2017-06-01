@@ -76,12 +76,10 @@
 
 ## 更新日志：
 ### V1.6.3:
-    1.修复7.0升级安装APK失败Bug
-
-### V1.6.2:
     1.使用Vector替换图片
     2.首页添加工具合集
     3.图片浏览器更换新的UI界面
+    4.修复7.0升级安装APK失败Bug
 
 ### V1.6.1:
     1.分类浏览添加图片展示
@@ -205,6 +203,7 @@
 ###### 自定义日历控件 [MNCalendar](https://github.com/maning0303/MNCalendar)
 ###### 日志监听 [CrashMonitor](https://github.com/maning0303/CrashMonitor)
 ###### 图片缩放 [PhotoView](https://github.com/chrisbanes/PhotoView)
+###### APK升级安装 [MNUpdateAPK](https://github.com/maning0303/MNUpdateAPK)
 
 
 
