@@ -174,13 +174,9 @@
 
 
 ## 感谢：
-###### [代码家-干货集中营](https://github.com/daimajia)
-###### [drakeet](https://github.com/drakeet/Meizhi)
-###### [xingrz](https://github.com/xingrz/GankMeizhi)
-###### [dongjunkun](https://github.com/dongjunkun/GanK)
-###### [xiongwei-git](https://github.com/xiongwei-git/GankApp)
-###### [zzhoujay](https://github.com/zzhoujay/Gank4Android)
+###### [代码家](https://github.com/daimajia)
 ###### [所有的开源的人](https://github.com)
+###### [干货集中营](http://gank.io/)
 
 
 ## 依赖库：
@@ -202,10 +198,11 @@
 ###### 表格控件 [scrollablepanel](https://github.com/Kelin-Hong/ScrollablePanel)
 ###### 可以展开的文字 [expandableTextView](https://github.com/Manabu-GT/ExpandableTextView)
 ###### 自定义日历控件 [MNCalendar](https://github.com/maning0303/MNCalendar)
-###### 日志监听 [CrashMonitor](https://github.com/maning0303/CrashMonitor)
+###### 日志监听 [MNCrashMonitor](https://github.com/maning0303/MNCrashMonitor)
 ###### 图片缩放 [PhotoView](https://github.com/chrisbanes/PhotoView)
 ###### APK升级安装 [MNUpdateAPK](https://github.com/maning0303/MNUpdateAPK)
 ###### 夜间模式 [MNChangeSkin](https://github.com/maning0303/MNChangeSkin)
+###### 图片浏览 [MNImageBrowser](https://github.com/maning0303/MNImageBrowser)
 
 
 
