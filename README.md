@@ -56,7 +56,11 @@
 
 
 ##  项目截图：
+### Gif(加载比较慢,耐心等候...):
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_gif.gif)
 
+
+### 截图:
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_day_01.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_night_01.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_day_02.jpg)
