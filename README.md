@@ -45,7 +45,7 @@
 #### [MNCalendar](https://github.com/maning0303/MNCalendar)
 
 ### GankMM崩溃日志监听库：
-#### [CrashMonitor](https://github.com/maning0303/CrashMonitor)
+#### [MNCrashMonitor](https://github.com/maning0303/MNCrashMonitor)
 
 ### GankMM版本更新库：
 #### [MNUpdateAPK](https://github.com/maning0303/MNUpdateAPK)
