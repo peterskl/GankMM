@@ -17,6 +17,7 @@
     9.Android 6.0权限适配
     10.夜间模式的使用
     11.三方开源库的使用
+    12.7.0适配安装升级
 
 
 ## 所有的数据来自：
@@ -35,7 +36,7 @@
 
 
 ### GankMM夜间模式实现：
-#### [AndroidChangeSkinDemo](https://github.com/maning0303/AndroidChangeSkinDemo)
+#### [MNChangeSkin](https://github.com/maning0303/MNChangeSkin)
 
 ### GankMM图片浏览器库：
 #### [MNImageBrowser](https://github.com/maning0303/MNImageBrowser)
@@ -204,6 +205,7 @@
 ###### 日志监听 [CrashMonitor](https://github.com/maning0303/CrashMonitor)
 ###### 图片缩放 [PhotoView](https://github.com/chrisbanes/PhotoView)
 ###### APK升级安装 [MNUpdateAPK](https://github.com/maning0303/MNUpdateAPK)
+###### 夜间模式 [MNChangeSkin](https://github.com/maning0303/MNChangeSkin)
 
 
 
