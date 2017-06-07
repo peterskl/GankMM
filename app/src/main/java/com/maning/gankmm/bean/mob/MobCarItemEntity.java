@@ -1,11 +1,13 @@
 package com.maning.gankmm.bean.mob;
 
+import java.io.Serializable;
+
 /**
  * Created by maning on 2017/6/6.
  * 车型信息
  */
 
-public class MobCarItemEntity {
+public class MobCarItemEntity implements Serializable{
 
 
     /**

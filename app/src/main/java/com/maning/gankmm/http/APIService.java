@@ -11,6 +11,7 @@ import com.maning.gankmm.bean.RandomEntity;
 import com.maning.gankmm.bean.SearchBean;
 import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.bean.mob.MobBankCard;
+import com.maning.gankmm.bean.mob.MobCarDetailsEntity;
 import com.maning.gankmm.bean.mob.MobCarEntity;
 import com.maning.gankmm.bean.mob.MobCarItemEntity;
 import com.maning.gankmm.bean.mob.MobDictEntity;
@@ -236,6 +237,13 @@ public interface APIService {
     @GET(Constants.URL_Mob + "car/seriesname/query")
     Call<MobBaseEntity<ArrayList<MobCarItemEntity>>> queryCarItems(@Query("key") String appkey,
                                                                    @Query("name") String name
+    );
+
+    //车型详细信息查询
+    //http://apicloud.mob.com/car/series/query?key=appkey&cid=1060133
+    @GET(Constants.URL_Mob + "car/series/query")
+    Call<MobBaseEntity<ArrayList<MobCarDetailsEntity>>> queryCarDetails(@Query("key") String appkey,
+                                                                        @Query("cid") String cid
     );
 
 }

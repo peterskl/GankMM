@@ -1,17 +1,20 @@
 package com.maning.gankmm.ui.activity.mob;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.mob.MobCarEntity;
 import com.maning.gankmm.bean.mob.MobCarItemEntity;
 import com.maning.gankmm.http.MobApi;
 import com.maning.gankmm.http.MyCallBack;
+import com.maning.gankmm.listeners.OnItemClickListener;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.adapter.RecycleCarItemAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
@@ -78,6 +81,16 @@ public class CarItemsActivity extends BaseActivity {
     private void initAdapter() {
         mRecycleCarItemAdapter = new RecycleCarItemAdapter(mContext, mMDatas);
         mRecyclerView.setAdapter(mRecycleCarItemAdapter);
+        mRecycleCarItemAdapter.setOnItemClickLitener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //跳转详情页面
+                MobCarItemEntity mobCarItemEntity = mMDatas.get(position);
+                Intent intent = new Intent(CarItemsActivity.this, CarDetailActivity.class);
+                intent.putExtra(CarDetailActivity.IntentKey_CarItemEntity, mobCarItemEntity);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     private void initRecyclerView() {

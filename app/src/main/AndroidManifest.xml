@@ -258,6 +258,8 @@
         </activity>
         <activity android:name=".ui.activity.mob.CarItemsActivity">
         </activity>
+        <activity android:name=".ui.activity.mob.CarDetailActivity">
+        </activity>
     </application>
 
 </manifest>
