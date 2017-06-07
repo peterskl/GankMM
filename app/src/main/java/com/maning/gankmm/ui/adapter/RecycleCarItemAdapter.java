@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.maning.gankmm.R;
-import com.maning.gankmm.bean.mob.MobCarEntity;
+import com.maning.gankmm.bean.mob.MobCarItemEntity;
 import com.maning.gankmm.listeners.OnItemClickListener;
 
 import java.util.List;
@@ -19,51 +19,41 @@ import butterknife.ButterKnife;
 /**
  * Created by maning on 16/5/17.
  */
-public class RecycleCarListSonAdapter extends RecyclerView.Adapter<RecycleCarListSonAdapter.MyViewHolder> {
+public class RecycleCarItemAdapter extends RecyclerView.Adapter<RecycleCarItemAdapter.MyViewHolder> {
 
     private Context context;
-    private List<MobCarEntity.SonBean> mDatas;
+    private List<MobCarItemEntity> mDatas;
     private LayoutInflater layoutInflater;
 
-    public RecycleCarListSonAdapter(Context context, List<MobCarEntity.SonBean> mDatas) {
+    public RecycleCarItemAdapter(Context context, List<MobCarItemEntity> mDatas) {
         this.context = context;
         this.mDatas = mDatas;
         layoutInflater = LayoutInflater.from(this.context);
     }
 
+    public void updateDatas(List<MobCarItemEntity> mDatas) {
+        this.mDatas = mDatas;
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View inflate = layoutInflater.inflate(R.layout.item_car_list, parent, false);
+        View inflate = layoutInflater.inflate(R.layout.item_car_item, parent, false);
 
         return new MyViewHolder(inflate);
     }
 
-    public MobCarEntity.SonBean getItemData(int position) {
-        return mDatas.get(position);
-    }
-
     @Override
     public void onBindViewHolder(final MyViewHolder viewHolder, final int position) {
-        viewHolder.tvTitle.setVisibility(View.GONE);
 
-        MobCarEntity.SonBean sonBean = mDatas.get(position);
-        String type = sonBean.getType();
-        String car = sonBean.getCar();
+        MobCarItemEntity mobCarItemEntity = mDatas.get(position);
 
-        if (position == 0) {
-            viewHolder.tvTitle.setVisibility(View.VISIBLE);
-            viewHolder.tvTitle.setText(car);
-        } else {
-            MobCarEntity.SonBean sonBean2 = mDatas.get(position - 1);
-            if (!car.equals(sonBean2.getCar())) {
-                viewHolder.tvTitle.setVisibility(View.VISIBLE);
-                viewHolder.tvTitle.setText(car);
-            }
-        }
+        viewHolder.tvGuidePrice.setText(mobCarItemEntity.getGuidePrice());
+        viewHolder.tvSeriesName.setText(mobCarItemEntity.getSeriesName());
 
-        viewHolder.tvName.setText(type);
-        viewHolder.tvName.setOnClickListener(new View.OnClickListener() {
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mOnItemClickLitener != null) {
@@ -81,10 +71,10 @@ public class RecycleCarListSonAdapter extends RecyclerView.Adapter<RecycleCarLis
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.tv_title)
-        TextView tvTitle;
-        @Bind(R.id.tv_name)
-        TextView tvName;
+        @Bind(R.id.tv_guidePrice)
+        TextView tvGuidePrice;
+        @Bind(R.id.tv_seriesName)
+        TextView tvSeriesName;
 
         public MyViewHolder(View itemView) {
             super(itemView);

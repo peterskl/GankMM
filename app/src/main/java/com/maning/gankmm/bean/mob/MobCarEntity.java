@@ -1,12 +1,13 @@
 package com.maning.gankmm.bean.mob;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by maning on 2017/6/6.
  */
 
-public class MobCarEntity {
+public class MobCarEntity implements Serializable{
 
 
     /**
@@ -52,7 +53,7 @@ public class MobCarEntity {
         this.son = son;
     }
 
-    public static class SonBean {
+    public static class SonBean implements Serializable{
         /**
          * car : AC Schnitzer
          * type : AC Schnitzer X5

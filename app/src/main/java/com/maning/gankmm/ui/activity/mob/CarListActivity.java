@@ -1,5 +1,6 @@
 package com.maning.gankmm.ui.activity.mob;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +24,6 @@ import com.maning.gankmm.ui.adapter.RecycleCarListAdapter;
 import com.maning.gankmm.ui.adapter.RecycleCarListSonAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.ui.view.WaveSideBarView;
-import com.maning.gankmm.utils.MyToast;
 import com.maning.gankmm.utils.PinyinUtils;
 import com.socks.library.KLog;
 
@@ -55,6 +55,7 @@ public class CarListActivity extends BaseActivity {
     private RecycleCarListAdapter mRecycleCarListAdapter;
     private Animation mAnimation01;
     private Animation mAnimation02;
+    private RecycleCarListSonAdapter mRecycleCarListSonAdapter;
 
 
     @Override
@@ -168,12 +169,15 @@ public class CarListActivity extends BaseActivity {
     }
 
     private void initAdapter2(List<MobCarEntity.SonBean> mSon) {
-        RecycleCarListSonAdapter recycleCarListSonAdapter = new RecycleCarListSonAdapter(this, mSon);
-        mRecyclerViewSon.setAdapter(recycleCarListSonAdapter);
-        recycleCarListSonAdapter.setOnItemClickLitener(new OnItemClickListener() {
+        mRecycleCarListSonAdapter = new RecycleCarListSonAdapter(this, mSon);
+        mRecyclerViewSon.setAdapter(mRecycleCarListSonAdapter);
+        mRecycleCarListSonAdapter.setOnItemClickLitener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                MyToast.showShortToast(position + "");
+                MobCarEntity.SonBean itemData = mRecycleCarListSonAdapter.getItemData(position);
+                Intent intent = new Intent(CarListActivity.this, CarItemsActivity.class);
+                intent.putExtra(CarItemsActivity.IntentKey_Car, itemData);
+                mContext.startActivity(intent);
             }
         });
     }

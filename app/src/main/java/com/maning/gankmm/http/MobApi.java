@@ -5,6 +5,7 @@ import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.MobBaseEntity;
 import com.maning.gankmm.bean.mob.MobBankCard;
 import com.maning.gankmm.bean.mob.MobCarEntity;
+import com.maning.gankmm.bean.mob.MobCarItemEntity;
 import com.maning.gankmm.bean.mob.MobDictEntity;
 import com.maning.gankmm.bean.mob.MobFlightEntity;
 import com.maning.gankmm.bean.mob.MobHealthEntity;
@@ -596,6 +597,42 @@ public class MobApi {
             @Override
             public void onFailure(Call<MobBaseEntity<ArrayList<MobCarEntity>>> call, Throwable t) {
                 KLog.e("queryCarList-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+
+    public static Call<MobBaseEntity<ArrayList<MobCarItemEntity>>> queryCarItems(String carName, final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity<ArrayList<MobCarItemEntity>>> call = BuildApi.getAPIService().queryCarItems(Constants.URL_APP_Key, carName);
+        call.enqueue(new Callback<MobBaseEntity<ArrayList<MobCarItemEntity>>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<ArrayList<MobCarItemEntity>>> call, Response<MobBaseEntity<ArrayList<MobCarItemEntity>>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<ArrayList<MobCarItemEntity>> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("queryCarItems---success：" + body.toString());
+                            myCallBack.onSuccessList(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<ArrayList<MobCarItemEntity>>> call, Throwable t) {
+                KLog.e("queryCarItems-----onFailure：" + t.toString());
                 //数据错误
                 myCallBack.onFail(what, NET_FAIL);
             }
