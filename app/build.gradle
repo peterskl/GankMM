@@ -153,6 +153,4 @@ dependencies {
     compile 'com.github.maning0303:MNUpdateAPK:V1.0.3'
     /* 拼音转换 */
     compile 'com.github.promeg:tinypinyin:2.0.3'
-    /* 动画 */
-    compile 'com.github.florent37:viewanimator:1.0.5'
 }
