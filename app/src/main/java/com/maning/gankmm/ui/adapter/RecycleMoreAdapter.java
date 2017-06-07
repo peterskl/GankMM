@@ -2,21 +2,18 @@ package com.maning.gankmm.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maning.gankmm.R;
 import com.maning.gankmm.listeners.OnItemClickListener;
-import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.activity.mob.BankCardActivity;
+import com.maning.gankmm.ui.activity.mob.CarListActivity;
 import com.maning.gankmm.ui.activity.mob.ChineseCalendarActivity;
 import com.maning.gankmm.ui.activity.mob.DictionaryActivity;
 import com.maning.gankmm.ui.activity.mob.FlightActivity;
@@ -33,7 +30,6 @@ import com.maning.gankmm.ui.activity.mob.WXArticleActivity;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.MyToast;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,15 +130,15 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     if (title.equals("银行卡信息")) {
                         context.startActivity(new Intent(context, BankCardActivity.class));
                     } else if (title.equals("货币汇率")) {
-                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem, "功能暂未开通,敬请期待");
                     } else if (title.equals("货币汇率")) {
-                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem, "功能暂未开通,敬请期待");
                     } else if (title.equals("白银数据")) {
-                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem, "功能暂未开通,敬请期待");
                     } else if (title.equals("国内现货交易所贵金属")) {
-                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem, "功能暂未开通,敬请期待");
                     } else if (title.equals("全球股指查询")) {
-                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem, "功能暂未开通,敬请期待");
                     }
 
                     if (title.equals("周公解梦")) {
@@ -154,13 +150,13 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     } else if (title.equals("老黄历")) {
                         context.startActivity(new Intent(context, ChineseCalendarActivity.class));
                     } else if (title.equals("电影票房")) {
-                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem, "功能暂未开通,敬请期待");
                     } else if (title.equals("火车票查询")) {
                         context.startActivity(new Intent(context, TrainActivity.class));
                     } else if (title.equals("航班信息查询")) {
                         context.startActivity(new Intent(context, FlightActivity.class));
                     } else if (title.equals("足球五大联赛")) {
-                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem, "功能暂未开通,敬请期待");
                     }
 
                     if (title.equals("健康知识")) {
@@ -174,9 +170,9 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     } else if (title.equals("全国省市今日油价")) {
                         context.startActivity(new Intent(context, OilPriceActivity.class));
                     } else if (title.equals("汽车信息查询")) {
-                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
+                        context.startActivity(new Intent(context, CarListActivity.class));
                     } else if (title.equals("驾考题库")) {
-                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem,"功能暂未开通,敬请期待");
+                        MySnackbar.makeSnackBarGreen(myViewHolder.recyclerViewItem, "功能暂未开通,敬请期待");
                     }
                 }
             });

@@ -21,6 +21,16 @@
         <attr name="setting_red_dot" format="reference|boolean" />
     </declare-styleable>
 
+    <declare-styleable name="WaveSideBarView">
+        <attr name="sidebarTextColor" format="color|reference"/>
+        <attr name="sidebarBackgroundColor" format="color|reference"/>
+        <attr name="sidebarChooseTextColor" format="color|reference"/>
+        <attr name="sidebarTextSize" format="dimension"/>
+        <attr name="sidebarLargeTextSize" format="dimension"/>
+        <attr name="sidebarRadius" format="dimension"/>
+        <attr name="sidebarBallRadius" format="dimension"/>
+    </declare-styleable>
+
     <!--夜间模式自定义属性-->
     <attr name="app_background" format="reference|color" />
     <attr name="app_toolbar_bg" format="reference|color" />
