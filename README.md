@@ -76,6 +76,9 @@
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_07.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_08.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_09.jpg)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_10.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_11.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_12.png)
 
 
 
@@ -214,6 +217,7 @@
 ###### 夜间模式 [MNChangeSkin](https://github.com/maning0303/MNChangeSkin)
 ###### 图片浏览 [MNImageBrowser](https://github.com/maning0303/MNImageBrowser)
 ###### 汉字转拼音 [TinyPinyin](https://github.com/promeG/TinyPinyin)
+###### 快速跳跃分组的侧边栏控件 [WaveSideBar](https://github.com/Solartisan/WaveSideBar)
 
 
 
