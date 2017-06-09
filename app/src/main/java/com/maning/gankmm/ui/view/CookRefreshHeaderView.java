@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.aspsine.swipetoloadlayout.SwipeRefreshHeaderLayout;
 import com.maning.gankmm.R;
@@ -33,7 +33,7 @@ public class CookRefreshHeaderView extends SwipeRefreshHeaderLayout {
     private ImageView iv_cook_02;
     private ImageView iv_cook_03;
     private ImageView iv_cook_04;
-    private LinearLayout iv_pan_cover;
+    private RelativeLayout iv_pan_cover;
     private ImageView iv_pan;
 
     public CookRefreshHeaderView(Context context) {
@@ -56,7 +56,7 @@ public class CookRefreshHeaderView extends SwipeRefreshHeaderLayout {
         iv_cook_02 = (ImageView) findViewById(R.id.iv_cook_02);
         iv_cook_03 = (ImageView) findViewById(R.id.iv_cook_03);
         iv_cook_04 = (ImageView) findViewById(R.id.iv_cook_04);
-        iv_pan_cover = (LinearLayout) findViewById(R.id.iv_pan_cover);
+        iv_pan_cover = (RelativeLayout) findViewById(R.id.iv_pan_cover);
         iv_pan = (ImageView) findViewById(R.id.iv_pan);
     }
 
@@ -83,12 +83,20 @@ public class CookRefreshHeaderView extends SwipeRefreshHeaderLayout {
         if (!isComplete) {
             if (y >= mHeaderHeight) {
                 if (!rotated) {
-                    iv_pan_cover.setAlpha(0);
                     rotated = true;
                 }
             } else if (y < mHeaderHeight) {
-                float alpha = (float) y / (float) (mHeaderHeight);
-                iv_pan_cover.setAlpha(1 - alpha);
+//                float alpha = (float) y / (float) (mHeaderHeight);
+//                iv_pan_cover.setAlpha(1 - alpha);
+                float tan = (float) (y - mHeaderHeight * 2 / 3) / (float) (iv_pan_cover.getWidth());
+                int angle = (int) (tan * 90);
+                if (angle > 30) {
+                    angle = 30;
+                }
+                if (angle < 0) {
+                    angle = 0;
+                }
+                iv_pan_cover.setRotation(-angle);
             }
         }
     }
@@ -108,6 +116,7 @@ public class CookRefreshHeaderView extends SwipeRefreshHeaderLayout {
         iv_cook_03.setVisibility(View.GONE);
         iv_cook_04.setVisibility(View.GONE);
         iv_pan_cover.setAlpha(1);
+        iv_pan_cover.setRotation(0);
         float[] defaultPoint = {0, 0};
         startParabolaAnimation(iv_cook_01, defaultPoint, defaultPoint, defaultPoint);
         startParabolaAnimation(iv_cook_02, defaultPoint, defaultPoint, defaultPoint);
