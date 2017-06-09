@@ -16,6 +16,7 @@ import com.maning.gankmm.bean.mob.MobHistoryTodayEntity;
 import com.maning.gankmm.bean.mob.MobIdCardEntity;
 import com.maning.gankmm.bean.mob.MobIdiomEntity;
 import com.maning.gankmm.bean.mob.MobIpEntity;
+import com.maning.gankmm.bean.mob.MobLotteryEntity;
 import com.maning.gankmm.bean.mob.MobOilPriceEntity;
 import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
 import com.maning.gankmm.bean.mob.MobPostCodeEntity;
@@ -741,6 +742,78 @@ public class MobApi {
             @Override
             public void onFailure(Call<MobBaseEntity<MobCookDetailEntity>> call, Throwable t) {
                 KLog.e("queryCookDetailsList-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+
+    public static Call<MobBaseEntity<ArrayList<String>>> querylotteryList(final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity<ArrayList<String>>> call = BuildApi.getAPIService().querylotteryList(Constants.URL_APP_Key);
+        call.enqueue(new Callback<MobBaseEntity<ArrayList<String>>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<ArrayList<String>>> call, Response<MobBaseEntity<ArrayList<String>>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<ArrayList<String>> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("querylotteryList---success：" + body.toString());
+                            myCallBack.onSuccessList(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<ArrayList<String>>> call, Throwable t) {
+                KLog.e("querylotteryList-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+
+    public static Call<MobBaseEntity<MobLotteryEntity>> querylotteryDetail(String name, final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity<MobLotteryEntity>> call = BuildApi.getAPIService().querylotteryDetail(Constants.URL_APP_Key, name);
+        call.enqueue(new Callback<MobBaseEntity<MobLotteryEntity>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<MobLotteryEntity>> call, Response<MobBaseEntity<MobLotteryEntity>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<MobLotteryEntity> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("querylotteryDetail---success：" + body.toString());
+                            myCallBack.onSuccess(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<MobLotteryEntity>> call, Throwable t) {
+                KLog.e("querylotteryDetail-----onFailure：" + t.toString());
                 //数据错误
                 myCallBack.onFail(what, NET_FAIL);
             }

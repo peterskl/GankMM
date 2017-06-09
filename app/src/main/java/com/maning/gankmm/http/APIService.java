@@ -23,6 +23,7 @@ import com.maning.gankmm.bean.mob.MobHistoryTodayEntity;
 import com.maning.gankmm.bean.mob.MobIdCardEntity;
 import com.maning.gankmm.bean.mob.MobIdiomEntity;
 import com.maning.gankmm.bean.mob.MobIpEntity;
+import com.maning.gankmm.bean.mob.MobLotteryEntity;
 import com.maning.gankmm.bean.mob.MobOilPriceEntity;
 import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
 import com.maning.gankmm.bean.mob.MobPostCodeEntity;
@@ -261,6 +262,19 @@ public interface APIService {
                                                                   @Query("cid") String cid,
                                                                   @Query("page") int page,
                                                                   @Query("size") int size
+    );
+
+    //支持彩种列表
+    //http://apicloud.mob.com/lottery/list?key=appkey
+    @GET(Constants.URL_Mob + "lottery/list")
+    Call<MobBaseEntity<ArrayList<String>>> querylotteryList(@Query("key") String appkey
+    );
+
+    //彩票开奖结果查询
+    //http://apicloud.mob.com/lottery/query?key=appkey&name=大乐透
+    @GET(Constants.URL_Mob + "lottery/query")
+    Call<MobBaseEntity<MobLotteryEntity>> querylotteryDetail(@Query("key") String appkey,
+                                                             @Query("name") String name
     );
 
 }

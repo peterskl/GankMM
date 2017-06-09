@@ -23,6 +23,7 @@ import com.maning.gankmm.ui.activity.mob.HistoryTodayActivity;
 import com.maning.gankmm.ui.activity.mob.IDCardQueryActivity;
 import com.maning.gankmm.ui.activity.mob.IPQueryActivity;
 import com.maning.gankmm.ui.activity.mob.IdiomActivity;
+import com.maning.gankmm.ui.activity.mob.LotteryCategoryActivity;
 import com.maning.gankmm.ui.activity.mob.OilPriceActivity;
 import com.maning.gankmm.ui.activity.mob.PhoneAddressActivity;
 import com.maning.gankmm.ui.activity.mob.PostCodeActivity;
@@ -30,7 +31,6 @@ import com.maning.gankmm.ui.activity.mob.TrainActivity;
 import com.maning.gankmm.ui.activity.mob.WXArticleActivity;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
-import com.maning.gankmm.utils.MyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +123,7 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     } else if (title.equals("IP地址")) {
                         context.startActivity(new Intent(context, IPQueryActivity.class));
                     } else if (title.equals("中国彩票开奖结果")) {
-                        MyToast.showShortToast("功能暂未开通,敬请期待");
+                        context.startActivity(new Intent(context, LotteryCategoryActivity.class));
                     } else if (title.equals("微信精选")) {
                         context.startActivity(new Intent(context, WXArticleActivity.class));
                     }

@@ -266,6 +266,10 @@
         </activity>
         <activity android:name=".ui.activity.mob.CookDetailsActivity">
         </activity>
+        <activity android:name=".ui.activity.mob.LotteryCategoryActivity">
+        </activity>
+        <activity android:name=".ui.activity.mob.LotteryDetailActivity">
+        </activity>
     </application>
 
 </manifest>
