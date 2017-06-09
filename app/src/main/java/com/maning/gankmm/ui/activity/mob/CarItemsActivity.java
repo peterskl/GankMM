@@ -18,6 +18,7 @@ import com.maning.gankmm.listeners.OnItemClickListener;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.adapter.RecycleCarItemAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
+import com.maning.gankmm.utils.MySnackbar;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -74,6 +75,7 @@ public class CarItemsActivity extends BaseActivity {
             @Override
             public void onFail(int what, String result) {
                 dissmissProgressDialog();
+                MySnackbar.makeSnackBarRed(mToolbar, result);
             }
         });
     }

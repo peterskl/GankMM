@@ -7,6 +7,8 @@ import com.maning.gankmm.bean.mob.MobBankCard;
 import com.maning.gankmm.bean.mob.MobCarDetailsEntity;
 import com.maning.gankmm.bean.mob.MobCarEntity;
 import com.maning.gankmm.bean.mob.MobCarItemEntity;
+import com.maning.gankmm.bean.mob.MobCookCategoryEntity;
+import com.maning.gankmm.bean.mob.MobCookDetailEntity;
 import com.maning.gankmm.bean.mob.MobDictEntity;
 import com.maning.gankmm.bean.mob.MobFlightEntity;
 import com.maning.gankmm.bean.mob.MobHealthEntity;
@@ -608,8 +610,6 @@ public class MobApi {
     }
 
 
-
-
     public static Call<MobBaseEntity<ArrayList<MobCarItemEntity>>> queryCarItems(String carName, final int what, final MyCallBack myCallBack) {
 
         Call<MobBaseEntity<ArrayList<MobCarItemEntity>>> call = BuildApi.getAPIService().queryCarItems(Constants.URL_APP_Key, carName);
@@ -671,6 +671,76 @@ public class MobApi {
             @Override
             public void onFailure(Call<MobBaseEntity<ArrayList<MobCarDetailsEntity>>> call, Throwable t) {
                 KLog.e("queryCarDetails-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+    public static Call<MobBaseEntity<MobCookCategoryEntity>> queryCookCategory(final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity<MobCookCategoryEntity>> call = BuildApi.getAPIService().queryCookCategory(Constants.URL_APP_Key);
+        call.enqueue(new Callback<MobBaseEntity<MobCookCategoryEntity>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<MobCookCategoryEntity>> call, Response<MobBaseEntity<MobCookCategoryEntity>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<MobCookCategoryEntity> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("queryCookCategory---success：" + body.toString());
+                            myCallBack.onSuccess(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<MobCookCategoryEntity>> call, Throwable t) {
+                KLog.e("queryCookCategory-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+    public static Call<MobBaseEntity<MobCookDetailEntity>> queryCookDetailsList(String cid, int pageIndex, int pageSize, final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity<MobCookDetailEntity>> call = BuildApi.getAPIService().queryCookDetailsList(Constants.URL_APP_Key, cid, pageIndex, pageSize);
+        call.enqueue(new Callback<MobBaseEntity<MobCookDetailEntity>>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity<MobCookDetailEntity>> call, Response<MobBaseEntity<MobCookDetailEntity>> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity<MobCookDetailEntity> body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("queryCookDetailsList---success：" + body.toString());
+                            myCallBack.onSuccess(what, body.getResult());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity<MobCookDetailEntity>> call, Throwable t) {
+                KLog.e("queryCookDetailsList-----onFailure：" + t.toString());
                 //数据错误
                 myCallBack.onFail(what, NET_FAIL);
             }

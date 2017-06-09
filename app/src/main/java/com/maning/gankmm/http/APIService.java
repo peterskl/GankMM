@@ -14,6 +14,8 @@ import com.maning.gankmm.bean.mob.MobBankCard;
 import com.maning.gankmm.bean.mob.MobCarDetailsEntity;
 import com.maning.gankmm.bean.mob.MobCarEntity;
 import com.maning.gankmm.bean.mob.MobCarItemEntity;
+import com.maning.gankmm.bean.mob.MobCookCategoryEntity;
+import com.maning.gankmm.bean.mob.MobCookDetailEntity;
 import com.maning.gankmm.bean.mob.MobDictEntity;
 import com.maning.gankmm.bean.mob.MobFlightEntity;
 import com.maning.gankmm.bean.mob.MobHealthEntity;
@@ -244,6 +246,21 @@ public interface APIService {
     @GET(Constants.URL_Mob + "car/series/query")
     Call<MobBaseEntity<ArrayList<MobCarDetailsEntity>>> queryCarDetails(@Query("key") String appkey,
                                                                         @Query("cid") String cid
+    );
+
+    //菜谱分类标签查询
+    //http://apicloud.mob.com/v1/cook/category/query?key=appkey
+    @GET(Constants.URL_Mob + "v1/cook/category/query")
+    Call<MobBaseEntity<MobCookCategoryEntity>> queryCookCategory(@Query("key") String appkey
+    );
+
+    //按标签查询菜谱接口
+    //http://apicloud.mob.com/v1/cook/menu/search?key=appkey&cid=0010001007&page=1&size=20
+    @GET(Constants.URL_Mob + "v1/cook/menu/search")
+    Call<MobBaseEntity<MobCookDetailEntity>> queryCookDetailsList(@Query("key") String appkey,
+                                                                  @Query("cid") String cid,
+                                                                  @Query("page") int page,
+                                                                  @Query("size") int size
     );
 
 }

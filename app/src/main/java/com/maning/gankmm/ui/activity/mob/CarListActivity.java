@@ -24,6 +24,7 @@ import com.maning.gankmm.ui.adapter.RecycleCarListAdapter;
 import com.maning.gankmm.ui.adapter.RecycleCarListSonAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.ui.view.WaveSideBarView;
+import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.PinyinUtils;
 import com.socks.library.KLog;
 
@@ -149,6 +150,7 @@ public class CarListActivity extends BaseActivity {
             @Override
             public void onFail(int what, String result) {
                 dissmissProgressDialog();
+                MySnackbar.makeSnackBarRed(mToolbar, result);
             }
         });
     }

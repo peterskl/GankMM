@@ -14,6 +14,7 @@
     <dimen name="load_more_footer_height_classic">60dp</dimen>
 
     <dimen name="refresh_header_height_weather">80dp</dimen>
+    <dimen name="refresh_header_height_cook">80dp</dimen>
     <dimen name="refresh_header_height_twitter">50dp</dimen>
     <dimen name="load_more_footer_height_twitter">50dp</dimen>
 

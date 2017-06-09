@@ -15,6 +15,7 @@ import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.adapter.RecycleCarDetailsAdapter;
 import com.maning.gankmm.ui.base.BaseActivity;
+import com.maning.gankmm.utils.MySnackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,7 @@ public class CarDetailActivity extends BaseActivity {
             @Override
             public void onFail(int what, String result) {
                 dissmissProgressDialog();
+                MySnackbar.makeSnackBarRed(mToolbar, result);
             }
         });
 

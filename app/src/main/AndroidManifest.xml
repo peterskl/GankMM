@@ -260,6 +260,12 @@
         </activity>
         <activity android:name=".ui.activity.mob.CarDetailActivity">
         </activity>
+        <activity android:name=".ui.activity.mob.CookMenuActivity">
+        </activity>
+        <activity android:name=".ui.activity.mob.CookListActivity">
+        </activity>
+        <activity android:name=".ui.activity.mob.CookDetailsActivity">
+        </activity>
     </application>
 
 </manifest>

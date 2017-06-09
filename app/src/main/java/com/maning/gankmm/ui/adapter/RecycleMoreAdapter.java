@@ -15,6 +15,7 @@ import com.maning.gankmm.listeners.OnItemClickListener;
 import com.maning.gankmm.ui.activity.mob.BankCardActivity;
 import com.maning.gankmm.ui.activity.mob.CarListActivity;
 import com.maning.gankmm.ui.activity.mob.ChineseCalendarActivity;
+import com.maning.gankmm.ui.activity.mob.CookMenuActivity;
 import com.maning.gankmm.ui.activity.mob.DictionaryActivity;
 import com.maning.gankmm.ui.activity.mob.FlightActivity;
 import com.maning.gankmm.ui.activity.mob.HealthActivity;
@@ -116,7 +117,7 @@ public class RecycleMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     } else if (title.equals("邮编查询")) {
                         context.startActivity(new Intent(context, PostCodeActivity.class));
                     } else if (title.equals("菜谱查询")) {
-                        MyToast.showShortToast("功能暂未开通,敬请期待");
+                        context.startActivity(new Intent(context, CookMenuActivity.class));
                     } else if (title.equals("身份证查询")) {
                         context.startActivity(new Intent(context, IDCardQueryActivity.class));
                     } else if (title.equals("IP地址")) {
