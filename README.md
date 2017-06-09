@@ -83,7 +83,8 @@
 ### V1.6.5(未发版):
     1.工具合集中开放汽车信息查询功能
     2.工具合集中开放菜谱查询功能
-    3.优化页面体验
+    3.工具合集中开放彩票查询功能
+    4.优化页面体验
 
 ### V1.6.3:
     1.使用Vector替换图片
@@ -212,6 +213,7 @@
 ###### APK升级安装 [MNUpdateAPK](https://github.com/maning0303/MNUpdateAPK)
 ###### 夜间模式 [MNChangeSkin](https://github.com/maning0303/MNChangeSkin)
 ###### 图片浏览 [MNImageBrowser](https://github.com/maning0303/MNImageBrowser)
+###### 汉字转拼音 [TinyPinyin](https://github.com/promeG/TinyPinyin)
 
 
 
