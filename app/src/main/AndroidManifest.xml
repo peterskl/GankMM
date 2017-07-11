@@ -270,6 +270,8 @@
         </activity>
         <activity android:name=".ui.activity.mob.LotteryDetailActivity">
         </activity>
+        <activity android:name=".ui.activity.login.LoginActivity">
+        </activity>
     </application>
 
 </manifest>

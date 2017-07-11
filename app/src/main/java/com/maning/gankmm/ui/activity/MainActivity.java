@@ -30,6 +30,7 @@ import com.maning.gankmm.bean.WeatherBeseEntity;
 import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.skin.SkinBroadcastReceiver;
 import com.maning.gankmm.skin.SkinManager;
+import com.maning.gankmm.ui.activity.login.LoginActivity;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.ui.fragment.CategoryFragment;
 import com.maning.gankmm.ui.fragment.HistoryFragment;
@@ -40,7 +41,6 @@ import com.maning.gankmm.ui.presenter.impl.MainPresenterImpl;
 import com.maning.gankmm.utils.DialogUtils;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
-import com.maning.gankmm.utils.MyToast;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.NotifyUtil;
 import com.maning.gankmm.utils.SharePreUtil;
@@ -185,7 +185,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 startActivity(new Intent(MainActivity.this, SearchActivity.class));
                 return true;
             case R.id.item_login:
-                MyToast.showShortToast("登录");
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);
