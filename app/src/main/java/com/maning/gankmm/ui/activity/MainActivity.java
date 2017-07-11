@@ -12,9 +12,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -40,6 +40,7 @@ import com.maning.gankmm.ui.presenter.impl.MainPresenterImpl;
 import com.maning.gankmm.utils.DialogUtils;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
+import com.maning.gankmm.utils.MyToast;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.NotifyUtil;
 import com.maning.gankmm.utils.SharePreUtil;
@@ -155,19 +156,11 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
     private void initMyToolBar() {
         int currentSkinType = SkinManager.getCurrentSkinType(this);
-        Button rightBtnSearch = (Button) toolbar.findViewById(R.id.right_btn);
-        rightBtnSearch.setVisibility(View.VISIBLE);
         if (SkinManager.THEME_DAY == currentSkinType) {
             initToolBar(toolbar, Constants.FlagWelFare, R.drawable.gank_icon_menu_white);
         } else {
             initToolBar(toolbar, Constants.FlagWelFare, R.drawable.gank_icon_menu_night);
         }
-        rightBtnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SearchActivity.class));
-            }
-        });
     }
 
     private void initIntent() {
@@ -188,9 +181,22 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.item_search:
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                return true;
+            case R.id.item_login:
+                MyToast.showShortToast("登录");
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_toolbar, menu);
+        return true;
+    }
+
 
     /**
      * 设置默认的Fragment显示：如果savedInstanceState不是空，证明activity被后台销毁重建了，之前有fragment，就不再创建了
