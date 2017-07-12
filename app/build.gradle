@@ -153,4 +153,10 @@ dependencies {
     compile 'com.github.maning0303:MNUpdateAPK:V1.0.3'
     /* 拼音转换 */
     compile 'com.github.promeg:tinypinyin:2.0.3'
+    /* 显示斜切的布局 */
+    compile 'com.github.florent37:diagonallayout:1.0.6'
+    /* 背景可以移动的View */
+    compile 'com.flaviofaria:kenburnsview:1.0.7'
+    /* 圆形图片 */
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }

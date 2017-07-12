@@ -27,10 +27,12 @@ import com.maning.gankmm.R;
 import com.maning.gankmm.bean.AppUpdateInfo;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.bean.WeatherBeseEntity;
+import com.maning.gankmm.bean.mob.MobUserInfo;
 import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.skin.SkinBroadcastReceiver;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.activity.login.LoginActivity;
+import com.maning.gankmm.ui.activity.login.UserInfoActivity;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.ui.fragment.CategoryFragment;
 import com.maning.gankmm.ui.fragment.HistoryFragment;
@@ -44,6 +46,7 @@ import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.NotifyUtil;
 import com.maning.gankmm.utils.SharePreUtil;
+import com.maning.gankmm.utils.UserUtils;
 import com.maning.updatelibrary.InstallUtils;
 import com.socks.library.KLog;
 import com.yanzhenjie.permission.AndPermission;
@@ -185,7 +188,14 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                 startActivity(new Intent(MainActivity.this, SearchActivity.class));
                 return true;
             case R.id.item_login:
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                //判断是不是登录了
+                MobUserInfo userCache = UserUtils.getUserCache();
+                if (userCache != null && !TextUtils.isEmpty(userCache.getUid())) {
+                    //跳转资料页面
+                    startActivity(new Intent(MainActivity.this, UserInfoActivity.class));
+                } else {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

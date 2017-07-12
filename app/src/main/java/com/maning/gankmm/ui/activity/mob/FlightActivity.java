@@ -15,13 +15,12 @@ import android.widget.TextView;
 
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.mob.MobFlightEntity;
-import com.maning.gankmm.bean.mob.MobTrainEntity;
 import com.maning.gankmm.http.MobApi;
 import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.utils.KeyboardUtils;
 import com.maning.gankmm.utils.MySnackbar;
-import com.maning.gankmm.utils.StatusBarUtil;
+import com.maning.librarycrashmonitor.utils.StatusBarUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
 package com.maning.gankmm.ui.activity.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -7,11 +8,18 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.maning.gankmm.R;
+import com.maning.gankmm.bean.mob.MobUserInfo;
+import com.maning.gankmm.http.MobApi;
+import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.utils.KeyboardUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.MyToast;
+import com.maning.gankmm.utils.UserUtils;
+import com.socks.library.KLog;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -78,13 +86,57 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
-        MyToast.showShortToast(userName + "-" + userPsd);
+        showProgressDialog("正在登录...");
+        MobApi.userLogin(userName, userPsd, 0x001, new MyCallBack() {
+            @Override
+            public void onSuccess(int what, Object result) {
+                dissmissProgressDialog();
+                showProgressSuccess("登录成功!");
+                MobUserInfo userInfo = (MobUserInfo) result;
+                String userName = mEtUserName.getText().toString();
+                String userPsd = mEtPassword.getText().toString();
+                userInfo.setUserName(userName);
+                userInfo.setUserPsd(userPsd);
 
+                //保存用户信息
+                UserUtils.saveUserCache(userInfo);
+
+                //关闭当前页面。
+                closeAcitivity();
+
+
+            }
+
+            @Override
+            public void onSuccessList(int what, List results) {
+
+            }
+
+            @Override
+            public void onFail(int what, String result) {
+                dissmissProgressDialog();
+                MySnackbar.makeSnackBarRed(mToolbar, result);
+            }
+        });
+
+
+    }
+
+    private void closeAcitivity() {
+        //跳转到个人信息修改页面
+        MobUserInfo userCache = UserUtils.getUserCache();
+        KLog.i("userCache:" + userCache.toString());
+        this.finish();
+    }
+
+    @OnClick(R.id.btn_forget)
+    public void btn_forget() {
+        MyToast.showShortToast("忘记密码");
     }
 
     @OnClick(R.id.btn_register)
     public void btn_register() {
-        MyToast.showShortToast("注册");
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     @OnClick(R.id.ll_bg)

@@ -3,6 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.maning.gankmm">
 
+    <uses-sdk tools:overrideLibrary="com.sdsmdg.harjot.materialshadows"/>
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!-- Jpush -->
@@ -271,6 +273,10 @@
         <activity android:name=".ui.activity.mob.LotteryDetailActivity">
         </activity>
         <activity android:name=".ui.activity.login.LoginActivity">
+        </activity>
+        <activity android:name=".ui.activity.login.RegisterActivity">
+        </activity>
+        <activity android:name=".ui.activity.login.UserInfoActivity">
         </activity>
     </application>
 

@@ -20,7 +20,7 @@ import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.utils.KeyboardUtils;
 import com.maning.gankmm.utils.MySnackbar;
-import com.maning.gankmm.utils.StatusBarUtil;
+import com.maning.librarycrashmonitor.utils.StatusBarUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

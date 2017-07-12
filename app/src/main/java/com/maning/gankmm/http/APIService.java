@@ -29,6 +29,7 @@ import com.maning.gankmm.bean.mob.MobPhoneAddressEntity;
 import com.maning.gankmm.bean.mob.MobPostCodeEntity;
 import com.maning.gankmm.bean.mob.MobTrainEntity;
 import com.maning.gankmm.bean.mob.MobTrainNoEntity;
+import com.maning.gankmm.bean.mob.MobUserInfo;
 import com.maning.gankmm.bean.mob.MobWxArticleListEntity;
 import com.maning.gankmm.bean.mob.MobWxCategoryEntity;
 import com.maning.gankmm.constant.Constants;
@@ -276,5 +277,25 @@ public interface APIService {
     Call<MobBaseEntity<MobLotteryEntity>> querylotteryDetail(@Query("key") String appkey,
                                                              @Query("name") String name
     );
+
+
+    /* ----------------------用户系统接口---------------------- */
+    //用户注册
+    //http://apicloud.mob.com/user/rigister?key=123456&username=tangsir&password=4AC36A18EA02AC6C
+    @GET(Constants.URL_Mob + "user/rigister")
+    Call<MobBaseEntity> userRegister(@Query("key") String appkey,
+                                                      @Query("username") String username,
+                                                      @Query("password") String password,
+                                                      @Query("email") String email
+    );
+
+    //用户登录
+    //http://apicloud.mob.com/user/login?key=123456&username=tangsir&password=4AC36A18EA02AC6C
+    @GET(Constants.URL_Mob + "user/login")
+    Call<MobBaseEntity<MobUserInfo>> userLogin(@Query("key") String appkey,
+                                               @Query("username") String username,
+                                               @Query("password") String password
+    );
+
 
 }

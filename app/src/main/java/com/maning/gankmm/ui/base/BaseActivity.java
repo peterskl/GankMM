@@ -11,7 +11,7 @@ import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.bumptech.glide.Glide;
 import com.maning.gankmm.R;
 import com.maning.gankmm.skin.SkinManager;
-import com.maning.gankmm.utils.StatusBarUtil;
+import com.maning.librarycrashmonitor.utils.StatusBarUtil;
 import com.umeng.analytics.MobclickAgent;
 
 /**

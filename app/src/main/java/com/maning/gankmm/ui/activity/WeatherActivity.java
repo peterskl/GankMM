@@ -24,7 +24,7 @@ import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.ui.iView.IWeatherView;
 import com.maning.gankmm.ui.presenter.impl.WeatherPresenterImpl;
 import com.maning.gankmm.utils.MySnackbar;
-import com.maning.gankmm.utils.StatusBarUtil;
+import com.maning.librarycrashmonitor.utils.StatusBarUtil;
 import com.socks.library.KLog;
 
 import java.util.List;
