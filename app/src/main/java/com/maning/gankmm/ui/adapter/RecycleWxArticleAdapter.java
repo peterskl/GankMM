@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.mob.MobWxArticleListEntity;
-import com.maning.gankmm.bean.mob.MobWxCategoryEntity;
 import com.maning.gankmm.listeners.OnItemClickListener;
 
 import java.util.ArrayList;
@@ -72,10 +72,12 @@ public class RecycleWxArticleAdapter extends RecyclerView.Adapter<RecyclerView.V
             if (!TextUtils.isEmpty(thumbnails)) {
                 String[] images = thumbnails.split("$");
                 if (images.length > 0) {
+                    RequestOptions options = new RequestOptions();
+                    options.centerCrop();
+                    options.placeholder(R.drawable.pic_gray_bg);
                     Glide.with(context)
                             .load(images[0])
-                            .placeholder(R.drawable.pic_gray_bg)
-                            .centerCrop()
+                            .apply(options)
                             .into(myViewHolder.iv_show_wx);
                 } else {
                     myViewHolder.iv_show_wx.setVisibility(View.GONE);

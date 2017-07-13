@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.ldoublem.thumbUplib.ThumbUpView;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.GankEntity;
@@ -74,10 +75,12 @@ public class RecyclePublicAdapter extends RecyclerView.Adapter<RecyclePublicAdap
             viewHolder.ivShow.setVisibility(View.GONE);
         } else {
             viewHolder.ivShow.setVisibility(View.VISIBLE);
+            RequestOptions options = new RequestOptions();
+            options.centerCrop();
+            options.placeholder(R.drawable.pic_gray_bg);
             Glide.with(context)
                     .load(imageUrl)
-                    .placeholder(R.drawable.pic_gray_bg)
-                    .centerCrop()
+                    .apply(options)
                     .into(viewHolder.ivShow);
         }
 

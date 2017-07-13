@@ -1,5 +1,6 @@
 package com.maning.gankmm.ui.activity.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
@@ -28,6 +29,12 @@ public class UserInfoActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         StatusBarUtil.setTranslucentForImageView(this, 20, mLlContent);
+    }
+
+
+    @OnClick(R.id.btn_edit_info)
+    public void btn_edit_info() {
+        startActivity(new Intent(this, EditUserInfoActivity.class));
     }
 
 

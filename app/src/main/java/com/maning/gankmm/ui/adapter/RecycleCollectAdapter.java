@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.ldoublem.thumbUplib.ThumbUpView;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.GankEntity;
@@ -83,10 +84,11 @@ public class RecycleCollectAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 myViewHolder1.ivShow.setVisibility(View.GONE);
             } else {
                 myViewHolder1.ivShow.setVisibility(View.VISIBLE);
+                RequestOptions options = new RequestOptions();
+                options.centerCrop();
+                options.placeholder(R.drawable.pic_gray_bg);
                 Glide.with(context)
                         .load(imageUrl)
-                        .placeholder(R.drawable.pic_gray_bg)
-                        .centerCrop()
                         .into(myViewHolder1.ivShow);
             }
 
@@ -129,11 +131,12 @@ public class RecycleCollectAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             String url = resultsEntity.getUrl();
             KLog.i("图片地址：" + url);
             //图片显示
+            RequestOptions options = new RequestOptions();
+            options.centerCrop();
+            options.placeholder(R.drawable.pic_gray_bg);
             Glide.with(context)
                     .load(url)
-                    .placeholder(R.drawable.pic_gray_bg)
-                    .error(R.drawable.pic_gray_bg)
-                    .centerCrop()
+                    .apply(options)
                     .into(myViewHolder.image);
 
             //查询是否存在收藏

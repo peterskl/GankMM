@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.maning.gankmm.R;
@@ -85,7 +86,10 @@ public class RecycleCookDetailsAdapter extends RecyclerView.Adapter<RecyclerView
         if (viewHolder instanceof MyViewHolder) {
             final MyViewHolder myViewHolder = (MyViewHolder) viewHolder;
             //图片展示
-            Glide.with(context).load(mData.getRecipe().getImg()).asBitmap().centerCrop().placeholder(R.drawable.pic_gray_bg).into(myViewHolder.iv_show);
+            RequestOptions options = new RequestOptions();
+            options.centerCrop();
+            options.placeholder(R.drawable.pic_gray_bg);
+            Glide.with(context).asBitmap().load(mData.getRecipe().getImg()).apply(options).into(myViewHolder.iv_show);
             //大标题
             myViewHolder.tv_name.setText(mData.getName());
             //介绍
@@ -108,7 +112,10 @@ public class RecycleCookDetailsAdapter extends RecyclerView.Adapter<RecyclerView
 
             MobCookStepEntity mobCookStepEntity = steps.get(position - 1);
             //图片展示
-            Glide.with(context).load(mobCookStepEntity.getImg()).asBitmap().centerCrop().placeholder(R.drawable.pic_gray_bg).into(myViewHolder2.iv_step);
+            RequestOptions options = new RequestOptions();
+            options.centerCrop();
+            options.placeholder(R.drawable.pic_gray_bg);
+            Glide.with(context).asBitmap().load(mobCookStepEntity.getImg()).apply(options).into(myViewHolder2.iv_step);
             //文字步骤
             myViewHolder2.tv_step.setText(mobCookStepEntity.getStep());
 

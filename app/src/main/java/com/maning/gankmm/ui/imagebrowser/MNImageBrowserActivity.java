@@ -4,8 +4,10 @@ import android.Manifest;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +26,8 @@ import android.widget.TextView;
 
 import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.github.chrisbanes.photoview.PhotoView;
@@ -370,20 +373,20 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
             iv_fail.setVisibility(View.GONE);
 
             final String url = imageUrlList.get(position);
-            Glide
+                        Glide
                     .with(context)
                     .load(url)
                     .thumbnail(0.2f)
-                    .listener(new RequestListener<String, GlideDrawable>() {
+                    .listener(new RequestListener<Drawable>() {
                         @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                             progressWheel.setVisibility(View.GONE);
                             iv_fail.setVisibility(View.VISIBLE);
                             return false;
                         }
 
                         @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                             progressWheel.setVisibility(View.GONE);
                             rl_image_placeholder_bg.setVisibility(View.GONE);
                             iv_fail.setVisibility(View.GONE);
@@ -391,6 +394,28 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
                         }
                     })
                     .into(imageView);
+
+//            Glide
+//                    .with(context)
+//                    .load(url)
+//                    .thumbnail(0.2f)
+//                    .listener(new RequestListener<String, GlideDrawable>() {
+//                        @Override
+//                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+//                            progressWheel.setVisibility(View.GONE);
+//                            iv_fail.setVisibility(View.VISIBLE);
+//                            return false;
+//                        }
+//
+//                        @Override
+//                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                            progressWheel.setVisibility(View.GONE);
+//                            rl_image_placeholder_bg.setVisibility(View.GONE);
+//                            iv_fail.setVisibility(View.GONE);
+//                            return false;
+//                        }
+//                    })
+//                    .into(imageView);
 
 
             rl_browser_root.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,8 @@ package com.maning.gankmm.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.maning.gankmm.R;
 import com.maning.gankmm.ui.view.PinchImageView;
 import com.maning.gankmm.ui.view.ProgressWheel;
-import com.socks.library.KLog;
 
 import java.util.ArrayList;
 
@@ -57,18 +59,19 @@ public class ImagesAdapter extends PagerAdapter {
         View inflate = layoutInflater.inflate(R.layout.item_show_image, container, false);
         final ImageView imageView = (ImageView) inflate.findViewById(R.id.imageView);
         final ProgressWheel progressbar = (ProgressWheel) inflate.findViewById(R.id.progressbar);
-        Glide
+                Glide
                 .with(mContext)
                 .load(imageUrl)
                 .thumbnail(0.2f)
-                .listener(new RequestListener<String, GlideDrawable>() {
+                .listener(new RequestListener<Drawable>() {
                     @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        progressbar.setVisibility(View.GONE);
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         progressbar.setVisibility(View.GONE);
                         return false;
                     }

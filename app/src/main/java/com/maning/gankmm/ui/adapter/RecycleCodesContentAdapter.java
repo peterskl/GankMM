@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.CategoryContentBean;
 
@@ -53,15 +53,15 @@ public class RecycleCodesContentAdapter extends RecyclerView.Adapter<RecycleCode
         holder.tvDescription.setText(categoryContentBean.getDescription());
         holder.tvOtherInfo.setText(categoryContentBean.getOtherInfo());
 
+
         String imageUrl = categoryContentBean.getImageUrl();
+        RequestOptions options = new RequestOptions();
         if (imageUrl.contains(".gif")) {
-            glide.load(imageUrl).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.ivShow);
+            options.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+            glide.asGif().load(imageUrl).apply(options).into(holder.ivShow);
         } else {
-            glide
-                    .load(imageUrl)
-                    .asBitmap()
-                    .centerCrop()
-                    .into(holder.ivShow);
+            options.centerCrop();
+            glide.asBitmap().load(imageUrl).apply(options).into(holder.ivShow);
         }
 
 

@@ -51,6 +51,7 @@
                 />
 
             <TextView
+                android:id="@+id/btn_edit_info"
                 android:background="@drawable/btn_bg_half_circle"
                 android:layout_width="60dp"
                 android:gravity="center"

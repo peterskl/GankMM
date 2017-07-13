@@ -13,8 +13,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.ldoublem.thumbUplib.ThumbUpView;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.GankEntity;
@@ -160,14 +161,19 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 layoutParams.height = resultsEntity.getItemHeight();
             }
 
+
+            viewHolder.image.setImageResource(R.drawable.pic_gray_bg);
+            RequestOptions options = new RequestOptions();
+            options.fitCenter();
+            options.placeholder(R.drawable.pic_gray_bg);
+            options.diskCacheStrategy(DiskCacheStrategy.ALL);
             Glide.with(context)
-                    .load(url)
                     .asBitmap()
-                    .placeholder(R.drawable.pic_gray_bg)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(new SimpleTarget<Bitmap>(screenWidth / 2, screenWidth / 2) {
+                    .load(url)
+                    .apply(options)
+                    .into(new SimpleTarget<Bitmap>() {
                         @Override
-                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                             int width = resource.getWidth();
                             int height = resource.getHeight();
                             //计算高宽比

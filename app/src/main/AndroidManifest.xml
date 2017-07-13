@@ -48,6 +48,10 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".app.MyApplication"
         android:allowBackup="true"
@@ -277,6 +281,8 @@
         <activity android:name=".ui.activity.login.RegisterActivity">
         </activity>
         <activity android:name=".ui.activity.login.UserInfoActivity">
+        </activity>
+        <activity android:name=".ui.activity.login.EditUserInfoActivity">
         </activity>
     </application>
 

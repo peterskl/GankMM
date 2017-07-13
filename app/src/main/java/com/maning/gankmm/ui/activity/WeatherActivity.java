@@ -13,8 +13,9 @@ import android.widget.TextView;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.CalendarInfoEntity;
 import com.maning.gankmm.bean.GankEntity;
@@ -107,20 +108,27 @@ public class WeatherActivity extends BaseActivity implements OnRefreshListener, 
             int randomIndex = random.nextInt(welFareList.size() - 1);
             bgPicUrl = welFareList.get(randomIndex).getUrl();
             if (!TextUtils.isEmpty(bgPicUrl)) {
-                Glide.with(this).load(bgPicUrl).asBitmap().centerCrop().into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        ivBg.setImageBitmap(resource);
-                        ivBg2.setImageBitmap(resource);
-                        Blurry.with(WeatherActivity.this)
-                                .radius(25)
-                                .sampling(3)
-                                .async()
-                                .capture(ivBg2)
-                                .into(ivBg2);
-                        llBgBlur.setAlpha(defaultAlpha);
-                    }
-                });
+                RequestOptions options = new RequestOptions();
+                options.centerCrop();
+                Glide.with(mContext)
+                        .asBitmap()
+                        .load(bgPicUrl)
+                        .apply(options)
+                        .into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                ivBg.setImageBitmap(resource);
+                                ivBg2.setImageBitmap(resource);
+                                Blurry.with(WeatherActivity.this)
+                                        .radius(25)
+                                        .sampling(3)
+                                        .async()
+                                        .capture(ivBg2)
+                                        .into(ivBg2);
+                                llBgBlur.setAlpha(defaultAlpha);
+                            }
+                        });
+
             }
         }
 

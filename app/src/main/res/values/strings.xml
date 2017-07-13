@@ -72,4 +72,10 @@
         <item>前端</item>
     </string-array>
 
+    <!--性别：男女 -->
+    <string-array name="sexs">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+
 </resources>

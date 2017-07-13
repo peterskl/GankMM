@@ -1,11 +1,13 @@
 package com.maning.gankmm.app;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.support.multidex.MultiDex;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.maning.gankmm.BuildConfig;
@@ -37,6 +39,12 @@ public class MyApplication extends Application {
     private static MyApplication application;
     private static Handler mHandler;
     private static ACache aCache;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {

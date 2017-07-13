@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.mob.MobCookDetailEntity;
 import com.maning.gankmm.listeners.OnItemClickListener;
@@ -54,11 +54,12 @@ public class RecycleCookDetailItemAdapter extends RecyclerView.Adapter<RecycleCo
         MobCookDetailEntity.ListBean listBean = mDatas.get(position);
 
         //图片
+        RequestOptions options = new RequestOptions();
+        options.centerCrop();
+        options.placeholder(R.drawable.pic_gray_bg);
         Glide.with(context)
                 .load(listBean.getThumbnail())
-                .asBitmap()
-                .placeholder(R.drawable.pic_gray_bg)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .apply(options)
                 .into(viewHolder.iv_cook_show);
 
         //标题

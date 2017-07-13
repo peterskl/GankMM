@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.skin.SkinManager;
@@ -159,10 +160,12 @@ public class GankActivity extends BaseActivity implements IGankView {
 
     @Override
     public void showImageView(String url) {
+        RequestOptions options = new RequestOptions();
+        options.fitCenter();
         Glide
                 .with(this)
                 .load(url)
-                .fitCenter()
+                .apply(options)
                 .into(ivTop);
         //添加到集合
         images = new ArrayList<>();

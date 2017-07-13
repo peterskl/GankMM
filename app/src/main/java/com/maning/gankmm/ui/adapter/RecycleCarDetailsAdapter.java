@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.mob.MobCarDetailsEntity;
 
@@ -63,11 +64,15 @@ public class RecycleCarDetailsAdapter extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolderBase, final int position) {
         if (viewHolderBase instanceof MyViewHolder2) {
             MyViewHolder2 viewHolder2 = (MyViewHolder2) viewHolderBase;
-            Glide.with(context).load(mobCarDetailsEntity.getCarImage())
-                    .asBitmap()
-                    .centerCrop()
-                    .placeholder(R.drawable.pic_gray_bg).
-                    into(viewHolder2.ivCar);
+
+
+            RequestOptions options = new RequestOptions();
+            options.centerCrop();
+            options.placeholder(R.drawable.pic_gray_bg);
+            Glide.with(context).asBitmap().load(mobCarDetailsEntity.getCarImage())
+                    .apply(options)
+                    .into(viewHolder2.ivCar);
+
         } else if (viewHolderBase instanceof MyViewHolder) {
             MyViewHolder viewHolder = (MyViewHolder) viewHolderBase;
 
