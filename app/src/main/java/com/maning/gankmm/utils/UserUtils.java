@@ -24,6 +24,10 @@ public class UserUtils {
         return citysEntity;
     }
 
+    //退出登录
+    public static void quitLogin() {
+        MyApplication.getACache().put(cache_UserLogin, new MobUserInfo());
+    }
 
     //用户登录信息
     public static void saveUserCache(MobUserInfo userInfo) {

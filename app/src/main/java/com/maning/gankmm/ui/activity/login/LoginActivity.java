@@ -17,7 +17,6 @@ import com.maning.gankmm.utils.KeyboardUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.MyToast;
 import com.maning.gankmm.utils.UserUtils;
-import com.socks.library.KLog;
 
 import java.util.List;
 
@@ -124,8 +123,7 @@ public class LoginActivity extends BaseActivity {
 
     private void closeAcitivity() {
         //跳转到个人信息修改页面
-        MobUserInfo userCache = UserUtils.getUserCache();
-        KLog.i("userCache:" + userCache.toString());
+        startActivity(new Intent(this, UserInfoActivity.class));
         this.finish();
     }
 
