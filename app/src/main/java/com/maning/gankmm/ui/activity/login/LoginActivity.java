@@ -15,7 +15,6 @@ import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.utils.KeyboardUtils;
 import com.maning.gankmm.utils.MySnackbar;
-import com.maning.gankmm.utils.MyToast;
 import com.maning.gankmm.utils.UserUtils;
 
 import java.util.List;
@@ -129,7 +128,9 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.btn_forget)
     public void btn_forget() {
-        MyToast.showShortToast("忘记密码");
+        Intent intent = new Intent(this, ForgetPsdActivity.class);
+        intent.putExtra(ForgetPsdActivity.IntentKey_Mode, 2);
+        startActivity(intent);
     }
 
     @OnClick(R.id.btn_register)

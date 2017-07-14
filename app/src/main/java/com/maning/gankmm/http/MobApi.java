@@ -998,6 +998,78 @@ public class MobApi {
 
     }
 
+
+    public static Call<MobBaseEntity> userGetVerificationCode(String userName, final int what, final MyCallBack myCallBack) {
+        Call<MobBaseEntity> call = BuildApi.getAPIService().userGetVerificationCode(Constants.URL_APP_Key, userName);
+        call.enqueue(new Callback<MobBaseEntity>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity> call, Response<MobBaseEntity> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity body = response.body();
+                    if (body != null) {
+                        if (body.getRetCode().equals("200")) {
+                            KLog.i("userGetVerificationCode---success：" + body.toString());
+                            myCallBack.onSuccess(what, body.getMsg());
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity> call, Throwable t) {
+                KLog.e("userGetVerificationCode-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+
+    public static Call<MobBaseEntity> userModifyPsd(String userName, String oldPsd, String newPsd, String mode, final int what, final MyCallBack myCallBack) {
+
+        Call<MobBaseEntity> call = BuildApi.getAPIService().userModifyPsd(Constants.URL_APP_Key, userName, oldPsd, newPsd, mode);
+        call.enqueue(new Callback<MobBaseEntity>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity> call, Response<MobBaseEntity> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("userModifyPsd---success：" + body.toString());
+                            Object result = body.getResult();
+                            myCallBack.onSuccess(what, result);
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity> call, Throwable t) {
+                KLog.e("userModifyPsd-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
     /* -----end------用户系统------------ */
 
 }

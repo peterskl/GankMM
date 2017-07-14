@@ -311,9 +311,27 @@ public interface APIService {
     //http://apicloud.mob.com/user/data/query?key=123456&token=d8b5403cb22f6e17e8e57d8d8a24e497&uid=e5b0d1b60461ea4605cf27947f739bce&item=5bm06b6E
     @GET(Constants.URL_Mob + "user/data/query")
     Call<MobBaseEntity> userDataQuery(@Query("key") String appkey,
-                                               @Query("token") String token,
-                                               @Query("uid") String uid,
-                                               @Query("item") String item
+                                      @Query("token") String token,
+                                      @Query("uid") String uid,
+                                      @Query("item") String item
+    );
+
+    //找回密码-获取验证码
+    //http://apicloud.mob.com/user/password/retrieve?key=123456&username=duyp
+    @GET(Constants.URL_Mob + "user/password/retrieve")
+    Call<MobBaseEntity> userGetVerificationCode(@Query("key") String appkey,
+                                                @Query("username") String username
+    );
+
+
+    //修改密码
+    //http://apicloud.mob.com/user/password/change?key=123456&username=duyp&oldPassword=123456789&newPassword=a0987654321
+    @GET(Constants.URL_Mob + "user/password/change")
+    Call<MobBaseEntity> userModifyPsd(@Query("key") String appkey,
+                                      @Query("username") String token,
+                                      @Query("oldPassword") String oldPassword,
+                                      @Query("newPassword") String newPassword,
+                                      @Query("mode") String mode    //模式：1-用户输入旧密码;2-由用户通过找回密码接口获取系统随机码，默认为1
     );
 
 

@@ -139,6 +139,19 @@
                 android:layout_height="1px"
                 android:background="?lineColor"/>
 
+            <com.maning.gankmm.ui.view.MySettingItemView
+                android:id="@+id/item_app_psd"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="?item_setting_bg"
+                app:setting_red_dot="false"
+                app:setting_title="找回密码"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="?lineColor"/>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1px"

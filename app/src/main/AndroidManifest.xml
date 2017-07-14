@@ -303,6 +303,8 @@
         </activity>
         <activity android:name=".ui.activity.login.EditSignatureActivity">
         </activity>
+        <activity android:name=".ui.activity.login.ForgetPsdActivity">
+        </activity>
     </application>
 
 </manifest>

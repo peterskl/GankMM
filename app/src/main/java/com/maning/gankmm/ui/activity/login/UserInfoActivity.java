@@ -63,6 +63,13 @@ public class UserInfoActivity extends BaseActivity {
         startActivity(new Intent(this, SettingActivity.class));
     }
 
+    @OnClick(R.id.item_app_psd)
+    public void item_app_psd() {
+        Intent intent = new Intent(this, ForgetPsdActivity.class);
+        intent.putExtra(ForgetPsdActivity.IntentKey_Mode, 1);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.item_app_market)
     public void item_app_market() {
         IntentUtils.goToMarket(this, getPackageName());

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/ll_bg"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/backgroundColor"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical">
 
     <include layout="@layout/toolbar"/>
 
@@ -14,7 +15,7 @@
         android:layout_height="48dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/login_bg"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
@@ -42,6 +43,60 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/btn_get_code"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/main_color"
+            android:text="获取验证码"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:visibility="visible"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_toLeftOf="@id/btn_get_code"
+            android:background="@drawable/login_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/icon_login_pw"
+                />
+
+            <EditText
+                android:id="@+id/et_old_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:background="@null"
+                android:hint="请输入验证码"
+                android:textColor="@color/black_text2_color"
+                android:textColorHint="@color/black_text3_color"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -61,14 +116,14 @@
             />
 
         <EditText
-            android:id="@+id/et_password"
+            android:id="@+id/et_new_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="4dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp"
             android:background="@null"
-            android:hint="请输入密码"
+            android:hint="请输入新密码"
             android:inputType="textPassword"
             android:textColor="@color/black_text2_color"
             android:textColorHint="@color/black_text3_color"
@@ -77,46 +132,17 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/btn_forget"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:gravity="center_vertical"
-        android:paddingRight="20dp"
-        android:text="忘记密码?"
-        android:textColor="#ff8c00"
-        android:textSize="13sp"
-        />
-
-
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_ok"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
         android:background="@color/main_color"
-        android:text="登录"
+        android:text="修改密码"
         android:textColor="@color/white"
         android:textSize="14sp"/>
-
-
-    <Button
-        android:id="@+id/btn_register"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/login_bg"
-        android:text="注册"
-        android:textColor="@color/main_color"
-        android:textSize="14sp"/>
-
 
 </LinearLayout>
