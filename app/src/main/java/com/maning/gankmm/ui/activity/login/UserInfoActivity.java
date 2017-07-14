@@ -8,12 +8,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.mob.MobUserInfo;
+import com.maning.gankmm.ui.activity.CollectActivity;
 import com.maning.gankmm.ui.activity.SettingActivity;
 import com.maning.gankmm.ui.activity.SupportPayActivity;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.utils.DialogUtils;
 import com.maning.gankmm.utils.IntentUtils;
-import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.UserUtils;
 import com.maning.librarycrashmonitor.utils.StatusBarUtil;
 
@@ -55,7 +55,7 @@ public class UserInfoActivity extends BaseActivity {
 
     @OnClick(R.id.item_app_collect)
     public void item_app_collect() {
-        MySnackbar.makeSnackBarGreen(mAvatar,"正在开发中...");
+        startActivity(new Intent(this, CollectActivity.class));
     }
 
     @OnClick(R.id.item_app_setting)

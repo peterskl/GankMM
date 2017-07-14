@@ -75,9 +75,10 @@
             >
 
             <ImageView
+                android:id="@+id/iv_yzm"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/icon_login_pw"
+                android:background="@drawable/icon_user_yzm"
                 />
 
             <EditText

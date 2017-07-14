@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
@@ -43,6 +44,8 @@ public class ForgetPsdActivity extends BaseActivity {
     EditText mEtNewPassword;
     @Bind(R.id.btn_ok)
     Button mBtnOk;
+    @Bind(R.id.iv_yzm)
+    ImageView mIvYzm;
     private MyCountDownTimer mMyCountDownTimer;
     private int mMode;
 
@@ -67,7 +70,9 @@ public class ForgetPsdActivity extends BaseActivity {
         if (mMode == 1) {
             mBtnGetCode.setVisibility(View.GONE);
             mEtOldPassword.setHint("请输入旧密码");
+            mIvYzm.setBackgroundResource(R.drawable.icon_login_pw);
         } else {
+            mIvYzm.setBackgroundResource(R.drawable.icon_user_yzm);
             mEtOldPassword.setHint("请输入验证码");
             mBtnGetCode.setVisibility(View.VISIBLE);
             mMyCountDownTimer = new MyCountDownTimer(60000, 1000);

@@ -305,6 +305,8 @@
         </activity>
         <activity android:name=".ui.activity.login.ForgetPsdActivity">
         </activity>
+        <activity android:name=".ui.activity.CollectActivity">
+        </activity>
     </application>
 
 </manifest>
