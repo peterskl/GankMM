@@ -145,7 +145,7 @@
                 android:layout_height="44dp"
                 android:background="?item_setting_bg"
                 app:setting_red_dot="false"
-                app:setting_title="找回密码"/>
+                app:setting_title="修改密码"/>
 
             <ImageView
                 android:layout_width="match_parent"
