@@ -284,9 +284,9 @@ public interface APIService {
     //http://apicloud.mob.com/user/rigister?key=123456&username=tangsir&password=4AC36A18EA02AC6C
     @GET(Constants.URL_Mob + "user/rigister")
     Call<MobBaseEntity> userRegister(@Query("key") String appkey,
-                                                      @Query("username") String username,
-                                                      @Query("password") String password,
-                                                      @Query("email") String email
+                                     @Query("username") String username,
+                                     @Query("password") String password,
+                                     @Query("email") String email
     );
 
     //用户登录
@@ -295,6 +295,25 @@ public interface APIService {
     Call<MobBaseEntity<MobUserInfo>> userLogin(@Query("key") String appkey,
                                                @Query("username") String username,
                                                @Query("password") String password
+    );
+
+    //用户数据新增和更新
+    //http://apicloud.mob.com/user/data/put?key=123456&token=d8b5403cb22f6e17e8e57d8d8a24e497&uid=e5b0d1b60461ea4605cf27947f739bce&item=5bm06b6E&value=5aeT5ZCN
+    @GET(Constants.URL_Mob + "user/data/put")
+    Call<MobBaseEntity> userDataUpdate(@Query("key") String appkey,
+                                       @Query("token") String token,
+                                       @Query("uid") String uid,
+                                       @Query("item") String item,
+                                       @Query("value") String value
+    );
+
+    //用户数据查询
+    //http://apicloud.mob.com/user/data/query?key=123456&token=d8b5403cb22f6e17e8e57d8d8a24e497&uid=e5b0d1b60461ea4605cf27947f739bce&item=5bm06b6E
+    @GET(Constants.URL_Mob + "user/data/query")
+    Call<MobBaseEntity> userDataQuery(@Query("key") String appkey,
+                                               @Query("token") String token,
+                                               @Query("uid") String uid,
+                                               @Query("item") String item
     );
 
 

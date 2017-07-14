@@ -44,7 +44,7 @@ public class MobBaseEntity<T> implements Serializable {
         return "MobBaseEntity{" +
                 "msg='" + msg + '\'' +
                 ", retCode='" + retCode + '\'' +
-                ", result=" + result.toString() +
+                ", result=" + (result == null ? "" : result.toString())+
                 '}';
     }
 }

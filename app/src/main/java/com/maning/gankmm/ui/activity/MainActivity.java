@@ -500,10 +500,17 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             @Override
             public void onComplete(String path) {
                 KLog.i("installAPK----onComplete:" + path);
-                InstallUtils.installAPK(context, path, new InstallUtils.InstallCallBack() {
+                /**
+                 * 安装APK工具类
+                 * @param context       上下文
+                 * @param filePath      文件路径
+                 * @param authorities   ---------Manifest中配置provider的authorities字段---------
+                 * @param callBack      安装界面成功调起的回调
+                 */
+                InstallUtils.installAPK(context, path, getPackageName() + ".fileProvider", new InstallUtils.InstallCallBack() {
                     @Override
-                    public void onComplete() {
-
+                    public void onSuccess() {
+                        Toast.makeText(context, "正在安装程序", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

@@ -1,5 +1,7 @@
 package com.maning.gankmm.http;
 
+import android.text.TextUtils;
+
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.bean.MobBaseEntity;
@@ -26,6 +28,8 @@ import com.maning.gankmm.bean.mob.MobUserInfo;
 import com.maning.gankmm.bean.mob.MobWxArticleListEntity;
 import com.maning.gankmm.bean.mob.MobWxCategoryEntity;
 import com.maning.gankmm.constant.Constants;
+import com.maning.gankmm.utils.EncodeUtils;
+import com.maning.gankmm.utils.UserUtils;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -887,6 +891,104 @@ public class MobApi {
             @Override
             public void onFailure(Call<MobBaseEntity<MobUserInfo>> call, Throwable t) {
                 KLog.e("userLogin-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+
+    public static Call<MobBaseEntity> userDataUpdate(String itemName, String value, final int what, final MyCallBack myCallBack) {
+        //加密
+        String itemNameBase64 = EncodeUtils.EncodeBase64(itemName);
+        KLog.i("itemNameBase64:" + itemNameBase64);
+        String valueBase64 = EncodeUtils.EncodeBase64(value);
+        KLog.i("valueBase64:" + valueBase64);
+        KLog.i("valueBase64.length():" + valueBase64.length());
+
+        MobUserInfo userCache = UserUtils.getUserCache();
+        Call<MobBaseEntity> call = BuildApi.getAPIService().userDataUpdate(Constants.URL_APP_Key, userCache.getToken(), userCache.getUid(), itemNameBase64, valueBase64);
+        call.enqueue(new Callback<MobBaseEntity>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity> call, Response<MobBaseEntity> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("userDataUpdate---success：" + body.toString());
+                            //解密
+                            Object result = body.getResult();
+                            if (result != null) {
+                                String resutStr = (String) result;
+                                if (!TextUtils.isEmpty(resutStr)) {
+                                    result = EncodeUtils.DecodeBase64(resutStr);
+                                }
+                            }
+                            myCallBack.onSuccess(what, result);
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity> call, Throwable t) {
+                KLog.e("userDataUpdate-----onFailure：" + t.toString());
+                //数据错误
+                myCallBack.onFail(what, NET_FAIL);
+            }
+        });
+
+        return call;
+
+    }
+
+
+    public static Call<MobBaseEntity> userDataQuery(String itemName, final int what, final MyCallBack myCallBack) {
+        //加密
+        String itemNameBase64 = EncodeUtils.EncodeBase64(itemName);
+        KLog.i("itemNameBase64:" + itemNameBase64);
+        MobUserInfo userCache = UserUtils.getUserCache();
+        Call<MobBaseEntity> call = BuildApi.getAPIService().userDataQuery(Constants.URL_APP_Key, userCache.getToken(), userCache.getUid(), itemNameBase64);
+        call.enqueue(new Callback<MobBaseEntity>() {
+            @Override
+            public void onResponse(Call<MobBaseEntity> call, Response<MobBaseEntity> response) {
+                if (response.isSuccessful()) {
+                    MobBaseEntity body = response.body();
+                    if (body != null) {
+                        if (body.getMsg().equals("success")) {
+                            KLog.i("userDataQuery---success：" + body.toString());
+                            //解密
+                            Object result = body.getResult();
+                            if (result != null) {
+                                String resutStr = (String) result;
+                                if (!TextUtils.isEmpty(resutStr)) {
+                                    result = EncodeUtils.DecodeBase64(resutStr);
+                                }
+                            }
+                            myCallBack.onSuccess(what, result);
+                        } else {
+                            myCallBack.onFail(what, body.getMsg());
+                        }
+                    } else {
+                        myCallBack.onFail(what, GET_DATA_FAIL);
+                    }
+                } else {
+                    myCallBack.onFail(what, GET_DATA_FAIL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MobBaseEntity> call, Throwable t) {
+                KLog.e("userDataQuery-----onFailure：" + t.toString());
                 //数据错误
                 myCallBack.onFail(what, NET_FAIL);
             }

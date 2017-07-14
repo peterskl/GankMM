@@ -39,6 +39,9 @@ public class UserUtils {
     //获取用户信息
     public static MobUserInfo getUserCache() {
         MobUserInfo userInfo = (MobUserInfo) MyApplication.getACache().getAsObject(cache_UserLogin);
+        if(userInfo == null){
+            userInfo = new MobUserInfo();
+        }
         return userInfo;
     }
 

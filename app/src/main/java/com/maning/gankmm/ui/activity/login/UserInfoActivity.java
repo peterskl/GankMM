@@ -4,9 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.maning.gankmm.R;
+import com.maning.gankmm.bean.mob.MobUserInfo;
+import com.maning.gankmm.ui.activity.SettingActivity;
+import com.maning.gankmm.ui.activity.SupportPayActivity;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.utils.DialogUtils;
+import com.maning.gankmm.utils.IntentUtils;
+import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.UserUtils;
 import com.maning.librarycrashmonitor.utils.StatusBarUtil;
 
@@ -21,6 +28,8 @@ public class UserInfoActivity extends BaseActivity {
     CircleImageView mAvatar;
     @Bind(R.id.ll_content)
     LinearLayout mLlContent;
+
+    private MobUserInfo mUserCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,27 @@ public class UserInfoActivity extends BaseActivity {
     @OnClick(R.id.btn_back)
     public void btn_back() {
         this.finish();
+    }
+
+
+    @OnClick(R.id.item_app_collect)
+    public void item_app_collect() {
+        MySnackbar.makeSnackBarGreen(mAvatar,"正在开发中...");
+    }
+
+    @OnClick(R.id.item_app_setting)
+    public void item_app_setting() {
+        startActivity(new Intent(this, SettingActivity.class));
+    }
+
+    @OnClick(R.id.item_app_market)
+    public void item_app_market() {
+        IntentUtils.goToMarket(this, "com.maning.gankmm");
+    }
+
+    @OnClick(R.id.item_app_support)
+    public void item_app_support() {
+        startActivity(new Intent(this, SupportPayActivity.class));
     }
 
 
@@ -67,4 +97,19 @@ public class UserInfoActivity extends BaseActivity {
         this.finish();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshUserInfo();
+    }
+
+    private void refreshUserInfo() {
+        //刷新数据
+        mUserCache = UserUtils.getUserCache();
+        //设置头像
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.mipmap.icon_view_background);
+        options.error(R.mipmap.icon_view_background);
+        Glide.with(mContext).load(mUserCache.getAvatarLocal()).apply(options).into(mAvatar);
+    }
 }

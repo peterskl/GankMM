@@ -92,6 +92,8 @@ dependencies {
     compile 'com.android.support:support-v4:25.2.0'
     compile 'com.android.support:design:25.2.0'
     compile 'com.android.support:recyclerview-v7:25.2.0'
+    /* Dex分包 */
+    compile 'com.android.support:multidex:1.0.1'
     /*RecycleView的间隔线*/
     compile 'com.yqritc:recyclerview-flexibledivider:1.2.9'
     /*解析Json*/
@@ -154,7 +156,7 @@ dependencies {
     /* 图片浏览器所需 */
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
     /* 版本升级 */
-    compile 'com.github.maning0303:MNUpdateAPK:V1.0.3'
+    compile 'com.github.maning0303:MNUpdateAPK:V1.0.5'
     /* 拼音转换 */
     compile 'com.github.promeg:tinypinyin:2.0.3'
     /* 背景可以移动的View */
@@ -165,6 +167,5 @@ dependencies {
     compile 'com.contrarywind:Android-PickerView:3.2.5'
     /* 图片选择 */
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'
-    /* Dex分包 */
-    compile 'com.android.support:multidex:1.0.1'
+
 }

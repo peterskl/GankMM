@@ -14,7 +14,11 @@ public class MobUserInfo implements Serializable{
     private String userEmail;
     private String token;
     private String uid;
-    private String avatar;
+    private String avatarLocal;
+    private String avatarNet;
+    private String sex;
+    private String birth;
+    private String signature;
 
     public String getUserName() {
         return userName;
@@ -56,12 +60,44 @@ public class MobUserInfo implements Serializable{
         this.uid = uid;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getAvatarLocal() {
+        return avatarLocal;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setAvatarLocal(String avatarLocal) {
+        this.avatarLocal = avatarLocal;
+    }
+
+    public String getAvatarNet() {
+        return avatarNet;
+    }
+
+    public void setAvatarNet(String avatarNet) {
+        this.avatarNet = avatarNet;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
     @Override
@@ -72,7 +108,11 @@ public class MobUserInfo implements Serializable{
                 ", userEmail='" + userEmail + '\'' +
                 ", token='" + token + '\'' +
                 ", uid='" + uid + '\'' +
-                ", avatar='" + avatar + '\'' +
+                ", avatarLocal='" + avatarLocal + '\'' +
+                ", avatarNet='" + avatarNet + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birth='" + birth + '\'' +
+                ", signature='" + signature + '\'' +
                 '}';
     }
 }

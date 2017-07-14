@@ -96,12 +96,13 @@
             />
 
         <TextView
+            android:id="@+id/tv_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:layout_toLeftOf="@id/iv_right_arrow02"
-            android:text="马宁"
+            android:text="未填写"
             android:textColor="@color/black_text3_color"
             android:textSize="12sp"
             />
@@ -256,5 +257,18 @@
             android:background="@color/lineColor"
             />
     </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/btn_save"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/btn_background"
+        android:text="保存"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        />
 
 </LinearLayout>
