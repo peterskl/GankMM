@@ -193,7 +193,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     @OnClick(R.id.item_app_market)
     void item_app_market() {
-        IntentUtils.goToMarket(this, "com.maning.gankmm");
+        IntentUtils.goToMarket(this, getPackageName());
     }
 
     @Override

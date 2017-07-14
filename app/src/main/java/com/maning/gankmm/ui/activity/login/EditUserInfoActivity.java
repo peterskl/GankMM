@@ -81,8 +81,8 @@ public class EditUserInfoActivity extends BaseActivity {
         mUserCache = UserUtils.getUserCache();
         //设置头像
         RequestOptions options = new RequestOptions();
-        options.placeholder(R.mipmap.icon_view_background);
-        options.error(R.mipmap.icon_view_background);
+        options.placeholder(R.drawable.icon_default_avatar);
+        options.error(R.drawable.icon_default_avatar);
         Glide.with(mContext).load(mUserCache.getAvatarLocal()).apply(options).into(mAvatar);
         //设置用户名
         mTvUserName.setText(mUserCache.getUserName());
@@ -241,8 +241,8 @@ public class EditUserInfoActivity extends BaseActivity {
                         mUserCache.setAvatarLocal(compressPath);
 
                         RequestOptions options = new RequestOptions();
-                        options.placeholder(R.mipmap.icon_view_background);
-                        options.error(R.mipmap.icon_view_background);
+                        options.placeholder(R.drawable.icon_default_avatar);
+                        options.error(R.drawable.icon_default_avatar);
                         Glide.with(mContext).load(compressPath).apply(options).into(mAvatar);
                     }
                     break;
@@ -333,9 +333,21 @@ public class EditUserInfoActivity extends BaseActivity {
         //对比数据
         MobUserInfo userCacheBefore = UserUtils.getUserCache();
 
-        if (userCacheBefore.getSex().equals(mUserCache.getSex())
-                && userCacheBefore.getBirth().equals(mUserCache.getBirth())
-                && userCacheBefore.getSignature().equals(mUserCache.getSignature())
+        String avatarLocal = userCacheBefore.getAvatarLocal();
+        String sex = userCacheBefore.getSex();
+        String birth = userCacheBefore.getBirth();
+        String signature = userCacheBefore.getSignature();
+
+        String avatarLocal_new = mUserCache.getAvatarLocal();
+        String sex_new = mUserCache.getSex();
+        String birth_new = mUserCache.getBirth();
+        String signature_new = mUserCache.getSignature();
+
+        if (
+                (TextUtils.isEmpty(avatarLocal) ? "" : avatarLocal).equals((TextUtils.isEmpty(avatarLocal_new) ? "" : avatarLocal_new)) &&
+                        (TextUtils.isEmpty(sex) ? "" : sex).equals((TextUtils.isEmpty(sex_new) ? "" : sex_new)) &&
+                        (TextUtils.isEmpty(birth) ? "" : birth).equals((TextUtils.isEmpty(birth_new) ? "" : birth_new)) &&
+                        (TextUtils.isEmpty(signature) ? "" : signature).equals((TextUtils.isEmpty(signature_new) ? "" : signature_new))
                 ) {
             //关闭页面
             EditUserInfoActivity.this.finish();

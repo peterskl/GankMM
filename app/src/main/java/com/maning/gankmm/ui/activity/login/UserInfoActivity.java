@@ -65,7 +65,7 @@ public class UserInfoActivity extends BaseActivity {
 
     @OnClick(R.id.item_app_market)
     public void item_app_market() {
-        IntentUtils.goToMarket(this, "com.maning.gankmm");
+        IntentUtils.goToMarket(this, getPackageName());
     }
 
     @OnClick(R.id.item_app_support)
@@ -108,8 +108,8 @@ public class UserInfoActivity extends BaseActivity {
         mUserCache = UserUtils.getUserCache();
         //设置头像
         RequestOptions options = new RequestOptions();
-        options.placeholder(R.mipmap.icon_view_background);
-        options.error(R.mipmap.icon_view_background);
+        options.placeholder(R.drawable.icon_default_avatar);
+        options.error(R.drawable.icon_default_avatar);
         Glide.with(mContext).load(mUserCache.getAvatarLocal()).apply(options).into(mAvatar);
     }
 }
