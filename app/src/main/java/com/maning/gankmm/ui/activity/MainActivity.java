@@ -107,9 +107,9 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        KLog.i("onCreate");
 
         context = this;
+        mainPresenter = new MainPresenterImpl(this, this);
 
         initMyToolBar();
 
@@ -117,12 +117,6 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
         initIntent();
 
-        //申请权限
-        requestSomePermission();
-        //注册夜间模式广播监听
-        registerSkinReceiver();
-
-        mainPresenter = new MainPresenterImpl(this, this);
         mainPresenter.initDatas();
         mainPresenter.initAppUpdate();
         mainPresenter.initFeedBack();
@@ -133,6 +127,11 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
 
         setDefaultFragment();
 
+        //申请权限
+        requestSomePermission();
+        //注册夜间模式广播监听
+        registerSkinReceiver();
+
     }
 
     private void requestSomePermission() {
@@ -140,7 +139,8 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
         // 先判断是否有权限。
         if (!AndPermission.hasPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
                 !AndPermission.hasPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) ||
-                !AndPermission.hasPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                !AndPermission.hasPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ||
+                !AndPermission.hasPermission(MainActivity.this, Manifest.permission.CAMERA)
                 ) {
             // 申请权限。
             AndPermission.with(MainActivity.this)

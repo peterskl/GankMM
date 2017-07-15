@@ -3,6 +3,7 @@ package com.maning.gankmm.ui.activity.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -28,6 +29,8 @@ public class UserInfoActivity extends BaseActivity {
     CircleImageView mAvatar;
     @Bind(R.id.ll_content)
     LinearLayout mLlContent;
+    @Bind(R.id.tv_user_name)
+    TextView mTvUserName;
 
     private MobUserInfo mUserCache;
 
@@ -38,6 +41,7 @@ public class UserInfoActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         StatusBarUtil.setTranslucentForImageView(this, 20, mLlContent);
+
     }
 
 
@@ -118,5 +122,7 @@ public class UserInfoActivity extends BaseActivity {
         options.placeholder(R.drawable.icon_default_avatar);
         options.error(R.drawable.icon_default_avatar);
         Glide.with(mContext).load(mUserCache.getAvatarLocal()).apply(options).into(mAvatar);
+        //设置用户名
+        mTvUserName.setText(mUserCache.getUserName());
     }
 }
