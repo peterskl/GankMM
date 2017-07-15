@@ -18,6 +18,8 @@
     10.夜间模式的使用
     11.三方开源库的使用
     12.Android 7.0适配安装升级
+    13.自定义View的相关知识
+
 
 
 ## 所有的数据来自：
@@ -83,6 +85,11 @@
 
 
 ## 更新日志：
+### V1.6.6 (2017-7-15):
+    1.新增用户系统,可以注册登录了
+    2.修复天气页面部分时间段崩溃问题
+    3.优化页面UI
+
 ### V1.6.5:
     1.工具合集中开放汽车信息查询功能
     2.工具合集中开放菜谱查询功能
@@ -218,6 +225,10 @@
 ###### 图片浏览 [MNImageBrowser](https://github.com/maning0303/MNImageBrowser)
 ###### 汉字转拼音 [TinyPinyin](https://github.com/promeG/TinyPinyin)
 ###### 快速跳跃分组的侧边栏控件 [WaveSideBar](https://github.com/Solartisan/WaveSideBar)
+###### 背景可以移动的View [KenBurnsView](https://github.com/flavioarfaria/KenBurnsView)
+###### 圆形图片 [CircleImageView](https://github.com/hdodenhof/CircleImageView)
+###### 滚轮选择器 [Android-PickerView](https://github.com/Bigkoo/Android-PickerView)
+###### 图片选择器 [PictureSelector](https://github.com/LuckSiege/PictureSelector)
 
 
 

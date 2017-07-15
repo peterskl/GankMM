@@ -145,7 +145,7 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
             // 申请权限。
             AndPermission.with(MainActivity.this)
                     .requestCode(100)
-                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION)
+                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CAMERA)
                     .send();
         }
     }
