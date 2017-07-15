@@ -91,102 +91,12 @@ public class AboutActivity extends BaseActivity {
 
     @OnClick(R.id.tvGank)
     void tvGank() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.gankio), getString(R.string.gankio));
+        IntentUtils.startToWebActivity(this, null, getString(R.string.gankio), getString(R.string.gankio));
     }
 
-    /*------------------感谢-------------------*/
-    @OnClick(R.id.tv_github01)
-    void tv_github01() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_01));
+    @OnClick(R.id.tvOpenFrame)
+    void tvOpenFrame() {
+        startActivity(new Intent(mContext, OpenFrameActivity.class));
     }
-    @OnClick(R.id.tv_github02)
-    void tv_github02() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_02));
-    }
-    @OnClick(R.id.tv_github03)
-    void tv_github03() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_03));
-    }
-    @OnClick(R.id.tv_github04)
-    void tv_github04() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_04));
-    }
-    @OnClick(R.id.tv_github05)
-    void tv_github05() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_05));
-    }
-    @OnClick(R.id.tv_github06)
-    void tv_github06() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_06));
-    }
-    @OnClick(R.id.tv_github07)
-    void tv_github07() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_07));
-    }
-    @OnClick(R.id.tv_github08)
-    void tv_github08() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_08));
-    }
-    @OnClick(R.id.tv_github09)
-    void tv_github09() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_09));
-    }
-    @OnClick(R.id.tv_github10)
-    void tv_github10() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_10));
-    }
-    @OnClick(R.id.tv_github11)
-    void tv_github11() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_11));
-    }
-    @OnClick(R.id.tv_github12)
-    void tv_github12() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_12));
-    }
-    @OnClick(R.id.tv_github13)
-    void tv_github13() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_13));
-    }
-    @OnClick(R.id.tv_github14)
-    void tv_github14() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_14));
-    }
-    @OnClick(R.id.tv_github15)
-    void tv_github15() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_15));
-    }
-    @OnClick(R.id.tv_github16)
-    void tv_github16() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_16));
-    }
-    @OnClick(R.id.tv_github17)
-    void tv_github17() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_17));
-    }
-    @OnClick(R.id.tv_github18)
-    void tv_github18() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_18));
-    }
-    @OnClick(R.id.tv_github19)
-    void tv_github19() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_19));
-    }
-    @OnClick(R.id.tv_github20)
-    void tv_github20() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_20));
-    }
-    @OnClick(R.id.tv_github21)
-    void tv_github21() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_21));
-    }
-    @OnClick(R.id.tv_github22)
-    void tv_github22() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_22));
-    }
-    @OnClick(R.id.tv_github23)
-    void tv_github23() {
-        IntentUtils.startToWebActivity(this, null,getString(R.string.github), getString(R.string.github_23));
-    }
-
 
 }

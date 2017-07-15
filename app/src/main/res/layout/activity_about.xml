@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?app_background"
-    android:fitsSystemWindows="true"
-    android:gravity="center_horizontal">
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:background="?app_background"
+                                                 android:fitsSystemWindows="true"
+                                                 android:gravity="center_horizontal">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="20dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/ic_launcher"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/app_name"
                     android:textColor="?toolbar_title_color"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/tv_app_version"
@@ -51,7 +51,7 @@
                     android:layout_marginTop="10dp"
                     android:text="版本号：1.0"
                     android:textColor="?toolbar_title_color"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"/>
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -86,7 +86,7 @@
                 android:layout_marginTop="20dp"
                 android:text="作者Github地址："
                 android:textColor="?black_text1_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tvMyGithub"
@@ -97,7 +97,7 @@
                 android:gravity="center"
                 android:text="@string/github_my"
                 android:textColor="?main_text_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                 android:layout_marginTop="20dp"
                 android:text="APP下载地址："
                 android:textColor="?black_text1_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tvdownload"
@@ -117,7 +117,7 @@
                 android:gravity="center"
                 android:text="点击下载（ http://fir.im/gankmm ）"
                 android:textColor="?main_text_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                 android:layout_marginTop="20dp"
                 android:text="项目数据来源："
                 android:textColor="?black_text1_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tvGank"
@@ -137,270 +137,28 @@
                 android:gravity="center"
                 android:text="干活集中营（www.gank.io）提供！"
                 android:textColor="?main_text_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="20dp"
-                android:text="开源框架："
+                android:text="开源框架使用："
                 android:textColor="?black_text1_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
-                android:id="@+id/tv_github01"
+                android:id="@+id/tvOpenFrame"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginTop="10dp"
                 android:background="?item_setting_bg"
                 android:gravity="center"
-                android:text="RecyclerView-FlexibleDivider"
+                android:text="跳转开源框架使用详情"
                 android:textColor="?main_text_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
-            <TextView
-                android:id="@+id/tv_github02"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="gson"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github03"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="okhttp"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github04"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="retrofit"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github05"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="glide"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github06"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="KLog"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-
-            <TextView
-                android:id="@+id/tv_github07"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="Android-SVProgressHUD"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-
-            <TextView
-                android:id="@+id/tv_github08"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="butterknife"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github09"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="SwipeToLoadLayout"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github10"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="ThumbUp"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github11"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="material-dialogs"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github12"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="jsoup"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github13"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="AndPermission"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github14"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="SmartTabLayout"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github15"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="SwitcherView"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-            <TextView
-                android:id="@+id/tv_github16"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="fab-speed-dial"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github17"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="Blurry"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github18"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="chuck"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github19"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="scrollablepanel"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github20"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="expandableTextView"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github21"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="MNCalendar"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github22"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="CrashMonitor"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_github23"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="10dp"
-                android:background="?item_setting_bg"
-                android:gravity="center"
-                android:text="PhotoView"
-                android:textColor="?main_text_color"
-                android:textSize="14sp" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

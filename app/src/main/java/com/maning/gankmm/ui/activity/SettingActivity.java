@@ -169,6 +169,12 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     }
 
+    @OnClick(R.id.item_app_open_frame)
+    void item_app_open_frame() {
+        //跳转开源框架展示页面
+        startActivity(new Intent(this, OpenFrameActivity.class));
+    }
+
     //配置头条
     @OnClick(R.id.item_gank_headline)
     void item_gank_headline() {
