@@ -25,6 +25,7 @@ import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.NotifyUtil;
+import com.maning.gankmm.utils.SharePreUtil;
 import com.maning.updatelibrary.InstallUtils;
 import com.socks.library.KLog;
 import com.yanzhenjie.permission.AndPermission;
@@ -123,7 +124,28 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     @OnClick(R.id.item_feedback)
     void item_feedback() {
-        IntentUtils.startToWebActivity(this, "", "意见反馈", "https://github.com/maning0303/GankMM/issues");
+
+        boolean feedbackKey_showAlertDialog = SharePreUtil.getBooleanData(this, "FeedbackKey_ShowAlertDialog", false);
+        if(!feedbackKey_showAlertDialog){
+            DialogUtils.showMyDialog(this, "通知", "由于个人原因,暂时移除了之前版本的意见反馈,暂时把意见反馈链接到了GitHub项目的Issues地址,请你谅解!", "确定", "", new DialogUtils.OnDialogClickListener() {
+                @Override
+                public void onConfirm() {
+                    //意见反馈地址
+                    SharePreUtil.saveBooleanData(mContext, "FeedbackKey_ShowAlertDialog", true);
+                    IntentUtils.startToWebActivity(mContext, "", "意见反馈", "https://github.com/maning0303/GankMM/issues");
+                }
+
+                @Override
+                public void onCancel() {
+
+                }
+            });
+        }else{
+            //意见反馈地址
+            SharePreUtil.saveBooleanData(mContext, "FeedbackKey_ShowAlertDialog", true);
+            IntentUtils.startToWebActivity(mContext, "", "意见反馈", "https://github.com/maning0303/GankMM/issues");
+        }
+
     }
 
     @OnClick(R.id.item_app_update)
