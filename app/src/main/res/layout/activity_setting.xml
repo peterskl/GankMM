@@ -144,7 +144,7 @@
                     android:layout_height="44dp"
                     android:background="?item_setting_bg"
                     android:visibility="visible"
-                    app:setting_red_dot="true"
+                    app:setting_red_dot="false"
                     app:setting_title="意见反馈"/>
 
                 <ImageView

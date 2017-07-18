@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
-import com.alibaba.sdk.android.feedback.util.IWxCallback;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.cache.DiskCache;
 import com.maning.gankmm.R;
@@ -228,29 +226,7 @@ public class SettingPresenterImpl extends BasePresenterImpl<ISettingView> implem
 
     @Override
     public void initFeedBack() {
-        setFeedBackState();
-        FeedbackAPI.getFeedbackUnreadCount(context, "", new IWxCallback() {
-            @Override
-            public void onSuccess(final Object... result) {
-                if (result != null && result.length == 1 && result[0] instanceof Integer) {
-                    int count = (Integer) result[0];
-                    if (count > 0) {
-                        SharePreUtil.saveBooleanData(context, Constants.SPFeedback, true);
-                        setFeedBackState();
-                    }
-                }
-            }
 
-            @Override
-            public void onError(int code, String info) {
-
-            }
-
-            @Override
-            public void onProgress(int progress) {
-
-            }
-        });
     }
 
     @Override
@@ -270,13 +246,6 @@ public class SettingPresenterImpl extends BasePresenterImpl<ISettingView> implem
             if (mView != null) {
                 mView.showToast(context.getString(R.string.mm_no_net));
             }
-        }
-    }
-
-    private void setFeedBackState() {
-        boolean feedback = SharePreUtil.getBooleanData(context, Constants.SPFeedback, false);
-        if (mView != null) {
-            mView.setFeedbackState(feedback);
         }
     }
 

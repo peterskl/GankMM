@@ -15,7 +15,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.AppUpdateInfo;
-import com.maning.gankmm.constant.Constants;
 import com.maning.gankmm.skin.SkinManager;
 import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.ui.iView.ISettingView;
@@ -26,7 +25,6 @@ import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.NotifyUtil;
-import com.maning.gankmm.utils.SharePreUtil;
 import com.maning.updatelibrary.InstallUtils;
 import com.socks.library.KLog;
 import com.yanzhenjie.permission.AndPermission;
@@ -125,11 +123,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     @OnClick(R.id.item_feedback)
     void item_feedback() {
-        //保存状态
-        SharePreUtil.saveBooleanData(this, Constants.SPFeedback, false);
-        setFeedbackState(false);
-        IntentUtils.startToFeedBackPage(this);
-
+        IntentUtils.startToWebActivity(this, "", "意见反馈", "https://github.com/maning0303/GankMM/issues");
     }
 
     @OnClick(R.id.item_app_update)
@@ -236,12 +230,7 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
     @Override
     public void setFeedbackState(final boolean flag) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                itemFeedback.setRedDot(flag);
-            }
-        });
+
     }
 
     @Override

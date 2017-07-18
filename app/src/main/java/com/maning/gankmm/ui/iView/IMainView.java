@@ -10,8 +10,6 @@ public interface IMainView {
 
     void showToast(String msg);
 
-    void showFeedBackDialog();
-
     void showAppUpdateDialog(AppUpdateInfo appUpdateInfo);
 
     void initWeatherInfo(WeatherBeseEntity.WeatherBean weatherEntity);

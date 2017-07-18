@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 
-import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.maning.gankmm.BuildConfig;
 import com.maning.gankmm.utils.ACache;
 import com.maning.gankmm.utils.NetUtils;
@@ -61,9 +60,6 @@ public class MyApplication extends Application {
         //初始化异常捕获
         initCrash();
 
-        //初始化意见反馈
-        initAliFeedBack();
-
         //开启违例检测:StrictMode
         if (BuildConfig.LOG_DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
@@ -76,10 +72,6 @@ public class MyApplication extends Application {
         KLog.init(BuildConfig.LOG_DEBUG, "GankMM");
     }
 
-    private void initAliFeedBack() {
-        //第二个参数是appkey，就是百川应用创建时候的appkey
-        FeedbackAPI.initAnnoy(this, "23444312");
-    }
 
     private void initJpush() {
         try {

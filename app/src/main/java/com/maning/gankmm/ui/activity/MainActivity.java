@@ -421,30 +421,6 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
     }
 
     @Override
-    public void showFeedBackDialog() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                DialogUtils.showMyDialog(MainActivity.this,
-                        getString(R.string.gank_dialog_title_notify),
-                        getString(R.string.gank_dialog_msg_feedback),
-                        "查看", "等一会去", new DialogUtils.OnDialogClickListener() {
-                            @Override
-                            public void onConfirm() {
-                                SharePreUtil.saveBooleanData(context, Constants.SPFeedback, false);
-                                IntentUtils.startToFeedBackPage(MainActivity.this);
-                            }
-
-                            @Override
-                            public void onCancel() {
-
-                            }
-                        });
-            }
-        });
-    }
-
-    @Override
     public void showAppUpdateDialog(final AppUpdateInfo appUpdateInfo) {
         String title = "检测到新版本:V" + appUpdateInfo.getVersionShort();
         Double appSize = Double.parseDouble(appUpdateInfo.getBinary().getFsize() + "") / 1024 / 1024;

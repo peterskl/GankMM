@@ -3,8 +3,6 @@ package com.maning.gankmm.ui.presenter.impl;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
-import com.alibaba.sdk.android.feedback.util.IWxCallback;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -109,31 +107,7 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
 
     @Override
     public void initFeedBack() {
-        FeedbackAPI.getFeedbackUnreadCount(context, "", new IWxCallback() {
-            @Override
-            public void onSuccess(final Object... result) {
-                if (result != null && result.length == 1 && result[0] instanceof Integer) {
-                    int count = (Integer) result[0];
-                    KLog.i("反馈：" + count);
-                    if (count > 0) {
-                        SharePreUtil.saveBooleanData(context, Constants.SPFeedback, true);
-                        if (mView != null) {
-                            mView.showFeedBackDialog();
-                        }
-                    }
-                }
-            }
 
-            @Override
-            public void onError(int code, String info) {
-
-            }
-
-            @Override
-            public void onProgress(int progress) {
-
-            }
-        });
     }
 
     @Override
