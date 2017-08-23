@@ -1,8 +1,8 @@
 # GankMM -- 干货营
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/icon.png)<br>
 
-##### 干货营 是干货集中营（Gank.io）的三方客户端，每天一张美女图片，一个视频短片，若干程序干货，周一到周五每天更新。
-#####（Material Design & MVP & Retrofit + OKHttp & RecyclerView ...)
+#### 干货营 是干货集中营（Gank.io）的三方客户端，每天一张美女图片，一个视频短片，若干程序干货，周一到周五每天更新。
+#### (Material Design & MVP & Retrofit + OKHttp & RecyclerView ...)
 
 
 # 知识点：
