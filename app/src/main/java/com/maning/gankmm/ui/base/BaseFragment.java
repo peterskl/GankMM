@@ -9,6 +9,9 @@ import com.umeng.analytics.MobclickAgent;
 
 public class BaseFragment extends Fragment {
 
+    //统计名字判断
+    public String className;
+
     private SVProgressHUD mSVProgressHUD;
 
 
@@ -17,6 +20,8 @@ public class BaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        className = this.getClass().getSimpleName();
 
         context = getActivity();
 
@@ -43,13 +48,20 @@ public class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+        //CategoryFragment 内嵌套Fragment,统计子页面
+        if (!"CategoryFragment".equals(className)) {
+            MobclickAgent.onPageStart(className);
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
+        //CategoryFragment 内嵌套Fragment,统计子页面
+        if (!"CategoryFragment".equals(className)) {
+            MobclickAgent.onPageEnd(className);
+        }
+
     }
 
 }

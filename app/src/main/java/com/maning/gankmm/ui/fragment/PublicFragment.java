@@ -18,9 +18,7 @@ import com.maning.gankmm.ui.adapter.RecyclePublicAdapter;
 import com.maning.gankmm.ui.base.BaseFragment;
 import com.maning.gankmm.ui.iView.IPublicView;
 import com.maning.gankmm.ui.presenter.impl.PublicPresenterImpl;
-import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
-import com.socks.library.KLog;
 
 import java.util.List;
 
@@ -55,14 +53,14 @@ public class PublicFragment extends BaseFragment implements OnRefreshListener, O
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             flagFragment = getArguments().getString(Constants.FlagFragment);
-            KLog.i("CommentFragment-----onCreate:" + flagFragment);
+            //这个页面单独统计
+            className = "CategoryFragment-" + flagFragment;
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        KLog.i("PublicFragment-----onCreateView");
         View view = inflater.inflate(R.layout.fragment_common, container, false);
         ButterKnife.bind(this, view);
 
@@ -76,8 +74,6 @@ public class PublicFragment extends BaseFragment implements OnRefreshListener, O
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        KLog.i("PublicFragment-----onViewCreated");
-
         publicPresenter = new PublicPresenterImpl(getActivity(), this, flagFragment);
 
         publicPresenter.getDBDatas();

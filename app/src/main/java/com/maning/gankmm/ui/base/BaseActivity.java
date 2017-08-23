@@ -118,14 +118,22 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+        // MainActivity 内嵌套Fragment，应在Fragment中统计页面
+        String className = this.getClass().getSimpleName();
+        if (!"MainActivity".equals(className)) {
+            MobclickAgent.onPageStart(className);   // 统计页面
+        }
         MobclickAgent.onResume(this);       //统计时长
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+        // MainActivity 内嵌套Fragment，应在Fragment中统计页面
+        String className = this.getClass().getSimpleName();
+        if (!"MainActivity".equals(className)) {
+            MobclickAgent.onPageEnd(className);   // 统计页面
+        }
         MobclickAgent.onPause(this);
     }
 

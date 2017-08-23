@@ -15,6 +15,7 @@ import com.maning.gankmm.utils.NetUtils;
 import com.maning.librarycrashmonitor.main.MCrashMonitor;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.socks.library.KLog;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,6 +61,9 @@ public class MyApplication extends Application {
         //初始化异常捕获
         initCrash();
 
+        //Umeng统计相关
+        initUmeng();
+
         //开启违例检测:StrictMode
         if (BuildConfig.LOG_DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
@@ -68,8 +72,13 @@ public class MyApplication extends Application {
 
     }
 
+    private void initUmeng() {
+        //禁止默认的页面统计方式
+        MobclickAgent.openActivityDurationTrack(false);
+    }
+
     private void initLog() {
-        KLog.init(BuildConfig.LOG_DEBUG, "GankMM");
+        KLog.init(BuildConfig.LOG_DEBUG, "---GankMM---");
     }
 
 
