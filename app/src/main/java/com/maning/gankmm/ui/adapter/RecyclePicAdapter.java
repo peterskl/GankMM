@@ -2,6 +2,7 @@ package com.maning.gankmm.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -12,9 +13,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.ldoublem.thumbUplib.ThumbUpView;
 import com.maning.gankmm.R;
@@ -24,6 +29,7 @@ import com.maning.gankmm.utils.DensityUtil;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.library.SwitcherView;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,12 +50,19 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private LayoutInflater layoutInflater;
     private int screenWidth;
     private MyViewHolderHeader myViewHolderHeader;
+    private RequestOptions options;
 
     public RecyclePicAdapter(Context context, List<GankEntity> commonDataResults) {
         this.context = context;
         this.commonDataResults = commonDataResults;
         layoutInflater = LayoutInflater.from(this.context);
         screenWidth = DensityUtil.getWidth(context);
+
+        options = new RequestOptions();
+        options.fitCenter();
+        options.placeholder(R.drawable.pic_gray_bg);
+//            options.diskCacheStrategy(DiskCacheStrategy.ALL);
+
     }
 
     private OnItemClickLitener mOnItemClickLitener;
@@ -120,7 +133,7 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof MyViewHolderHeader) {
             final MyViewHolderHeader viewHolder = (MyViewHolderHeader) holder;
             StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
@@ -146,8 +159,8 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 viewHolder.switcherView.setVisibility(View.GONE);
             }
         } else if (holder instanceof MyViewHolder) {
-            final MyViewHolder viewHolder = (MyViewHolder) holder;
             final int newPosition = position - 1;
+            final MyViewHolder viewHolder = (MyViewHolder) holder;
             final GankEntity resultsEntity = commonDataResults.get(newPosition);
 
             String time = resultsEntity.getPublishedAt().split("T")[0];
@@ -161,19 +174,21 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 layoutParams.height = resultsEntity.getItemHeight();
             }
 
-
             viewHolder.image.setImageResource(R.drawable.pic_gray_bg);
-            RequestOptions options = new RequestOptions();
-            options.fitCenter();
-            options.placeholder(R.drawable.pic_gray_bg);
-            options.diskCacheStrategy(DiskCacheStrategy.ALL);
             Glide.with(context)
                     .asBitmap()
                     .load(url)
                     .apply(options)
-                    .into(new SimpleTarget<Bitmap>() {
+                    .thumbnail(0.2f)
+                    .listener(new RequestListener<Bitmap>() {
                         @Override
-                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                            KLog.e("图片加载失败：" + e.toString());
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
                             int width = resource.getWidth();
                             int height = resource.getHeight();
                             //计算高宽比
@@ -185,8 +200,26 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                             }
 
                             viewHolder.image.setImageBitmap(resource);
+                            return false;
                         }
-                    });
+                    })
+                    .into(viewHolder.image);
+//                    .into(new SimpleTarget<Bitmap>() {
+//                        @Override
+//                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+//                            int width = resource.getWidth();
+//                            int height = resource.getHeight();
+//                            //计算高宽比
+//                            int finalHeight = (screenWidth / 2) * height / width;
+//                            if (resultsEntity.getItemHeight() <= 0) {
+//                                resultsEntity.setItemHeight(finalHeight);
+//                                ViewGroup.LayoutParams layoutParams = viewHolder.rlRoot.getLayoutParams();
+//                                layoutParams.height = resultsEntity.getItemHeight();
+//                            }
+//
+//                            viewHolder.image.setImageBitmap(resource);
+//                        }
+//                    });
 
             //查询是否存在收藏
             boolean isCollect = new CollectDao().queryOneCollectByID(resultsEntity.get_id());

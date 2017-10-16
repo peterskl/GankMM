@@ -230,7 +230,7 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
                 if (provinceName.endsWith("省") || provinceName.endsWith("市")) {
                     provinceName = provinceName.substring(0, provinceName.length() - 1);
                 }
-                getCityWeather(cityName, provinceName);
+                getCityWeather(provinceName, cityName);
             } else {
                 //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                 KLog.e("AmapError", "location Error, ErrCode:"
