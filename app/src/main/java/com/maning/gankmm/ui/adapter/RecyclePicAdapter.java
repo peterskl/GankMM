@@ -3,6 +3,7 @@ package com.maning.gankmm.ui.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
+import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.ldoublem.thumbUplib.ThumbUpView;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.GankEntity;
+import com.maning.gankmm.bean.PicSizeEntity;
 import com.maning.gankmm.db.CollectDao;
 import com.maning.gankmm.utils.DensityUtil;
 import com.maning.gankmm.utils.IntentUtils;
@@ -36,6 +38,10 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static android.R.attr.numberPickerStyle;
+import static android.R.attr.resource;
+import static android.R.attr.width;
 
 /**
  * Created by maning on 16/5/17.
@@ -51,17 +57,18 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private int screenWidth;
     private MyViewHolderHeader myViewHolderHeader;
     private RequestOptions options;
+    //保存图片Size的集合
+    private ArrayMap<String, PicSizeEntity> picSizeEntityArrayMap = new ArrayMap<>();
 
     public RecyclePicAdapter(Context context, List<GankEntity> commonDataResults) {
         this.context = context;
         this.commonDataResults = commonDataResults;
         layoutInflater = LayoutInflater.from(this.context);
         screenWidth = DensityUtil.getWidth(context);
-
         options = new RequestOptions();
         options.fitCenter();
         options.placeholder(R.drawable.pic_gray_bg);
-//            options.diskCacheStrategy(DiskCacheStrategy.ALL);
+        options.diskCacheStrategy(DiskCacheStrategy.ALL);
 
     }
 
@@ -90,6 +97,7 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         updateHeadLinesStrs();
         notifyDataSetChanged();
     }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -169,12 +177,16 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             //图片显示
             String url = resultsEntity.getUrl();
 
-            if (resultsEntity.getItemHeight() > 0) {
+            PicSizeEntity picSizeEntity = picSizeEntityArrayMap.get(resultsEntity.getUrl());
+            if (picSizeEntity != null && !picSizeEntity.isNull()) {
+                int width = picSizeEntity.getPicWidth();
+                int height = picSizeEntity.getPicHeight();
+                //计算高宽比
+                int finalHeight = (screenWidth / 2) * height / width;
                 ViewGroup.LayoutParams layoutParams = viewHolder.rlRoot.getLayoutParams();
-                layoutParams.height = resultsEntity.getItemHeight();
+                layoutParams.height = finalHeight;
             }
 
-            viewHolder.image.setImageResource(R.drawable.pic_gray_bg);
             Glide.with(context)
                     .asBitmap()
                     .load(url)
@@ -189,37 +201,20 @@ public class RecyclePicAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                         @Override
                         public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                            int width = resource.getWidth();
-                            int height = resource.getHeight();
-                            //计算高宽比
-                            int finalHeight = (screenWidth / 2) * height / width;
-                            if (resultsEntity.getItemHeight() <= 0) {
-                                resultsEntity.setItemHeight(finalHeight);
+                            PicSizeEntity picSizeEntity = picSizeEntityArrayMap.get(resultsEntity.getUrl());
+                            if (picSizeEntity == null || picSizeEntity.isNull()) {
+                                int width = resource.getWidth();
+                                int height = resource.getHeight();
+                                //计算高宽比
+                                int finalHeight = (screenWidth / 2) * height / width;
                                 ViewGroup.LayoutParams layoutParams = viewHolder.rlRoot.getLayoutParams();
-                                layoutParams.height = resultsEntity.getItemHeight();
+                                layoutParams.height = finalHeight;
+                                picSizeEntityArrayMap.put(resultsEntity.getUrl(), new PicSizeEntity(width, height));
                             }
-
-                            viewHolder.image.setImageBitmap(resource);
                             return false;
                         }
                     })
                     .into(viewHolder.image);
-//                    .into(new SimpleTarget<Bitmap>() {
-//                        @Override
-//                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
-//                            int width = resource.getWidth();
-//                            int height = resource.getHeight();
-//                            //计算高宽比
-//                            int finalHeight = (screenWidth / 2) * height / width;
-//                            if (resultsEntity.getItemHeight() <= 0) {
-//                                resultsEntity.setItemHeight(finalHeight);
-//                                ViewGroup.LayoutParams layoutParams = viewHolder.rlRoot.getLayoutParams();
-//                                layoutParams.height = resultsEntity.getItemHeight();
-//                            }
-//
-//                            viewHolder.image.setImageBitmap(resource);
-//                        }
-//                    });
 
             //查询是否存在收藏
             boolean isCollect = new CollectDao().queryOneCollectByID(resultsEntity.get_id());
