@@ -18,6 +18,8 @@ android {
 
         // 设置MultiDex可用
         multiDexEnabled true
+        flavorDimensions "versionCode"
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
 
     signingConfigs {//签名信息
@@ -57,16 +59,16 @@ android {
             proguardFiles customerproguardFile.path
             buildConfigField "boolean", "LOG_DEBUG", "false"
             // 自定义输出配置
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def outputFile = output.outputFile
-                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        // 输出apk名称为xxx_release_v1.0_wandoujia.apk
-                        def fileName = "gankmm_${variant.buildType.name}_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
-                        output.outputFile = new File(outputFile.parent + "/${variant.buildType.name}", fileName)
-                    }
-                }
-            }
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        // 输出apk名称为xxx_release_v1.0_wandoujia.apk
+//                        def fileName = "gankmm_${variant.buildType.name}_v${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+//                        output.outputFile = new File(outputFile.parent + "/${variant.buildType.name}", fileName)
+//                    }
+//                }
+//            }
         }
         debug {
             //混淆
@@ -77,7 +79,6 @@ android {
         }
 
     }
-
 }
 
 repositories{
@@ -88,10 +89,10 @@ repositories{
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:support-v4:25.2.0'
-    compile 'com.android.support:design:25.2.0'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     /* Dex分包 */
     compile 'com.android.support:multidex:1.0.1'
     /*RecycleView的间隔线*/
@@ -103,8 +104,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     /*图片加载Glide*/
-//    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
-//    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     /*日志*/
     compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
@@ -162,5 +162,7 @@ dependencies {
     compile 'com.contrarywind:Android-PickerView:3.2.5'
     /* 图片选择 */
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'
+    /* 提示框 */
+    compile 'com.github.maning0303:MNProgressHUD:V1.0.2'
 
 }
