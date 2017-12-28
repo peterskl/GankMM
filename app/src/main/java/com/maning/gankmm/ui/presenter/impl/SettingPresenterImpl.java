@@ -214,6 +214,7 @@ public class SettingPresenterImpl extends BasePresenterImpl<ISettingView> implem
                         //清除内存缓存
                         Glide.get(context).clearMemory();
                         if (mView != null) {
+                            mView.hideBaseProgressDialog();
                             mView.showBasesProgressSuccess("清除完毕");
                             initCache();
                         }

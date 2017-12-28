@@ -34,6 +34,7 @@ public class ImagePresenterImpl extends BasePresenterImpl<IImageView> implements
         mView.showBaseProgressDialog("正在保存...");
         final Bitmap bitmap = mView.getCurrentImageViewBitmap();
         if (bitmap == null) {
+            mView.hideBaseProgressDialog();
             mView.showBasesProgressError(context.getResources().getString(R.string.gank_hint_save_pic_fail));
             return;
         }
@@ -48,6 +49,7 @@ public class ImagePresenterImpl extends BasePresenterImpl<IImageView> implements
                         if(mView == null){
                             return;
                         }
+                        mView.hideBaseProgressDialog();
                         if (saveBitmapToSD) {
                             mView.showBasesProgressSuccess("保存成功，保存目录：\n" + Constants.BasePath);
                         } else {
@@ -67,6 +69,7 @@ public class ImagePresenterImpl extends BasePresenterImpl<IImageView> implements
         mView.showBaseProgressDialog("正在设置壁纸...");
         final Bitmap bitmap = mView.getCurrentImageViewBitmap();
         if (bitmap == null) {
+            mView.hideBaseProgressDialog();
             mView.showBasesProgressError("设置失败");
             return;
         }
@@ -88,6 +91,7 @@ public class ImagePresenterImpl extends BasePresenterImpl<IImageView> implements
                             MyApplication.getHandler().post(new Runnable() {
                                 @Override
                                 public void run() {
+                                    mView.hideBaseProgressDialog();
                                     mView.showBasesProgressSuccess("设置成功");
                                 }
                             });
@@ -95,6 +99,7 @@ public class ImagePresenterImpl extends BasePresenterImpl<IImageView> implements
                             MyApplication.getHandler().post(new Runnable() {
                                 @Override
                                 public void run() {
+                                    mView.hideBaseProgressDialog();
                                     mView.showBasesProgressError("设置失败");
                                 }
                             });

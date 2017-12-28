@@ -123,8 +123,6 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     /*日志*/
     compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
-    /*提示库*/
-    compile 'com.bigkoo:svprogresshud:1.0.4'
     /*注解*/
     compile 'com.jakewharton:butterknife:7.0.1'
     /*下拉刷新框架*/
@@ -178,7 +176,7 @@ dependencies {
     /* 图片选择 */
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'
     /* 提示框 */
-    compile 'com.github.maning0303:MNProgressHUD:V1.0.2'
+    compile 'com.github.maning0303:MNProgressHUD:V1.0.3'
     /* 状态栏 */
     compile 'com.jaeger.statusbarutil:library:1.4.0'
 

@@ -24,7 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -38,6 +37,8 @@ import com.maning.gankmm.ui.view.ProgressWheel;
 import com.maning.gankmm.utils.BitmapUtils;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
+import com.maning.mndialoglibrary.MProgressDialog;
+import com.maning.mndialoglibrary.MStatusDialog;
 import com.umeng.analytics.MobclickAgent;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.PermissionListener;
@@ -78,7 +79,8 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
     private ArrayList<String> imageUrlList = new ArrayList<>();
     private int currentPosition;
 
-    private SVProgressHUD mSVProgressHUD;
+    private MStatusDialog mStatusDialog;
+    private MProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +90,11 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
 
         context = this;
 
-        mSVProgressHUD = new SVProgressHUD(this);
         mAnimation01 = AnimationUtils.loadAnimation(this, R.anim.translate_up);
         mAnimation02 = AnimationUtils.loadAnimation(this, R.anim.translate_down);
         mAnimation03 = AnimationUtils.loadAnimation(this, R.anim.alpha_bg);
+
+        initDialog();
 
         initIntent();
 
@@ -101,6 +104,12 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
 
         initViewPager();
 
+    }
+
+    private void initDialog() {
+        //新建一个Dialog
+        mProgressDialog = new MProgressDialog.Builder(this).build();
+        mStatusDialog = new MStatusDialog(this);
     }
 
     private void setWindowFullScreen() {
@@ -262,6 +271,7 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
                         MyApplication.getHandler().post(new Runnable() {
                             @Override
                             public void run() {
+                                dissmissProgressDialog();
                                 showProgressSuccess("设置成功");
                             }
                         });
@@ -269,6 +279,7 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
                         MyApplication.getHandler().post(new Runnable() {
                             @Override
                             public void run() {
+                                dissmissProgressDialog();
                                 showProgressError("设置失败");
                             }
                         });
@@ -481,7 +492,7 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
 
     public void showProgressDialog() {
         dissmissProgressDialog();
-        mSVProgressHUD.showWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.Black);
+        mProgressDialog.show();
     }
 
     public void showProgressDialog(String message) {
@@ -489,23 +500,20 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
             showProgressDialog();
         } else {
             dissmissProgressDialog();
-            mSVProgressHUD.showWithStatus(message, SVProgressHUD.SVProgressHUDMaskType.Black);
+            mProgressDialog.show(message);
         }
     }
 
     public void showProgressSuccess(String message) {
-        dissmissProgressDialog();
-        mSVProgressHUD.showSuccessWithStatus(message, SVProgressHUD.SVProgressHUDMaskType.Black);
+        mStatusDialog.show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_success));
     }
 
     public void showProgressError(String message) {
-        dissmissProgressDialog();
-        mSVProgressHUD.showErrorWithStatus(message, SVProgressHUD.SVProgressHUDMaskType.Black);
+        mStatusDialog.show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
     }
-
     public void dissmissProgressDialog() {
-        if (mSVProgressHUD.isShowing()) {
-            mSVProgressHUD.dismiss();
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
         }
     }
 

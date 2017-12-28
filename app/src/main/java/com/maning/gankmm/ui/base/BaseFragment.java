@@ -4,7 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.bigkoo.svprogresshud.SVProgressHUD;
+import com.maning.mndialoglibrary.MProgressDialog;
+import com.maning.mndialoglibrary.MStatusDialog;
 import com.umeng.analytics.MobclickAgent;
 
 public class BaseFragment extends Fragment {
@@ -12,7 +13,8 @@ public class BaseFragment extends Fragment {
     //统计名字判断
     public String className;
 
-    private SVProgressHUD mSVProgressHUD;
+    private MStatusDialog mStatusDialog;
+    private MProgressDialog mProgressDialog;
 
 
     public Context context;
@@ -31,17 +33,20 @@ public class BaseFragment extends Fragment {
 
 
     private void initDialog() {
-        mSVProgressHUD = new SVProgressHUD(getActivity());
+        //新建一个Dialog
+        mProgressDialog = new MProgressDialog.Builder(context)
+                .build()
+        ;
     }
 
     public void showProgressDialog() {
         dissmissProgressDialog();
-        mSVProgressHUD.showWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.BlackCancel);
+        mProgressDialog.show();
     }
 
     public void dissmissProgressDialog() {
-        if (mSVProgressHUD.isShowing()) {
-            mSVProgressHUD.dismiss();
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
         }
     }
 

@@ -7,11 +7,12 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 
-import com.bigkoo.svprogresshud.SVProgressHUD;
 import com.bumptech.glide.Glide;
 import com.jaeger.library.StatusBarUtil;
 import com.maning.gankmm.R;
 import com.maning.gankmm.skin.SkinManager;
+import com.maning.mndialoglibrary.MProgressDialog;
+import com.maning.mndialoglibrary.MStatusDialog;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -21,7 +22,8 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    private SVProgressHUD mSVProgressHUD;
+    private MStatusDialog mStatusDialog;
+    private MProgressDialog mProgressDialog;
     public Context mContext;
 
     @Override
@@ -35,7 +37,14 @@ public class BaseActivity extends AppCompatActivity {
         initStatus();
 
         initDialog();
+    }
 
+    private void initDialog() {
+        //新建一个Dialog
+        mProgressDialog = new MProgressDialog.Builder(this)
+                .build()
+        ;
+        mStatusDialog = new MStatusDialog(this);
     }
 
     private void initStatus() {
@@ -48,13 +57,10 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    private void initDialog() {
-        mSVProgressHUD = new SVProgressHUD(this);
-    }
 
     public void showProgressDialog() {
         dissmissProgressDialog();
-        mSVProgressHUD.showWithStatus("加载中...", SVProgressHUD.SVProgressHUDMaskType.Black);
+        mProgressDialog.show();
     }
 
     public void showProgressDialog(String message) {
@@ -62,23 +68,21 @@ public class BaseActivity extends AppCompatActivity {
             showProgressDialog();
         } else {
             dissmissProgressDialog();
-            mSVProgressHUD.showWithStatus(message, SVProgressHUD.SVProgressHUDMaskType.Black);
+            mProgressDialog.show(message);
         }
     }
 
     public void showProgressSuccess(String message) {
-        dissmissProgressDialog();
-        mSVProgressHUD.showSuccessWithStatus(message, SVProgressHUD.SVProgressHUDMaskType.Black);
+        mStatusDialog.show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_success));
     }
 
     public void showProgressError(String message) {
-        dissmissProgressDialog();
-        mSVProgressHUD.showErrorWithStatus(message, SVProgressHUD.SVProgressHUDMaskType.Black);
+        mStatusDialog.show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
     }
 
     public void dissmissProgressDialog() {
-        if (mSVProgressHUD.isShowing()) {
-            mSVProgressHUD.dismiss();
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
         }
     }
 
@@ -99,8 +103,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            if (mSVProgressHUD.isShowing()) {
-                mSVProgressHUD.dismiss();
+            if (mProgressDialog.isShowing()) {
+                mProgressDialog.dismiss();
                 return false;
             }
         }
