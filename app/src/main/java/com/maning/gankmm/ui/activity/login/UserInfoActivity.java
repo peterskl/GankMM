@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.jaeger.library.StatusBarUtil;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.mob.MobUserInfo;
 import com.maning.gankmm.ui.activity.CollectActivity;
@@ -16,7 +17,6 @@ import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.utils.DialogUtils;
 import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.UserUtils;
-import com.maning.librarycrashmonitor.utils.StatusBarUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

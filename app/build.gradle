@@ -162,7 +162,7 @@ dependencies {
     /* 日历 */
     compile 'com.github.maning0303:MNCalendar:V1.0.1'
     /* 日志监听 */
-    compile 'com.github.maning0303:CrashMonitor:V1.0.2'
+    compile 'com.github.maning0303:MNCrashMonitor:V1.0.5'
     /* 图片浏览器所需 */
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
     /* 版本升级 */
@@ -179,5 +179,7 @@ dependencies {
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'
     /* 提示框 */
     compile 'com.github.maning0303:MNProgressHUD:V1.0.2'
+    /* 状态栏 */
+    compile 'com.jaeger.statusbarutil:library:1.4.0'
 
 }

@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.jaeger.library.StatusBarUtil;
 import com.maning.gankmm.R;
 import com.maning.gankmm.bean.CalendarInfoEntity;
 import com.maning.gankmm.bean.GankEntity;
@@ -25,7 +26,6 @@ import com.maning.gankmm.ui.base.BaseActivity;
 import com.maning.gankmm.ui.iView.IWeatherView;
 import com.maning.gankmm.ui.presenter.impl.WeatherPresenterImpl;
 import com.maning.gankmm.utils.MySnackbar;
-import com.maning.librarycrashmonitor.utils.StatusBarUtil;
 import com.socks.library.KLog;
 
 import java.util.List;

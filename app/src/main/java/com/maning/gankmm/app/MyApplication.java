@@ -12,7 +12,7 @@ import android.support.multidex.MultiDex;
 import com.maning.gankmm.BuildConfig;
 import com.maning.gankmm.utils.ACache;
 import com.maning.gankmm.utils.NetUtils;
-import com.maning.librarycrashmonitor.main.MCrashMonitor;
+import com.maning.librarycrashmonitor.MCrashMonitor;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.socks.library.KLog;
 import com.umeng.analytics.MobclickAgent;
