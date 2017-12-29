@@ -41,6 +41,13 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <style name="animate_list_dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowEnterAnimation">@anim/translate_up</item>
+        <item name="android:windowExitAnimation">@anim/translate_down</item>
+    </style>
+
 
     <!--白天-->
     <style name="DayTheme" parent="@style/BaseAppTheme">

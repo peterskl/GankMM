@@ -33,6 +33,8 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
 import com.maning.gankmm.constant.Constants;
+import com.maning.gankmm.listeners.OnItemClickListener;
+import com.maning.gankmm.ui.dialog.ListFragmentDialog;
 import com.maning.gankmm.ui.view.ProgressWheel;
 import com.maning.gankmm.utils.BitmapUtils;
 import com.maning.gankmm.utils.IntentUtils;
@@ -51,7 +53,7 @@ import java.util.List;
 /**
  * 图片浏览的页面
  */
-public class MNImageBrowserActivity extends AppCompatActivity implements View.OnClickListener {
+public class MNImageBrowserActivity extends AppCompatActivity {
 
     public final static String IntentKey_ImageList = "IntentKey_ImageList";
     public final static String IntentKey_CurrentPosition = "IntentKey_CurrentPosition";
@@ -63,18 +65,8 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
     private TextView tvNumShow;
     private RelativeLayout rl_black_bg;
 
-    private LinearLayout view_bottom_sheet;
-    private View view_bottom_bg;
-    private TextView tv_click_cancel;
-    private TextView tv_click_01;
-    private TextView tv_click_02;
-    private TextView tv_click_03;
     private ImageView currentImageView; //需要保存的图片
     private int clickPosition; //需要保存的图片
-
-    private Animation mAnimation01;
-    private Animation mAnimation02;
-    private Animation mAnimation03;
 
     private ArrayList<String> imageUrlList = new ArrayList<>();
     private int currentPosition;
@@ -89,10 +81,6 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_mnimage_browser);
 
         context = this;
-
-        mAnimation01 = AnimationUtils.loadAnimation(this, R.anim.translate_up);
-        mAnimation02 = AnimationUtils.loadAnimation(this, R.anim.translate_down);
-        mAnimation03 = AnimationUtils.loadAnimation(this, R.anim.alpha_bg);
 
         initDialog();
 
@@ -132,23 +120,6 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
         mnGestureView = (MNGestureView) findViewById(R.id.mnGestureView);
         tvNumShow = (TextView) findViewById(R.id.tvNumShow);
         rl_black_bg = (RelativeLayout) findViewById(R.id.rl_black_bg);
-
-        view_bottom_sheet = (LinearLayout) findViewById(R.id.view_bottom_sheet);
-        view_bottom_bg = findViewById(R.id.view_bottom_bg);
-        tv_click_cancel = (TextView) findViewById(R.id.tv_click_cancel);
-        tv_click_01 = (TextView) findViewById(R.id.tv_click_01);
-        tv_click_02 = (TextView) findViewById(R.id.tv_click_02);
-        tv_click_03 = (TextView) findViewById(R.id.tv_click_03);
-
-        view_bottom_sheet.setOnClickListener(this);
-        view_bottom_bg.setOnClickListener(this);
-        tv_click_cancel.setOnClickListener(this);
-        tv_click_01.setOnClickListener(this);
-        tv_click_02.setOnClickListener(this);
-        tv_click_03.setOnClickListener(this);
-
-        view_bottom_sheet.setVisibility(View.GONE);
-        view_bottom_bg.setVisibility(View.GONE);
     }
 
     private void initData() {
@@ -214,36 +185,6 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
     @Override
     public void onBackPressed() {
         finishBrowser();
-    }
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.view_bottom_bg || id == R.id.tv_click_cancel) {
-            hideBottomSheet();
-        } else if (id == R.id.tv_click_01) {
-            //保存图片
-            hideBottomSheet();
-
-            // 先判断是否有权限。
-            if (AndPermission.hasPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                // 有权限，直接do anything.
-                saveImage();
-            } else {
-                // 申请权限。
-                AndPermission.with(this)
-                        .requestCode(100)
-                        .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .send();
-            }
-        } else if (id == R.id.tv_click_02) {
-            hideBottomSheet();
-            IntentUtils.startAppShareText(this, "GankMM图片分享", "分享图片：" + imageUrlList.get(clickPosition));
-        } else if (id == R.id.tv_click_03) {
-            hideBottomSheet();
-            setWallpaper();
-        }
-
     }
 
     private void setWallpaper() {
@@ -318,32 +259,34 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
         }).start();
     }
 
+    private ArrayList<String> mListDialogDatas = new ArrayList<>();
+
     public void showBottomSheet() {
-        //动画显示
-        view_bottom_bg.startAnimation(mAnimation03);
-        view_bottom_bg.setVisibility(View.VISIBLE);
-        view_bottom_sheet.startAnimation(mAnimation01);
-        view_bottom_sheet.setVisibility(View.VISIBLE);
-    }
-
-    public void hideBottomSheet() {
-        //动画隐藏
-        view_bottom_bg.setVisibility(View.GONE);
-        view_bottom_sheet.startAnimation(mAnimation02);
-        mAnimation02.setAnimationListener(new Animation.AnimationListener() {
+        mListDialogDatas.clear();
+        mListDialogDatas.add("保存");
+        mListDialogDatas.add("分享");
+        mListDialogDatas.add("设置壁纸");
+        ListFragmentDialog.newInstance(this).showDailog(getSupportFragmentManager(), mListDialogDatas, new OnItemClickListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                view_bottom_sheet.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
+            public void onItemClick(View view, int position) {
+                if (position == 0) {
+                    //保存图片
+                    // 先判断是否有权限。
+                    if (AndPermission.hasPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        // 有权限，直接do anything.
+                        saveImage();
+                    } else {
+                        // 申请权限。
+                        AndPermission.with(MNImageBrowserActivity.this)
+                                .requestCode(100)
+                                .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                .send();
+                    }
+                } else if (position == 1) {
+                    IntentUtils.startAppShareText(context, "GankMM图片分享", "分享图片：" + imageUrlList.get(clickPosition));
+                } else if (position == 2) {
+                    setWallpaper();
+                }
             }
         });
     }
@@ -384,7 +327,7 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
             iv_fail.setVisibility(View.GONE);
 
             final String url = imageUrlList.get(position);
-                        Glide
+            Glide
                     .with(context)
                     .load(url)
                     .thumbnail(0.2f)
@@ -470,7 +413,7 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
         public void onSucceed(int requestCode, List<String> grantedPermissions) {
             // 权限申请成功回调。
             if (requestCode == 100) {
-                MySnackbar.makeSnackBarBlack(view_bottom_sheet, "权限申请成功");
+                MySnackbar.makeSnackBarBlack(viewPagerBrowser, "权限申请成功");
                 saveImage();
             }
         }
@@ -511,6 +454,7 @@ public class MNImageBrowserActivity extends AppCompatActivity implements View.On
     public void showProgressError(String message) {
         mStatusDialog.show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
     }
+
     public void dissmissProgressDialog() {
         if (mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
