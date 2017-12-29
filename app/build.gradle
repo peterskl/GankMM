@@ -58,17 +58,6 @@ android {
             shrinkResources true
             proguardFiles customerproguardFile.path
             buildConfigField "boolean", "LOG_DEBUG", "false"
-            // 自定义输出配置
-//            android.applicationVariants.all { variant ->
-//                variant.outputs.each { output ->
-//                    def outputFile = output.outputFile
-//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-//                        // 输出apk名称为xxx_release_v1.0_wandoujia_time.apk
-//                        def fileName = "gankmm_${variant.buildType.name}_v${defaultConfig.versionName}_${variant.productFlavors[0].name}_${buildTime()}.apk"
-//                        outputFileName = fileName
-//                    }
-//                }
-//            }
         }
         debug {
             //混淆
@@ -79,11 +68,33 @@ android {
         }
     }
 
+    //修改apk名
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('release.apk')) {
+                // 输出apk名称为GankMM_yingyongbao_v1.0.0_2017-12-29-21_23_30_release.apk
+                def fileName = "GankMM_${variant.flavorName}_v${variant.versionName}_${releaseTime()}_release.apk"
+                outputFileName = new File(fileName)
+            }
+            if (outputFile != null && outputFile.name.endsWith('debug.apk')) {
+                // 输出apk名称为GankMM_yingyongbao_v1.0.0_2017-12-29_debug.apk
+                def fileName = "GankMM_${variant.flavorName}_v${variant.versionName}_${debugTime()}_debug.apk"
+                outputFileName = new File(fileName)
+            }
+        }
+    }
 }
 
-static def buildTime() {
-    return new Date().format("yyyy-MM-dd-HH-mm", TimeZone.getDefault())//包含时分秒
+//时间字符串方法
+def debugTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("GMT+8:00"))
 }
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd_HH_mm_ss", TimeZone.getTimeZone("GMT+8:00"))
+}
+
 
 repositories {
     flatDir {
