@@ -76,7 +76,7 @@ public class WelFareFragment extends BaseFragment implements OnRefreshListener, 
     }
 
     private void initRecycleView(List<GankEntity> welFareList) {
-        
+
         ((MainActivity) getActivity()).setPicList(welFareList);
 
         if (recyclePicAdapter == null) {
@@ -86,7 +86,7 @@ public class WelFareFragment extends BaseFragment implements OnRefreshListener, 
             recyclePicAdapter.setOnItemClickLitener(new RecyclePicAdapter.OnItemClickLitener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    welFarePresenter.itemClick(view,position);
+                    welFarePresenter.itemClick(view, position);
                 }
             });
             //获取头条随机
@@ -154,5 +154,12 @@ public class WelFareFragment extends BaseFragment implements OnRefreshListener, 
         ButterKnife.unbind(this);
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        //刷新页面
+        if (recyclePicAdapter != null) {
+            recyclePicAdapter.notifyDataSetChanged();
+        }
+    }
 }

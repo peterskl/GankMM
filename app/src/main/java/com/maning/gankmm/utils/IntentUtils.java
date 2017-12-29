@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 
+import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.ui.activity.AboutActivity;
 import com.maning.gankmm.ui.activity.GankActivity;
 import com.maning.gankmm.ui.activity.MoreActivity;
@@ -17,6 +18,7 @@ import com.maning.gankmm.ui.imagebrowser.MNImageBrowser;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by maning on 16/3/3.
@@ -35,12 +37,11 @@ public class IntentUtils {
     public static final String PushMessage = "PushMessage";
 
     public static void startToImageShow(Context context, ArrayList<String> mDatas, int position, View view) {
-//        Intent intent = new Intent(context.getApplicationContext(), ImagesActivity.class);
-//        intent.putStringArrayListExtra(ImageArrayList, mDatas);
-//        intent.putExtra(ImagePositionForImageShow, position);
-//        context.startActivity(intent);
-        KLog.i("startToImageShow:" + view.getWidth() / 2 + "," + view.getHeight());
-        MNImageBrowser.showImageBrowser(context, view, position, mDatas);
+        MNImageBrowser.showImageBrowser(context, view, position, mDatas, null);
+    }
+
+    public static void startToImageShow(Context context, ArrayList<String> mDatas, ArrayList<GankEntity> gankEntityList, int position, View view) {
+        MNImageBrowser.showImageBrowser(context, view, position, mDatas, gankEntityList);
     }
 
     public static void startToWebActivity(Context context, String titleFlag, String title, String url) {

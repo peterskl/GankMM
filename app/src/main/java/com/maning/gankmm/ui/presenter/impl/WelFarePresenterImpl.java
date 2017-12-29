@@ -37,7 +37,7 @@ public class WelFarePresenterImpl extends BasePresenterImpl<IWelFareView> implem
     private MyCallBack httpCallBack = new MyCallBack() {
         @Override
         public void onSuccessList(int what, List results) {
-            if(mView == null){
+            if (mView == null) {
                 return;
             }
             switch (what) {
@@ -89,7 +89,7 @@ public class WelFarePresenterImpl extends BasePresenterImpl<IWelFareView> implem
 
         @Override
         public void onFail(int what, String result) {
-            if(mView == null){
+            if (mView == null) {
                 return;
             }
             mView.overRefresh();
@@ -114,7 +114,7 @@ public class WelFarePresenterImpl extends BasePresenterImpl<IWelFareView> implem
     public void getRandomDatas() {
         //查看配置的干活类型:默认Android
         String headLineType = SharePreUtil.getStringData(context, Constants.SPSwitcherDataType, "Android");
-        GankApi.getRandomDatas(headLineType,10, 0x003, httpCallBack);
+        GankApi.getRandomDatas(headLineType, 10, 0x003, httpCallBack);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class WelFarePresenterImpl extends BasePresenterImpl<IWelFareView> implem
         for (int i = 0; i < welFareLists.size(); i++) {
             imagesList.add(welFareLists.get(i).getUrl());
         }
-        IntentUtils.startToImageShow(context, imagesList, position,view);
+        IntentUtils.startToImageShow(context, imagesList, (ArrayList<GankEntity>) welFareLists, position, view);
     }
 
 }

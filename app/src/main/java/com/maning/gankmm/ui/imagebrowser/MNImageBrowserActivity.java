@@ -17,10 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,7 +29,9 @@ import com.bumptech.glide.request.target.Target;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.maning.gankmm.R;
 import com.maning.gankmm.app.MyApplication;
+import com.maning.gankmm.bean.GankEntity;
 import com.maning.gankmm.constant.Constants;
+import com.maning.gankmm.db.CollectDao;
 import com.maning.gankmm.listeners.OnItemClickListener;
 import com.maning.gankmm.ui.dialog.ListFragmentDialog;
 import com.maning.gankmm.ui.view.ProgressWheel;
@@ -56,6 +55,7 @@ import java.util.List;
 public class MNImageBrowserActivity extends AppCompatActivity {
 
     public final static String IntentKey_ImageList = "IntentKey_ImageList";
+    public final static String IntentKey_GankEntityList = "IntentKey_GankEntityList";
     public final static String IntentKey_CurrentPosition = "IntentKey_CurrentPosition";
 
     private Context context;
@@ -69,10 +69,13 @@ public class MNImageBrowserActivity extends AppCompatActivity {
     private int clickPosition; //需要保存的图片
 
     private ArrayList<String> imageUrlList = new ArrayList<>();
+    private ArrayList<GankEntity> welFareLists;
     private int currentPosition;
 
     private MStatusDialog mStatusDialog;
     private MProgressDialog mProgressDialog;
+
+    private ArrayList<String> mListDialogDatas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +115,7 @@ public class MNImageBrowserActivity extends AppCompatActivity {
 
     private void initIntent() {
         imageUrlList = getIntent().getStringArrayListExtra(IntentKey_ImageList);
+        welFareLists = (ArrayList<GankEntity>) getIntent().getSerializableExtra(IntentKey_GankEntityList);
         currentPosition = getIntent().getIntExtra(IntentKey_CurrentPosition, 1);
     }
 
@@ -138,6 +142,7 @@ public class MNImageBrowserActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+                currentPosition = position;
                 tvNumShow.setText(String.valueOf((position + 1) + "/" + imageUrlList.size()));
             }
 
@@ -259,13 +264,23 @@ public class MNImageBrowserActivity extends AppCompatActivity {
         }).start();
     }
 
-    private ArrayList<String> mListDialogDatas = new ArrayList<>();
-
     public void showBottomSheet() {
         mListDialogDatas.clear();
         mListDialogDatas.add("保存");
         mListDialogDatas.add("分享");
         mListDialogDatas.add("设置壁纸");
+
+        if (welFareLists != null && welFareLists.size() > 0) {
+            GankEntity gankEntity = welFareLists.get(currentPosition);
+            //查询是否存在收藏
+            boolean isCollect = new CollectDao().queryOneCollectByID(gankEntity.get_id());
+            if (isCollect) {
+                mListDialogDatas.add("取消收藏");
+            } else {
+                mListDialogDatas.add("收藏");
+            }
+        }
+
         ListFragmentDialog.newInstance(this).showDailog(getSupportFragmentManager(), mListDialogDatas, new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -286,6 +301,29 @@ public class MNImageBrowserActivity extends AppCompatActivity {
                     IntentUtils.startAppShareText(context, "GankMM图片分享", "分享图片：" + imageUrlList.get(clickPosition));
                 } else if (position == 2) {
                     setWallpaper();
+                } else if (position == 3) {
+                    if (welFareLists != null && welFareLists.size() > 0) {
+                        GankEntity gankEntity = welFareLists.get(currentPosition);
+                        //查询是否存在收藏
+                        boolean isCollect = new CollectDao().queryOneCollectByID(gankEntity.get_id());
+                        if (isCollect) {
+                            //取消收藏
+                            boolean deleteResult = new CollectDao().deleteOneCollect(gankEntity.get_id());
+                            if (deleteResult) {
+                                mStatusDialog.show("取消收藏成功", getResources().getDrawable(R.drawable.mn_icon_dialog_success));
+                            } else {
+                                mStatusDialog.show("取消收藏失败", getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
+                            }
+                        } else {
+                            //收藏
+                            boolean insertResult = new CollectDao().insertOneCollect(gankEntity);
+                            if (insertResult) {
+                                mStatusDialog.show("收藏成功", getResources().getDrawable(R.drawable.mn_icon_dialog_success));
+                            } else {
+                                mStatusDialog.show("收藏失败", getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -348,28 +386,6 @@ public class MNImageBrowserActivity extends AppCompatActivity {
                         }
                     })
                     .into(imageView);
-
-//            Glide
-//                    .with(context)
-//                    .load(url)
-//                    .thumbnail(0.2f)
-//                    .listener(new RequestListener<String, GlideDrawable>() {
-//                        @Override
-//                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-//                            progressWheel.setVisibility(View.GONE);
-//                            iv_fail.setVisibility(View.VISIBLE);
-//                            return false;
-//                        }
-//
-//                        @Override
-//                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-//                            progressWheel.setVisibility(View.GONE);
-//                            rl_image_placeholder_bg.setVisibility(View.GONE);
-//                            iv_fail.setVisibility(View.GONE);
-//                            return false;
-//                        }
-//                    })
-//                    .into(imageView);
 
 
             rl_browser_root.setOnClickListener(new View.OnClickListener() {
