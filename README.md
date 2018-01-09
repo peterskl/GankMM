@@ -55,6 +55,9 @@
 ### GankMM首页滚动条库：
 #### [SwitcherView](https://github.com/maning0303/SwitcherView)
 
+### GankMM提示框ProgressDialog库：
+#### [MNProgressHUD](https://github.com/maning0303/MNProgressHUD)
+
 
 
 ##  项目截图：
