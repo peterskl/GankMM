@@ -22,7 +22,6 @@
         android:layout_marginLeft="6dp"
         android:layout_marginRight="6dp"
         android:layout_marginTop="10dp"
-        android:ellipsize="middle"
         android:maxLines="1"
         android:text="工具"
         android:textColor="@color/black_text3_color"

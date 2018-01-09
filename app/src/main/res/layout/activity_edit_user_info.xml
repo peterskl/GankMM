@@ -40,7 +40,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/gank_icon_arrow_right"
+            app:srcCompat="@drawable/gank_icon_arrow_right"
             />
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -92,7 +92,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/gank_icon_arrow_right"
+            app:srcCompat="@drawable/gank_icon_arrow_right"
             />
 
         <TextView
@@ -140,7 +140,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/gank_icon_arrow_right"
+            app:srcCompat="@drawable/gank_icon_arrow_right"
             />
 
         <TextView
@@ -187,7 +187,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/gank_icon_arrow_right"
+            app:srcCompat="@drawable/gank_icon_arrow_right"
             />
 
         <TextView
@@ -235,7 +235,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/gank_icon_arrow_right"
+            app:srcCompat="@drawable/gank_icon_arrow_right"
             />
 
         <TextView
