@@ -2,11 +2,11 @@
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/icon.png)<br>
 
 #### 干货营 是干货集中营（Gank.io）的三方客户端，每天一张美女图片，一个视频短片，若干程序干货，周一到周五每天更新。
-#### (Material Design & MVP & Retrofit + OKHttp & RecyclerView ...)
+#### (Material Design & MVP & Retrofit2 + OKHttp & RecyclerView ...)
 
 
 # 知识点：
-    1.Retrofit和OKHttp的使用；
+    1.Retrofit2和OKHttp的使用；
     2.MVP模式的基本使用；
     3.RecycleView控件的使用；
     4.状态的的颜色的设置（Android 4.4 +）；
@@ -17,7 +17,7 @@
     9.Android 6.0权限适配
     10.夜间模式的使用
     11.三方开源库的使用
-    12.Android 7.0适配安装升级
+    12.Android 7.0，8.0适配安装升级
     13.自定义View的相关知识
 
 
