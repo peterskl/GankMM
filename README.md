@@ -73,7 +73,7 @@
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_day_03.jpg)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_night_03.jpg)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_01.png)
-![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_02.png)
+![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_02.jpg)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_03.jpg)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_04.png)
 ![](https://github.com/maning0303/GankMM/raw/master/screenshots/gank_05.png)
