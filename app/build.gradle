@@ -1,4 +1,16 @@
 apply plugin: 'com.android.application'
+apply plugin: 'channel'
+
+channel{
+    //指定渠道文件
+    channelFile = file("channel.txt")
+    //多渠道包的输出目录，默认为new File(project.buildDir,"channel")
+    baseOutputDir = new File(project.buildDir,"channel")
+    //多渠道包的命名规则，默认为：${appName}-${versionName}-${versionCode}-${flavorName}-${buildType}
+    apkNameFormat ='${appName}-${versionName}-${flavorName}-${buildType}'
+    //快速模式：生成渠道包时不进行校验（速度可以提升10倍以上）
+    isFastMode = true
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -28,25 +40,23 @@ android {
             storePassword rootProject.ext.storePassword
             keyAlias rootProject.ext.keyAlias
             keyPassword rootProject.ext.keyPassword
+
+            v1SigningEnabled true
+            v2SigningEnabled false
         }
     }
 
 
-    productFlavors {
-        maning {}
-        wandoujia {}
-        "360" {}
-        xiaomi {}
-        meizu {}
-        yingyongbao {}
+//    productFlavors {
+//        yingyongbao {}
+//
+//        productFlavors.all { flavor ->
+//            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//        }
+//
+//    }
 
-        productFlavors.all { flavor ->
-            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
-        }
-
-    }
-
-    def File customerproguardFile = file('src/proguard.cfg')
+    File customerproguardFile = file('src/proguard.cfg')
     buildTypes {
         release {
             //混淆
@@ -151,7 +161,8 @@ dependencies {
     /*翻滚广告条TextView*/
     compile 'com.github.maning0303:SwitcherView:v1.0.4'
     /*Umeng统计*/
-    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.umeng.sdk:common:latest.integration'
+    compile 'com.umeng.sdk:analytics:latest.integration'
     /*极光推送*/
     compile files('libs/jcore-android_v1.1.2.jar')
     compile files('libs/jpush-android_v3.0.5.jar')
@@ -190,5 +201,7 @@ dependencies {
     compile 'com.github.maning0303:MNProgressHUD:V1.0.3'
     /* 状态栏 */
     compile 'com.jaeger.statusbarutil:library:1.4.0'
+    /* 渠道包渠道获取帮助类 */
+    api 'com.leon.channel:helper:1.1.7'
 
 }

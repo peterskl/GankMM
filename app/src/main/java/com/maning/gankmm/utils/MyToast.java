@@ -1,6 +1,7 @@
 package com.maning.gankmm.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.maning.gankmm.app.MyApplication;
@@ -24,6 +25,9 @@ public class MyToast {
     }
 
     public static void showShortToast(String text) {
+        if (TextUtils.isEmpty(text)) {
+            return;
+        }
         if (mToast == null) {
             mToast = Toast.makeText(MyApplication.getIntstance(), text, Toast.LENGTH_SHORT);
         } else {

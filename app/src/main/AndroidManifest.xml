@@ -195,15 +195,6 @@
             android:value="9154ee1b9e0fac4b4d967222"/>
         <!-- 极光推送  END -->
 
-
-        <!-- Umeng -->
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="56dce179e0f55ac5d700046c"/>
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL_VALUE}"/>
-
         <activity
             android:name=".ui.activity.SplashActivity"
             android:screenOrientation="portrait"
