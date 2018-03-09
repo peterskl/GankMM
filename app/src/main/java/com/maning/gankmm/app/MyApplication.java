@@ -80,8 +80,6 @@ public class MyApplication extends Application {
         MobclickAgent.openActivityDurationTrack(false);
         //获取渠道
         String channel = ChannelReaderUtil.getChannel(getApplicationContext());
-        MyToast.showShortToast(channel);
-        KLog.i("channel:" + channel);
         /**
          * 初始化common库
          * 参数1:上下文，不能为空

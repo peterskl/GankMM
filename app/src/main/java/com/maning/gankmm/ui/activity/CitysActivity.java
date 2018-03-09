@@ -75,7 +75,7 @@ public class CitysActivity extends BaseActivity {
                     citysMap.put(province, citysNameList);
                 }
             }
-            recycleCitysAdapter_province = new RecycleCitysAdapter(this, provinceList);
+            recycleCitysAdapter_province = new RecycleCitysAdapter(this, provinceList, 0);
             recycleProvince.setAdapter(recycleCitysAdapter_province);
             //点击事件
             recycleCitysAdapter_province.setOnItemClickLitener(new RecycleCitysAdapter.OnItemClickLitener() {
@@ -87,7 +87,7 @@ public class CitysActivity extends BaseActivity {
                     if (recycleCitysAdapter_city != null) {
                         recycleCitysAdapter_city.updateDatas(citysList);
                     } else {
-                        recycleCitysAdapter_city = new RecycleCitysAdapter(CitysActivity.this, citysList);
+                        recycleCitysAdapter_city = new RecycleCitysAdapter(CitysActivity.this, citysList, 1);
                         recycleCity.setAdapter(recycleCitysAdapter_city);
                         //点击事件
                         recycleCitysAdapter_city.setOnItemClickLitener(new RecycleCitysAdapter.OnItemClickLitener() {
