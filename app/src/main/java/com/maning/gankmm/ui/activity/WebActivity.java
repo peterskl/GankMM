@@ -154,9 +154,13 @@ public class WebActivity extends BaseActivity implements IWebView {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-                view.loadUrl(url);
-                return true;
+                WebView.HitTestResult hitTestResult = view.getHitTestResult();
+                //hitTestResult==null解决重定向问题
+                if (!TextUtils.isEmpty(url) && hitTestResult == null) {
+                    view.loadUrl(url);
+                    return true;
+                }
+                return super.shouldOverrideUrlLoading(view, url);
             }
 
             @Override
