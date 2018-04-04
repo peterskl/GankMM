@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.multidex.MultiDex;
+import android.text.TextUtils;
 
 import com.leon.channel.helper.ChannelReaderUtil;
 import com.maning.gankmm.BuildConfig;
@@ -80,6 +81,9 @@ public class MyApplication extends Application {
         MobclickAgent.openActivityDurationTrack(false);
         //获取渠道
         String channel = ChannelReaderUtil.getChannel(getApplicationContext());
+        if(TextUtils.isEmpty(channel)){
+            channel = "gankmm_bd";
+        }
         /**
          * 初始化common库
          * 参数1:上下文，不能为空

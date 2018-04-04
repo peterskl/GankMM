@@ -39,8 +39,8 @@ ext {
     buildToolsVersion = "26.0.2"
     minSdkVersion = 16
     targetSdkVersion = 25
-    versionCode = 25
-    versionName = "1.6.8"
+    versionCode = 170
+    versionName = "1.7.0"
     storePassword = "123456"
     keyAlias = "Gank"
     keyPassword = "123456"
