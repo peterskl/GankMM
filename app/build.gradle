@@ -186,7 +186,7 @@ dependencies {
     /* 图片浏览器所需 */
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
     /* 版本升级 */
-    compile 'com.github.maning0303:MNUpdateAPK:V1.0.5'
+    compile 'com.github.maning0303:MNUpdateAPK:V1.1.8'
     /* 拼音转换 */
     compile 'com.github.promeg:tinypinyin:2.0.3'
     /* 背景可以移动的View */
@@ -198,7 +198,7 @@ dependencies {
     /* 图片选择 */
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'
     /* 提示框 */
-    compile 'com.github.maning0303:MNProgressHUD:V1.0.3'
+    compile 'com.github.maning0303:MNProgressHUD:V1.0.6'
     /* 状态栏 */
     compile 'com.jaeger.statusbarutil:library:1.4.0'
     /* 渠道包渠道获取帮助类 */

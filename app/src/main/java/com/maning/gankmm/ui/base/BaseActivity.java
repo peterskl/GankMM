@@ -22,8 +22,8 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    private MStatusDialog mStatusDialog;
-    private MProgressDialog mProgressDialog;
+    //    private MStatusDialog mStatusDialog;
+//    private MProgressDialog mProgressDialog;
     public Context mContext;
 
     @Override
@@ -41,10 +41,10 @@ public class BaseActivity extends AppCompatActivity {
 
     private void initDialog() {
         //新建一个Dialog
-        mProgressDialog = new MProgressDialog.Builder(this)
-                .build()
-        ;
-        mStatusDialog = new MStatusDialog(this);
+//        mProgressDialog = new MProgressDialog.Builder(this)
+//                .build()
+//        ;
+//        mStatusDialog = new MStatusDialog(this);
     }
 
     private void initStatus() {
@@ -59,31 +59,23 @@ public class BaseActivity extends AppCompatActivity {
 
 
     public void showProgressDialog() {
-        dissmissProgressDialog();
-        mProgressDialog.show();
+        MProgressDialog.showProgress(this);
     }
 
     public void showProgressDialog(String message) {
-        if (TextUtils.isEmpty(message)) {
-            showProgressDialog();
-        } else {
-            dissmissProgressDialog();
-            mProgressDialog.show(message);
-        }
+        MProgressDialog.showProgress(this, message);
     }
 
     public void showProgressSuccess(String message) {
-        mStatusDialog.show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_success));
+        new MStatusDialog(this).show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_success));
     }
 
     public void showProgressError(String message) {
-        mStatusDialog.show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
+        new MStatusDialog(this).show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
     }
 
     public void dissmissProgressDialog() {
-        if (mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
+        MProgressDialog.dismissProgress();
     }
 
     public void initToolBar(Toolbar toolbar, String title, int icon) {
@@ -103,8 +95,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            if (mProgressDialog.isShowing()) {
-                mProgressDialog.dismiss();
+            if (MProgressDialog.isShowing()) {
+                MProgressDialog.dismissProgress();
                 return false;
             }
         }

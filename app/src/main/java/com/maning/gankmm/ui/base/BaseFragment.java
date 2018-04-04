@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.maning.gankmm.R;
 import com.maning.mndialoglibrary.MProgressDialog;
 import com.maning.mndialoglibrary.MStatusDialog;
 import com.umeng.analytics.MobclickAgent;
@@ -12,10 +13,6 @@ public class BaseFragment extends Fragment {
 
     //统计名字判断
     public String className;
-
-    private MStatusDialog mStatusDialog;
-    private MProgressDialog mProgressDialog;
-
 
     public Context context;
 
@@ -27,27 +24,27 @@ public class BaseFragment extends Fragment {
 
         context = getActivity();
 
-        initDialog();
-
     }
 
-
-    private void initDialog() {
-        //新建一个Dialog
-        mProgressDialog = new MProgressDialog.Builder(context)
-                .build()
-        ;
-    }
 
     public void showProgressDialog() {
-        dissmissProgressDialog();
-        mProgressDialog.show();
+        MProgressDialog.showProgress(context);
+    }
+
+    public void showProgressDialog(String message) {
+        MProgressDialog.showProgress(context, message);
+    }
+
+    public void showProgressSuccess(String message) {
+        new MStatusDialog(context).show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_success));
+    }
+
+    public void showProgressError(String message) {
+        new MStatusDialog(context).show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
     }
 
     public void dissmissProgressDialog() {
-        if (mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
+        MProgressDialog.dismissProgress();
     }
 
     @Override

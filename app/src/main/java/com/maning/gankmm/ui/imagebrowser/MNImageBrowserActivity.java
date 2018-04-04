@@ -72,9 +72,6 @@ public class MNImageBrowserActivity extends AppCompatActivity {
     private ArrayList<GankEntity> welFareLists;
     private int currentPosition;
 
-    private MStatusDialog mStatusDialog;
-    private MProgressDialog mProgressDialog;
-
     private ArrayList<String> mListDialogDatas = new ArrayList<>();
 
     @Override
@@ -85,8 +82,6 @@ public class MNImageBrowserActivity extends AppCompatActivity {
 
         context = this;
 
-        initDialog();
-
         initIntent();
 
         initViews();
@@ -95,12 +90,6 @@ public class MNImageBrowserActivity extends AppCompatActivity {
 
         initViewPager();
 
-    }
-
-    private void initDialog() {
-        //新建一个Dialog
-        mProgressDialog = new MProgressDialog.Builder(this).build();
-        mStatusDialog = new MStatusDialog(this);
     }
 
     private void setWindowFullScreen() {
@@ -310,17 +299,17 @@ public class MNImageBrowserActivity extends AppCompatActivity {
                             //取消收藏
                             boolean deleteResult = new CollectDao().deleteOneCollect(gankEntity.get_id());
                             if (deleteResult) {
-                                mStatusDialog.show("取消收藏成功", getResources().getDrawable(R.drawable.mn_icon_dialog_success));
+                                new MStatusDialog(context).show("取消收藏成功", getResources().getDrawable(R.drawable.mn_icon_dialog_success));
                             } else {
-                                mStatusDialog.show("取消收藏失败", getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
+                                new MStatusDialog(context).show("取消收藏失败", getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
                             }
                         } else {
                             //收藏
                             boolean insertResult = new CollectDao().insertOneCollect(gankEntity);
                             if (insertResult) {
-                                mStatusDialog.show("收藏成功", getResources().getDrawable(R.drawable.mn_icon_dialog_success));
+                                new MStatusDialog(context).show("收藏成功", getResources().getDrawable(R.drawable.mn_icon_dialog_success));
                             } else {
-                                mStatusDialog.show("收藏失败", getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
+                                new MStatusDialog(context).show("收藏失败", getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
                             }
                         }
                     }
@@ -450,31 +439,23 @@ public class MNImageBrowserActivity extends AppCompatActivity {
     };
 
     public void showProgressDialog() {
-        dissmissProgressDialog();
-        mProgressDialog.show();
+        MProgressDialog.showProgress(context);
     }
 
     public void showProgressDialog(String message) {
-        if (TextUtils.isEmpty(message)) {
-            showProgressDialog();
-        } else {
-            dissmissProgressDialog();
-            mProgressDialog.show(message);
-        }
+        MProgressDialog.showProgress(context,message);
     }
 
     public void showProgressSuccess(String message) {
-        mStatusDialog.show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_success));
+        new MStatusDialog(context).show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_success));
     }
 
     public void showProgressError(String message) {
-        mStatusDialog.show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
+        new MStatusDialog(context).show(message, getResources().getDrawable(R.drawable.mn_icon_dialog_fail));
     }
 
     public void dissmissProgressDialog() {
-        if (mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
+        MProgressDialog.dismissProgress();
     }
 
     @Override

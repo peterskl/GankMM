@@ -463,68 +463,76 @@ public class MainActivity extends BaseActivity implements IMainView, View.OnClic
                     }
                 })
                 .show();
-
-        new InstallUtils(context, appUpdateInfo.getInstall_url(), "GankMM_" + appUpdateInfo.getVersionShort(), new InstallUtils.DownloadCallBack() {
-            @Override
-            public void onStart() {
-                KLog.i("installAPK-----onStart");
-                if (dialogUpdate != null) {
-                    dialogUpdate.setProgress(0);
-                }
-            }
-
-            @Override
-            public void onComplete(String path) {
-                KLog.i("installAPK----onComplete:" + path);
-                /**
-                 * 安装APK工具类
-                 * @param context       上下文
-                 * @param filePath      文件路径
-                 * @param authorities   ---------Manifest中配置provider的authorities字段---------
-                 * @param callBack      安装界面成功调起的回调
-                 */
-                InstallUtils.installAPK(context, path, getPackageName() + ".fileProvider", new InstallUtils.InstallCallBack() {
+        InstallUtils.with(context)
+                .setApkUrl(appUpdateInfo.getInstall_url())
+                .setApkName("GankMM")
+                .setCallBack(new InstallUtils.DownloadCallBack() {
                     @Override
-                    public void onSuccess() {
-                        Toast.makeText(context, "正在安装程序", Toast.LENGTH_SHORT).show();
+                    public void onStart() {
+                        KLog.i("installAPK-----onStart");
+                        if (dialogUpdate != null) {
+                            dialogUpdate.setProgress(0);
+                        }
+                    }
+
+                    @Override
+                    public void onComplete(String path) {
+                        KLog.i("installAPK----onComplete:" + path);
+                        /**
+                         * 安装APK工具类
+                         * @param context       上下文
+                         * @param filePath      文件路径
+                         * @param authorities   ---------Manifest中配置provider的authorities字段---------
+                         * @param callBack      安装界面成功调起的回调
+                         */
+                        InstallUtils.installAPK(context, path, new InstallUtils.InstallCallBack() {
+                            @Override
+                            public void onSuccess() {
+                                Toast.makeText(context, "正在安装程序", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFail(Exception e) {
+                                Toast.makeText(context, "安装失败:" + e.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        if (dialogUpdate != null && dialogUpdate.isShowing()) {
+                            dialogUpdate.dismiss();
+                        }
+                        if (notifyUtils != null) {
+                            notifyUtils.setNotifyProgressComplete();
+                            notifyUtils.clear();
+                        }
+                    }
+
+                    @Override
+                    public void onLoading(long total, long current) {
+                        KLog.i("installAPK-----onLoading:-----total:" + total + ",current:" + current);
+                        int currentProgress = (int) (current * 100 / total);
+                        if (dialogUpdate != null) {
+                            dialogUpdate.setProgress(currentProgress);
+                        }
+                        if (notifyUtils != null) {
+                            notifyUtils.setNotifyProgress(100, currentProgress, false);
+                        }
                     }
 
                     @Override
                     public void onFail(Exception e) {
-                        Toast.makeText(context, "安装失败:" + e.toString(), Toast.LENGTH_SHORT).show();
+                        if (dialogUpdate != null && dialogUpdate.isShowing()) {
+                            dialogUpdate.dismiss();
+                        }
+                        if (notifyUtils != null) {
+                            notifyUtils.clear();
+                        }
                     }
-                });
-                if (dialogUpdate != null && dialogUpdate.isShowing()) {
-                    dialogUpdate.dismiss();
-                }
-                if (notifyUtils != null) {
-                    notifyUtils.setNotifyProgressComplete();
-                    notifyUtils.clear();
-                }
-            }
 
-            @Override
-            public void onLoading(long total, long current) {
-                KLog.i("installAPK-----onLoading:-----total:" + total + ",current:" + current);
-                int currentProgress = (int) (current * 100 / total);
-                if (dialogUpdate != null) {
-                    dialogUpdate.setProgress(currentProgress);
-                }
-                if (notifyUtils != null) {
-                    notifyUtils.setNotifyProgress(100, currentProgress, false);
-                }
-            }
+                    @Override
+                    public void cancle() {
 
-            @Override
-            public void onFail(Exception e) {
-                if (dialogUpdate != null && dialogUpdate.isShowing()) {
-                    dialogUpdate.dismiss();
-                }
-                if (notifyUtils != null) {
-                    notifyUtils.clear();
-                }
-            }
-        }).downloadAPK();
+                    }
+                })
+                .startDownload();
 
     }
 
