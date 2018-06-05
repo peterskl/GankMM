@@ -1,6 +1,5 @@
 package com.maning.gankmm.ui.activity;
 
-import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -25,14 +24,12 @@ import com.maning.gankmm.utils.IntentUtils;
 import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.gankmm.utils.NotifyUtil;
+import com.maning.gankmm.utils.PermissionUtils;
 import com.maning.gankmm.utils.SharePreUtil;
 import com.maning.updatelibrary.InstallUtils;
 import com.socks.library.KLog;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.PermissionListener;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -164,17 +161,18 @@ public class SettingActivity extends BaseActivity implements ISettingView {
 
             @Override
             public void onConfirm() {
-                // 先判断是否有权限。
-                if (AndPermission.hasPermission(SettingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    // 有权限，直接do anything.
-                    settingPresenter.cleanCache();
-                } else {
-                    // 申请权限。
-                    AndPermission.with(SettingActivity.this)
-                            .requestCode(101)
-                            .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                            .send();
-                }
+                PermissionUtils.checkWritePermission(mContext, new PermissionUtils.PermissionCallBack() {
+                    @Override
+                    public void onGranted() {
+                        settingPresenter.cleanCache();
+                    }
+
+                    @Override
+                    public void onDenied() {
+                        showProgressError("获取存储权限失败，请前往设置页面打开存储权限");
+                    }
+                });
+
             }
 
             @Override
@@ -277,18 +275,30 @@ public class SettingActivity extends BaseActivity implements ISettingView {
                 new DialogUtils.OnDialogClickListener() {
                     @Override
                     public void onConfirm() {
-                        // 先判断是否有权限。
-                        if (AndPermission.hasPermission(SettingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                            // 有权限，直接do anything.
-                            //更新版本
-                            showDownloadDialog(SettingActivity.this.appUpdateInfo);
-                        } else {
-                            // 申请权限。
-                            AndPermission.with(SettingActivity.this)
-                                    .requestCode(100)
-                                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                    .send();
-                        }
+                        PermissionUtils.checkWritePermission(mContext, new PermissionUtils.PermissionCallBack() {
+                            @Override
+                            public void onGranted() {
+                                //更新版本
+                                showDownloadDialog(SettingActivity.this.appUpdateInfo);
+                            }
+
+                            @Override
+                            public void onDenied() {
+                                showProgressError("获取存储权限失败，请前往设置页面打开存储权限");
+                            }
+                        });
+//                        // 先判断是否有权限。
+//                        if (AndPermission.hasPermission(SettingActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//                            // 有权限，直接do anything.
+//                            //更新版本
+//                            showDownloadDialog(SettingActivity.this.appUpdateInfo);
+//                        } else {
+//                            // 申请权限。
+//                            AndPermission.with(SettingActivity.this)
+//                                    .requestCode(100)
+//                                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                                    .send();
+//                        }
                     }
 
                     @Override
@@ -435,40 +445,5 @@ public class SettingActivity extends BaseActivity implements ISettingView {
         settingPresenter.detachView();
         super.onDestroy();
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        // 只需要调用这一句，其它的交给AndPermission吧，最后一个参数是PermissionListener。
-        AndPermission.onRequestPermissionsResult(requestCode, permissions, grantResults, listener);
-    }
-
-    private PermissionListener listener = new PermissionListener() {
-        @Override
-        public void onSucceed(int requestCode, List<String> grantedPermissions) {
-            MySnackbar.makeSnackBarBlack(toolbar, "权限申请成功");
-            // 权限申请成功回调。
-            if (requestCode == 100) {
-                //更新版本
-                showDownloadDialog(appUpdateInfo);
-            } else if (requestCode == 101) {
-                //清理缓存
-                settingPresenter.cleanCache();
-            }
-        }
-
-        @Override
-        public void onFailed(int requestCode, List<String> deniedPermissions) {
-            // 权限申请失败回调。
-            // 用户否勾选了不再提示并且拒绝了权限，那么提示用户到设置中授权。
-            if (AndPermission.hasAlwaysDeniedPermission(SettingActivity.this, deniedPermissions)) {
-                // 第二种：用自定义的提示语。
-                AndPermission.defaultSettingDialog(SettingActivity.this, 300)
-                        .setTitle("权限申请失败")
-                        .setMessage("我们需要的一些权限被您拒绝或者系统发生错误申请失败，请您到设置页面手动授权，否则功能无法正常使用！")
-                        .setPositiveButton("好，去设置")
-                        .show();
-            }
-        }
-    };
 
 }

@@ -108,6 +108,8 @@ public class WelFareFragment extends BaseFragment implements OnRefreshListener, 
     @Override
     public void onRefresh() {
         welFarePresenter.getNewDatas();
+        //重新定位
+        ((MainActivity) getActivity()).refreshLocationInfo();
     }
 
     @Override

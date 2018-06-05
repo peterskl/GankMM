@@ -17,8 +17,10 @@ import com.maning.gankmm.http.MyCallBack;
 import com.maning.gankmm.ui.iView.IMainView;
 import com.maning.gankmm.ui.presenter.IMainPresenter;
 import com.maning.gankmm.utils.LocationUtils;
+import com.maning.gankmm.utils.MySnackbar;
 import com.maning.gankmm.utils.MyToast;
 import com.maning.gankmm.utils.NetUtils;
+import com.maning.gankmm.utils.PermissionUtils;
 import com.maning.gankmm.utils.SharePreUtil;
 import com.socks.library.KLog;
 
@@ -119,8 +121,19 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
 
     @Override
     public void getLocationInfo() {
-        //高德获取位置信息
-        requestLocationInfo();
+        PermissionUtils.checkLocationPermission(context, new PermissionUtils.PermissionCallBack() {
+            @Override
+            public void onGranted() {
+                //高德获取位置信息
+                requestLocationInfo();
+            }
+
+            @Override
+            public void onDenied() {
+                mView.showToast("获取定位权限失败，请前往设置页面打开定位权限");
+            }
+        });
+
     }
 
     @Override
@@ -173,7 +186,7 @@ public class MainPresenterImpl extends BasePresenterImpl<IMainView> implements I
 
             @Override
             public void onFail(int errorCode, String errorMsg) {
-                MyToast.showShortToast(errorMsg + "-" + errorCode);
+                mView.showToast(errorMsg);
             }
 
             @Override

@@ -1,6 +1,5 @@
 package com.maning.gankmm.ui.imagebrowser;
 
-import android.Manifest;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,16 +35,13 @@ import com.maning.gankmm.ui.dialog.ListFragmentDialog;
 import com.maning.gankmm.ui.view.ProgressWheel;
 import com.maning.gankmm.utils.BitmapUtils;
 import com.maning.gankmm.utils.IntentUtils;
-import com.maning.gankmm.utils.MySnackbar;
+import com.maning.gankmm.utils.PermissionUtils;
 import com.maning.mndialoglibrary.MProgressDialog;
 import com.maning.mndialoglibrary.MStatusDialog;
 import com.umeng.analytics.MobclickAgent;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.PermissionListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -275,17 +270,17 @@ public class MNImageBrowserActivity extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 if (position == 0) {
                     //保存图片
-                    // 先判断是否有权限。
-                    if (AndPermission.hasPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        // 有权限，直接do anything.
-                        saveImage();
-                    } else {
-                        // 申请权限。
-                        AndPermission.with(MNImageBrowserActivity.this)
-                                .requestCode(100)
-                                .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                .send();
-                    }
+                    PermissionUtils.checkWritePermission(context, new PermissionUtils.PermissionCallBack() {
+                        @Override
+                        public void onGranted() {
+                            saveImage();
+                        }
+
+                        @Override
+                        public void onDenied() {
+                            showProgressError("获取存储权限失败，请前往设置页面打开存储权限");
+                        }
+                    });
                 } else if (position == 1) {
                     IntentUtils.startAppShareText(context, "GankMM图片分享", "分享图片：" + imageUrlList.get(clickPosition));
                 } else if (position == 2) {
@@ -406,37 +401,6 @@ public class MNImageBrowserActivity extends AppCompatActivity {
             return inflate;
         }
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        // 只需要调用这一句，其它的交给AndPermission吧，最后一个参数是PermissionListener。
-        AndPermission.onRequestPermissionsResult(requestCode, permissions, grantResults, listener);
-    }
-
-    private PermissionListener listener = new PermissionListener() {
-        @Override
-        public void onSucceed(int requestCode, List<String> grantedPermissions) {
-            // 权限申请成功回调。
-            if (requestCode == 100) {
-                MySnackbar.makeSnackBarBlack(viewPagerBrowser, "权限申请成功");
-                saveImage();
-            }
-        }
-
-        @Override
-        public void onFailed(int requestCode, List<String> deniedPermissions) {
-            // 权限申请失败回调。
-            // 用户否勾选了不再提示并且拒绝了权限，那么提示用户到设置中授权。
-            if (AndPermission.hasAlwaysDeniedPermission(MNImageBrowserActivity.this, deniedPermissions)) {
-                // 第二种：用自定义的提示语。
-                AndPermission.defaultSettingDialog(MNImageBrowserActivity.this, 300)
-                        .setTitle("权限申请失败")
-                        .setMessage("我们需要的一些权限被您拒绝或者系统发生错误申请失败，请您到设置页面手动授权，否则功能无法正常使用！")
-                        .setPositiveButton("好，去设置")
-                        .show();
-            }
-        }
-    };
 
     public void showProgressDialog() {
         MProgressDialog.showProgress(context);
