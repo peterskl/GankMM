@@ -394,7 +394,7 @@ public class PermissionUtils {
                     "body", "date", "type"};
             cursor = context.getContentResolver().query(uri, projection, null,
                     null, "date desc"); // 获取手机内部短信
-            //TODO://这里需要注意，当没有权限时拿到的count可能是0，也许记录被删除了，这里需要注意下！
+            //这里需要注意，当没有权限时拿到的count可能是0，也许记录被删除了，这里需要注意下！
             if (cursor != null && cursor.moveToFirst()) {
                 return true;
             } else {

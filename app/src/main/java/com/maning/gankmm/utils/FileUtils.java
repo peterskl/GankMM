@@ -291,7 +291,6 @@ public class FileUtils {
                 return false;
             }
         } catch (Exception e) {
-            // TODO: handle exception
             return false;
         }
         return true;
@@ -318,7 +317,6 @@ public class FileUtils {
                 }
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         //return size/1048576;
