@@ -22,8 +22,6 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    //    private MStatusDialog mStatusDialog;
-//    private MProgressDialog mProgressDialog;
     public Context mContext;
 
     @Override
@@ -36,15 +34,6 @@ public class BaseActivity extends AppCompatActivity {
 
         initStatus();
 
-        initDialog();
-    }
-
-    private void initDialog() {
-        //新建一个Dialog
-//        mProgressDialog = new MProgressDialog.Builder(this)
-//                .build()
-//        ;
-//        mStatusDialog = new MStatusDialog(this);
     }
 
     private void initStatus() {
