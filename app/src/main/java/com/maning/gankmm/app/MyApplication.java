@@ -13,7 +13,6 @@ import android.text.TextUtils;
 import com.leon.channel.helper.ChannelReaderUtil;
 import com.maning.gankmm.BuildConfig;
 import com.maning.gankmm.utils.ACache;
-import com.maning.gankmm.utils.MyToast;
 import com.maning.gankmm.utils.NetUtils;
 import com.maning.librarycrashmonitor.MCrashMonitor;
 import com.readystatesoftware.chuck.ChuckInterceptor;
@@ -73,6 +72,9 @@ public class MyApplication extends Application {
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
         }
+
+        System.out.println("------:"+"测试");
+        System.out.println("------:"+"测试");
 
     }
 
